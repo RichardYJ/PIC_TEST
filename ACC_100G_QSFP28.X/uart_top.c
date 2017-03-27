@@ -18,7 +18,7 @@ void uart_send_char(uint8_t *buffer)            // ?????
 
 }
 
-void uart_send_byte(char temp)               // ??????
+void uart_send_byte(char temp)               // 利用同步写入方法，向USART写入一个字节数数据
 { 
 	//while(PIR1bits.TXIF == 0);
 	//TXREG = temp;	
@@ -28,7 +28,7 @@ void uart_send_byte(char temp)               // ??????
         TX1REG = temp;    // Write the data byte to the USART.
 }
 
-void uart_send_dec(uint32_t decValue)
+void uart_send_dec(uint32_t decValue)		//yj 将uint32 的十进制值的每一位转换成对应的ASCII值存入，先传最高位
 {
     if(decValue/1000)   uart_send_byte(decValue/1000+'0');	
 	decValue = decValue%1000;

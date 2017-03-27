@@ -10732,10 +10732,10 @@ const uint8_t script_content[] = {
 0x81,0x4e,0x38,0x00,
 0x82,0x4e,0x38,0x00,
 0x83,0x4e,0x38,0x00,
-0x84,0x4e,0x10,0x00,
-0x85,0x4e,0x10,0x00,
-0x86,0x4e,0x10,0x00,
-0x87,0x4e,0x10,0x00,
+0x84,0x4e,0x08,0x00,
+0x85,0x4e,0x08,0x00,
+0x86,0x4e,0x08,0x00,
+0x87,0x4e,0x08,0x00,
 0x80,0x61,0x3C,0x20,
 0x81,0x61,0x34,0x20,
 0x82,0x61,0x34,0x20,
@@ -10906,7 +10906,10 @@ GE_I2C2_HexWrite(0x980d,0x0000);
 
 # 878
 _delay((unsigned long)((1000)*(32000000/4000.0)));
+_delay((unsigned long)((1000)*(32000000/4000.0)));
 
+GE_I2C2_HexWrite(0x980d,0x0777);
+GE_I2C2_HexWrite(0x980d,0x0000);
 
 
 
@@ -10920,14 +10923,22 @@ x=0;
 i=0;
 
 while (1)
-{ x++;
-if(x > 10)
 {
-i++;
-if(i > 30000)
+if( EEPROM_Buffer[78] == 2 )
 {
+GE_I2C2_ByteHLWrite( EEPROM_Buffer[74], EEPROM_Buffer[75], EEPROM_Buffer[76], EEPROM_Buffer[77] ) ;
+EEPROM_Buffer[78] = 0 ;
+}
+else if( EEPROM_Buffer[78] == 1 )
+{
+uint16_t rValue;
+rValue = GE_I2C2_ByteHLRead( EEPROM_Buffer[74], EEPROM_Buffer[75] ) ;
+EEPROM_Buffer[76] = rValue >> 8 ;
+EEPROM_Buffer[77] = rValue & 0x00ff ;
+EEPROM_Buffer[78] = 0 ;
+}
 
-# 911
+# 930
 FVRCON = 0xB5;
 _delay((unsigned long)((10)*(32000000/4000.0)));
 ADC_StartConversion(AN1_Channel);
@@ -10953,11 +10964,8 @@ uart_send_dec(Temperature);
 uart_send_byte('\r'); uart_send_byte('\n');
 
 }
-i = 0;
-}
-x=0;
-}
 
+# 970
 }
 
 }

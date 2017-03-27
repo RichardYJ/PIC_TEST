@@ -3,7 +3,7 @@
 [d edition pro ]
 [d chip 16LF18346 ]
 [d frameptr 6 ]
-"184 D:\WORK\PIC\ACC_100G_QSFP28.X\mcc_generated_files/i2c2.c
+"184 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\mcc_generated_files/i2c2.c
 [e E7648 . `uc
 I2C2_MESSAGE_COMPLETE 0
 I2C2_MESSAGE_FAIL 1
@@ -28,7 +28,7 @@ S_MASTER_NOACK_STOP 9
 S_MASTER_SEND_ADDR_10BIT_LSB 10
 S_MASTER_10BIT_RESTART 11
 ]
-"123 D:\WORK\PIC\ACC_100G_QSFP28.X\mcc_generated_files/i2c1.c
+"123 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\mcc_generated_files/i2c1.c
 [e E7648 . `uc
 I2C1_SLAVE_WRITE_REQUEST 0
 I2C1_SLAVE_READ_REQUEST 1
@@ -40,21 +40,21 @@ I2C1_SLAVE_READ_COMPLETED 3
 SLAVE_NORMAL_DATA 0
 SLAVE_DATA_ADDRESS 1
 ]
-"86 D:\WORK\PIC\ACC_100G_QSFP28.X\mcc_generated_files/adc.c
+"86 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\mcc_generated_files/adc.c
 [e E7651 . `uc
 channel_AVSS 60
 channel_Temp 61
 channel_DAC1 62
 channel_FVR 63
 ]
-"883 D:\WORK\PIC\ACC_100G_QSFP28.X\main.c
+"886 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\main.c
 [e E7656 . `uc
 channel_AVSS 60
 channel_Temp 61
 channel_DAC1 62
 channel_FVR 63
 ]
-"73 D:\WORK\PIC\ACC_100G_QSFP28.X\eeprom_i2c.c
+"73 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\eeprom_i2c.c
 [e E7697 . `uc
 I2C2_MESSAGE_COMPLETE 0
 I2C2_MESSAGE_FAIL 1
@@ -64,7 +64,7 @@ I2C2_MESSAGE_ADDRESS_NO_ACK 4
 I2C2_DATA_NO_ACK 5
 I2C2_LOST_STATE 6
 ]
-"115 D:\WORK\PIC\ACC_100G_QSFP28.X\golden_eagle_i2c.c
+"115 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\golden_eagle_i2c.c
 [e E7697 . `uc
 I2C2_MESSAGE_COMPLETE 0
 I2C2_MESSAGE_FAIL 1
@@ -98,14 +98,16 @@ I2C2_LOST_STATE 6
 [v _eecpymem eecpymem `(v  1 e 1 0 ]
 "39
 [v _memcpyee memcpyee `(v  1 e 1 0 ]
-"52 D:\WORK\PIC\ACC_100G_QSFP28.X\eeprom_i2c.c
+"52 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\eeprom_i2c.c
 [v _I2C2_ByteWrite I2C2_ByteWrite `(i  1 e 2 0 ]
-"12 D:\WORK\PIC\ACC_100G_QSFP28.X\golden_eagle_i2c.c
+"12 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\golden_eagle_i2c.c
 [v _GE_I2C2_HexWrite GE_I2C2_HexWrite `(i  1 e 2 0 ]
 "28
 [v _GE_I2C2_HexRead GE_I2C2_HexRead `(ui  1 e 2 0 ]
 "46
 [v _GE_I2C2_ByteHLWrite GE_I2C2_ByteHLWrite `(i  1 e 2 0 ]
+"62
+[v _GE_I2C2_ByteHLRead GE_I2C2_ByteHLRead `(ui  1 e 2 0 ]
 "80
 [v _GE_I2C2_ByteWrite GE_I2C2_ByteWrite `(i  1 e 2 0 ]
 "146
@@ -122,9 +124,9 @@ I2C2_LOST_STATE 6
 [v _get_int32 get_int32 `(l  1 e 4 0 ]
 "573
 [v _GE_set_polarity GE_set_polarity `(v  1 e 1 0 ]
-"705 D:\WORK\PIC\ACC_100G_QSFP28.X\main.c
+"705 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\main.c
 [v _main main `(v  1 e 1 0 ]
-"64 D:\WORK\PIC\ACC_100G_QSFP28.X\mcc_generated_files/adc.c
+"64 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\mcc_generated_files/adc.c
 [v _ADC_Initialize ADC_Initialize `(v  1 e 1 0 ]
 "85
 [v _ADC_StartConversion ADC_StartConversion `(v  1 e 1 0 ]
@@ -132,21 +134,21 @@ I2C2_LOST_STATE 6
 [v _ADC_IsConversionDone ADC_IsConversionDone `(uc  1 e 1 0 ]
 "104
 [v _ADC_GetConversionResult ADC_GetConversionResult `(ui  1 e 2 0 ]
-"57 D:\WORK\PIC\ACC_100G_QSFP28.X\mcc_generated_files/clkref.c
+"57 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\mcc_generated_files/clkref.c
 [v _CLKREF_Initialize CLKREF_Initialize `(v  1 e 1 0 ]
-"55 D:\WORK\PIC\ACC_100G_QSFP28.X\mcc_generated_files/eusart.c
+"55 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\mcc_generated_files/eusart.c
 [v _EUSART_Initialize EUSART_Initialize `(v  1 e 1 0 ]
 "97
 [v _EUSART_Write EUSART_Write `(v  1 e 1 0 ]
-"57 D:\WORK\PIC\ACC_100G_QSFP28.X\mcc_generated_files/fvr.c
+"57 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\mcc_generated_files/fvr.c
 [v _FVR_Initialize FVR_Initialize `(v  1 e 1 0 ]
-"85 D:\WORK\PIC\ACC_100G_QSFP28.X\mcc_generated_files/i2c1.c
+"85 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\mcc_generated_files/i2c1.c
 [v _I2C1_Initialize I2C1_Initialize `(v  1 e 1 0 ]
 "108
 [v _I2C1_ISR I2C1_ISR `(v  1 e 1 0 ]
 "172
 [v _I2C1_StatusCallback I2C1_StatusCallback `(v  1 e 1 0 ]
-"198 D:\WORK\PIC\ACC_100G_QSFP28.X\mcc_generated_files/i2c2.c
+"198 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\mcc_generated_files/i2c2.c
 [v _I2C2_Initialize I2C2_Initialize `(v  1 e 1 0 ]
 "233
 [v _I2C2_ISR I2C2_ISR `(v  1 e 1 0 ]
@@ -166,15 +168,15 @@ I2C2_LOST_STATE 6
 [v _I2C2_MasterWriteTRBBuild I2C2_MasterWriteTRBBuild `(v  1 e 1 0 ]
 "728
 [v _I2C2_BusCollisionISR I2C2_BusCollisionISR `(v  1 e 1 0 ]
-"51 D:\WORK\PIC\ACC_100G_QSFP28.X\mcc_generated_files/interrupt_manager.c
+"51 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\mcc_generated_files/interrupt_manager.c
 [v _INTERRUPT_InterruptManager INTERRUPT_InterruptManager `II(v  1 e 1 0 ]
-"76 D:\WORK\PIC\ACC_100G_QSFP28.X\mcc_generated_files/mcc.c
+"76 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\mcc_generated_files/mcc.c
 [v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
 "89
 [v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
-"50 D:\WORK\PIC\ACC_100G_QSFP28.X\mcc_generated_files/pin_manager.c
+"50 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\mcc_generated_files/pin_manager.c
 [v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
-"6 D:\WORK\PIC\ACC_100G_QSFP28.X\uart_top.c
+"6 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\uart_top.c
 [v _uart_send_char uart_send_char `(v  1 e 1 0 ]
 "21
 [v _uart_send_byte uart_send_byte `(v  1 e 1 0 ]
@@ -543,18 +545,18 @@ I2C2_LOST_STATE 6
 [v _RC4PPSbits RC4PPSbits `VES481  1 e 1 @3748 ]
 "19345
 [v _GIE GIE `VEb  1 e 0 @95 ]
-"10 D:\WORK\PIC\ACC_100G_QSFP28.X\golden_eagle_i2c.c
+"10 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\golden_eagle_i2c.c
 [v _timeOut timeOut `uc  1 e 1 0 ]
-"62 D:\WORK\PIC\ACC_100G_QSFP28.X\main.c
+"62 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\main.c
 [v _fw_content fw_content `DCC[5500]uc  1 e 5500 0 ]
 "410
 [v _script_content script_content `DCC[1168]uc  1 e 1168 0 ]
-"66 D:\WORK\PIC\ACC_100G_QSFP28.X\mcc_generated_files/i2c1.c
+"66 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\mcc_generated_files/i2c1.c
 [v _I2C1_slaveWriteData I2C1_slaveWriteData `VEuc  1 e 1 0 ]
-"90 D:\WORK\PIC\ACC_100G_QSFP28.X\mcc_generated_files/i2c1.h
+"90 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\mcc_generated_files/i2c1.h
 [v _EEPROM_Buffer EEPROM_Buffer `[256]uc  1 e 256 @9968 ]
 [s S19 . 5 `ui 1 address 2 0 `uc 1 length 1 2 `*.39uc 1 pbuffer 2 3 ]
-"184 D:\WORK\PIC\ACC_100G_QSFP28.X\mcc_generated_files/i2c2.c
+"184 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\mcc_generated_files/i2c2.c
 [s S31 . 3 `uc 1 count 1 0 `*.4S19 1 ptrb_list 1 1 `*.4E7648 1 pTrFlag 1 2 ]
 [v _i2c2_tr_queue i2c2_tr_queue `[1]S31  1 s 3 i2c2_tr_queue ]
 "185
@@ -573,17 +575,19 @@ I2C2_LOST_STATE 6
 [v _p_i2c2_trb_current p_i2c2_trb_current `*.4S19  1 s 1 p_i2c2_trb_current ]
 "190
 [v _p_i2c2_current p_i2c2_current `*.4S31  1 s 1 p_i2c2_current ]
-"705 D:\WORK\PIC\ACC_100G_QSFP28.X\main.c
+"705 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"926
-[v main@temp_abs temp_abs `f  1 a 3 50 ]
+"945
+[v main@temp_abs temp_abs `f  1 a 3 52 ]
+"904
+[v main@rValue rValue `ui  1 a 2 66 ]
 "759
 [v main@FW_regAddr_base FW_regAddr_base `[3]ui  1 a 6 0 ]
 "753
-[v main@startAddr startAddr `ul  1 a 4 40 ]
+[v main@startAddr startAddr `ul  1 a 4 42 ]
 "751
-[v main@len len `ul  1 a 4 36 ]
+[v main@len len `ul  1 a 4 38 ]
 "762
 [v main@checktime checktime `ul  1 a 4 22 ]
 "757
@@ -594,41 +598,40 @@ I2C2_LOST_STATE 6
 [v main@enterPoint enterPoint `ul  1 a 4 10 ]
 "750
 [v main@counter counter `ul  1 a 4 6 ]
-"885
-[v main@temp_float temp_float `f  1 a 3 47 ]
-[v main@adc_float adc_float `f  1 a 3 44 ]
+"888
+[v main@temp_float temp_float `f  1 a 3 49 ]
+[v main@adc_float adc_float `f  1 a 3 46 ]
 "760
-[v main@i i `i  1 a 2 71 ]
-"884
-[v main@Temperature Temperature `i  1 a 2 69 ]
+[v main@i i `i  1 a 2 73 ]
+"887
+[v main@Temperature Temperature `i  1 a 2 71 ]
 "746
-[v main@b_data b_data `*.25DCCi  1 a 2 67 ]
-"886
+[v main@b_data b_data `*.25DCCi  1 a 2 69 ]
+"889
 [v main@convertedValue convertedValue `ui  1 a 2 64 ]
-"760
-[v main@x x `i  1 a 2 62 ]
-"886
-[v main@convertedValue_LowRange convertedValue_LowRange `ui  1 a 2 60 ]
-[v main@convertedValue_HighRange convertedValue_HighRange `ui  1 a 2 58 ]
+[v main@convertedValue_LowRange convertedValue_LowRange `ui  1 a 2 62 ]
+[v main@convertedValue_HighRange convertedValue_HighRange `ui  1 a 2 60 ]
 "774
-[v main@len_script len_script `i  1 a 2 56 ]
+[v main@len_script len_script `i  1 a 2 58 ]
 "767
-[v main@TotalError TotalError `ui  1 a 2 34 ]
+[v main@TotalError TotalError `ui  1 a 2 36 ]
 "765
-[v main@RdCheck RdCheck `ui  1 a 2 32 ]
+[v main@RdCheck RdCheck `ui  1 a 2 34 ]
 "761
-[v main@section section `i  1 a 2 30 ]
+[v main@section section `i  1 a 2 32 ]
+"760
+[v main@x x `i  1 a 2 30 ]
 "755
 [v main@dataAddr dataAddr `ui  1 a 2 28 ]
 "727
 [v main@r r `i  1 a 2 26 ]
-"883
-[v main@AN1_Channel AN1_Channel `E7656  1 a 1 66 ]
+"886
+[v main@AN1_Channel AN1_Channel `E7656  1 a 1 68 ]
 "757
 [v main@F7854 F7854 `[3]ui  1 s 6 F7854 ]
-"943
+"972
 } 0
-"31 D:\WORK\PIC\ACC_100G_QSFP28.X\uart_top.c
+"31 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\uart_top.c
 [v _uart_send_dec uart_send_dec `(v  1 e 1 0 ]
 {
 [v uart_send_dec@decValue decValue `ul  1 p 4 14 ]
@@ -656,7 +659,7 @@ I2C2_LOST_STATE 6
 [v ___lldiv@dividend dividend `ul  1 p 4 4 ]
 "31
 } 0
-"550 D:\WORK\PIC\ACC_100G_QSFP28.X\golden_eagle_i2c.c
+"550 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\golden_eagle_i2c.c
 [v _get_int32 get_int32 `(l  1 e 4 0 ]
 {
 "552
@@ -739,57 +742,57 @@ I2C2_LOST_STATE 6
 [v ___ftpack@sign sign `uc  1 p 1 4 ]
 "86
 } 0
-"76 D:\WORK\PIC\ACC_100G_QSFP28.X\mcc_generated_files/mcc.c
+"76 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\mcc_generated_files/mcc.c
 [v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
 {
 "87
 } 0
-"50 D:\WORK\PIC\ACC_100G_QSFP28.X\mcc_generated_files/pin_manager.c
+"50 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\mcc_generated_files/pin_manager.c
 [v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
 {
 "68
 [v PIN_MANAGER_Initialize@state state `uc  1 a 1 0 ]
 "91
 } 0
-"89 D:\WORK\PIC\ACC_100G_QSFP28.X\mcc_generated_files/mcc.c
+"89 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\mcc_generated_files/mcc.c
 [v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
 {
 "103
 } 0
-"198 D:\WORK\PIC\ACC_100G_QSFP28.X\mcc_generated_files/i2c2.c
+"198 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\mcc_generated_files/i2c2.c
 [v _I2C2_Initialize I2C2_Initialize `(v  1 e 1 0 ]
 {
 "222
 } 0
-"85 D:\WORK\PIC\ACC_100G_QSFP28.X\mcc_generated_files/i2c1.c
+"85 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\mcc_generated_files/i2c1.c
 [v _I2C1_Initialize I2C1_Initialize `(v  1 e 1 0 ]
 {
 "106
 } 0
-"57 D:\WORK\PIC\ACC_100G_QSFP28.X\mcc_generated_files/fvr.c
+"57 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\mcc_generated_files/fvr.c
 [v _FVR_Initialize FVR_Initialize `(v  1 e 1 0 ]
 {
 "61
 } 0
-"55 D:\WORK\PIC\ACC_100G_QSFP28.X\mcc_generated_files/eusart.c
+"55 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\mcc_generated_files/eusart.c
 [v _EUSART_Initialize EUSART_Initialize `(v  1 e 1 0 ]
 {
 "74
 } 0
-"57 D:\WORK\PIC\ACC_100G_QSFP28.X\mcc_generated_files/clkref.c
+"57 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\mcc_generated_files/clkref.c
 [v _CLKREF_Initialize CLKREF_Initialize `(v  1 e 1 0 ]
 {
 "61
 } 0
-"64 D:\WORK\PIC\ACC_100G_QSFP28.X\mcc_generated_files/adc.c
+"64 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\mcc_generated_files/adc.c
 [v _ADC_Initialize ADC_Initialize `(v  1 e 1 0 ]
 {
 "83
 } 0
-"573 D:\WORK\PIC\ACC_100G_QSFP28.X\golden_eagle_i2c.c
+"573 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\golden_eagle_i2c.c
 [v _GE_set_polarity GE_set_polarity `(v  1 e 1 0 ]
 {
-"594
+"596
 } 0
 "347
 [v _GE_reload_default GE_reload_default `(v  1 e 1 0 ]
@@ -855,75 +858,6 @@ I2C2_LOST_STATE 6
 [v GE_I2C2_HexRead@F7829 F7829 `[2]uc  1 s 2 F7829 ]
 "44
 } 0
-"191
-[v _GE_I2C2_ByteRead GE_I2C2_ByteRead `(uc  1 e 1 0 ]
-{
-[v GE_I2C2_ByteRead@dataAddress dataAddress `*.4uc  1 a 1 wreg ]
-"193
-[v GE_I2C2_ByteRead@check check `i  1 a 2 46 ]
-"203
-[v GE_I2C2_ByteRead@status status `E7697  1 a 1 49 ]
-"191
-[v GE_I2C2_ByteRead@dataAddress dataAddress `*.4uc  1 a 1 wreg ]
-[v GE_I2C2_ByteRead@data2Byte data2Byte `*.4uc  1 p 1 42 ]
-[v GE_I2C2_ByteRead@addlen addlen `uc  1 p 1 43 ]
-"196
-[v GE_I2C2_ByteRead@dataAddress dataAddress `*.4uc  1 a 1 48 ]
-"241
-} 0
-"619 D:\WORK\PIC\ACC_100G_QSFP28.X\mcc_generated_files/i2c2.c
-[v _I2C2_MasterRead I2C2_MasterRead `(v  1 e 1 0 ]
-{
-"620
-[v I2C2_MasterRead@pdata pdata `*.39uc  1 p 2 8 ]
-"621
-[v I2C2_MasterRead@length length `uc  1 p 1 10 ]
-"622
-[v I2C2_MasterRead@address address `ui  1 p 2 11 ]
-"623
-[v I2C2_MasterRead@pflag pflag `*.4E7648  1 p 1 13 ]
-[s S19 . 5 `ui 1 address 2 0 `uc 1 length 1 2 `*.39uc 1 pbuffer 2 3 ]
-"625
-[v I2C2_MasterRead@trBlock trBlock `S19  1 s 5 trBlock ]
-"639
-} 0
-"694
-[v _I2C2_MasterReadTRBBuild I2C2_MasterReadTRBBuild `(v  1 e 1 0 ]
-{
-[s S19 . 5 `ui 1 address 2 0 `uc 1 length 1 2 `*.39uc 1 pbuffer 2 3 ]
-"695
-[v I2C2_MasterReadTRBBuild@ptrb ptrb `*.4S19  1 a 1 wreg ]
-[v I2C2_MasterReadTRBBuild@ptrb ptrb `*.4S19  1 a 1 wreg ]
-"696
-[v I2C2_MasterReadTRBBuild@pdata pdata `*.39uc  1 p 2 0 ]
-"697
-[v I2C2_MasterReadTRBBuild@length length `uc  1 p 1 2 ]
-"698
-[v I2C2_MasterReadTRBBuild@address address `ui  1 p 2 3 ]
-"700
-"695
-[v I2C2_MasterReadTRBBuild@ptrb ptrb `*.4S19  1 a 1 7 ]
-"705
-} 0
-"146 D:\WORK\PIC\ACC_100G_QSFP28.X\golden_eagle_i2c.c
-[v _GE_I2C2_AddrWrite GE_I2C2_AddrWrite `(i  1 e 2 0 ]
-{
-[v GE_I2C2_AddrWrite@dataAddress dataAddress `*.4uc  1 a 1 wreg ]
-"152
-[v GE_I2C2_AddrWrite@i i `i  1 a 2 39 ]
-"148
-[v GE_I2C2_AddrWrite@writeBuffer writeBuffer `[19]uc  1 a 19 18 ]
-"160
-[v GE_I2C2_AddrWrite@status status `E7697  1 a 1 41 ]
-"149
-[v GE_I2C2_AddrWrite@buflen buflen `uc  1 a 1 37 ]
-"146
-[v GE_I2C2_AddrWrite@dataAddress dataAddress `*.4uc  1 a 1 wreg ]
-[v GE_I2C2_AddrWrite@addlen addlen `uc  1 p 1 14 ]
-"152
-[v GE_I2C2_AddrWrite@dataAddress dataAddress `*.4uc  1 a 1 38 ]
-"189
-} 0
 "46
 [v _GE_I2C2_ByteHLWrite GE_I2C2_ByteHLWrite `(i  1 e 2 0 ]
 {
@@ -964,7 +898,43 @@ I2C2_LOST_STATE 6
 [v GE_I2C2_ByteWrite@dataAddress dataAddress `*.4uc  1 a 1 41 ]
 "144
 } 0
-"42 D:\WORK\PIC\ACC_100G_QSFP28.X\uart_top.c
+"62
+[v _GE_I2C2_ByteHLRead GE_I2C2_ByteHLRead `(ui  1 e 2 0 ]
+{
+[v GE_I2C2_ByteHLRead@RegAddrH RegAddrH `uc  1 a 1 wreg ]
+"66
+[v GE_I2C2_ByteHLRead@dataValue dataValue `[2]uc  1 a 2 58 ]
+"67
+[v GE_I2C2_ByteHLRead@dataAddr dataAddr `[2]uc  1 a 2 56 ]
+"64
+[v GE_I2C2_ByteHLRead@RegValue RegValue `ui  1 a 2 60 ]
+"62
+[v GE_I2C2_ByteHLRead@RegAddrH RegAddrH `uc  1 a 1 wreg ]
+[v GE_I2C2_ByteHLRead@RegAddrL RegAddrL `uc  1 p 1 50 ]
+"64
+[v GE_I2C2_ByteHLRead@F7842 F7842 `[2]uc  1 s 2 F7842 ]
+"66
+[v GE_I2C2_ByteHLRead@F7844 F7844 `[2]uc  1 s 2 F7844 ]
+[v GE_I2C2_ByteHLRead@RegAddrH RegAddrH `uc  1 a 1 55 ]
+"77
+} 0
+"191
+[v _GE_I2C2_ByteRead GE_I2C2_ByteRead `(uc  1 e 1 0 ]
+{
+[v GE_I2C2_ByteRead@dataAddress dataAddress `*.4uc  1 a 1 wreg ]
+"193
+[v GE_I2C2_ByteRead@check check `i  1 a 2 46 ]
+"203
+[v GE_I2C2_ByteRead@status status `E7697  1 a 1 49 ]
+"191
+[v GE_I2C2_ByteRead@dataAddress dataAddress `*.4uc  1 a 1 wreg ]
+[v GE_I2C2_ByteRead@data2Byte data2Byte `*.4uc  1 p 1 42 ]
+[v GE_I2C2_ByteRead@addlen addlen `uc  1 p 1 43 ]
+"196
+[v GE_I2C2_ByteRead@dataAddress dataAddress `*.4uc  1 a 1 48 ]
+"241
+} 0
+"42 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\uart_top.c
 [v _uart_send_hex uart_send_hex `(v  1 e 1 0 ]
 {
 [v uart_send_hex@hexValue hexValue `uc  1 a 1 wreg ]
@@ -991,7 +961,7 @@ I2C2_LOST_STATE 6
 [v ___awdiv@dividend dividend `i  1 p 2 2 ]
 "42
 } 0
-"97 D:\WORK\PIC\ACC_100G_QSFP28.X\mcc_generated_files/eusart.c
+"97 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\mcc_generated_files/eusart.c
 [v _EUSART_Write EUSART_Write `(v  1 e 1 0 ]
 {
 [v EUSART_Write@txData txData `uc  1 a 1 wreg ]
@@ -999,7 +969,7 @@ I2C2_LOST_STATE 6
 [v EUSART_Write@txData txData `uc  1 a 1 0 ]
 "104
 } 0
-"6 D:\WORK\PIC\ACC_100G_QSFP28.X\uart_top.c
+"6 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\uart_top.c
 [v _uart_send_char uart_send_char `(v  1 e 1 0 ]
 {
 "8
@@ -1016,7 +986,60 @@ I2C2_LOST_STATE 6
 [v uart_send_byte@temp temp `uc  1 a 1 0 ]
 "29
 } 0
-"598 D:\WORK\PIC\ACC_100G_QSFP28.X\mcc_generated_files/i2c2.c
+"619 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\mcc_generated_files/i2c2.c
+[v _I2C2_MasterRead I2C2_MasterRead `(v  1 e 1 0 ]
+{
+"620
+[v I2C2_MasterRead@pdata pdata `*.39uc  1 p 2 8 ]
+"621
+[v I2C2_MasterRead@length length `uc  1 p 1 10 ]
+"622
+[v I2C2_MasterRead@address address `ui  1 p 2 11 ]
+"623
+[v I2C2_MasterRead@pflag pflag `*.4E7648  1 p 1 13 ]
+[s S19 . 5 `ui 1 address 2 0 `uc 1 length 1 2 `*.39uc 1 pbuffer 2 3 ]
+"625
+[v I2C2_MasterRead@trBlock trBlock `S19  1 s 5 trBlock ]
+"639
+} 0
+"694
+[v _I2C2_MasterReadTRBBuild I2C2_MasterReadTRBBuild `(v  1 e 1 0 ]
+{
+[s S19 . 5 `ui 1 address 2 0 `uc 1 length 1 2 `*.39uc 1 pbuffer 2 3 ]
+"695
+[v I2C2_MasterReadTRBBuild@ptrb ptrb `*.4S19  1 a 1 wreg ]
+[v I2C2_MasterReadTRBBuild@ptrb ptrb `*.4S19  1 a 1 wreg ]
+"696
+[v I2C2_MasterReadTRBBuild@pdata pdata `*.39uc  1 p 2 0 ]
+"697
+[v I2C2_MasterReadTRBBuild@length length `uc  1 p 1 2 ]
+"698
+[v I2C2_MasterReadTRBBuild@address address `ui  1 p 2 3 ]
+"700
+"695
+[v I2C2_MasterReadTRBBuild@ptrb ptrb `*.4S19  1 a 1 7 ]
+"705
+} 0
+"146 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\golden_eagle_i2c.c
+[v _GE_I2C2_AddrWrite GE_I2C2_AddrWrite `(i  1 e 2 0 ]
+{
+[v GE_I2C2_AddrWrite@dataAddress dataAddress `*.4uc  1 a 1 wreg ]
+"152
+[v GE_I2C2_AddrWrite@i i `i  1 a 2 39 ]
+"148
+[v GE_I2C2_AddrWrite@writeBuffer writeBuffer `[19]uc  1 a 19 18 ]
+"160
+[v GE_I2C2_AddrWrite@status status `E7697  1 a 1 41 ]
+"149
+[v GE_I2C2_AddrWrite@buflen buflen `uc  1 a 1 37 ]
+"146
+[v GE_I2C2_AddrWrite@dataAddress dataAddress `*.4uc  1 a 1 wreg ]
+[v GE_I2C2_AddrWrite@addlen addlen `uc  1 p 1 14 ]
+"152
+[v GE_I2C2_AddrWrite@dataAddress dataAddress `*.4uc  1 a 1 38 ]
+"189
+} 0
+"598 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\mcc_generated_files/i2c2.c
 [v _I2C2_MasterWrite I2C2_MasterWrite `(v  1 e 1 0 ]
 {
 "599
@@ -1068,7 +1091,7 @@ I2C2_LOST_STATE 6
 [v I2C2_MasterTRBInsert@count count `uc  1 a 1 3 ]
 "692
 } 0
-"85 D:\WORK\PIC\ACC_100G_QSFP28.X\mcc_generated_files/adc.c
+"85 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\mcc_generated_files/adc.c
 [v _ADC_StartConversion ADC_StartConversion `(v  1 e 1 0 ]
 {
 [v ADC_StartConversion@channel channel `E7651  1 a 1 wreg ]
@@ -1087,12 +1110,12 @@ I2C2_LOST_STATE 6
 {
 "108
 } 0
-"51 D:\WORK\PIC\ACC_100G_QSFP28.X\mcc_generated_files/interrupt_manager.c
+"51 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\mcc_generated_files/interrupt_manager.c
 [v _INTERRUPT_InterruptManager INTERRUPT_InterruptManager `II(v  1 e 1 0 ]
 {
 "70
 } 0
-"233 D:\WORK\PIC\ACC_100G_QSFP28.X\mcc_generated_files/i2c2.c
+"233 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\mcc_generated_files/i2c2.c
 [v _I2C2_ISR I2C2_ISR `(v  1 e 1 0 ]
 {
 "236
@@ -1124,7 +1147,7 @@ I2C2_LOST_STATE 6
 {
 "731
 } 0
-"108 D:\WORK\PIC\ACC_100G_QSFP28.X\mcc_generated_files/i2c1.c
+"108 D:\WorkSpace\MyCode\PIC\ACC_100G_QSFP28.X\mcc_generated_files/i2c1.c
 [v _I2C1_ISR I2C1_ISR `(v  1 e 1 0 ]
 {
 "110

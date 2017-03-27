@@ -115,9 +115,9 @@ void I2C1_ISR ( void )
 
     PIR1bits.SSP1IF = 0;        // clear the slave interrupt flag
     i2c_data        = SSP1BUF;  // read SSPBUF to clear BF
-    if(1 == SSP1STATbits.R_nW)
+    if(1 == SSP1STATbits.R_nW)      //???????????
     {
-        if((1 == SSP1STATbits.D_nA) && (1 == SSP1CON2bits.ACKSTAT))
+        if((1 == SSP1STATbits.D_nA) && (1 == SSP1CON2bits.ACKSTAT))//D_nA?ACKSTAT???????
         {
             // callback routine can perform any post-read processing
             I2C1_StatusCallback(I2C1_SLAVE_READ_COMPLETED);
@@ -191,7 +191,7 @@ void I2C1_StatusCallback(I2C1_SLAVE_DRIVER_STATUS i2c_bus_state)
                 case SLAVE_DATA_ADDRESS:
                     if(I2C1_slaveWriteData>=128)
                     {
-                     eepromAddress    = I2C1_slaveWriteData+128*EEPROM_Buffer[127] ;   
+                     eepromAddress    = I2C1_slaveWriteData+128*EEPROM_Buffer[127] ;  //???????? 
                     }
                     else
                     {
@@ -202,7 +202,7 @@ void I2C1_StatusCallback(I2C1_SLAVE_DRIVER_STATUS i2c_bus_state)
 
                 case SLAVE_NORMAL_DATA:
                 default:
-                    EEPROM_Buffer[eepromAddress++]    = I2C1_slaveWriteData;   
+                    EEPROM_Buffer[eepromAddress++]    = I2C1_slaveWriteData;   //?????????
                  
                     
                     if(sizeof(EEPROM_Buffer) <= eepromAddress) //this compare will cost too many mcu time, will cause SCL conflict,unless set MCU to 32MHz
