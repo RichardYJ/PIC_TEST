@@ -877,6 +877,10 @@ void main(void)
     
      __delay_ms(1000);  //Delay 1000ms /2
      
+	  __delay_ms(1000);  //Delay 1000ms /2
+	  
+	   GE_I2C2_HexWrite(0x980d,0x0777);
+	 GE_I2C2_HexWrite(0x980d,0x0000);//Logic Reset
     
   //Temperature test
     
