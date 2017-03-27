@@ -53,7 +53,7 @@
 #pragma config FCMEN = ON    // Fail-Safe Clock Monitor Enable->Fail-Safe Clock Monitor is enabled
 
 // CONFIG2
-#pragma config MCLRE = ON    // Master Clear Enable bit->MCLR/VPP pin function is MCLR; Weak pull-up enabled
+#pragma config MCLRE = OFF //ON  yj20170314   // Master Clear Enable bit->MCLR/VPP pin function is MCLR; Weak pull-up enabled
 #pragma config PWRTE = OFF    // Power-up Timer Enable bit->PWRT disabled
 #pragma config WDTE = OFF    // Watchdog Timer Enable bits->WDT disabled; SWDTEN is ignored
 #pragma config LPBOREN = OFF    // Low-power BOR enable bit->ULPBOR disabled
@@ -65,7 +65,7 @@
 
 // CONFIG3
 #pragma config WRT = OFF    // User NVM self-write protection bits->Write protection off
-#pragma config LVP = ON    // Low Voltage Programming Enable bit->Low Voltage programming enabled. MCLR/VPP pin function is MCLR. MCLRE configuration bit is ignored.
+#pragma config LVP = OFF  //ON yj20170314  // Low Voltage Programming Enable bit->Low Voltage programming enabled. MCLR/VPP pin function is MCLR. MCLRE configuration bit is ignored.
 
 // CONFIG4
 #pragma config CP = OFF    // User NVM Program Memory Code Protection bit->User NVM code protection disabled
@@ -76,14 +76,14 @@
 void SYSTEM_Initialize(void)
 {
     
-    PIN_MANAGER_Initialize();
+    PIN_MANAGER_Initialize();		//yj  ??????pin是什么
     OSCILLATOR_Initialize();
     I2C1_Initialize();
     I2C2_Initialize();
-    FVR_Initialize();
+    FVR_Initialize();				//yj  ??????FVR是什么
     ADC_Initialize();
-    CLKREF_Initialize();
-    EUSART_Initialize();
+    CLKREF_Initialize();			//yj  ??????CLKREF是什么
+    EUSART_Initialize();			//yj  ??????EUSART是什么
 }
 
 void OSCILLATOR_Initialize(void)

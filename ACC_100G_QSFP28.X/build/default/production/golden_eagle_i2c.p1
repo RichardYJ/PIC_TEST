@@ -10,12 +10,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 "67
 [v _uart_send_byte `(v ~T0 @X0 0 ef1`uc ]
 "115 golden_eagle_i2c.c
-[c E7697 0 1 2 3 4 5 6 .. ]
-[n E7697 . I2C2_MESSAGE_COMPLETE I2C2_MESSAGE_FAIL I2C2_MESSAGE_PENDING I2C2_STUCK_START I2C2_MESSAGE_ADDRESS_NO_ACK I2C2_DATA_NO_ACK I2C2_LOST_STATE  ]
+[c E7659 0 1 2 3 4 5 6 .. ]
+[n E7659 . I2C2_MESSAGE_COMPLETE I2C2_MESSAGE_FAIL I2C2_MESSAGE_PENDING I2C2_STUCK_START I2C2_MESSAGE_ADDRESS_NO_ACK I2C2_DATA_NO_ACK I2C2_LOST_STATE  ]
 "259 mcc_generated_files/i2c2.h
-[v _I2C2_MasterWrite `(v ~T0 @X0 0 ef4`*uc`uc`ui`*E7697 ]
+[v _I2C2_MasterWrite `(v ~T0 @X0 0 ef4`*uc`uc`ui`*E7659 ]
 "406
-[v _I2C2_MasterRead `(v ~T0 @X0 0 ef4`*uc`uc`ui`*E7697 ]
+[v _I2C2_MasterRead `(v ~T0 @X0 0 ef4`*uc`uc`ui`*E7659 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -7271,7 +7271,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic.h: 186: extern unsigned char __resetbits;
 [; ;pic.h: 187: extern __bit __powerdown;
 [; ;pic.h: 188: extern __bit __timeout;
-[; ;pin_manager.h: 263: void PIN_MANAGER_Initialize (void);
+[; ;pin_manager.h: 231: void PIN_MANAGER_Initialize (void);
+[; ;pin_manager.h: 243: void PIN_MANAGER_IOC(void);
 [; ;stdint.h: 13: typedef signed char int8_t;
 [; ;stdint.h: 20: typedef signed int int16_t;
 [; ;stdint.h: 28: typedef signed short long int int24_t;
@@ -7302,32 +7303,55 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
 [; ;stdbool.h: 12: typedef unsigned char bool;
 [; ;interrupt_manager.h: 110: void interrupt INTERRUPT_InterruptManager(void);
-[; ;adc.h: 71: typedef uint16_t adc_result_t;
-[; ;adc.h: 76: typedef struct
-[; ;adc.h: 77: {
-[; ;adc.h: 78: adc_result_t adcResult1;
-[; ;adc.h: 79: adc_result_t adcResult2;
-[; ;adc.h: 80: } adc_sync_double_result_t;
-[; ;adc.h: 94: typedef enum
-[; ;adc.h: 95: {
-[; ;adc.h: 96: channel_AVSS = 0x3C,
-[; ;adc.h: 97: channel_Temp = 0x3D,
-[; ;adc.h: 98: channel_DAC1 = 0x3E,
-[; ;adc.h: 99: channel_FVR = 0x3F
-[; ;adc.h: 100: } adc_channel_t;
-[; ;adc.h: 135: void ADC_Initialize(void);
-[; ;adc.h: 164: void ADC_StartConversion(adc_channel_t channel);
-[; ;adc.h: 196: bool ADC_IsConversionDone();
-[; ;adc.h: 229: adc_result_t ADC_GetConversionResult(void);
-[; ;adc.h: 259: adc_result_t ADC_GetConversion(adc_channel_t channel);
-[; ;eusart.h: 94: void EUSART_Initialize(void);
-[; ;eusart.h: 114: uint8_t EUSART_Read(void);
-[; ;eusart.h: 134: void EUSART_Write(uint8_t txData);
 [; ;fvr.h: 92: void FVR_Initialize(void);
 [; ;fvr.h: 126: bool FVR_IsOutputReady(void);
-[; ;clkref.h: 92: void CLKREF_Initialize(void);
 [; ;__size_t.h: 4: typedef unsigned size_t;
 [; ;stddef.h: 6: typedef int ptrdiff_t;
+[; ;i2c2.h: 83: typedef enum
+[; ;i2c2.h: 84: {
+[; ;i2c2.h: 85: I2C2_MESSAGE_COMPLETE,
+[; ;i2c2.h: 86: I2C2_MESSAGE_FAIL,
+[; ;i2c2.h: 87: I2C2_MESSAGE_PENDING,
+[; ;i2c2.h: 88: I2C2_STUCK_START,
+[; ;i2c2.h: 89: I2C2_MESSAGE_ADDRESS_NO_ACK,
+[; ;i2c2.h: 90: I2C2_DATA_NO_ACK,
+[; ;i2c2.h: 91: I2C2_LOST_STATE
+[; ;i2c2.h: 92: } I2C2_MESSAGE_STATUS;
+[; ;i2c2.h: 108: typedef struct
+[; ;i2c2.h: 109: {
+[; ;i2c2.h: 110: uint16_t address;
+[; ;i2c2.h: 113: uint8_t length;
+[; ;i2c2.h: 114: uint8_t *pbuffer;
+[; ;i2c2.h: 115: } I2C2_TRANSACTION_REQUEST_BLOCK;
+[; ;i2c2.h: 220: void I2C2_Initialize(void);
+[; ;i2c2.h: 259: void I2C2_MasterWrite(
+[; ;i2c2.h: 260: uint8_t *pdata,
+[; ;i2c2.h: 261: uint8_t length,
+[; ;i2c2.h: 262: uint16_t address,
+[; ;i2c2.h: 263: I2C2_MESSAGE_STATUS *pstatus);
+[; ;i2c2.h: 406: void I2C2_MasterRead(
+[; ;i2c2.h: 407: uint8_t *pdata,
+[; ;i2c2.h: 408: uint8_t length,
+[; ;i2c2.h: 409: uint16_t address,
+[; ;i2c2.h: 410: I2C2_MESSAGE_STATUS *pstatus);
+[; ;i2c2.h: 516: void I2C2_MasterTRBInsert(
+[; ;i2c2.h: 517: uint8_t count,
+[; ;i2c2.h: 518: I2C2_TRANSACTION_REQUEST_BLOCK *ptrb_list,
+[; ;i2c2.h: 519: I2C2_MESSAGE_STATUS *pflag);
+[; ;i2c2.h: 560: void I2C2_MasterReadTRBBuild(
+[; ;i2c2.h: 561: I2C2_TRANSACTION_REQUEST_BLOCK *ptrb,
+[; ;i2c2.h: 562: uint8_t *pdata,
+[; ;i2c2.h: 563: uint8_t length,
+[; ;i2c2.h: 564: uint16_t address);
+[; ;i2c2.h: 605: void I2C2_MasterWriteTRBBuild(
+[; ;i2c2.h: 606: I2C2_TRANSACTION_REQUEST_BLOCK *ptrb,
+[; ;i2c2.h: 607: uint8_t *pdata,
+[; ;i2c2.h: 608: uint8_t length,
+[; ;i2c2.h: 609: uint16_t address);
+[; ;i2c2.h: 647: bool I2C2_MasterQueueIsEmpty(void);
+[; ;i2c2.h: 685: bool I2C2_MasterQueueIsFull(void);
+[; ;i2c2.h: 686: void I2C2_BusCollisionISR( void );
+[; ;i2c2.h: 687: void I2C2_ISR ( void );
 [; ;i2c1.h: 78: typedef enum
 [; ;i2c1.h: 79: {
 [; ;i2c1.h: 80: I2C1_SLAVE_WRITE_REQUEST,
@@ -8115,53 +8139,32 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;i2c1.h: 376: void I2C1_Initialize(void);
 [; ;i2c1.h: 396: void I2C1_ISR ( void );
 [; ;i2c1.h: 403: extern volatile uint8_t I2C1_slaveWriteData;
-[; ;i2c2.h: 83: typedef enum
-[; ;i2c2.h: 84: {
-[; ;i2c2.h: 85: I2C2_MESSAGE_COMPLETE,
-[; ;i2c2.h: 86: I2C2_MESSAGE_FAIL,
-[; ;i2c2.h: 87: I2C2_MESSAGE_PENDING,
-[; ;i2c2.h: 88: I2C2_STUCK_START,
-[; ;i2c2.h: 89: I2C2_MESSAGE_ADDRESS_NO_ACK,
-[; ;i2c2.h: 90: I2C2_DATA_NO_ACK,
-[; ;i2c2.h: 91: I2C2_LOST_STATE
-[; ;i2c2.h: 92: } I2C2_MESSAGE_STATUS;
-[; ;i2c2.h: 108: typedef struct
-[; ;i2c2.h: 109: {
-[; ;i2c2.h: 110: uint16_t address;
-[; ;i2c2.h: 113: uint8_t length;
-[; ;i2c2.h: 114: uint8_t *pbuffer;
-[; ;i2c2.h: 115: } I2C2_TRANSACTION_REQUEST_BLOCK;
-[; ;i2c2.h: 220: void I2C2_Initialize(void);
-[; ;i2c2.h: 259: void I2C2_MasterWrite(
-[; ;i2c2.h: 260: uint8_t *pdata,
-[; ;i2c2.h: 261: uint8_t length,
-[; ;i2c2.h: 262: uint16_t address,
-[; ;i2c2.h: 263: I2C2_MESSAGE_STATUS *pstatus);
-[; ;i2c2.h: 406: void I2C2_MasterRead(
-[; ;i2c2.h: 407: uint8_t *pdata,
-[; ;i2c2.h: 408: uint8_t length,
-[; ;i2c2.h: 409: uint16_t address,
-[; ;i2c2.h: 410: I2C2_MESSAGE_STATUS *pstatus);
-[; ;i2c2.h: 516: void I2C2_MasterTRBInsert(
-[; ;i2c2.h: 517: uint8_t count,
-[; ;i2c2.h: 518: I2C2_TRANSACTION_REQUEST_BLOCK *ptrb_list,
-[; ;i2c2.h: 519: I2C2_MESSAGE_STATUS *pflag);
-[; ;i2c2.h: 560: void I2C2_MasterReadTRBBuild(
-[; ;i2c2.h: 561: I2C2_TRANSACTION_REQUEST_BLOCK *ptrb,
-[; ;i2c2.h: 562: uint8_t *pdata,
-[; ;i2c2.h: 563: uint8_t length,
-[; ;i2c2.h: 564: uint16_t address);
-[; ;i2c2.h: 605: void I2C2_MasterWriteTRBBuild(
-[; ;i2c2.h: 606: I2C2_TRANSACTION_REQUEST_BLOCK *ptrb,
-[; ;i2c2.h: 607: uint8_t *pdata,
-[; ;i2c2.h: 608: uint8_t length,
-[; ;i2c2.h: 609: uint16_t address);
-[; ;i2c2.h: 647: bool I2C2_MasterQueueIsEmpty(void);
-[; ;i2c2.h: 685: bool I2C2_MasterQueueIsFull(void);
-[; ;i2c2.h: 686: void I2C2_BusCollisionISR( void );
-[; ;i2c2.h: 687: void I2C2_ISR ( void );
-[; ;mcc.h: 73: void SYSTEM_Initialize(void);
-[; ;mcc.h: 86: void OSCILLATOR_Initialize(void);
+[; ;clkref.h: 92: void CLKREF_Initialize(void);
+[; ;eusart.h: 94: void EUSART_Initialize(void);
+[; ;eusart.h: 114: uint8_t EUSART_Read(void);
+[; ;eusart.h: 134: void EUSART_Write(uint8_t txData);
+[; ;adc.h: 71: typedef uint16_t adc_result_t;
+[; ;adc.h: 76: typedef struct
+[; ;adc.h: 77: {
+[; ;adc.h: 78: adc_result_t adcResult1;
+[; ;adc.h: 79: adc_result_t adcResult2;
+[; ;adc.h: 80: } adc_sync_double_result_t;
+[; ;adc.h: 94: typedef enum
+[; ;adc.h: 95: {
+[; ;adc.h: 96: channel_AVSS = 0x3C,
+[; ;adc.h: 97: channel_Temp = 0x3D,
+[; ;adc.h: 98: channel_DAC1 = 0x3E,
+[; ;adc.h: 99: channel_FVR = 0x3F
+[; ;adc.h: 100: } adc_channel_t;
+[; ;adc.h: 135: void ADC_Initialize(void);
+[; ;adc.h: 165: void ADC_SelectChannel(adc_channel_t channel);
+[; ;adc.h: 192: void ADC_StartConversion();
+[; ;adc.h: 224: bool ADC_IsConversionDone();
+[; ;adc.h: 257: adc_result_t ADC_GetConversionResult(void);
+[; ;adc.h: 287: adc_result_t ADC_GetConversion(adc_channel_t channel);
+[; ;mcc.h: 74: void SYSTEM_Initialize(void);
+[; ;mcc.h: 87: void OSCILLATOR_Initialize(void);
+[; ;mcc.h: 100: void WDT_Initialize(void);
 [; ;golden_eagle_i2c.h: 24: int GE_I2C2_ByteWrite(uint8_t *dataAddress, uint8_t *data2Byte, uint8_t addlen);
 [; ;golden_eagle_i2c.h: 25: uint8_t GE_I2C2_ByteRead(uint8_t *dataAddress, uint8_t *data2Byte,uint8_t addlen);
 [; ;golden_eagle_i2c.h: 26: int GE_I2C2_BufferWrite(uint8_t *dataAddress, uint8_t *dataBuffer, uint8_t addlen, uint8_t buflen);
@@ -8202,8 +8205,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RegValue `ui ~T0 @X0 1 r2 ]
 "13
 [f ]
-[v F7821 `uc ~T0 @X0 -> 0 `x s ]
-[i F7821
+[v F7826 `uc ~T0 @X0 -> 0 `x s ]
+[i F7826
 :U ..
 "15
 -> -> 0 `i `uc
@@ -8212,9 +8215,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 ]
 [v _dataValue `uc ~T0 @X0 2  a ]
 [; ;golden_eagle_i2c.c: 15: unsigned char dataValue[]= {0x00,0x00};
-[e = _dataValue F7821 ]
-[v F7823 `uc ~T0 @X0 -> 0 `x s ]
-[i F7823
+[e = _dataValue F7826 ]
+[v F7828 `uc ~T0 @X0 -> 0 `x s ]
+[i F7828
 :U ..
 "16
 -> -> 0 `i `uc
@@ -8223,7 +8226,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 ]
 [v _dataAddr `uc ~T0 @X0 2  a ]
 [; ;golden_eagle_i2c.c: 16: unsigned char dataAddr[]= {0x00,0x00};
-[e = _dataAddr F7823 ]
+[e = _dataAddr F7828 ]
 [; ;golden_eagle_i2c.c: 18: dataAddr[0]=((RegAddr>>8)&0xff);
 "18
 [e = *U + &U _dataAddr * -> -> -> 0 `i `ui `ux -> -> # *U &U _dataAddr `ui `ux -> & >> _RegAddr -> 8 `i -> -> 255 `i `ui `uc ]
@@ -8269,8 +8272,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [f ]
 "30
 [v _RegValue `ui ~T0 @X0 1 a ]
-[v F7827 `uc ~T0 @X0 -> 0 `x s ]
-[i F7827
+[v F7832 `uc ~T0 @X0 -> 0 `x s ]
+[i F7832
 :U ..
 "32
 -> -> 0 `i `uc
@@ -8280,9 +8283,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _dataValue `uc ~T0 @X0 2  a ]
 [; ;golden_eagle_i2c.c: 30: uint16_t RegValue;
 [; ;golden_eagle_i2c.c: 32: unsigned char dataValue[]= {0x00,0x00};
-[e = _dataValue F7827 ]
-[v F7829 `uc ~T0 @X0 -> 0 `x s ]
-[i F7829
+[e = _dataValue F7832 ]
+[v F7834 `uc ~T0 @X0 -> 0 `x s ]
+[i F7834
 :U ..
 "33
 -> -> 0 `i `uc
@@ -8291,7 +8294,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 ]
 [v _dataAddr `uc ~T0 @X0 2  a ]
 [; ;golden_eagle_i2c.c: 33: unsigned char dataAddr[]= {0x00,0x00};
-[e = _dataAddr F7829 ]
+[e = _dataAddr F7834 ]
 [; ;golden_eagle_i2c.c: 35: dataAddr[0]=((RegAddr>>8)&0xff);
 "35
 [e = *U + &U _dataAddr * -> -> -> 0 `i `ui `ux -> -> # *U &U _dataAddr `ui `ux -> & >> _RegAddr -> 8 `i -> -> 255 `i `ui `uc ]
@@ -8329,8 +8332,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RegValueL `uc ~T0 @X0 1 r4 ]
 "47
 [f ]
-[v F7835 `uc ~T0 @X0 -> 0 `x s ]
-[i F7835
+[v F7840 `uc ~T0 @X0 -> 0 `x s ]
+[i F7840
 :U ..
 "49
 -> -> 0 `i `uc
@@ -8339,9 +8342,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 ]
 [v _dataValue `uc ~T0 @X0 2  a ]
 [; ;golden_eagle_i2c.c: 49: unsigned char dataValue[]= {0x00,0x00};
-[e = _dataValue F7835 ]
-[v F7837 `uc ~T0 @X0 -> 0 `x s ]
-[i F7837
+[e = _dataValue F7840 ]
+[v F7842 `uc ~T0 @X0 -> 0 `x s ]
+[i F7842
 :U ..
 "50
 -> -> 0 `i `uc
@@ -8350,7 +8353,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 ]
 [v _dataAddr `uc ~T0 @X0 2  a ]
 [; ;golden_eagle_i2c.c: 50: unsigned char dataAddr[]= {0x00,0x00};
-[e = _dataAddr F7837 ]
+[e = _dataAddr F7842 ]
 [; ;golden_eagle_i2c.c: 52: dataAddr[0]=RegAddrH;
 "52
 [e = *U + &U _dataAddr * -> -> -> 0 `i `ui `ux -> -> # *U &U _dataAddr `ui `ux _RegAddrH ]
@@ -8397,8 +8400,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [f ]
 "64
 [v _RegValue `ui ~T0 @X0 1 a ]
-[v F7842 `uc ~T0 @X0 -> 0 `x s ]
-[i F7842
+[v F7847 `uc ~T0 @X0 -> 0 `x s ]
+[i F7847
 :U ..
 "66
 -> -> 0 `i `uc
@@ -8408,9 +8411,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _dataValue `uc ~T0 @X0 2  a ]
 [; ;golden_eagle_i2c.c: 64: uint16_t RegValue;
 [; ;golden_eagle_i2c.c: 66: unsigned char dataValue[]= {0x00,0x00};
-[e = _dataValue F7842 ]
-[v F7844 `uc ~T0 @X0 -> 0 `x s ]
-[i F7844
+[e = _dataValue F7847 ]
+[v F7849 `uc ~T0 @X0 -> 0 `x s ]
+[i F7849
 :U ..
 "67
 -> -> 0 `i `uc
@@ -8419,7 +8422,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 ]
 [v _dataAddr `uc ~T0 @X0 2  a ]
 [; ;golden_eagle_i2c.c: 67: unsigned char dataAddr[]= {0x00,0x00};
-[e = _dataAddr F7844 ]
+[e = _dataAddr F7849 ]
 [; ;golden_eagle_i2c.c: 69: dataAddr[0]=RegAddrH;
 "69
 [e = *U + &U _dataAddr * -> -> -> 0 `i `ui `ux -> -> # *U &U _dataAddr `ui `ux _RegAddrH ]
@@ -8522,10 +8525,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 "109
 }
 "115
-[v _status `E7697 ~T0 @X0 1 a ]
+[v _status `E7659 ~T0 @X0 1 a ]
 [; ;golden_eagle_i2c.c: 109: }
 [; ;golden_eagle_i2c.c: 115: I2C2_MESSAGE_STATUS status = I2C2_MESSAGE_PENDING;
-[e = _status . `E7697 2 ]
+[e = _status . `E7659 2 ]
 [; ;golden_eagle_i2c.c: 118: timeOut = 0;
 "118
 [e = _timeOut -> -> 0 `i `uc ]
@@ -8544,18 +8547,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 914  ]
 [e :U 915 ]
 [e :U 914 ]
-[e $ == -> _status `i -> . `E7697 2 `i 915  ]
+[e $ == -> _status `i -> . `E7659 2 `i 915  ]
 [e :U 916 ]
 [; ;golden_eagle_i2c.c: 129: if (status == I2C2_MESSAGE_COMPLETE)
 "129
-[e $ ! == -> _status `i -> . `E7697 0 `i 917  ]
+[e $ ! == -> _status `i -> . `E7659 0 `i 917  ]
 [; ;golden_eagle_i2c.c: 130: break;
 "130
 [e $U 913  ]
 [e :U 917 ]
 [; ;golden_eagle_i2c.c: 132: if (status == I2C2_MESSAGE_FAIL)
 "132
-[e $ ! == -> _status `i -> . `E7697 1 `i 918  ]
+[e $ ! == -> _status `i -> . `E7659 1 `i 918  ]
 [; ;golden_eagle_i2c.c: 133: break;
 "133
 [e $U 913  ]
@@ -8578,12 +8581,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 }
 [e :U 911 ]
 "121
-[e $ != -> _status `i -> . `E7697 1 `i 912  ]
+[e $ != -> _status `i -> . `E7659 1 `i 912  ]
 [e :U 913 ]
 [; ;golden_eagle_i2c.c: 139: }
 [; ;golden_eagle_i2c.c: 142: if (status == I2C2_MESSAGE_FAIL)
 "142
-[e $ ! == -> _status `i -> . `E7697 1 `i 921  ]
+[e $ ! == -> _status `i -> . `E7659 1 `i 921  ]
 [; ;golden_eagle_i2c.c: 143: return 1;
 "143
 [e ) -> 1 `i ]
@@ -8638,9 +8641,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "157
 [e = _buflen _addlen ]
 "160
-[v _status `E7697 ~T0 @X0 1 a ]
+[v _status `E7659 ~T0 @X0 1 a ]
 [; ;golden_eagle_i2c.c: 160: I2C2_MESSAGE_STATUS status = I2C2_MESSAGE_PENDING;
-[e = _status . `E7697 2 ]
+[e = _status . `E7659 2 ]
 [; ;golden_eagle_i2c.c: 163: timeOut = 0;
 "163
 [e = _timeOut -> -> 0 `i `uc ]
@@ -8659,18 +8662,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 930  ]
 [e :U 931 ]
 [e :U 930 ]
-[e $ == -> _status `i -> . `E7697 2 `i 931  ]
+[e $ == -> _status `i -> . `E7659 2 `i 931  ]
 [e :U 932 ]
 [; ;golden_eagle_i2c.c: 174: if (status == I2C2_MESSAGE_COMPLETE)
 "174
-[e $ ! == -> _status `i -> . `E7697 0 `i 933  ]
+[e $ ! == -> _status `i -> . `E7659 0 `i 933  ]
 [; ;golden_eagle_i2c.c: 175: break;
 "175
 [e $U 929  ]
 [e :U 933 ]
 [; ;golden_eagle_i2c.c: 177: if (status == I2C2_MESSAGE_FAIL)
 "177
-[e $ ! == -> _status `i -> . `E7697 1 `i 934  ]
+[e $ ! == -> _status `i -> . `E7659 1 `i 934  ]
 [; ;golden_eagle_i2c.c: 178: break;
 "178
 [e $U 929  ]
@@ -8693,12 +8696,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 }
 [e :U 927 ]
 "166
-[e $ != -> _status `i -> . `E7697 1 `i 928  ]
+[e $ != -> _status `i -> . `E7659 1 `i 928  ]
 [e :U 929 ]
 [; ;golden_eagle_i2c.c: 184: }
 [; ;golden_eagle_i2c.c: 187: if (status == I2C2_MESSAGE_FAIL)
 "187
-[e $ ! == -> _status `i -> . `E7697 1 `i 937  ]
+[e $ ! == -> _status `i -> . `E7659 1 `i 937  ]
 [; ;golden_eagle_i2c.c: 188: return 1;
 "188
 [e ) -> 1 `i ]
@@ -8735,9 +8738,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $UE 938  ]
 [e :U 939 ]
 "203
-[v _status `E7697 ~T0 @X0 1 a ]
+[v _status `E7659 ~T0 @X0 1 a ]
 [; ;golden_eagle_i2c.c: 203: I2C2_MESSAGE_STATUS status = I2C2_MESSAGE_PENDING;
-[e = _status . `E7697 2 ]
+[e = _status . `E7659 2 ]
 [; ;golden_eagle_i2c.c: 205: timeOut = 0;
 "205
 [e = _timeOut -> -> 0 `i `uc ]
@@ -8756,18 +8759,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 943  ]
 [e :U 944 ]
 [e :U 943 ]
-[e $ == -> _status `i -> . `E7697 2 `i 944  ]
+[e $ == -> _status `i -> . `E7659 2 `i 944  ]
 [e :U 945 ]
 [; ;golden_eagle_i2c.c: 217: if (status == I2C2_MESSAGE_COMPLETE)
 "217
-[e $ ! == -> _status `i -> . `E7697 0 `i 946  ]
+[e $ ! == -> _status `i -> . `E7659 0 `i 946  ]
 [; ;golden_eagle_i2c.c: 218: break;
 "218
 [e $U 942  ]
 [e :U 946 ]
 [; ;golden_eagle_i2c.c: 221: if (status == I2C2_MESSAGE_FAIL)
 "221
-[e $ ! == -> _status `i -> . `E7697 1 `i 947  ]
+[e $ ! == -> _status `i -> . `E7659 1 `i 947  ]
 [; ;golden_eagle_i2c.c: 222: break;
 "222
 [e $U 942  ]
@@ -8790,7 +8793,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 }
 [e :U 940 ]
 "208
-[e $ != -> _status `i -> . `E7697 1 `i 941  ]
+[e $ != -> _status `i -> . `E7659 1 `i 941  ]
 [e :U 942 ]
 [; ;golden_eagle_i2c.c: 229: }
 [; ;golden_eagle_i2c.c: 231: uart_send_char("Rd ");
@@ -8840,10 +8843,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 "245
 [v _writeBuffer `uc ~T0 @X0 + -> 16 `i -> 3 `i a ]
 "246
-[v _status `E7697 ~T0 @X0 1 a ]
+[v _status `E7659 ~T0 @X0 1 a ]
 [; ;golden_eagle_i2c.c: 245: uint8_t writeBuffer[16+3];
 [; ;golden_eagle_i2c.c: 246: I2C2_MESSAGE_STATUS status = I2C2_MESSAGE_PENDING;
-[e = _status . `E7697 2 ]
+[e = _status . `E7659 2 ]
 [; ;golden_eagle_i2c.c: 249: for(int i = 0; i < addlen; i++)
 "249
 {
@@ -8915,18 +8918,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 963  ]
 [e :U 964 ]
 [e :U 963 ]
-[e $ == -> _status `i -> . `E7697 2 `i 964  ]
+[e $ == -> _status `i -> . `E7659 2 `i 964  ]
 [e :U 965 ]
 [; ;golden_eagle_i2c.c: 274: if (status == I2C2_MESSAGE_COMPLETE)
 "274
-[e $ ! == -> _status `i -> . `E7697 0 `i 966  ]
+[e $ ! == -> _status `i -> . `E7659 0 `i 966  ]
 [; ;golden_eagle_i2c.c: 275: break;
 "275
 [e $U 962  ]
 [e :U 966 ]
 [; ;golden_eagle_i2c.c: 277: if (status == I2C2_MESSAGE_FAIL)
 "277
-[e $ ! == -> _status `i -> . `E7697 1 `i 967  ]
+[e $ ! == -> _status `i -> . `E7659 1 `i 967  ]
 [; ;golden_eagle_i2c.c: 278: break;
 "278
 [e $U 962  ]
@@ -8949,12 +8952,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 }
 [e :U 960 ]
 "266
-[e $ != -> _status `i -> . `E7697 1 `i 961  ]
+[e $ != -> _status `i -> . `E7659 1 `i 961  ]
 [e :U 962 ]
 [; ;golden_eagle_i2c.c: 285: }
 [; ;golden_eagle_i2c.c: 287: if (status == I2C2_MESSAGE_FAIL)
 "287
-[e $ ! == -> _status `i -> . `E7697 1 `i 970  ]
+[e $ ! == -> _status `i -> . `E7659 1 `i 970  ]
 [; ;golden_eagle_i2c.c: 288: return 1;
 "288
 [e ) -> 1 `i ]
@@ -8983,9 +8986,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;golden_eagle_i2c.c: 293: int check = 0;
 [e = _check -> 0 `i ]
 "294
-[v _status `E7697 ~T0 @X0 1 a ]
+[v _status `E7659 ~T0 @X0 1 a ]
 [; ;golden_eagle_i2c.c: 294: I2C2_MESSAGE_STATUS status = I2C2_MESSAGE_PENDING;
-[e = _status . `E7697 2 ]
+[e = _status . `E7659 2 ]
 [; ;golden_eagle_i2c.c: 297: check = GE_I2C2_ByteWrite(dataAddress,(0),addlen);
 "297
 [e = _check ( _GE_I2C2_ByteWrite (3 , , _dataAddress -> -> 0 `i `*uc _addlen ]
@@ -9012,18 +9015,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 976  ]
 [e :U 977 ]
 [e :U 976 ]
-[e $ == -> _status `i -> . `E7697 2 `i 977  ]
+[e $ == -> _status `i -> . `E7659 2 `i 977  ]
 [e :U 978 ]
 [; ;golden_eagle_i2c.c: 314: if (status == I2C2_MESSAGE_COMPLETE)
 "314
-[e $ ! == -> _status `i -> . `E7697 0 `i 979  ]
+[e $ ! == -> _status `i -> . `E7659 0 `i 979  ]
 [; ;golden_eagle_i2c.c: 315: break;
 "315
 [e $U 975  ]
 [e :U 979 ]
 [; ;golden_eagle_i2c.c: 318: if (status == I2C2_MESSAGE_FAIL)
 "318
-[e $ ! == -> _status `i -> . `E7697 1 `i 980  ]
+[e $ ! == -> _status `i -> . `E7659 1 `i 980  ]
 [; ;golden_eagle_i2c.c: 319: break;
 "319
 [e $U 975  ]
@@ -9046,16 +9049,16 @@ Version 3.2 HI-TECH Software Intermediate Code
 }
 [e :U 973 ]
 "306
-[e $ != -> _status `i -> . `E7697 1 `i 974  ]
+[e $ != -> _status `i -> . `E7659 1 `i 974  ]
 [e :U 975 ]
 [; ;golden_eagle_i2c.c: 326: }
 [; ;golden_eagle_i2c.c: 327: }
 "327
 [e :UE 971 ]
 }
-[v F7788 `(ui ~T0 @X0 1 tf4`ui`ui`i`i ]
+[v F7793 `(ui ~T0 @X0 1 tf4`ui`ui`i`i ]
 "331
-[v _bitset `TF7788 ~T0 @X0 1 s ]
+[v _bitset `TF7793 ~T0 @X0 1 s ]
 "332
 {
 [; ;golden_eagle_i2c.c: 331: inline static uint16_t bitset(uint16_t value, uint16_t new_value, int lbit, int width)
@@ -9086,9 +9089,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "337
 [e :UE 983 ]
 }
-[v F7794 `(v ~T0 @X0 1 tf4`ui`ui`i`i ]
+[v F7799 `(v ~T0 @X0 1 tf4`ui`ui`i`i ]
 "339
-[v _GE_I2C2_bitset `TF7794 ~T0 @X0 1 s ]
+[v _GE_I2C2_bitset `TF7799 ~T0 @X0 1 s ]
 "340
 {
 [; ;golden_eagle_i2c.c: 339: inline static void GE_I2C2_bitset(uint16_t addr, uint16_t new_value, int lbit, int width)
@@ -10314,49 +10317,55 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;golden_eagle_i2c.c: 574: {
 [e :U _GE_set_polarity ]
 [f ]
-[; ;golden_eagle_i2c.c: 586: GE_I2C2_bitset(0x8061,0x1,14,1);
-"586
-[e ( _GE_I2C2_bitset (4 , , , -> 32865 `ui -> -> 1 `i `ui -> 14 `i -> 1 `i ]
-[; ;golden_eagle_i2c.c: 594: }
-"594
+[; ;golden_eagle_i2c.c: 577: GE_I2C2_bitset(0x8561,0x1,14,1);
+"577
+[e ( _GE_I2C2_bitset (4 , , , -> 34145 `ui -> -> 1 `i `ui -> 14 `i -> 1 `i ]
+[; ;golden_eagle_i2c.c: 578: GE_I2C2_bitset(0x8661,0x1,14,1);
+"578
+[e ( _GE_I2C2_bitset (4 , , , -> 34401 `ui -> -> 1 `i `ui -> 14 `i -> 1 `i ]
+[; ;golden_eagle_i2c.c: 579: GE_I2C2_bitset(0x8761,0x1,14,1);
+"579
+[e ( _GE_I2C2_bitset (4 , , , -> 34657 `ui -> -> 1 `i `ui -> 14 `i -> 1 `i ]
+[; ;golden_eagle_i2c.c: 596: }
+"596
 [e :UE 1139 ]
 }
-"597
+"599
 [v _GE_state_reset `(v ~T0 @X0 1 ef ]
-"598
+"600
 {
-[; ;golden_eagle_i2c.c: 597: void GE_state_reset(void)
-[; ;golden_eagle_i2c.c: 598: {
+[; ;golden_eagle_i2c.c: 599: void GE_state_reset(void)
+[; ;golden_eagle_i2c.c: 600: {
 [e :U _GE_state_reset ]
 [f ]
-"599
-[v _i `ui ~T0 @X0 1 a ]
-[; ;golden_eagle_i2c.c: 599: uint16_t i;
-[; ;golden_eagle_i2c.c: 601: for(i=0;i<8;i++) {
 "601
+[v _i `ui ~T0 @X0 1 a ]
+[; ;golden_eagle_i2c.c: 601: uint16_t i;
+[; ;golden_eagle_i2c.c: 603: for(i=0;i<8;i++) {
+"603
 {
 [e = _i -> -> 0 `i `ui ]
 [e $ < _i -> -> 8 `i `ui 1141  ]
 [e $U 1142  ]
 [e :U 1141 ]
 {
-[; ;golden_eagle_i2c.c: 602: GE_I2C2_bitset(0x80A1+i*0x0100,0x1,11,1);
-"602
-[e ( _GE_I2C2_bitset (4 , , , + -> 32929 `ui * _i -> -> 256 `i `ui -> -> 1 `i `ui -> 11 `i -> 1 `i ]
-[; ;golden_eagle_i2c.c: 603: GE_I2C2_bitset(0x80A1+i*0x0100,0x0,11,1);
-"603
-[e ( _GE_I2C2_bitset (4 , , , + -> 32929 `ui * _i -> -> 256 `i `ui -> -> 0 `i `ui -> 11 `i -> 1 `i ]
+[; ;golden_eagle_i2c.c: 604: GE_I2C2_bitset(0x80A1+i*0x0100,0x1,11,1);
 "604
+[e ( _GE_I2C2_bitset (4 , , , + -> 32929 `ui * _i -> -> 256 `i `ui -> -> 1 `i `ui -> 11 `i -> 1 `i ]
+[; ;golden_eagle_i2c.c: 605: GE_I2C2_bitset(0x80A1+i*0x0100,0x0,11,1);
+"605
+[e ( _GE_I2C2_bitset (4 , , , + -> 32929 `ui * _i -> -> 256 `i `ui -> -> 0 `i `ui -> 11 `i -> 1 `i ]
+"606
 }
-"601
+"603
 [e ++ _i -> -> 1 `i `ui ]
 [e $ < _i -> -> 8 `i `ui 1141  ]
 [e :U 1142 ]
-"604
+"606
 }
-[; ;golden_eagle_i2c.c: 604: }
-[; ;golden_eagle_i2c.c: 607: }
-"607
+[; ;golden_eagle_i2c.c: 606: }
+[; ;golden_eagle_i2c.c: 609: }
+"609
 [e :UE 1140 ]
 }
 [a 4C 61 61 0 ]

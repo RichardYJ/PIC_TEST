@@ -13,12 +13,12 @@
   @Description
     This header file provides APIs for driver for ADC.
     Generation Information :
-        Product Revision  :  MPLAB(c) Code Configurator - 3.16
+        Product Revision  :  MPLAB(c) Code Configurator - 4.15
         Device            :  PIC16LF18346
         Driver Version    :  2.00
     The generated drivers are tested against the following:
         Compiler          :  XC8 1.35
-        MPLAB             :  MPLAB X 3.20
+        MPLAB             :  MPLAB X 3.40
 */
 
 /*
@@ -157,11 +157,39 @@ void ADC_Initialize(void);
     uint16_t convertedValue;
 
     ADC_Initialize();
-    ADC_StartConversion(AN1_Channel);
+    ADC_SelectChannel(AN1_Channel);
+    ADC_StartConversion();
     convertedValue = ADC_GetConversionResult();
     </code>
 */
-void ADC_StartConversion(adc_channel_t channel);
+void ADC_SelectChannel(adc_channel_t channel);
+
+/**
+  @Summary
+    Starts conversion
+
+  @Description
+    This routine is used to start conversion of desired channel.
+    
+  @Preconditions
+    ADC_Initialize() function should have been called before calling this function.
+
+  @Returns
+    None
+
+  @Param
+    None
+
+  @Example
+    <code>
+    uint16_t convertedValue;
+
+    ADC_Initialize();    
+    ADC_StartConversion();
+    convertedValue = ADC_GetConversionResult();
+    </code>
+*/
+void ADC_StartConversion();
 
 /**
   @Summary

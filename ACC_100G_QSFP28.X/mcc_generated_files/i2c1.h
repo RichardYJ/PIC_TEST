@@ -89,7 +89,7 @@ typedef enum
     //static uint8_t EEPROM_Buffer[] =
     uint8_t EEPROM_Buffer[] =
     {
-17,
+17,//yj 
 5,
 6,
 0,
@@ -167,7 +167,7 @@ typedef enum
 0,
 0,
 0,
-0,
+0,//yj 00
 0,
 0,
 0,

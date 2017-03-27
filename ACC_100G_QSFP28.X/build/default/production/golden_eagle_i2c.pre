@@ -9644,8 +9644,11 @@ extern unsigned char __resetbits;
 extern __bit __powerdown;
 extern __bit __timeout;
 
-# 263 "mcc_generated_files/pin_manager.h"
+# 231 "mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_Initialize (void);
+
+# 243
+void PIN_MANAGER_IOC(void);
 
 # 13 "C:\Program Files (x86)\Microchip\xc8\v1.38\include\stdint.h"
 typedef signed char int8_t;
@@ -9743,63 +9746,84 @@ typedef unsigned char bool;
 # 110 "mcc_generated_files/interrupt_manager.h"
 void interrupt INTERRUPT_InterruptManager(void);
 
-# 71 "mcc_generated_files/adc.h"
-typedef uint16_t adc_result_t;
-
-# 76
-typedef struct
-{
-adc_result_t adcResult1;
-adc_result_t adcResult2;
-} adc_sync_double_result_t;
-
-# 94
-typedef enum
-{
-channel_AVSS = 0x3C,
-channel_Temp = 0x3D,
-channel_DAC1 = 0x3E,
-channel_FVR = 0x3F
-} adc_channel_t;
-
-# 135
-void ADC_Initialize(void);
-
-# 164
-void ADC_StartConversion(adc_channel_t channel);
-
-# 196
-bool ADC_IsConversionDone();
-
-# 229
-adc_result_t ADC_GetConversionResult(void);
-
-# 259
-adc_result_t ADC_GetConversion(adc_channel_t channel);
-
-# 94 "mcc_generated_files/eusart.h"
-void EUSART_Initialize(void);
-
-# 114
-uint8_t EUSART_Read(void);
-
-# 134
-void EUSART_Write(uint8_t txData);
-
 # 92 "mcc_generated_files/fvr.h"
 void FVR_Initialize(void);
 
 # 126
 bool FVR_IsOutputReady(void);
 
-# 92 "mcc_generated_files/clkref.h"
-void CLKREF_Initialize(void);
-
 # 4 "C:\Program Files (x86)\Microchip\xc8\v1.38\include\__size_t.h"
 typedef unsigned size_t;
 
 # 6 "C:\Program Files (x86)\Microchip\xc8\v1.38\include\stddef.h"
 typedef int ptrdiff_t;
+
+# 83 "mcc_generated_files/i2c2.h"
+typedef enum
+{
+I2C2_MESSAGE_COMPLETE,
+I2C2_MESSAGE_FAIL,
+I2C2_MESSAGE_PENDING,
+I2C2_STUCK_START,
+I2C2_MESSAGE_ADDRESS_NO_ACK,
+I2C2_DATA_NO_ACK,
+I2C2_LOST_STATE
+} I2C2_MESSAGE_STATUS;
+
+# 108
+typedef struct
+{
+uint16_t address;
+
+
+uint8_t length;
+uint8_t *pbuffer;
+} I2C2_TRANSACTION_REQUEST_BLOCK;
+
+# 220
+void I2C2_Initialize(void);
+
+# 259
+void I2C2_MasterWrite(
+uint8_t *pdata,
+uint8_t length,
+uint16_t address,
+I2C2_MESSAGE_STATUS *pstatus);
+
+# 406
+void I2C2_MasterRead(
+uint8_t *pdata,
+uint8_t length,
+uint16_t address,
+I2C2_MESSAGE_STATUS *pstatus);
+
+# 516
+void I2C2_MasterTRBInsert(
+uint8_t count,
+I2C2_TRANSACTION_REQUEST_BLOCK *ptrb_list,
+I2C2_MESSAGE_STATUS *pflag);
+
+# 560
+void I2C2_MasterReadTRBBuild(
+I2C2_TRANSACTION_REQUEST_BLOCK *ptrb,
+uint8_t *pdata,
+uint8_t length,
+uint16_t address);
+
+# 605
+void I2C2_MasterWriteTRBBuild(
+I2C2_TRANSACTION_REQUEST_BLOCK *ptrb,
+uint8_t *pdata,
+uint8_t length,
+uint16_t address);
+
+# 647
+bool I2C2_MasterQueueIsEmpty(void);
+
+# 685
+bool I2C2_MasterQueueIsFull(void);
+void I2C2_BusCollisionISR( void );
+void I2C2_ISR ( void );
 
 # 78 "mcc_generated_files/i2c1.h"
 typedef enum
@@ -10081,78 +10105,63 @@ void I2C1_ISR ( void );
 # 403
 extern volatile uint8_t I2C1_slaveWriteData;
 
-# 83 "mcc_generated_files/i2c2.h"
-typedef enum
-{
-I2C2_MESSAGE_COMPLETE,
-I2C2_MESSAGE_FAIL,
-I2C2_MESSAGE_PENDING,
-I2C2_STUCK_START,
-I2C2_MESSAGE_ADDRESS_NO_ACK,
-I2C2_DATA_NO_ACK,
-I2C2_LOST_STATE
-} I2C2_MESSAGE_STATUS;
+# 92 "mcc_generated_files/clkref.h"
+void CLKREF_Initialize(void);
 
-# 108
+# 94 "mcc_generated_files/eusart.h"
+void EUSART_Initialize(void);
+
+# 114
+uint8_t EUSART_Read(void);
+
+# 134
+void EUSART_Write(uint8_t txData);
+
+# 71 "mcc_generated_files/adc.h"
+typedef uint16_t adc_result_t;
+
+# 76
 typedef struct
 {
-uint16_t address;
+adc_result_t adcResult1;
+adc_result_t adcResult2;
+} adc_sync_double_result_t;
 
+# 94
+typedef enum
+{
+channel_AVSS = 0x3C,
+channel_Temp = 0x3D,
+channel_DAC1 = 0x3E,
+channel_FVR = 0x3F
+} adc_channel_t;
 
-uint8_t length;
-uint8_t *pbuffer;
-} I2C2_TRANSACTION_REQUEST_BLOCK;
+# 135
+void ADC_Initialize(void);
 
-# 220
-void I2C2_Initialize(void);
+# 165
+void ADC_SelectChannel(adc_channel_t channel);
 
-# 259
-void I2C2_MasterWrite(
-uint8_t *pdata,
-uint8_t length,
-uint16_t address,
-I2C2_MESSAGE_STATUS *pstatus);
+# 192
+void ADC_StartConversion();
 
-# 406
-void I2C2_MasterRead(
-uint8_t *pdata,
-uint8_t length,
-uint16_t address,
-I2C2_MESSAGE_STATUS *pstatus);
+# 224
+bool ADC_IsConversionDone();
 
-# 516
-void I2C2_MasterTRBInsert(
-uint8_t count,
-I2C2_TRANSACTION_REQUEST_BLOCK *ptrb_list,
-I2C2_MESSAGE_STATUS *pflag);
+# 257
+adc_result_t ADC_GetConversionResult(void);
 
-# 560
-void I2C2_MasterReadTRBBuild(
-I2C2_TRANSACTION_REQUEST_BLOCK *ptrb,
-uint8_t *pdata,
-uint8_t length,
-uint16_t address);
+# 287
+adc_result_t ADC_GetConversion(adc_channel_t channel);
 
-# 605
-void I2C2_MasterWriteTRBBuild(
-I2C2_TRANSACTION_REQUEST_BLOCK *ptrb,
-uint8_t *pdata,
-uint8_t length,
-uint16_t address);
-
-# 647
-bool I2C2_MasterQueueIsEmpty(void);
-
-# 685
-bool I2C2_MasterQueueIsFull(void);
-void I2C2_BusCollisionISR( void );
-void I2C2_ISR ( void );
-
-# 73 "mcc_generated_files/mcc.h"
+# 74 "mcc_generated_files/mcc.h"
 void SYSTEM_Initialize(void);
 
-# 86
+# 87
 void OSCILLATOR_Initialize(void);
+
+# 100
+void WDT_Initialize(void);
 
 # 24 "golden_eagle_i2c.h"
 int GE_I2C2_ByteWrite(uint8_t *dataAddress, uint8_t *data2Byte, uint8_t addlen);
@@ -10741,10 +10750,12 @@ return result;
 void GE_set_polarity(void)
 {
 
-# 586
-GE_I2C2_bitset(0x8061,0x1,14,1);
 
-# 594
+GE_I2C2_bitset(0x8561,0x1,14,1);
+GE_I2C2_bitset(0x8661,0x1,14,1);
+GE_I2C2_bitset(0x8761,0x1,14,1);
+
+# 596
 }
 
 

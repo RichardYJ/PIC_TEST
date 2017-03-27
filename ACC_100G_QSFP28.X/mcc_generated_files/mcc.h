@@ -13,12 +13,12 @@
   @Description:
     This header file provides implementations for driver APIs for all modules selected in the GUI.
     Generation Information :
-        Product Revision  :  MPLAB(c) Code Configurator - 3.16
+        Product Revision  :  MPLAB(c) Code Configurator - 4.15
         Device            :  PIC16LF18346
         Version           :  1.02
     The generated drivers are tested against the following:
         Compiler          :  XC8 1.35
-        MPLAB             :  MPLAB X 3.20
+        MPLAB             :  MPLAB X 3.40
 */
 
 /*
@@ -50,14 +50,15 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "interrupt_manager.h"
-#include "adc.h"
-#include "eusart.h"
 #include "fvr.h"
-#include "clkref.h"
-#include "i2c1.h"
 #include "i2c2.h"
+#include "i2c1.h"
+#include "clkref.h"
+#include "eusart.h"
+#include "adc.h"
 
 #define _XTAL_FREQ  32000000
+
 
 /**
  * @Param
@@ -84,6 +85,19 @@ void SYSTEM_Initialize(void);
     OSCILLATOR_Initialize(void);
  */
 void OSCILLATOR_Initialize(void);
+
+/**
+ * @Param
+    none
+ * @Returns
+    none
+ * @Description
+    Initializes the WDT module to the default states configured in the
+ *                  MCC GUI
+ * @Example
+    WDT_Initialize(void);
+ */
+void WDT_Initialize(void);
 
 
 #endif	/* MCC_H */

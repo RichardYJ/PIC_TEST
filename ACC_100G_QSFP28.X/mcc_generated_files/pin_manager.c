@@ -13,12 +13,12 @@
   Description:
     This header file provides implementations for pin APIs for all pins selected in the GUI.
     Generation Information :
-        Product Revision  :  MPLAB(c) Code Configurator - 3.16
+        Product Revision  :  MPLAB(c) Code Configurator - 4.15
         Device            :  PIC16LF18346
         Driver Version    :  1.02
     The generated drivers are tested against the following:
         Compiler          :  XC8 1.35
-        MPLAB             :  MPLAB X 3.20
+        MPLAB             :  MPLAB X 3.40
 
     Copyright (c) 2013 - 2015 released Microchip Technology Inc.  All rights reserved.
 
@@ -45,26 +45,51 @@
 
 #include <xc.h>
 #include "pin_manager.h"
-#include <stdbool.h>
+#include "stdbool.h"
+
 
 void PIN_MANAGER_Initialize(void)
 {
-    LATB = 0x0;
-    LATA = 0x0;
-    LATC = 0x0;
-    WPUA = 0x4;
-    WPUB = 0x0;
-    WPUC = 0x0;
-    ANSELA = 0x33;
-    ANSELB = 0x0;
-    ANSELC = 0xFF;
+    /**
+    LATx registers
+    */   
+    LATA = 0x00;    
+    LATB = 0x00;    
+    LATC = 0x00;    
+
+    /**
+    TRISx registers
+    */    
+    TRISA = 0x2F;// 0x27	yj20170314
     TRISB = 0xF0;
     TRISC = 0x27;
-    TRISA = 0x27;
 
+    /**
+    ANSELx registers
+    */   
+    ANSELC = 0xFF;
+    ANSELB = 0x00;
+    ANSELA = 0x33;
+
+    /**
+    WPUx registers
+    */ 
+    WPUB = 0x00;
+    WPUA = 0x04;
+    WPUC = 0x00;
+
+    /**
+    ODx registers
+    */   
+    ODCONA = 0x00;
+    ODCONB = 0x00;
+    ODCONC = 0x00;
     
 
 
+   
+    
+    
     bool state = GIE;
     GIE = 0;
     PPSLOCK = 0x55;
@@ -87,6 +112,10 @@ void PIN_MANAGER_Initialize(void)
     PPSLOCKbits.PPSLOCKED = 0x01; // lock PPS
 
     GIE = state;
+}       
+
+void PIN_MANAGER_IOC(void)
+{   
 
 }
 

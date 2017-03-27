@@ -13,12 +13,12 @@
   @Description
     This source file provides implementations for driver APIs for ADC.
     Generation Information :
-        Product Revision  :  MPLAB(c) Code Configurator - 3.16
+        Product Revision  :  MPLAB(c) Code Configurator - 4.15
         Device            :  PIC16LF18346
         Driver Version    :  2.00
     The generated drivers are tested against the following:
         Compiler          :  XC8 1.35
-        MPLAB             :  MPLAB X 3.20
+        MPLAB             :  MPLAB X 3.40
 */
 
 /*
@@ -82,25 +82,27 @@ void ADC_Initialize(void)
     
 }
 
-void ADC_StartConversion(adc_channel_t channel)
+void ADC_SelectChannel(adc_channel_t channel)
 {
     // select the A/D channel
     ADCON0bits.CHS = channel;    
     // Turn on the ADC module
-    ADCON0bits.ADON = 1;
-    // Acquisition time delay
-    __delay_us(ACQ_US_DELAY);
+    ADCON0bits.ADON = 1;  
+}
 
+void ADC_StartConversion()
+{
     // Start the conversion
     ADCON0bits.ADGO = 1;
-    
 }
+
 
 bool ADC_IsConversionDone()
 {
     // Start the conversion
     return (!ADCON0bits.ADGO);
 }
+
 adc_result_t ADC_GetConversionResult(void)
 {
     // Conversion finished, return the result

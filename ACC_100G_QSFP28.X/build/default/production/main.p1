@@ -1,6 +1,6 @@
 Version 3.2 HI-TECH Software Intermediate Code
 [p mainexit ]
-"73 mcc_generated_files/mcc.h
+"74 mcc_generated_files/mcc.h
 [v _SYSTEM_Initialize `(v ~T0 @X0 0 ef ]
 "343 C:\Program Files (x86)\Microchip\xc8\v1.38\include\pic16lf18346.h
 [s S27 :1 `uc 1 :5 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -34,18 +34,20 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _GE_I2C2_HexWrite `(i ~T0 @X0 0 ef2`ui`ui ]
 "39
 [v _GE_set_polarity `(v ~T0 @X0 0 ef ]
-"883 main.c
-[c E7656 60 61 62 63 .. ]
-[n E7656 . channel_AVSS channel_Temp channel_DAC1 channel_FVR  ]
+"886 main.c
+[c E7732 60 61 62 63 .. ]
+[n E7732 . channel_AVSS channel_Temp channel_DAC1 channel_FVR  ]
 "135 mcc_generated_files/adc.h
 [v _ADC_Initialize `(v ~T0 @X0 0 ef ]
+"31 golden_eagle_i2c.h
+[v _GE_I2C2_ByteHLRead `(ui ~T0 @X0 0 ef2`uc`uc ]
 "2537 C:\Program Files (x86)\Microchip\xc8\v1.38\include\pic16lf18346.h
 [v _FVRCON `Vuc ~T0 @X0 0 e@279 ]
-"164 mcc_generated_files/adc.h
-[v _ADC_StartConversion `(v ~T0 @X0 0 ef1`E7656 ]
-"196
+"192 mcc_generated_files/adc.h
+[v _ADC_StartConversion `(v ~T0 @X0 0 ef ]
+"224
 [v _ADC_IsConversionDone `(uc ~T0 @X0 0 ef ]
-"229
+"257
 [v _ADC_GetConversionResult `(ui ~T0 @X0 0 ef ]
 "68 uart_top.h
 [v _uart_send_dec `(v ~T0 @X0 0 ef1`ul ]
@@ -7306,7 +7308,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic.h: 186: extern unsigned char __resetbits;
 [; ;pic.h: 187: extern __bit __powerdown;
 [; ;pic.h: 188: extern __bit __timeout;
-[; ;pin_manager.h: 263: void PIN_MANAGER_Initialize (void);
+[; ;pin_manager.h: 231: void PIN_MANAGER_Initialize (void);
+[; ;pin_manager.h: 243: void PIN_MANAGER_IOC(void);
 [; ;stdint.h: 13: typedef signed char int8_t;
 [; ;stdint.h: 20: typedef signed int int16_t;
 [; ;stdint.h: 28: typedef signed short long int int24_t;
@@ -7337,32 +7340,55 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
 [; ;stdbool.h: 12: typedef unsigned char bool;
 [; ;interrupt_manager.h: 110: void interrupt INTERRUPT_InterruptManager(void);
-[; ;adc.h: 71: typedef uint16_t adc_result_t;
-[; ;adc.h: 76: typedef struct
-[; ;adc.h: 77: {
-[; ;adc.h: 78: adc_result_t adcResult1;
-[; ;adc.h: 79: adc_result_t adcResult2;
-[; ;adc.h: 80: } adc_sync_double_result_t;
-[; ;adc.h: 94: typedef enum
-[; ;adc.h: 95: {
-[; ;adc.h: 96: channel_AVSS = 0x3C,
-[; ;adc.h: 97: channel_Temp = 0x3D,
-[; ;adc.h: 98: channel_DAC1 = 0x3E,
-[; ;adc.h: 99: channel_FVR = 0x3F
-[; ;adc.h: 100: } adc_channel_t;
-[; ;adc.h: 135: void ADC_Initialize(void);
-[; ;adc.h: 164: void ADC_StartConversion(adc_channel_t channel);
-[; ;adc.h: 196: bool ADC_IsConversionDone();
-[; ;adc.h: 229: adc_result_t ADC_GetConversionResult(void);
-[; ;adc.h: 259: adc_result_t ADC_GetConversion(adc_channel_t channel);
-[; ;eusart.h: 94: void EUSART_Initialize(void);
-[; ;eusart.h: 114: uint8_t EUSART_Read(void);
-[; ;eusart.h: 134: void EUSART_Write(uint8_t txData);
 [; ;fvr.h: 92: void FVR_Initialize(void);
 [; ;fvr.h: 126: bool FVR_IsOutputReady(void);
-[; ;clkref.h: 92: void CLKREF_Initialize(void);
 [; ;__size_t.h: 4: typedef unsigned size_t;
 [; ;stddef.h: 6: typedef int ptrdiff_t;
+[; ;i2c2.h: 83: typedef enum
+[; ;i2c2.h: 84: {
+[; ;i2c2.h: 85: I2C2_MESSAGE_COMPLETE,
+[; ;i2c2.h: 86: I2C2_MESSAGE_FAIL,
+[; ;i2c2.h: 87: I2C2_MESSAGE_PENDING,
+[; ;i2c2.h: 88: I2C2_STUCK_START,
+[; ;i2c2.h: 89: I2C2_MESSAGE_ADDRESS_NO_ACK,
+[; ;i2c2.h: 90: I2C2_DATA_NO_ACK,
+[; ;i2c2.h: 91: I2C2_LOST_STATE
+[; ;i2c2.h: 92: } I2C2_MESSAGE_STATUS;
+[; ;i2c2.h: 108: typedef struct
+[; ;i2c2.h: 109: {
+[; ;i2c2.h: 110: uint16_t address;
+[; ;i2c2.h: 113: uint8_t length;
+[; ;i2c2.h: 114: uint8_t *pbuffer;
+[; ;i2c2.h: 115: } I2C2_TRANSACTION_REQUEST_BLOCK;
+[; ;i2c2.h: 220: void I2C2_Initialize(void);
+[; ;i2c2.h: 259: void I2C2_MasterWrite(
+[; ;i2c2.h: 260: uint8_t *pdata,
+[; ;i2c2.h: 261: uint8_t length,
+[; ;i2c2.h: 262: uint16_t address,
+[; ;i2c2.h: 263: I2C2_MESSAGE_STATUS *pstatus);
+[; ;i2c2.h: 406: void I2C2_MasterRead(
+[; ;i2c2.h: 407: uint8_t *pdata,
+[; ;i2c2.h: 408: uint8_t length,
+[; ;i2c2.h: 409: uint16_t address,
+[; ;i2c2.h: 410: I2C2_MESSAGE_STATUS *pstatus);
+[; ;i2c2.h: 516: void I2C2_MasterTRBInsert(
+[; ;i2c2.h: 517: uint8_t count,
+[; ;i2c2.h: 518: I2C2_TRANSACTION_REQUEST_BLOCK *ptrb_list,
+[; ;i2c2.h: 519: I2C2_MESSAGE_STATUS *pflag);
+[; ;i2c2.h: 560: void I2C2_MasterReadTRBBuild(
+[; ;i2c2.h: 561: I2C2_TRANSACTION_REQUEST_BLOCK *ptrb,
+[; ;i2c2.h: 562: uint8_t *pdata,
+[; ;i2c2.h: 563: uint8_t length,
+[; ;i2c2.h: 564: uint16_t address);
+[; ;i2c2.h: 605: void I2C2_MasterWriteTRBBuild(
+[; ;i2c2.h: 606: I2C2_TRANSACTION_REQUEST_BLOCK *ptrb,
+[; ;i2c2.h: 607: uint8_t *pdata,
+[; ;i2c2.h: 608: uint8_t length,
+[; ;i2c2.h: 609: uint16_t address);
+[; ;i2c2.h: 647: bool I2C2_MasterQueueIsEmpty(void);
+[; ;i2c2.h: 685: bool I2C2_MasterQueueIsFull(void);
+[; ;i2c2.h: 686: void I2C2_BusCollisionISR( void );
+[; ;i2c2.h: 687: void I2C2_ISR ( void );
 [; ;i2c1.h: 78: typedef enum
 [; ;i2c1.h: 79: {
 [; ;i2c1.h: 80: I2C1_SLAVE_WRITE_REQUEST,
@@ -8150,53 +8176,32 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;i2c1.h: 376: void I2C1_Initialize(void);
 [; ;i2c1.h: 396: void I2C1_ISR ( void );
 [; ;i2c1.h: 403: extern volatile uint8_t I2C1_slaveWriteData;
-[; ;i2c2.h: 83: typedef enum
-[; ;i2c2.h: 84: {
-[; ;i2c2.h: 85: I2C2_MESSAGE_COMPLETE,
-[; ;i2c2.h: 86: I2C2_MESSAGE_FAIL,
-[; ;i2c2.h: 87: I2C2_MESSAGE_PENDING,
-[; ;i2c2.h: 88: I2C2_STUCK_START,
-[; ;i2c2.h: 89: I2C2_MESSAGE_ADDRESS_NO_ACK,
-[; ;i2c2.h: 90: I2C2_DATA_NO_ACK,
-[; ;i2c2.h: 91: I2C2_LOST_STATE
-[; ;i2c2.h: 92: } I2C2_MESSAGE_STATUS;
-[; ;i2c2.h: 108: typedef struct
-[; ;i2c2.h: 109: {
-[; ;i2c2.h: 110: uint16_t address;
-[; ;i2c2.h: 113: uint8_t length;
-[; ;i2c2.h: 114: uint8_t *pbuffer;
-[; ;i2c2.h: 115: } I2C2_TRANSACTION_REQUEST_BLOCK;
-[; ;i2c2.h: 220: void I2C2_Initialize(void);
-[; ;i2c2.h: 259: void I2C2_MasterWrite(
-[; ;i2c2.h: 260: uint8_t *pdata,
-[; ;i2c2.h: 261: uint8_t length,
-[; ;i2c2.h: 262: uint16_t address,
-[; ;i2c2.h: 263: I2C2_MESSAGE_STATUS *pstatus);
-[; ;i2c2.h: 406: void I2C2_MasterRead(
-[; ;i2c2.h: 407: uint8_t *pdata,
-[; ;i2c2.h: 408: uint8_t length,
-[; ;i2c2.h: 409: uint16_t address,
-[; ;i2c2.h: 410: I2C2_MESSAGE_STATUS *pstatus);
-[; ;i2c2.h: 516: void I2C2_MasterTRBInsert(
-[; ;i2c2.h: 517: uint8_t count,
-[; ;i2c2.h: 518: I2C2_TRANSACTION_REQUEST_BLOCK *ptrb_list,
-[; ;i2c2.h: 519: I2C2_MESSAGE_STATUS *pflag);
-[; ;i2c2.h: 560: void I2C2_MasterReadTRBBuild(
-[; ;i2c2.h: 561: I2C2_TRANSACTION_REQUEST_BLOCK *ptrb,
-[; ;i2c2.h: 562: uint8_t *pdata,
-[; ;i2c2.h: 563: uint8_t length,
-[; ;i2c2.h: 564: uint16_t address);
-[; ;i2c2.h: 605: void I2C2_MasterWriteTRBBuild(
-[; ;i2c2.h: 606: I2C2_TRANSACTION_REQUEST_BLOCK *ptrb,
-[; ;i2c2.h: 607: uint8_t *pdata,
-[; ;i2c2.h: 608: uint8_t length,
-[; ;i2c2.h: 609: uint16_t address);
-[; ;i2c2.h: 647: bool I2C2_MasterQueueIsEmpty(void);
-[; ;i2c2.h: 685: bool I2C2_MasterQueueIsFull(void);
-[; ;i2c2.h: 686: void I2C2_BusCollisionISR( void );
-[; ;i2c2.h: 687: void I2C2_ISR ( void );
-[; ;mcc.h: 73: void SYSTEM_Initialize(void);
-[; ;mcc.h: 86: void OSCILLATOR_Initialize(void);
+[; ;clkref.h: 92: void CLKREF_Initialize(void);
+[; ;eusart.h: 94: void EUSART_Initialize(void);
+[; ;eusart.h: 114: uint8_t EUSART_Read(void);
+[; ;eusart.h: 134: void EUSART_Write(uint8_t txData);
+[; ;adc.h: 71: typedef uint16_t adc_result_t;
+[; ;adc.h: 76: typedef struct
+[; ;adc.h: 77: {
+[; ;adc.h: 78: adc_result_t adcResult1;
+[; ;adc.h: 79: adc_result_t adcResult2;
+[; ;adc.h: 80: } adc_sync_double_result_t;
+[; ;adc.h: 94: typedef enum
+[; ;adc.h: 95: {
+[; ;adc.h: 96: channel_AVSS = 0x3C,
+[; ;adc.h: 97: channel_Temp = 0x3D,
+[; ;adc.h: 98: channel_DAC1 = 0x3E,
+[; ;adc.h: 99: channel_FVR = 0x3F
+[; ;adc.h: 100: } adc_channel_t;
+[; ;adc.h: 135: void ADC_Initialize(void);
+[; ;adc.h: 165: void ADC_SelectChannel(adc_channel_t channel);
+[; ;adc.h: 192: void ADC_StartConversion();
+[; ;adc.h: 224: bool ADC_IsConversionDone();
+[; ;adc.h: 257: adc_result_t ADC_GetConversionResult(void);
+[; ;adc.h: 287: adc_result_t ADC_GetConversion(adc_channel_t channel);
+[; ;mcc.h: 74: void SYSTEM_Initialize(void);
+[; ;mcc.h: 87: void OSCILLATOR_Initialize(void);
+[; ;mcc.h: 100: void WDT_Initialize(void);
 [; ;eeprom_i2c.h: 19: int I2C2_ByteWrite(uint8_t *dataAddress, uint8_t dataByte, uint8_t addlen);
 [; ;eeprom_i2c.h: 20: uint8_t I2C2_ByteRead(uint8_t *dataAddress, uint8_t dataByte,uint8_t addlen);
 [; ;eeprom_i2c.h: 21: int I2C2_BufferWrite(uint8_t *dataAddress, uint8_t *dataBuffer, uint8_t addlen, uint8_t buflen);
@@ -15407,22 +15412,22 @@ Version 3.2 HI-TECH Software Intermediate Code
 "607
 -> -> 132 `i `uc
 -> -> 78 `i `uc
--> -> 16 `i `uc
+-> -> 8 `i `uc
 -> -> 0 `i `uc
 "608
 -> -> 133 `i `uc
 -> -> 78 `i `uc
--> -> 16 `i `uc
+-> -> 8 `i `uc
 -> -> 0 `i `uc
 "609
 -> -> 134 `i `uc
 -> -> 78 `i `uc
--> -> 16 `i `uc
+-> -> 8 `i `uc
 -> -> 0 `i `uc
 "610
 -> -> 135 `i `uc
 -> -> 78 `i `uc
--> -> 16 `i `uc
+-> -> 8 `i `uc
 -> -> 0 `i `uc
 "611
 -> -> 128 `i `uc
@@ -16083,10 +16088,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 604: 0x81,0x4e,0x38,0x00,
 [; ;main.c: 605: 0x82,0x4e,0x38,0x00,
 [; ;main.c: 606: 0x83,0x4e,0x38,0x00,
-[; ;main.c: 607: 0x84,0x4e,0x10,0x00,
-[; ;main.c: 608: 0x85,0x4e,0x10,0x00,
-[; ;main.c: 609: 0x86,0x4e,0x10,0x00,
-[; ;main.c: 610: 0x87,0x4e,0x10,0x00,
+[; ;main.c: 607: 0x84,0x4e,0x08,0x00,
+[; ;main.c: 608: 0x85,0x4e,0x08,0x00,
+[; ;main.c: 609: 0x86,0x4e,0x08,0x00,
+[; ;main.c: 610: 0x87,0x4e,0x08,0x00,
 [; ;main.c: 611: 0x80,0x61,0x3C,0x20,
 [; ;main.c: 612: 0x81,0x61,0x34,0x20,
 [; ;main.c: 613: 0x82,0x61,0x34,0x20,
@@ -16274,8 +16279,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _checkSum `l ~T0 @X0 1 a ]
 [; ;main.c: 757: int32_t checkSum = 0;
 [e = _checkSum -> -> 0 `i `l ]
-[v F7854 `ui ~T0 @X0 -> 3 `i s ]
-[i F7854
+[v F7859 `ui ~T0 @X0 -> 3 `i s ]
+[i F7859
 :U ..
 "759
 -> 40704 `ui
@@ -16285,7 +16290,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 ]
 [v _FW_regAddr_base `ui ~T0 @X0 -> 3 `i a ]
 [; ;main.c: 759: uint16_t FW_regAddr_base[3] = {0x9f00,0x980D,0x9814};
-[e = _FW_regAddr_base F7854 ]
+[e = _FW_regAddr_base F7859 ]
 "760
 [v _x `i ~T0 @X0 1 a ]
 [v _i `i ~T0 @X0 1 a ]
@@ -16359,156 +16364,178 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 878: _delay((unsigned long)((1000)*(32000000/4000.0)));
 "878
 [e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-"883
-[v _AN1_Channel `E7656 ~T0 @X0 1 a ]
-[; ;main.c: 883: adc_channel_t AN1_Channel = channel_Temp;
-[e = _AN1_Channel . `E7656 1 ]
-"884
+[; ;main.c: 879: _delay((unsigned long)((1000)*(32000000/4000.0)));
+"879
+[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;main.c: 881: GE_I2C2_HexWrite(0x980d,0x0777);
+"881
+[e ( _GE_I2C2_HexWrite (2 , -> 38925 `ui -> -> 1911 `i `ui ]
+[; ;main.c: 882: GE_I2C2_HexWrite(0x980d,0x0000);
+"882
+[e ( _GE_I2C2_HexWrite (2 , -> 38925 `ui -> -> 0 `i `ui ]
+"886
+[v _AN1_Channel `E7732 ~T0 @X0 1 a ]
+[; ;main.c: 886: adc_channel_t AN1_Channel = channel_Temp;
+[e = _AN1_Channel . `E7732 1 ]
+"887
 [v _Temperature `i ~T0 @X0 1 a ]
-"885
+"888
 [v _adc_float `f ~T0 @X0 1 a ]
 [v _temp_float `f ~T0 @X0 1 a ]
-"886
+"889
 [v _convertedValue `ui ~T0 @X0 1 a ]
 [v _convertedValue_HighRange `ui ~T0 @X0 1 a ]
 [v _convertedValue_LowRange `ui ~T0 @X0 1 a ]
-[; ;main.c: 884: int Temperature;
-[; ;main.c: 885: float adc_float,temp_float;
-[; ;main.c: 886: uint16_t convertedValue,convertedValue_HighRange,convertedValue_LowRange;
-[; ;main.c: 888: ADC_Initialize();
-"888
+[; ;main.c: 887: int Temperature;
+[; ;main.c: 888: float adc_float,temp_float;
+[; ;main.c: 889: uint16_t convertedValue,convertedValue_HighRange,convertedValue_LowRange;
+[; ;main.c: 891: ADC_Initialize();
+"891
 [e ( _ADC_Initialize ..  ]
-[; ;main.c: 889: x=0;
-"889
-[e = _x -> 0 `i ]
-[; ;main.c: 890: i=0;
-"890
-[e = _i -> 0 `i ]
-[; ;main.c: 892: while (1)
+[; ;main.c: 892: x=0;
 "892
-[e :U 904 ]
-[; ;main.c: 893: { x++;
-"893
-{
-[e ++ _x -> 1 `i ]
-[; ;main.c: 894: if(x > 10)
-"894
-[e $ ! > _x -> 10 `i 906  ]
-[; ;main.c: 895: {
-"895
-{
-[; ;main.c: 896: i++;
-"896
-[e ++ _i -> 1 `i ]
-[; ;main.c: 897: if(i > 30000)
-"897
-[e $ ! > _i -> 30000 `i 907  ]
-[; ;main.c: 898: {
-"898
-{
-[; ;main.c: 911: FVRCON = 0xB5;
-"911
-[e = _FVRCON -> -> 181 `i `uc ]
-[; ;main.c: 912: _delay((unsigned long)((10)*(32000000/4000.0)));
-"912
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;main.c: 913: ADC_StartConversion(AN1_Channel);
-"913
-[e ( _ADC_StartConversion (1 _AN1_Channel ]
-[; ;main.c: 914: while(!ADC_IsConversionDone());
-"914
-[e $U 908  ]
-[e :U 909 ]
-[e :U 908 ]
-[e $ ! != -> ( _ADC_IsConversionDone ..  `i -> -> -> 0 `i `uc `i 909  ]
-[e :U 910 ]
-[; ;main.c: 915: convertedValue_HighRange = ADC_GetConversionResult();
-"915
-[e = _convertedValue_HighRange ( _ADC_GetConversionResult ..  ]
-[; ;main.c: 916: FVRCON = 0xA5;
-"916
-[e = _FVRCON -> -> 165 `i `uc ]
-[; ;main.c: 917: _delay((unsigned long)((10)*(32000000/4000.0)));
-"917
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;main.c: 918: ADC_StartConversion(AN1_Channel);
-"918
-[e ( _ADC_StartConversion (1 _AN1_Channel ]
-[; ;main.c: 919: while(!ADC_IsConversionDone());
-"919
-[e $U 911  ]
-[e :U 912 ]
-[e :U 911 ]
-[e $ ! != -> ( _ADC_IsConversionDone ..  `i -> -> -> 0 `i `uc `i 912  ]
-[e :U 913 ]
-[; ;main.c: 920: convertedValue_LowRange = ADC_GetConversionResult();
-"920
-[e = _convertedValue_LowRange ( _ADC_GetConversionResult ..  ]
-[; ;main.c: 921: convertedValue = convertedValue_LowRange-convertedValue_HighRange;
-"921
-[e = _convertedValue - _convertedValue_LowRange _convertedValue_HighRange ]
-[; ;main.c: 923: {
-"923
-{
-[; ;main.c: 924: adc_float = (float) convertedValue;
-"924
-[e = _adc_float -> _convertedValue `f ]
-[; ;main.c: 925: temp_float = -40+(0.659 - (3.3/2)*(adc_float/1023))/0.00132;
-"925
-[e = _temp_float -> + -> -U -> 40 `i `d / - .0.659 * / .3.3 -> -> 2 `i `d -> / _adc_float -> -> 1023 `i `f `d .0.00132 `f ]
-"926
-[v _temp_abs `f ~T0 @X0 1 a ]
-[; ;main.c: 926: float temp_abs = (temp_float)*256;
-[e = _temp_abs * _temp_float -> -> 256 `i `f ]
-[; ;main.c: 927: Temperature = (int) temp_abs;
-"927
-[e = _Temperature -> _temp_abs `i ]
-[; ;main.c: 928: EEPROM_Buffer[22] = Temperature >> 8;
-"928
-[e = *U + &U _EEPROM_Buffer * -> -> -> 22 `i `ui `ux -> -> # *U &U _EEPROM_Buffer `ui `ux -> >> _Temperature -> 8 `i `uc ]
-[; ;main.c: 929: EEPROM_Buffer[23] = Temperature & 0x00ff;
-"929
-[e = *U + &U _EEPROM_Buffer * -> -> -> 23 `i `ui `ux -> -> # *U &U _EEPROM_Buffer `ui `ux -> & _Temperature -> 255 `i `uc ]
-[; ;main.c: 930: uart_send_dec(convertedValue);
-"930
-[e ( _uart_send_dec (1 -> _convertedValue `ul ]
-[; ;main.c: 931: uart_send_byte('\r'); uart_send_byte('\n');
-"931
-[e ( _uart_send_byte (1 -> -> 13 `ui `uc ]
-[e ( _uart_send_byte (1 -> -> 10 `ui `uc ]
-[; ;main.c: 932: uart_send_dec(Temperature);
-"932
-[e ( _uart_send_dec (1 -> -> _Temperature `l `ul ]
-[; ;main.c: 933: uart_send_byte('\r'); uart_send_byte('\n');
-"933
-[e ( _uart_send_byte (1 -> -> 13 `ui `uc ]
-[e ( _uart_send_byte (1 -> -> 10 `ui `uc ]
-"935
-}
-[; ;main.c: 935: }
-[; ;main.c: 936: i = 0;
-"936
-[e = _i -> 0 `i ]
-"937
-}
-[e :U 907 ]
-[; ;main.c: 937: }
-[; ;main.c: 938: x=0;
-"938
 [e = _x -> 0 `i ]
-"939
+[; ;main.c: 893: i=0;
+"893
+[e = _i -> 0 `i ]
+[; ;main.c: 895: while (1)
+"895
+[e :U 904 ]
+[; ;main.c: 896: {
+"896
+{
+[; ;main.c: 899: if( EEPROM_Buffer[78] == 2 )
+"899
+[e $ ! == -> *U + &U _EEPROM_Buffer * -> -> -> 78 `i `ui `ux -> -> # *U &U _EEPROM_Buffer `ui `ux `i -> 2 `i 906  ]
+[; ;main.c: 900: {
+"900
+{
+[; ;main.c: 901: GE_I2C2_ByteHLWrite( EEPROM_Buffer[74], EEPROM_Buffer[75], EEPROM_Buffer[76], EEPROM_Buffer[77] ) ;
+"901
+[e ( _GE_I2C2_ByteHLWrite (4 , , , *U + &U _EEPROM_Buffer * -> -> -> 74 `i `ui `ux -> -> # *U &U _EEPROM_Buffer `ui `ux *U + &U _EEPROM_Buffer * -> -> -> 75 `i `ui `ux -> -> # *U &U _EEPROM_Buffer `ui `ux *U + &U _EEPROM_Buffer * -> -> -> 76 `i `ui `ux -> -> # *U &U _EEPROM_Buffer `ui `ux *U + &U _EEPROM_Buffer * -> -> -> 77 `i `ui `ux -> -> # *U &U _EEPROM_Buffer `ui `ux ]
+[; ;main.c: 902: EEPROM_Buffer[78] = 0 ;
+"902
+[e = *U + &U _EEPROM_Buffer * -> -> -> 78 `i `ui `ux -> -> # *U &U _EEPROM_Buffer `ui `ux -> -> 0 `i `uc ]
+"903
 }
+[; ;main.c: 903: }
+[e $U 907  ]
+"904
 [e :U 906 ]
+[; ;main.c: 904: else if( EEPROM_Buffer[78] == 1 )
+[e $ ! == -> *U + &U _EEPROM_Buffer * -> -> -> 78 `i `ui `ux -> -> # *U &U _EEPROM_Buffer `ui `ux `i -> 1 `i 908  ]
+[; ;main.c: 905: {
+"905
+{
+"906
+[v _rValue `ui ~T0 @X0 1 a ]
+[; ;main.c: 906: uint16_t rValue;
+[; ;main.c: 907: rValue = GE_I2C2_ByteHLRead( EEPROM_Buffer[74], EEPROM_Buffer[75] ) ;
+"907
+[e = _rValue ( _GE_I2C2_ByteHLRead (2 , *U + &U _EEPROM_Buffer * -> -> -> 74 `i `ui `ux -> -> # *U &U _EEPROM_Buffer `ui `ux *U + &U _EEPROM_Buffer * -> -> -> 75 `i `ui `ux -> -> # *U &U _EEPROM_Buffer `ui `ux ]
+[; ;main.c: 908: EEPROM_Buffer[76] = rValue >> 8 ;
+"908
+[e = *U + &U _EEPROM_Buffer * -> -> -> 76 `i `ui `ux -> -> # *U &U _EEPROM_Buffer `ui `ux -> >> _rValue -> 8 `i `uc ]
+[; ;main.c: 909: EEPROM_Buffer[77] = rValue & 0x00ff ;
+"909
+[e = *U + &U _EEPROM_Buffer * -> -> -> 77 `i `ui `ux -> -> # *U &U _EEPROM_Buffer `ui `ux -> & _rValue -> -> 255 `i `ui `uc ]
+[; ;main.c: 910: EEPROM_Buffer[78] = 0 ;
+"910
+[e = *U + &U _EEPROM_Buffer * -> -> -> 78 `i `ui `ux -> -> # *U &U _EEPROM_Buffer `ui `ux -> -> 0 `i `uc ]
+"911
+}
+[e :U 908 ]
+"932
+[e :U 907 ]
+[; ;main.c: 911: }
+[; ;main.c: 932: FVRCON = 0xB5;
+[e = _FVRCON -> -> 181 `i `uc ]
+[; ;main.c: 933: _delay((unsigned long)((10)*(32000000/4000.0)));
+"933
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;main.c: 934: ADC_StartConversion(AN1_Channel);
+"934
+[e ( _ADC_StartConversion -> _AN1_Channel `i ]
+[; ;main.c: 935: while(!ADC_IsConversionDone());
+"935
+[e $U 909  ]
+[e :U 910 ]
+[e :U 909 ]
+[e $ ! != -> ( _ADC_IsConversionDone ..  `i -> -> -> 0 `i `uc `i 910  ]
+[e :U 911 ]
+[; ;main.c: 936: convertedValue_HighRange = ADC_GetConversionResult();
+"936
+[e = _convertedValue_HighRange ( _ADC_GetConversionResult ..  ]
+[; ;main.c: 937: FVRCON = 0xA5;
+"937
+[e = _FVRCON -> -> 165 `i `uc ]
+[; ;main.c: 938: _delay((unsigned long)((10)*(32000000/4000.0)));
+"938
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+[; ;main.c: 939: ADC_StartConversion(AN1_Channel);
+"939
+[e ( _ADC_StartConversion -> _AN1_Channel `i ]
+[; ;main.c: 940: while(!ADC_IsConversionDone());
+"940
+[e $U 912  ]
+[e :U 913 ]
+[e :U 912 ]
+[e $ ! != -> ( _ADC_IsConversionDone ..  `i -> -> -> 0 `i `uc `i 913  ]
+[e :U 914 ]
+[; ;main.c: 941: convertedValue_LowRange = ADC_GetConversionResult();
 "941
+[e = _convertedValue_LowRange ( _ADC_GetConversionResult ..  ]
+[; ;main.c: 942: convertedValue = convertedValue_LowRange-convertedValue_HighRange;
+"942
+[e = _convertedValue - _convertedValue_LowRange _convertedValue_HighRange ]
+[; ;main.c: 944: {
+"944
+{
+[; ;main.c: 945: adc_float = (float) convertedValue;
+"945
+[e = _adc_float -> _convertedValue `f ]
+[; ;main.c: 946: temp_float = -40+(0.659 - (3.3/2)*(adc_float/1023))/0.00132;
+"946
+[e = _temp_float -> + -> -U -> 40 `i `d / - .0.659 * / .3.3 -> -> 2 `i `d -> / _adc_float -> -> 1023 `i `f `d .0.00132 `f ]
+"947
+[v _temp_abs `f ~T0 @X0 1 a ]
+[; ;main.c: 947: float temp_abs = (temp_float)*256;
+[e = _temp_abs * _temp_float -> -> 256 `i `f ]
+[; ;main.c: 948: Temperature = (int) temp_abs;
+"948
+[e = _Temperature -> _temp_abs `i ]
+[; ;main.c: 949: EEPROM_Buffer[22] = Temperature >> 8;
+"949
+[e = *U + &U _EEPROM_Buffer * -> -> -> 22 `i `ui `ux -> -> # *U &U _EEPROM_Buffer `ui `ux -> >> _Temperature -> 8 `i `uc ]
+[; ;main.c: 950: EEPROM_Buffer[23] = Temperature & 0x00ff;
+"950
+[e = *U + &U _EEPROM_Buffer * -> -> -> 23 `i `ui `ux -> -> # *U &U _EEPROM_Buffer `ui `ux -> & _Temperature -> 255 `i `uc ]
+[; ;main.c: 951: uart_send_dec(convertedValue);
+"951
+[e ( _uart_send_dec (1 -> _convertedValue `ul ]
+[; ;main.c: 952: uart_send_byte('\r'); uart_send_byte('\n');
+"952
+[e ( _uart_send_byte (1 -> -> 13 `ui `uc ]
+[e ( _uart_send_byte (1 -> -> 10 `ui `uc ]
+[; ;main.c: 953: uart_send_dec(Temperature);
+"953
+[e ( _uart_send_dec (1 -> -> _Temperature `l `ul ]
+[; ;main.c: 954: uart_send_byte('\r'); uart_send_byte('\n');
+"954
+[e ( _uart_send_byte (1 -> -> 13 `ui `uc ]
+[e ( _uart_send_byte (1 -> -> 10 `ui `uc ]
+"956
+}
+"972
 }
 [e :U 903 ]
-"892
+"895
 [e $U 904  ]
 [e :U 905 ]
-[; ;main.c: 939: }
-[; ;main.c: 941: }
-[; ;main.c: 943: }
-"943
+[; ;main.c: 956: }
+[; ;main.c: 972: }
+[; ;main.c: 974: }
+"974
 [e :UE 898 ]
 }
 [a 2C 82 101 115 101 116 32 100 111 110 101 33 32 110 111 119 32 108 111 97 100 32 102 119 32 116 111 32 71 69 13 10 0 ]

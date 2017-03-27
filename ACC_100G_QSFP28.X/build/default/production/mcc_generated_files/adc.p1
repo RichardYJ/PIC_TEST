@@ -7328,20 +7328,63 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;adc.h: 99: channel_FVR = 0x3F
 [; ;adc.h: 100: } adc_channel_t;
 [; ;adc.h: 135: void ADC_Initialize(void);
-[; ;adc.h: 164: void ADC_StartConversion(adc_channel_t channel);
-[; ;adc.h: 196: bool ADC_IsConversionDone();
-[; ;adc.h: 229: adc_result_t ADC_GetConversionResult(void);
-[; ;adc.h: 259: adc_result_t ADC_GetConversion(adc_channel_t channel);
-[; ;pin_manager.h: 263: void PIN_MANAGER_Initialize (void);
+[; ;adc.h: 165: void ADC_SelectChannel(adc_channel_t channel);
+[; ;adc.h: 192: void ADC_StartConversion();
+[; ;adc.h: 224: bool ADC_IsConversionDone();
+[; ;adc.h: 257: adc_result_t ADC_GetConversionResult(void);
+[; ;adc.h: 287: adc_result_t ADC_GetConversion(adc_channel_t channel);
+[; ;pin_manager.h: 231: void PIN_MANAGER_Initialize (void);
+[; ;pin_manager.h: 243: void PIN_MANAGER_IOC(void);
 [; ;interrupt_manager.h: 110: void interrupt INTERRUPT_InterruptManager(void);
-[; ;eusart.h: 94: void EUSART_Initialize(void);
-[; ;eusart.h: 114: uint8_t EUSART_Read(void);
-[; ;eusart.h: 134: void EUSART_Write(uint8_t txData);
 [; ;fvr.h: 92: void FVR_Initialize(void);
 [; ;fvr.h: 126: bool FVR_IsOutputReady(void);
-[; ;clkref.h: 92: void CLKREF_Initialize(void);
 [; ;__size_t.h: 4: typedef unsigned size_t;
 [; ;stddef.h: 6: typedef int ptrdiff_t;
+[; ;i2c2.h: 83: typedef enum
+[; ;i2c2.h: 84: {
+[; ;i2c2.h: 85: I2C2_MESSAGE_COMPLETE,
+[; ;i2c2.h: 86: I2C2_MESSAGE_FAIL,
+[; ;i2c2.h: 87: I2C2_MESSAGE_PENDING,
+[; ;i2c2.h: 88: I2C2_STUCK_START,
+[; ;i2c2.h: 89: I2C2_MESSAGE_ADDRESS_NO_ACK,
+[; ;i2c2.h: 90: I2C2_DATA_NO_ACK,
+[; ;i2c2.h: 91: I2C2_LOST_STATE
+[; ;i2c2.h: 92: } I2C2_MESSAGE_STATUS;
+[; ;i2c2.h: 108: typedef struct
+[; ;i2c2.h: 109: {
+[; ;i2c2.h: 110: uint16_t address;
+[; ;i2c2.h: 113: uint8_t length;
+[; ;i2c2.h: 114: uint8_t *pbuffer;
+[; ;i2c2.h: 115: } I2C2_TRANSACTION_REQUEST_BLOCK;
+[; ;i2c2.h: 220: void I2C2_Initialize(void);
+[; ;i2c2.h: 259: void I2C2_MasterWrite(
+[; ;i2c2.h: 260: uint8_t *pdata,
+[; ;i2c2.h: 261: uint8_t length,
+[; ;i2c2.h: 262: uint16_t address,
+[; ;i2c2.h: 263: I2C2_MESSAGE_STATUS *pstatus);
+[; ;i2c2.h: 406: void I2C2_MasterRead(
+[; ;i2c2.h: 407: uint8_t *pdata,
+[; ;i2c2.h: 408: uint8_t length,
+[; ;i2c2.h: 409: uint16_t address,
+[; ;i2c2.h: 410: I2C2_MESSAGE_STATUS *pstatus);
+[; ;i2c2.h: 516: void I2C2_MasterTRBInsert(
+[; ;i2c2.h: 517: uint8_t count,
+[; ;i2c2.h: 518: I2C2_TRANSACTION_REQUEST_BLOCK *ptrb_list,
+[; ;i2c2.h: 519: I2C2_MESSAGE_STATUS *pflag);
+[; ;i2c2.h: 560: void I2C2_MasterReadTRBBuild(
+[; ;i2c2.h: 561: I2C2_TRANSACTION_REQUEST_BLOCK *ptrb,
+[; ;i2c2.h: 562: uint8_t *pdata,
+[; ;i2c2.h: 563: uint8_t length,
+[; ;i2c2.h: 564: uint16_t address);
+[; ;i2c2.h: 605: void I2C2_MasterWriteTRBBuild(
+[; ;i2c2.h: 606: I2C2_TRANSACTION_REQUEST_BLOCK *ptrb,
+[; ;i2c2.h: 607: uint8_t *pdata,
+[; ;i2c2.h: 608: uint8_t length,
+[; ;i2c2.h: 609: uint16_t address);
+[; ;i2c2.h: 647: bool I2C2_MasterQueueIsEmpty(void);
+[; ;i2c2.h: 685: bool I2C2_MasterQueueIsFull(void);
+[; ;i2c2.h: 686: void I2C2_BusCollisionISR( void );
+[; ;i2c2.h: 687: void I2C2_ISR ( void );
 [; ;i2c1.h: 78: typedef enum
 [; ;i2c1.h: 79: {
 [; ;i2c1.h: 80: I2C1_SLAVE_WRITE_REQUEST,
@@ -8129,53 +8172,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;i2c1.h: 376: void I2C1_Initialize(void);
 [; ;i2c1.h: 396: void I2C1_ISR ( void );
 [; ;i2c1.h: 403: extern volatile uint8_t I2C1_slaveWriteData;
-[; ;i2c2.h: 83: typedef enum
-[; ;i2c2.h: 84: {
-[; ;i2c2.h: 85: I2C2_MESSAGE_COMPLETE,
-[; ;i2c2.h: 86: I2C2_MESSAGE_FAIL,
-[; ;i2c2.h: 87: I2C2_MESSAGE_PENDING,
-[; ;i2c2.h: 88: I2C2_STUCK_START,
-[; ;i2c2.h: 89: I2C2_MESSAGE_ADDRESS_NO_ACK,
-[; ;i2c2.h: 90: I2C2_DATA_NO_ACK,
-[; ;i2c2.h: 91: I2C2_LOST_STATE
-[; ;i2c2.h: 92: } I2C2_MESSAGE_STATUS;
-[; ;i2c2.h: 108: typedef struct
-[; ;i2c2.h: 109: {
-[; ;i2c2.h: 110: uint16_t address;
-[; ;i2c2.h: 113: uint8_t length;
-[; ;i2c2.h: 114: uint8_t *pbuffer;
-[; ;i2c2.h: 115: } I2C2_TRANSACTION_REQUEST_BLOCK;
-[; ;i2c2.h: 220: void I2C2_Initialize(void);
-[; ;i2c2.h: 259: void I2C2_MasterWrite(
-[; ;i2c2.h: 260: uint8_t *pdata,
-[; ;i2c2.h: 261: uint8_t length,
-[; ;i2c2.h: 262: uint16_t address,
-[; ;i2c2.h: 263: I2C2_MESSAGE_STATUS *pstatus);
-[; ;i2c2.h: 406: void I2C2_MasterRead(
-[; ;i2c2.h: 407: uint8_t *pdata,
-[; ;i2c2.h: 408: uint8_t length,
-[; ;i2c2.h: 409: uint16_t address,
-[; ;i2c2.h: 410: I2C2_MESSAGE_STATUS *pstatus);
-[; ;i2c2.h: 516: void I2C2_MasterTRBInsert(
-[; ;i2c2.h: 517: uint8_t count,
-[; ;i2c2.h: 518: I2C2_TRANSACTION_REQUEST_BLOCK *ptrb_list,
-[; ;i2c2.h: 519: I2C2_MESSAGE_STATUS *pflag);
-[; ;i2c2.h: 560: void I2C2_MasterReadTRBBuild(
-[; ;i2c2.h: 561: I2C2_TRANSACTION_REQUEST_BLOCK *ptrb,
-[; ;i2c2.h: 562: uint8_t *pdata,
-[; ;i2c2.h: 563: uint8_t length,
-[; ;i2c2.h: 564: uint16_t address);
-[; ;i2c2.h: 605: void I2C2_MasterWriteTRBBuild(
-[; ;i2c2.h: 606: I2C2_TRANSACTION_REQUEST_BLOCK *ptrb,
-[; ;i2c2.h: 607: uint8_t *pdata,
-[; ;i2c2.h: 608: uint8_t length,
-[; ;i2c2.h: 609: uint16_t address);
-[; ;i2c2.h: 647: bool I2C2_MasterQueueIsEmpty(void);
-[; ;i2c2.h: 685: bool I2C2_MasterQueueIsFull(void);
-[; ;i2c2.h: 686: void I2C2_BusCollisionISR( void );
-[; ;i2c2.h: 687: void I2C2_ISR ( void );
-[; ;mcc.h: 73: void SYSTEM_Initialize(void);
-[; ;mcc.h: 86: void OSCILLATOR_Initialize(void);
+[; ;clkref.h: 92: void CLKREF_Initialize(void);
+[; ;eusart.h: 94: void EUSART_Initialize(void);
+[; ;eusart.h: 114: uint8_t EUSART_Read(void);
+[; ;eusart.h: 134: void EUSART_Write(uint8_t txData);
+[; ;mcc.h: 74: void SYSTEM_Initialize(void);
+[; ;mcc.h: 87: void OSCILLATOR_Initialize(void);
+[; ;mcc.h: 100: void WDT_Initialize(void);
 "64 mcc_generated_files/adc.c
 [v _ADC_Initialize `(v ~T0 @X0 1 ef ]
 "65
@@ -8204,12 +8207,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :UE 898 ]
 }
 "85
-[v _ADC_StartConversion `(v ~T0 @X0 1 ef1`E7651 ]
+[v _ADC_SelectChannel `(v ~T0 @X0 1 ef1`E7651 ]
 "86
 {
-[; ;adc.c: 85: void ADC_StartConversion(adc_channel_t channel)
+[; ;adc.c: 85: void ADC_SelectChannel(adc_channel_t channel)
 [; ;adc.c: 86: {
-[e :U _ADC_StartConversion ]
+[e :U _ADC_SelectChannel ]
 "85
 [v _channel `E7651 ~T0 @X0 1 r1 ]
 "86
@@ -8220,90 +8223,99 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;adc.c: 90: ADCON0bits.ADON = 1;
 "90
 [e = . . _ADCON0bits 0 0 -> -> 1 `i `uc ]
-[; ;adc.c: 92: _delay((unsigned long)((5)*(32000000/4000000.0)));
-"92
-[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
-[; ;adc.c: 95: ADCON0bits.ADGO = 1;
-"95
+[; ;adc.c: 91: }
+"91
+[e :UE 899 ]
+}
+"93
+[v _ADC_StartConversion `(v ~T0 @X0 1 ef ]
+"94
+{
+[; ;adc.c: 93: void ADC_StartConversion()
+[; ;adc.c: 94: {
+[e :U _ADC_StartConversion ]
+[f ]
+[; ;adc.c: 96: ADCON0bits.ADGO = 1;
+"96
 [e = . . _ADCON0bits 1 1 -> -> 1 `i `uc ]
 [; ;adc.c: 97: }
 "97
-[e :UE 899 ]
-}
-"99
-[v _ADC_IsConversionDone `(uc ~T0 @X0 1 ef ]
-"100
-{
-[; ;adc.c: 99: bool ADC_IsConversionDone()
-[; ;adc.c: 100: {
-[e :U _ADC_IsConversionDone ]
-[f ]
-[; ;adc.c: 102: return (!ADCON0bits.ADGO);
-"102
-[e ) -> -> ! != -> . . _ADCON0bits 1 1 `i -> -> -> 0 `i `Vuc `i `i `uc ]
-[e $UE 900  ]
-[; ;adc.c: 103: }
-"103
 [e :UE 900 ]
 }
-"104
-[v _ADC_GetConversionResult `(ui ~T0 @X0 1 ef ]
-"105
+"100
+[v _ADC_IsConversionDone `(uc ~T0 @X0 1 ef ]
+"101
 {
-[; ;adc.c: 104: adc_result_t ADC_GetConversionResult(void)
-[; ;adc.c: 105: {
-[e :U _ADC_GetConversionResult ]
+[; ;adc.c: 100: bool ADC_IsConversionDone()
+[; ;adc.c: 101: {
+[e :U _ADC_IsConversionDone ]
 [f ]
-[; ;adc.c: 107: return ((ADRESH << 8) + ADRESL);
-"107
-[e ) -> + << -> _ADRESH `i -> 8 `i -> _ADRESL `i `ui ]
+[; ;adc.c: 103: return (!ADCON0bits.ADGO);
+"103
+[e ) -> -> ! != -> . . _ADCON0bits 1 1 `i -> -> -> 0 `i `Vuc `i `i `uc ]
 [e $UE 901  ]
-[; ;adc.c: 108: }
-"108
+[; ;adc.c: 104: }
+"104
 [e :UE 901 ]
 }
-"110
-[v _ADC_GetConversion `(ui ~T0 @X0 1 ef1`E7651 ]
-"111
+"106
+[v _ADC_GetConversionResult `(ui ~T0 @X0 1 ef ]
+"107
 {
-[; ;adc.c: 110: adc_result_t ADC_GetConversion(adc_channel_t channel)
-[; ;adc.c: 111: {
-[e :U _ADC_GetConversion ]
-"110
-[v _channel `E7651 ~T0 @X0 1 r1 ]
-"111
+[; ;adc.c: 106: adc_result_t ADC_GetConversionResult(void)
+[; ;adc.c: 107: {
+[e :U _ADC_GetConversionResult ]
 [f ]
-[; ;adc.c: 113: ADCON0bits.CHS = channel;
-"113
-[e = . . _ADCON0bits 0 2 -> _channel `uc ]
-[; ;adc.c: 116: ADCON0bits.ADON = 1;
-"116
-[e = . . _ADCON0bits 0 0 -> -> 1 `i `uc ]
-[; ;adc.c: 118: _delay((unsigned long)((5)*(32000000/4000000.0)));
-"118
-[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
-[; ;adc.c: 121: ADCON0bits.ADGO = 1;
-"121
-[e = . . _ADCON0bits 1 1 -> -> 1 `i `uc ]
-[; ;adc.c: 124: while (ADCON0bits.ADGO)
-"124
-[e $U 903  ]
-[e :U 904 ]
-[; ;adc.c: 125: {
-"125
-{
-"126
-}
-[e :U 903 ]
-"124
-[e $ != -> . . _ADCON0bits 1 1 `i -> -> -> 0 `i `Vuc `i 904  ]
-[e :U 905 ]
-[; ;adc.c: 126: }
-[; ;adc.c: 128: return ((ADRESH << 8) + ADRESL);
-"128
+[; ;adc.c: 109: return ((ADRESH << 8) + ADRESL);
+"109
 [e ) -> + << -> _ADRESH `i -> 8 `i -> _ADRESL `i `ui ]
 [e $UE 902  ]
-[; ;adc.c: 130: }
-"130
+[; ;adc.c: 110: }
+"110
 [e :UE 902 ]
+}
+"112
+[v _ADC_GetConversion `(ui ~T0 @X0 1 ef1`E7651 ]
+"113
+{
+[; ;adc.c: 112: adc_result_t ADC_GetConversion(adc_channel_t channel)
+[; ;adc.c: 113: {
+[e :U _ADC_GetConversion ]
+"112
+[v _channel `E7651 ~T0 @X0 1 r1 ]
+"113
+[f ]
+[; ;adc.c: 115: ADCON0bits.CHS = channel;
+"115
+[e = . . _ADCON0bits 0 2 -> _channel `uc ]
+[; ;adc.c: 118: ADCON0bits.ADON = 1;
+"118
+[e = . . _ADCON0bits 0 0 -> -> 1 `i `uc ]
+[; ;adc.c: 120: _delay((unsigned long)((5)*(32000000/4000000.0)));
+"120
+[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
+[; ;adc.c: 123: ADCON0bits.ADGO = 1;
+"123
+[e = . . _ADCON0bits 1 1 -> -> 1 `i `uc ]
+[; ;adc.c: 126: while (ADCON0bits.ADGO)
+"126
+[e $U 904  ]
+[e :U 905 ]
+[; ;adc.c: 127: {
+"127
+{
+"128
+}
+[e :U 904 ]
+"126
+[e $ != -> . . _ADCON0bits 1 1 `i -> -> -> 0 `i `Vuc `i 905  ]
+[e :U 906 ]
+[; ;adc.c: 128: }
+[; ;adc.c: 130: return ((ADRESH << 8) + ADRESL);
+"130
+[e ) -> + << -> _ADRESH `i -> 8 `i -> _ADRESL `i `ui ]
+[e $UE 903  ]
+[; ;adc.c: 132: }
+"132
+[e :UE 903 ]
 }
