@@ -3,7 +3,7 @@
     <type>com.microchip.mplab.nbide.embedded.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>ACC_100G_QSFP28</name>
+            <name>16F18346_I2C2_100G</name>
             <creation-uuid>6d531f8f-d7a1-4308-8c31-4c24bd484a98</creation-uuid>
             <make-project-type>0</make-project-type>
             <c-extensions>c</c-extensions>
