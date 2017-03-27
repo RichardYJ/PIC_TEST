@@ -76,14 +76,14 @@
 void SYSTEM_Initialize(void)
 {
     
-    PIN_MANAGER_Initialize();
+    PIN_MANAGER_Initialize();		//yj  ??????pin是什么
     OSCILLATOR_Initialize();
     I2C1_Initialize();
     I2C2_Initialize();
-    FVR_Initialize();
+    FVR_Initialize();				//yj  ??????FVR是什么
     ADC_Initialize();
-    CLKREF_Initialize();
-    EUSART_Initialize();
+    CLKREF_Initialize();			//yj  ??????CLKREF是什么
+    EUSART_Initialize();			//yj  ??????EUSART是什么
 }
 
 void OSCILLATOR_Initialize(void)

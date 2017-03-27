@@ -604,10 +604,10 @@ const uint8_t script_content[] = {
 0x81,0x4e,0x38,0x00,
 0x82,0x4e,0x38,0x00,
 0x83,0x4e,0x38,0x00,
-0x84,0x4e,0x10,0x00,  // 1000 ctle =2 for 6M awg30
-0x85,0x4e,0x10,0x00,  // 3000 ctle =6  2M awg26
-0x86,0x4e,0x10,0x00,  // 1800 clte=3  8M awg26  
-0x87,0x4e,0x10,0x00,  // 0800 clte =1 10M awg26
+0x84,0x4e,0x08,0x00,  // 1000 ctle =2 for 6M awg30
+0x85,0x4e,0x08,0x00,  // 3000 ctle =6  2M awg26
+0x86,0x4e,0x08,0x00,  // 1800 clte=3  8M awg26  
+0x87,0x4e,0x08,0x00,  // 0800 clte =1 10M awg26
 0x80,0x61,0x3C,0x20,
 0x81,0x61,0x34,0x20,
 0x82,0x61,0x34,0x20,
@@ -705,7 +705,7 @@ const uint8_t script_content[] = {
 void main(void)
 {
     // initialize the device
-    SYSTEM_Initialize();
+    SYSTEM_Initialize();        //yj系统初始化
 
     // When using interrupts, you need to set the Global and Peripheral Interrupt Enable bits
     // Use the following macros to:
@@ -733,7 +733,7 @@ void main(void)
     uart_send_char("This is a new test, now reset GE first \r\n");
     
     __delay_ms(500);  //250ms
-    EN_1V0 = 1;
+    EN_1V0 = 1;					//yj ?????
     __delay_ms(500);  //250ms
     EN_1V8 = 1;
     __delay_ms(500);  //250ms
@@ -748,13 +748,13 @@ void main(void)
    
     
     uint32_t counter = 0; 
-    uint32_t len = get_int32(b_data+6);  // 0x0000 2680     12/2
+    uint32_t len = get_int32(b_data+6);  // 0x0000 2680     12/2		//yj  ????????4????
     uint32_t enterPoint = get_int32(b_data+4);    //0x0100 2654  8/2
     uint32_t startAddr = get_int32(b_data+8);  //0x0100 0000    16/2
  
     uint16_t dataAddr = 10;   //   20/2
-    uint32_t ramAddr = startAddr;
-    int32_t checkSum = 0;
+    uint32_t ramAddr = startAddr;   //?????
+    int32_t checkSum = 0;       //????
     
     uint16_t FW_regAddr_base[3] = {0x9f00,0x980D,0x9814};
     int x, i;
@@ -876,7 +876,10 @@ void main(void)
     
     
      __delay_ms(1000);  //Delay 1000ms /2
+     __delay_ms(1000);  //Delay 1000ms /2
      
+      GE_I2C2_HexWrite(0x980d,0x0777);
+    GE_I2C2_HexWrite(0x980d,0x0000);//Logic Reset
     
   //Temperature test
     
@@ -937,7 +940,20 @@ void main(void)
             }
         x=0;
         }
- 
+ 		if((EEPROM_Buffer[78]&0x02 !=0)&&(EEPROM_Buffer[78]&0x01 ==0))
+ 		{
+			GE_I2C2_ByteHLWrite(EEPROM_Buffer[74],EEPROM_Buffer[75],EEPROM_Buffer[76],EEPROM_Buffer[77]) ;
+			EEPROM_Buffer[78] |= 0x01 ;
+		}
+		if((EEPROM_Buffer[78]&0x02 ==0) && (EEPROM_Buffer[78]&0x01 ==0))
+ 		{
+			uint16_t rValue;
+			rValue = GE_I2C2_ByteHLRead(EEPROM_Buffer[74],EEPROM_Buffer[75]) ;
+			EEPROM_Buffer[76] = rValue >> 8 ;
+			EEPROM_Buffer[77] = rValue & 0x00ff ;
+			EEPROM_Buffer[78] |= 0x01 ;
+		}
+		
     }
 
 }

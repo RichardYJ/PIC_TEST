@@ -10906,7 +10906,10 @@ GE_I2C2_HexWrite(0x980d,0x0000);
 
 # 878
 _delay((unsigned long)((1000)*(32000000/4000.0)));
+_delay((unsigned long)((1000)*(32000000/4000.0)));
 
+GE_I2C2_HexWrite(0x980d,0x0777);
+GE_I2C2_HexWrite(0x980d,0x0000);
 
 
 
@@ -10927,7 +10930,7 @@ i++;
 if(i > 30000)
 {
 
-# 911
+# 914
 FVRCON = 0xB5;
 _delay((unsigned long)((10)*(32000000/4000.0)));
 ADC_StartConversion(AN1_Channel);
