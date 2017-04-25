@@ -94,7 +94,7 @@ int GE_I2C2_ByteWrite(uint8_t *dataAddress, uint8_t *data2Byte, uint8_t addlen)
        writeBuffer[addlen] = data2Byte[0];
        writeBuffer[addlen+1] = data2Byte[1];
        buflen = addlen+2; 
-#if 0       
+#if 1       
        #if MY_PRINTF_EN == 1
        uart_send_char("Wr ");
        uart_send_hex(dataAddress[0]);
@@ -243,7 +243,7 @@ uint8_t GE_I2C2_ByteRead(uint8_t *dataAddress,uint8_t *data2Byte, uint8_t addlen
             else
                 timeOut++;
     }
-      #if 0 //MY_PRINTF_EN == 1		//yj20170414
+      #if MY_PRINTF_EN == 1		//yj20170414
        uart_send_char("Rd ");
        uart_send_hex(dataAddress[0]);
        uart_send_hex(dataAddress[1]);
@@ -593,20 +593,17 @@ void GE_set_polarity(void)
     GE_I2C2_bitset(0x8461,0x1,14,1); //BR0
     //GE_I2C2_bitset(0x8561,0x1,14,1); //BR1
     //GE_I2C2_bitset(0x8661,0x1,14,1);  //BR2 
-    GE_I2C2_bitset(0x8761,0x1,14,1);  //BR3
+    //GE_I2C2_bitset(0x8761,0x1,14,1);  //BR3
     
    //Cable side  2m awg30 cable
    //GE_I2C2_bitset(0x8561,0x1,14,1); //BR1
    //GE_I2C2_bitset(0x8761,0x1,14,1);  //BR2
    
    //Gold Finger
-    GE_I2C2_bitset(0x8061,0x1,14,1);  //AR0
-    GE_I2C2_bitset(0x8161,0x1,14,1);  //AR1
-    GE_I2C2_bitset(0x8261,0x1,14,1);  //AR2
+    //GE_I2C2_bitset(0x8061,0x1,14,1);  //AR0
+   // GE_I2C2_bitset(0x8161,0x1,14,1);  //AR1
+    //GE_I2C2_bitset(0x8261,0x1,14,1);  //AR2
    //
-    
-  
-    
     
 }
 

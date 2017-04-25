@@ -56,6 +56,102 @@
 #define EN_1V8 LATCbits.LATC7
 #define LPMODE RA2
 
+#define STRESSTEST 0
+
+
+#define DYCALCC 1
+
+
+#if STRESSTEST == 1
+void testReadWrite(uint32_t loop_times, uint16_t regAddr)
+{
+/*
+0x80,0x79
+0x81,0x79
+0x82,0x79
+0x83,0x79
+0x84,0x79
+0x85,0x79
+0x86,0x79
+0x87,0x79
+*/
+#define OFFSET0 (0<<8)
+#define OFFSET1 (1<<8)
+#define OFFSET2 (2<<8)
+#define OFFSET3 (3<<8)
+#define OFFSET4 (4<<8)
+#define OFFSET5 (5<<8)
+#define OFFSET6 (6<<8)
+#define OFFSET7 (7<<8)
+
+	uint32_t i;
+//	uint16_t regAddr=;
+	uint16_t value_0,value_1,value_2,value_3,value_4,value_5,value_6,value_7,value_8,value_9;
+	uint16_t read_0,read_1,read_2,read_3,read_4,read_5,read_6,read_7,read_8,read_9;
+	for(i=0; i<loop_times; i++)
+	{
+		value_0 = rand();//65535
+		GE_I2C2_HexWrite(regAddr+OFFSET0, value_0); //wr 0
+
+		value_1 = rand();
+		GE_I2C2_HexWrite(regAddr+OFFSET1, value_1); //wr 1
+
+		value_2 = rand();
+		GE_I2C2_HexWrite(regAddr+OFFSET2, value_2); //wr 2
+
+		value_3 = rand();
+		GE_I2C2_HexWrite(regAddr+OFFSET3, value_3); //wr 3
+
+		value_4 = rand();
+		GE_I2C2_HexWrite(regAddr+OFFSET4, value_4); //wr 4
+
+		value_5 = rand();
+		GE_I2C2_HexWrite(regAddr+OFFSET5, value_5); //wr 5
+
+		value_6 = rand();
+		GE_I2C2_HexWrite(regAddr+OFFSET6, value_6); //wr 6
+
+		value_7 = rand();
+		GE_I2C2_HexWrite(regAddr+OFFSET7, value_7); //wr 7
+
+//		value_8 = rand();
+//		GE_I2C2_HexWrite(regAddr+8, value_8); //wr 8
+
+//		value_9 = rand();
+//		GE_I2C2_HexWrite(regAddr+9, value_9); //wr 9
+
+		read_0 = GE_I2C2_HexRead( regAddr+OFFSET0); //rd 0
+		read_1 = GE_I2C2_HexRead( regAddr+OFFSET1); //	1
+		read_2 = GE_I2C2_HexRead( regAddr+OFFSET2); //  2
+		read_3 = GE_I2C2_HexRead( regAddr+OFFSET3); //  3
+		read_4 = GE_I2C2_HexRead( regAddr+OFFSET4); //  4
+		read_5 = GE_I2C2_HexRead( regAddr+OFFSET5); //  5
+		read_6 = GE_I2C2_HexRead( regAddr+OFFSET6); //  6
+		read_7 = GE_I2C2_HexRead( regAddr+OFFSET7); //  7
+//		read_8 = GE_I2C2_HexRead( regAddr+8); //  8
+//		read_9 = GE_I2C2_HexRead( regAddr+9); //  9
+
+		if ((read_0==value_0) && (read_1==value_1) && (read_2==value_2) && (read_3==value_3) && (read_4==value_4) && \
+		   (read_5==value_5) && (read_6==value_6) && (read_7==value_7))//&& (read_8==value_8) && (read_9==value_9))
+		{
+			if (0 == (i%100))
+			{
+				uart_send_dec(i);
+				uart_send_char("\r\n");
+			}
+		}
+		else
+		{
+			uart_send_char("Reg readwrite ERROR!\r\n");
+			break;
+//			  raw_input();
+		}
+	}
+	uart_send_char("Func testReadWrite End!\r\n");
+}
+#endif
+
+
 /*
                          Main application
  */
@@ -1105,10 +1201,10 @@ const uint8_t script_content[] = {
 0x81,0x4e,0x38,0x00,
 0x82,0x4e,0x38,0x00,
 0x83,0x4e,0x38,0x00,  // 3800 clte =7 B?
-0x84,0x4e,0x08,0x00,  // 1000 ctle =2 for 6M awg30 A?
-0x85,0x4e,0x08,0x00,  // 3000 ctle =6  2M awg26
-0x86,0x4e,0x08,0x00,  // 1800 clte=3  8M awg26  
-0x87,0x4e,0x08,0x00,  // 0800 clte =1 10M awg26
+0x84,0x4e,0x10,0x00,  // 1000 ctle =2 for 6M awg30 A?
+0x85,0x4e,0x10,0x00,  // 3000 ctle =6  2M awg26
+0x86,0x4e,0x10,0x00,  // 1800 clte=3  8M awg26  
+0x87,0x4e,0x10,0x00,  // 0800 clte =1 10M awg26
 0x80,0x61,0x3C,0x20,
 0x81,0x61,0x34,0x20,
 0x82,0x61,0x34,0x20,
@@ -1202,7 +1298,7 @@ const uint8_t script_content[] = {
 0x86,0xff,0xfd,0xc0,
 0x87,0xff,0xfd,0xc0,
 };
-
+#if 1
 void main(void)
 {
     int prt_Res = -1;
@@ -1242,9 +1338,9 @@ void main(void)
 #if MY_PRINTF_EN == 1
     uart_send_char("This is a new test, now reset GE first \r\n");
 #endif    
-    __delay_ms(500);  //250ms
+    __delay_ms(300);  //150ms
     EN_1V0 = 1;					//yj ?????
-    __delay_ms(500);  //250ms
+    __delay_ms(300);  //150ms
     EN_1V8 = 1;
     __delay_ms(500);  //250ms
     GE_RSTB = 1;
@@ -1253,8 +1349,8 @@ void main(void)
 #endif
     __delay_ms(500);  //250ms
     
-    __delay_ms(5000);  //2500ms
-    __delay_ms(5000);  //2500ms
+    //__delay_ms(5000);  //2500ms
+    //__delay_ms(5000);  //2500ms
     
      const int* b_data; 
      b_data = &fw_content[0]; //point to the program memory table:  fw_content 
@@ -1268,7 +1364,9 @@ void main(void)
     uint16_t dataAddr = 10;   //   20/2
     uint32_t ramAddr = startAddr;   //?????
     int32_t checkSum = 0;       //????
-    
+#if DYCALCC==1
+    uint32_t iCC_BASE=0,iCC_EXT=0;
+#endif    
     uint16_t FW_regAddr_base[3] = {0x9f00,0x980D,0x9814};
     int x, i;
     int section = len/24+1;
@@ -1283,6 +1381,20 @@ void main(void)
     //load script
 ///    GE_reload_default();
 
+#if DYCALCC==1
+	for (i=128;i<=190;i++)
+	{
+		iCC_BASE+=EEPROM_Buffer[i];
+		
+	}
+	for (i=192;i<=222;i++)
+	{
+		iCC_EXT+=EEPROM_Buffer[i];
+		
+	}
+	EEPROM_Buffer[191]=iCC_BASE&0xff;
+	EEPROM_Buffer[223]=iCC_EXT&0xff;
+#endif
 
     int len_script = sizeof(script_content)/4;
 	
@@ -1294,7 +1406,13 @@ void main(void)
     GE_I2C2_HexWrite(0x980d,0x0000);//Logic Reset
     
     GE_set_polarity();
-        
+//20170421 add for xx
+    __delay_ms(500);  //Delay 250ms
+
+    //GE_I2C2_HexWrite(0x980d,0x0777);
+    //GE_I2C2_HexWrite(0x980d,0x0000);//Logic Reset
+//20170421 add for xx	   
+
     GE_I2C2_HexWrite(0x980d,0x0777);
     GE_I2C2_HexWrite(0x980d,0x0000);//Logic Reset
     
@@ -1303,7 +1421,7 @@ void main(void)
 
      //GE_PRBS31_test();
     //load script
-#if 1    
+#if 0    
       //golden eagle?firmware?????20170330
     
     //load firmware
@@ -1339,12 +1457,12 @@ void main(void)
 #endif
         GE_I2C2_HexWrite(FW_regAddr_base[0] + 14, (-checkSum) & 0xFFFF);
         GE_I2C2_HexRead(FW_regAddr_base[0] + 14);
-        GE_I2C2_HexWrite(FW_regAddr_base[0] + 15, 0x800C);	//¿ªÊ¼°áÒÆÊý¾ÝµÄÃüÁî
+        GE_I2C2_HexWrite(FW_regAddr_base[0] + 15, 0x800C);	
         
         checktime = 0;
         status = GE_I2C2_HexRead(FW_regAddr_base[0] + 15);
         
-        while (status == 0x800C) {	//Èç¹û³É¹¦Ö´ÐÐ£¬Ôò½«FW_regAddr_base[0] + 15 ×Ö½ÚÇåÁã¡£
+        while (status == 0x800C) {	
             checktime++;
             if (checktime > 1000)
 #if MY_PRINTF_EN == 1
@@ -1369,9 +1487,9 @@ void main(void)
     GE_I2C2_HexWrite(FW_regAddr_base[0] + 13, enterPoint & 0xFFFF);
     checkSum = (enterPoint>>16) + (enterPoint & 0xFFFF) + 0x4000;
     GE_I2C2_HexWrite(FW_regAddr_base[0] + 14, (-checkSum) & 0xFFFF);
-    GE_I2C2_HexWrite(FW_regAddr_base[0] + 15, 0x4000);		//³ÌÐòÆô¶¯¡£Ìø×ªÈë¿ÚµØÖ·
+    GE_I2C2_HexWrite(FW_regAddr_base[0] + 15, 0x4000);		
     
-    if (RdCheck) {		//Èç¹û³É¹¦Ö´ÐÐ£¬Ôò½«FW_regAddr_base[0] + 15 ×Ö½ÚÇåÁã¡£
+    if (RdCheck) {		
         checktime = 0;
         status = GE_I2C2_HexRead(FW_regAddr_base[0] + 15);
         while (status==0x4000) {
@@ -1403,11 +1521,7 @@ void main(void)
 #endif	
     
     
-     __delay_ms(1000);  //Delay 1000ms /2
-     __delay_ms(1000);  //Delay 1000ms /2
-     
-      GE_I2C2_HexWrite(0x980d,0x0777);
-    GE_I2C2_HexWrite(0x980d,0x0000);//Logic Reset
+
     
   //Temperature test
     
@@ -1419,7 +1533,11 @@ void main(void)
     ADC_Initialize();
      x=0;
     i=0;
-   
+
+#if STRESSTEST == 1
+	testReadWrite(200000, 0x8079);
+#endif
+
     while (1)
     {
 		if( EEPROM_Buffer[78] == 2 )                //write  xxxxxx11;2
@@ -1504,3 +1622,23 @@ void main(void)
 */
 
 
+#else
+#include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
+void main (void)
+{
+//    time_t toc;
+    int i;
+    unsigned short val;
+//    time(&toc);
+//    srand((int)32766);//toc);
+    for(i = 0 ; i != 10 ; i++)
+    {
+        val = rand();
+        val++;
+    }
+    //putchar(’\n’);
+}
+
+#endif

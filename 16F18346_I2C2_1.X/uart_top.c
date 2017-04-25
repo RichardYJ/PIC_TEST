@@ -3,7 +3,7 @@
 #include "golden_eagle_i2c.h"
 
 
-#if MY_PRINTF_EN == 1
+//#if MY_PRINTF_EN == 1
 void uart_send_char(uint8_t *buffer)            // ?????
 { 
 	char * temp_ptr = buffer;
@@ -79,4 +79,4 @@ void uart_send_hex16(uint16_t hexValue)
     if(hexL > 9) EUSART_Write(hexL+55); //convert to ASCII A~F
     else EUSART_Write(hexL+48); //convert to ASCII 0~9
 }
-#endif
+//#endif

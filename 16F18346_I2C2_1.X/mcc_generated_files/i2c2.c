@@ -211,7 +211,7 @@ void I2C2_Initialize(void)
     // ACKTIM ackseq; SBCDE disabled; BOEN disabled; SCIE disabled; PCIE disabled; DHEN disabled; SDAHT 100ns; AHEN disabled; 
     SSP2CON3 = 0x00;
     // Baud Rate Generator Value: SSP2ADD 127;   
-    SSP2ADD = 0x1F;
+    SSP2ADD = 0x1f; //0x1f//0x7F//min:0x18
 
    
     // clear the master interrupt flag
