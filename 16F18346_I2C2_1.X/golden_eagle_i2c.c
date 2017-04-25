@@ -8,6 +8,30 @@
 
 uint8_t timeOut = 0;
 
+void GE_I2C2_RS(void)
+{	
+//	GE_I2C2_bitset(0x8081,0x00,11,1);
+	GE_I2C2_bitset(0x8081,0x01,11,1);
+	GE_I2C2_bitset(0x8081,0x00,11,1);
+	__delay_ms(10);
+
+//	GE_I2C2_bitset(0x8181,0x00,11,1);
+	GE_I2C2_bitset(0x8181,0x01,11,1);
+	GE_I2C2_bitset(0x8181,0x00,11,1);
+	__delay_ms(10);
+
+//	GE_I2C2_bitset(0x8281,0x00,11,1);
+	GE_I2C2_bitset(0x8281,0x01,11,1);
+	GE_I2C2_bitset(0x8281,0x00,11,1);
+	__delay_ms(10);
+
+//	GE_I2C2_bitset(0x8381,0x00,11,1);
+	GE_I2C2_bitset(0x8381,0x01,11,1);
+	GE_I2C2_bitset(0x8381,0x00,11,1);
+//		__delay_ms(10);
+}
+
+
 int GE_I2C2_HexWrite(uint16_t RegAddr, uint16_t RegValue)
 {
    
@@ -360,7 +384,7 @@ inline static void GE_I2C2_bitset(uint16_t addr, uint16_t new_value, int lbit, i
 }
 
 
-#if 0	
+#if 1	
 void GE_reload_default(void)
 {
     int i=0;
