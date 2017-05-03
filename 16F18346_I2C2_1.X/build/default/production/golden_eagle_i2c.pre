@@ -9898,7 +9898,7 @@ uint8_t EEPROM_Buffer[] =
 17,
 0,
 35,
-136,
+128,
 0,
 112,
 0,
@@ -10179,6 +10179,7 @@ void OSCILLATOR_Initialize(void);
 void WDT_Initialize(void);
 
 # 25 "golden_eagle_i2c.h"
+void GE_abRs_reset(void);
 int GE_I2C2_ByteWrite(uint8_t *dataAddress, uint8_t *data2Byte, uint8_t addlen);
 uint8_t GE_I2C2_ByteRead(uint8_t *dataAddress, uint8_t *data2Byte,uint8_t addlen);
 int GE_I2C2_BufferWrite(uint8_t *dataAddress, uint8_t *dataBuffer, uint8_t addlen, uint8_t buflen);
@@ -10206,6 +10207,7 @@ void uart_send_hex16(uint16_t hexValue);
 
 # 9 "golden_eagle_i2c.c"
 uint8_t timeOut = 0;
+
 
 int GE_I2C2_HexWrite(uint16_t RegAddr, uint16_t RegValue)
 {
@@ -10294,10 +10296,10 @@ writeBuffer[addlen] = data2Byte[0];
 writeBuffer[addlen+1] = data2Byte[1];
 buflen = addlen+2;
 
-# 125
+# 126
 }
 
-# 131
+# 132
 I2C2_MESSAGE_STATUS status = I2C2_MESSAGE_PENDING;
 
 
@@ -10414,7 +10416,7 @@ else
 timeOut++;
 }
 
-# 255
+# 256
 return 1;
 
 }
@@ -10522,7 +10524,184 @@ readout = bitset(readout, new_value, lbit, width);
 GE_I2C2_HexWrite(addr, readout);
 }
 
-# 543
+
+
+void GE_reload_default(void)
+{
+int i=0;
+
+# 373
+GE_I2C2_HexWrite(0x9900,0x9dc0);
+GE_I2C2_HexWrite(0x9901,0x2104);
+GE_I2C2_HexWrite(0x9902,0x8F10);
+GE_I2C2_HexWrite(0x9815,0x0000);
+GE_I2C2_bitset(0x6002,0x1,15,1);
+GE_I2C2_bitset(0x7000,0x0,1,1);
+
+GE_I2C2_bitset(0x7000,0x0,1,1);
+GE_I2C2_bitset(0x7400,0x0,1,1);
+GE_I2C2_bitset(0x80a3,0x0,6,1);
+GE_I2C2_bitset(0x84a3,0x0,6,1);
+GE_I2C2_bitset(0x6012,0x1,15,1);
+GE_I2C2_bitset(0x7100,0x0,1,1);
+GE_I2C2_bitset(0x7500,0x0,1,1);
+GE_I2C2_bitset(0x81a3,0x0,6,1);
+GE_I2C2_bitset(0x85a3,0x0,6,1);
+GE_I2C2_bitset(0x6022,0x1,15,1);
+GE_I2C2_bitset(0x7200,0x0,1,1);
+GE_I2C2_bitset(0x7600,0x0,1,1);
+GE_I2C2_bitset(0x82a3,0x0,6,1);
+GE_I2C2_bitset(0x86a3,0x0,6,1);
+GE_I2C2_bitset(0x6032,0x1,15,1);
+GE_I2C2_bitset(0x7300,0x0,1,1);
+GE_I2C2_bitset(0x7700,0x0,1,1);
+GE_I2C2_bitset(0x83a3,0x0,6,1);
+GE_I2C2_bitset(0x87a3,0x0,6,1);
+
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x8079+i*0x0100,0x1,11,1);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x8063+i*0x0100,0x1,7,1);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x8064+i*0x0100,0x1,15,1);
+GE_I2C2_bitset(0x8064+i*0x0100,0x1,7,1);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_HexWrite(0x8076+i*0x0100,0x0084);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_HexWrite(0x8077+i*0x0100,0x1882);
+}
+for(i=0;i<4;i++) {
+GE_I2C2_HexWrite(0x8078+i*0x0100,0x8c3c);
+}
+for(i=4;i<8;i++) {
+GE_I2C2_HexWrite(0x8078+i*0x0100,0x8c38);
+}
+
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x8002+i*0x0100,0x04,12,4);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x8000+i*0x0100,0x0D05,0,14);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x8007+i*0x0100,0x0D7A,0,14);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x8083+i*0x0100,0x0E05,0,14);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x8084+i*0x0100,0x0F7A,0,14);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x8085+i*0x0100,0x0F05,0,14);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x8086+i*0x0100,0x0F05,0,14);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x8087+i*0x0100,0x0d0a,0,14);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x8088+i*0x0100,0x0d75,0,14);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x804d+i*0x0100,0x00,0,11);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x804e+i*0x0100,0x00,0,11);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x8081+i*0x0100,0x00,0,11);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x8082+i*0x0100,0x00,0,11);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x8075+i*0x0100,0x06,8,6);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x8079+i*0x0100,0x06,8,6);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x8079+i*0x0100,0x1,15,1);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x8079+i*0x0100,0x1,15,1);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_HexWrite(0x80FE+i*0x0100,0x29A8);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_HexWrite(0x80FD+i*0x0100,0x3244);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_HexWrite(0x80FC+i*0x0100,0x5236);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_HexWrite(0x80F8+i*0x0100,0xB778);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_HexWrite(0x80F5+i*0x0100,0x61E0);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_HexWrite(0x80F1+i*0x0100,0x7000);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x80F9+i*0x0100,0x2D,1,6);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x8003+i*0x0100,0x0,9,1);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x8050+i*0x0100,0x040,0,12);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x8005+i*0x0100,0xA,12,4);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x8001+i*0x0100,0x0,15,1);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x8003+i*0x0100,0x2,12,4);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x8006+i*0x0100,0xA,12,4);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x8008+i*0x0100,0xA,8,4);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x80A0+i*0x0100,0x1,7,1);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x8061+i*0x0100,0x0,8,1);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x8082+i*0x0100,0xD,12,4);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x8079+i*0x0100,0x50,0,6);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x80FE+i*0x0100,0x4,4,3);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x8008+i*0x0100,0x5,12,4);
+}
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x8087+i*0x0100,0x3,14,2);
+}
+
+GE_I2C2_HexWrite(0x980d,0x0777);
+GE_I2C2_HexWrite(0x980d,0x0000);
+}
+
+
+
 void GE_PRBS31_test(void)
 {
 uint16_t i;
@@ -10575,15 +10754,7 @@ void GE_set_polarity(void)
 
 GE_I2C2_bitset(0x8461,0x1,14,1);
 
-
-GE_I2C2_bitset(0x8761,0x1,14,1);
-
-# 603
-GE_I2C2_bitset(0x8061,0x1,14,1);
-GE_I2C2_bitset(0x8161,0x1,14,1);
-GE_I2C2_bitset(0x8261,0x1,14,1);
-
-# 611
+# 610
 }
 
 
@@ -10595,6 +10766,16 @@ for(i=0;i<8;i++) {
 GE_I2C2_bitset(0x80A1+i*0x0100,0x1,11,1);
 GE_I2C2_bitset(0x80A1+i*0x0100,0x0,11,1);
 }
+}
 
+void GE_abRs_reset(void)
+{
+uint16_t i;
 
+for(i=0;i<8;i++) {
+GE_I2C2_bitset(0x8081+i*0x0100,0x1,11,1);
+_delay((unsigned long)((10)*(32000000/4000.0)));
+GE_I2C2_bitset(0x8081+i*0x0100,0x0,11,1);
+_delay((unsigned long)((10)*(32000000/4000.0)));
+}
 }

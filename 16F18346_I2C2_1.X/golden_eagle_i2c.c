@@ -8,29 +8,6 @@
 
 uint8_t timeOut = 0;
 
-void GE_I2C2_RS(void)
-{	
-//	GE_I2C2_bitset(0x8081,0x00,11,1);
-	GE_I2C2_bitset(0x8081,0x01,11,1);
-	GE_I2C2_bitset(0x8081,0x00,11,1);
-	__delay_ms(10);
-
-//	GE_I2C2_bitset(0x8181,0x00,11,1);
-	GE_I2C2_bitset(0x8181,0x01,11,1);
-	GE_I2C2_bitset(0x8181,0x00,11,1);
-	__delay_ms(10);
-
-//	GE_I2C2_bitset(0x8281,0x00,11,1);
-	GE_I2C2_bitset(0x8281,0x01,11,1);
-	GE_I2C2_bitset(0x8281,0x00,11,1);
-	__delay_ms(10);
-
-//	GE_I2C2_bitset(0x8381,0x00,11,1);
-	GE_I2C2_bitset(0x8381,0x01,11,1);
-	GE_I2C2_bitset(0x8381,0x00,11,1);
-//		__delay_ms(10);
-}
-
 
 int GE_I2C2_HexWrite(uint16_t RegAddr, uint16_t RegValue)
 {
@@ -614,7 +591,8 @@ uint16_t get_int16(const unsigned char* data)
 void GE_set_polarity(void)
 {
        //Cable side   6m awg30 cable
-    GE_I2C2_bitset(0x8461,0x1,14,1); //BR0
+	GE_I2C2_bitset(0x8461,0x1,14,1); //BR0
+
     //GE_I2C2_bitset(0x8561,0x1,14,1); //BR1
     //GE_I2C2_bitset(0x8661,0x1,14,1);  //BR2 
     //GE_I2C2_bitset(0x8761,0x1,14,1);  //BR3
@@ -625,7 +603,7 @@ void GE_set_polarity(void)
    
    //Gold Finger
     //GE_I2C2_bitset(0x8061,0x1,14,1);  //AR0
-   // GE_I2C2_bitset(0x8161,0x1,14,1);  //AR1
+    //GE_I2C2_bitset(0x8161,0x1,14,1);  //AR1
     //GE_I2C2_bitset(0x8261,0x1,14,1);  //AR2
    //
     
@@ -636,10 +614,20 @@ void GE_state_reset(void)
 {
     uint16_t i;
     
-for(i=0;i<8;i++) {
-GE_I2C2_bitset(0x80A1+i*0x0100,0x1,11,1);  //  0x8x8a[11]->1
-GE_I2C2_bitset(0x80A1+i*0x0100,0x0,11,1);  //  0x8x8a[11]->0
-}  
+	for(i=0;i<8;i++) {
+		GE_I2C2_bitset(0x80A1+i*0x0100,0x1,11,1);  //  0x8x8a[11]->1
+		GE_I2C2_bitset(0x80A1+i*0x0100,0x0,11,1);  //  0x8x8a[11]->0
+	}     
+}
+
+void GE_abRs_reset(void)
+{
+    uint16_t i;
     
-    
+	for(i=0;i<8;i++) {
+		GE_I2C2_bitset(0x8081+i*0x0100,0x1,11,1);  //  0x8x81[11]->1
+		__delay_ms(10);
+		GE_I2C2_bitset(0x8081+i*0x0100,0x0,11,1);  //  0x8x81[11]->0
+		__delay_ms(10);
+	}
 }
