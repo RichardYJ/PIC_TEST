@@ -1,4 +1,16 @@
 Version 3.2 HI-TECH Software Intermediate Code
+"555 C:\Program Files (x86)\Microchip\xc8\v1.38\include\pic16lf18346.h
+[s S37 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S37 . TMR1IF TMR2IF BCL1IF SSP1IF TXIF RCIF ADIF TMR1GIF ]
+"554
+[u S36 `S37 1 ]
+[n S36 . . ]
+"566
+[v _PIR1bits `VS36 ~T0 @X0 0 e@17 ]
+"2914
+[v _TX1REG `Vuc ~T0 @X0 0 e@410 ]
+"134 mcc_generated_files/eusart.h
+[v _EUSART_Write `(v ~T0 @X0 0 ef1`uc ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -7563,7 +7575,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "222
 -> -> 35 `i `uc
 "223
--> -> 136 `i `uc
+-> -> 128 `i `uc
 "224
 -> -> 0 `i `uc
 "225
@@ -7947,7 +7959,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;i2c1.h: 220: 17,
 [; ;i2c1.h: 221: 0,
 [; ;i2c1.h: 222: 35,
-[; ;i2c1.h: 223: 136,
+[; ;i2c1.h: 223: 128,
 [; ;i2c1.h: 224: 0,
 [; ;i2c1.h: 225: 112,
 [; ;i2c1.h: 226: 0,
@@ -8158,20 +8170,267 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;uart_top.h: 68: void uart_send_dec(uint32_t decValue);
 [; ;uart_top.h: 69: void uart_send_hex(uint8_t hexValue);
 [; ;uart_top.h: 70: void uart_send_hex16(uint16_t hexValue);
-[; ;golden_eagle_i2c.h: 25: int GE_I2C2_ByteWrite(uint8_t *dataAddress, uint8_t *data2Byte, uint8_t addlen);
-[; ;golden_eagle_i2c.h: 26: uint8_t GE_I2C2_ByteRead(uint8_t *dataAddress, uint8_t *data2Byte,uint8_t addlen);
-[; ;golden_eagle_i2c.h: 27: int GE_I2C2_BufferWrite(uint8_t *dataAddress, uint8_t *dataBuffer, uint8_t addlen, uint8_t buflen);
-[; ;golden_eagle_i2c.h: 28: void GE_I2C2_BufferRead(uint8_t *dataAddress, uint8_t *dataBuffer, uint8_t addlen, uint8_t buflen);
-[; ;golden_eagle_i2c.h: 29: int GE_I2C2_HexWrite(uint16_t RegAddr, uint16_t RegValue);
-[; ;golden_eagle_i2c.h: 30: uint16_t GE_I2C2_HexRead(uint16_t RegAddr);
-[; ;golden_eagle_i2c.h: 31: int GE_I2C2_ByteHLWrite(uint8_t RegAddrH,uint8_t RegAddrL,uint8_t RegValueH, uint8_t RegValueL);
-[; ;golden_eagle_i2c.h: 32: uint16_t GE_I2C2_ByteHLRead(uint8_t RegAddrH,uint8_t RegAddrL);
-[; ;golden_eagle_i2c.h: 33: int GE_I2C2_AddrWrite(uint8_t *dataAddress, uint8_t addlen);
-[; ;golden_eagle_i2c.h: 34: inline static uint16_t bitset(uint16_t value, uint16_t new_value, int lbit, int width);
-[; ;golden_eagle_i2c.h: 35: inline static void GE_I2C2_bitset(uint16_t addr, uint16_t new_value, int lbit, int width);
-[; ;golden_eagle_i2c.h: 36: void GE_reload_default(void);
-[; ;golden_eagle_i2c.h: 37: void GE_PRBS31_test(void);
-[; ;golden_eagle_i2c.h: 38: int32_t get_int32(const unsigned char* data);
-[; ;golden_eagle_i2c.h: 39: uint16_t get_int16(const unsigned char* data);
-[; ;golden_eagle_i2c.h: 40: void GE_set_polarity(void);
-[; ;golden_eagle_i2c.h: 41: void GE_state_reset(void);
+[; ;golden_eagle_i2c.h: 25: void GE_abRs_reset(void);
+[; ;golden_eagle_i2c.h: 26: int GE_I2C2_ByteWrite(uint8_t *dataAddress, uint8_t *data2Byte, uint8_t addlen);
+[; ;golden_eagle_i2c.h: 27: uint8_t GE_I2C2_ByteRead(uint8_t *dataAddress, uint8_t *data2Byte,uint8_t addlen);
+[; ;golden_eagle_i2c.h: 28: int GE_I2C2_BufferWrite(uint8_t *dataAddress, uint8_t *dataBuffer, uint8_t addlen, uint8_t buflen);
+[; ;golden_eagle_i2c.h: 29: void GE_I2C2_BufferRead(uint8_t *dataAddress, uint8_t *dataBuffer, uint8_t addlen, uint8_t buflen);
+[; ;golden_eagle_i2c.h: 30: int GE_I2C2_HexWrite(uint16_t RegAddr, uint16_t RegValue);
+[; ;golden_eagle_i2c.h: 31: uint16_t GE_I2C2_HexRead(uint16_t RegAddr);
+[; ;golden_eagle_i2c.h: 32: int GE_I2C2_ByteHLWrite(uint8_t RegAddrH,uint8_t RegAddrL,uint8_t RegValueH, uint8_t RegValueL);
+[; ;golden_eagle_i2c.h: 33: uint16_t GE_I2C2_ByteHLRead(uint8_t RegAddrH,uint8_t RegAddrL);
+[; ;golden_eagle_i2c.h: 34: int GE_I2C2_AddrWrite(uint8_t *dataAddress, uint8_t addlen);
+[; ;golden_eagle_i2c.h: 35: inline static uint16_t bitset(uint16_t value, uint16_t new_value, int lbit, int width);
+[; ;golden_eagle_i2c.h: 36: inline static void GE_I2C2_bitset(uint16_t addr, uint16_t new_value, int lbit, int width);
+[; ;golden_eagle_i2c.h: 37: void GE_reload_default(void);
+[; ;golden_eagle_i2c.h: 38: void GE_PRBS31_test(void);
+[; ;golden_eagle_i2c.h: 39: int32_t get_int32(const unsigned char* data);
+[; ;golden_eagle_i2c.h: 40: uint16_t get_int16(const unsigned char* data);
+[; ;golden_eagle_i2c.h: 41: void GE_set_polarity(void);
+[; ;golden_eagle_i2c.h: 42: void GE_state_reset(void);
+"7 uart_top.c
+[v _uart_send_char `(v ~T0 @X0 1 ef1`*uc ]
+"8
+{
+[; ;uart_top.c: 7: void uart_send_char(uint8_t *buffer)
+[; ;uart_top.c: 8: {
+[e :U _uart_send_char ]
+"7
+[v _buffer `*uc ~T0 @X0 1 r1 ]
+"8
+[f ]
+"9
+[v _temp_ptr `*uc ~T0 @X0 1 a ]
+[; ;uart_top.c: 9: char * temp_ptr = buffer;
+[e = _temp_ptr _buffer ]
+[; ;uart_top.c: 10: while(*temp_ptr != '\0')
+"10
+[e $U 899  ]
+[e :U 900 ]
+[; ;uart_top.c: 11: {
+"11
+{
+[; ;uart_top.c: 14: while(0 == PIR1bits.TXIF)
+"14
+[e $U 902  ]
+[e :U 903 ]
+[; ;uart_top.c: 15: {
+"15
+{
+"16
+}
+[e :U 902 ]
+"14
+[e $ == -> 0 `i -> . . _PIR1bits 0 4 `i 903  ]
+[e :U 904 ]
+[; ;uart_top.c: 16: }
+[; ;uart_top.c: 17: TX1REG = *temp_ptr++;
+"17
+[e = _TX1REG *U ++ _temp_ptr * -> -> 1 `i `x -> -> # *U _temp_ptr `i `x ]
+"18
+}
+[e :U 899 ]
+"10
+[e $ != -> *U _temp_ptr `ui -> 0 `ui 900  ]
+[e :U 901 ]
+[; ;uart_top.c: 18: }
+[; ;uart_top.c: 20: }
+"20
+[e :UE 898 ]
+}
+"22
+[v _uart_send_byte `(v ~T0 @X0 1 ef1`uc ]
+"23
+{
+[; ;uart_top.c: 22: void uart_send_byte(char temp)
+[; ;uart_top.c: 23: {
+[e :U _uart_send_byte ]
+"22
+[v _temp `uc ~T0 @X0 1 r1 ]
+"23
+[f ]
+[; ;uart_top.c: 26: while(0 == PIR1bits.TXIF)
+"26
+[e $U 906  ]
+[e :U 907 ]
+[; ;uart_top.c: 27: {
+"27
+{
+"28
+}
+[e :U 906 ]
+"26
+[e $ == -> 0 `i -> . . _PIR1bits 0 4 `i 907  ]
+[e :U 908 ]
+[; ;uart_top.c: 28: }
+[; ;uart_top.c: 29: TX1REG = temp;
+"29
+[e = _TX1REG _temp ]
+[; ;uart_top.c: 30: }
+"30
+[e :UE 905 ]
+}
+"32
+[v _uart_send_dec `(v ~T0 @X0 1 ef1`ul ]
+"33
+{
+[; ;uart_top.c: 32: void uart_send_dec(uint32_t decValue)
+[; ;uart_top.c: 33: {
+[e :U _uart_send_dec ]
+"32
+[v _decValue `ul ~T0 @X0 1 r1 ]
+"33
+[f ]
+[; ;uart_top.c: 34: if(decValue/1000) uart_send_byte(decValue/1000+'0');
+"34
+[e $ ! != / _decValue -> -> -> 1000 `i `l `ul -> -> 0 `i `ul 910  ]
+[e ( _uart_send_byte (1 -> + / _decValue -> -> -> 1000 `i `l `ul -> -> 48 `ui `ul `uc ]
+[e :U 910 ]
+[; ;uart_top.c: 35: decValue = decValue%1000;
+"35
+[e = _decValue % _decValue -> -> -> 1000 `i `l `ul ]
+[; ;uart_top.c: 36: uart_send_byte(decValue/100+'0');
+"36
+[e ( _uart_send_byte (1 -> + / _decValue -> -> -> 100 `i `l `ul -> -> 48 `ui `ul `uc ]
+[; ;uart_top.c: 37: decValue = decValue%100;
+"37
+[e = _decValue % _decValue -> -> -> 100 `i `l `ul ]
+[; ;uart_top.c: 38: uart_send_byte(decValue/10+'0');
+"38
+[e ( _uart_send_byte (1 -> + / _decValue -> -> -> 10 `i `l `ul -> -> 48 `ui `ul `uc ]
+[; ;uart_top.c: 39: decValue = decValue%10;
+"39
+[e = _decValue % _decValue -> -> -> 10 `i `l `ul ]
+[; ;uart_top.c: 40: uart_send_byte(decValue+'0');
+"40
+[e ( _uart_send_byte (1 -> + _decValue -> -> 48 `ui `ul `uc ]
+[; ;uart_top.c: 41: }
+"41
+[e :UE 909 ]
+}
+"43
+[v _uart_send_hex `(v ~T0 @X0 1 ef1`uc ]
+"44
+{
+[; ;uart_top.c: 43: void uart_send_hex(uint8_t hexValue)
+[; ;uart_top.c: 44: {
+[e :U _uart_send_hex ]
+"43
+[v _hexValue `uc ~T0 @X0 1 r1 ]
+"44
+[f ]
+"45
+[v _hexH `uc ~T0 @X0 1 a ]
+"46
+[v _hexL `uc ~T0 @X0 1 a ]
+[; ;uart_top.c: 45: uint8_t hexH;
+[; ;uart_top.c: 46: uint8_t hexL;
+[; ;uart_top.c: 48: hexH = hexValue/16;
+"48
+[e = _hexH -> / -> _hexValue `i -> 16 `i `uc ]
+[; ;uart_top.c: 49: hexL = hexValue - (16*hexH);
+"49
+[e = _hexL -> - -> _hexValue `i * -> 16 `i -> _hexH `i `uc ]
+[; ;uart_top.c: 51: if(hexH > 9) EUSART_Write(hexH+55);
+"51
+[e $ ! > -> _hexH `i -> 9 `i 912  ]
+[e ( _EUSART_Write (1 -> + -> _hexH `i -> 55 `i `uc ]
+[e $U 913  ]
+"52
+[e :U 912 ]
+[; ;uart_top.c: 52: else EUSART_Write(hexH+48);
+[e ( _EUSART_Write (1 -> + -> _hexH `i -> 48 `i `uc ]
+[e :U 913 ]
+[; ;uart_top.c: 54: if(hexL > 9) EUSART_Write(hexL+55);
+"54
+[e $ ! > -> _hexL `i -> 9 `i 914  ]
+[e ( _EUSART_Write (1 -> + -> _hexL `i -> 55 `i `uc ]
+[e $U 915  ]
+"55
+[e :U 914 ]
+[; ;uart_top.c: 55: else EUSART_Write(hexL+48);
+[e ( _EUSART_Write (1 -> + -> _hexL `i -> 48 `i `uc ]
+[e :U 915 ]
+[; ;uart_top.c: 56: }
+"56
+[e :UE 911 ]
+}
+"58
+[v _uart_send_hex16 `(v ~T0 @X0 1 ef1`ui ]
+"59
+{
+[; ;uart_top.c: 58: void uart_send_hex16(uint16_t hexValue)
+[; ;uart_top.c: 59: {
+[e :U _uart_send_hex16 ]
+"58
+[v _hexValue `ui ~T0 @X0 1 r1 ]
+"59
+[f ]
+"60
+[v _hexH `uc ~T0 @X0 1 a ]
+"61
+[v _hexM1 `uc ~T0 @X0 1 a ]
+"62
+[v _hexM2 `uc ~T0 @X0 1 a ]
+"63
+[v _hexL `uc ~T0 @X0 1 a ]
+[; ;uart_top.c: 60: uint8_t hexH;
+[; ;uart_top.c: 61: uint8_t hexM1;
+[; ;uart_top.c: 62: uint8_t hexM2;
+[; ;uart_top.c: 63: uint8_t hexL;
+[; ;uart_top.c: 65: hexH = hexValue/16/16/16;
+"65
+[e = _hexH -> / / / _hexValue -> -> 16 `i `ui -> -> 16 `i `ui -> -> 16 `i `ui `uc ]
+[; ;uart_top.c: 66: hexM1 = hexValue/16/16-(hexH*16);
+"66
+[e = _hexM1 -> - / / _hexValue -> -> 16 `i `ui -> -> 16 `i `ui -> * -> _hexH `i -> 16 `i `ui `uc ]
+[; ;uart_top.c: 67: hexM2 = hexValue/16-(hexH*16*16)-(hexM1*16);
+"67
+[e = _hexM2 -> - - / _hexValue -> -> 16 `i `ui -> * * -> _hexH `i -> 16 `i -> 16 `i `ui -> * -> _hexM1 `i -> 16 `i `ui `uc ]
+[; ;uart_top.c: 68: hexL = hexValue-(hexH*16*16*16)-(hexM1*16*16)-(hexM2*16);
+"68
+[e = _hexL -> - - - _hexValue -> * * * -> _hexH `i -> 16 `i -> 16 `i -> 16 `i `ui -> * * -> _hexM1 `i -> 16 `i -> 16 `i `ui -> * -> _hexM2 `i -> 16 `i `ui `uc ]
+[; ;uart_top.c: 70: if(hexH > 9) EUSART_Write(hexH+55);
+"70
+[e $ ! > -> _hexH `i -> 9 `i 917  ]
+[e ( _EUSART_Write (1 -> + -> _hexH `i -> 55 `i `uc ]
+[e $U 918  ]
+"71
+[e :U 917 ]
+[; ;uart_top.c: 71: else EUSART_Write(hexH+48);
+[e ( _EUSART_Write (1 -> + -> _hexH `i -> 48 `i `uc ]
+[e :U 918 ]
+[; ;uart_top.c: 73: if(hexM1 > 9) EUSART_Write(hexM1+55);
+"73
+[e $ ! > -> _hexM1 `i -> 9 `i 919  ]
+[e ( _EUSART_Write (1 -> + -> _hexM1 `i -> 55 `i `uc ]
+[e $U 920  ]
+"74
+[e :U 919 ]
+[; ;uart_top.c: 74: else EUSART_Write(hexM1+48);
+[e ( _EUSART_Write (1 -> + -> _hexM1 `i -> 48 `i `uc ]
+[e :U 920 ]
+[; ;uart_top.c: 76: if(hexM2 > 9) EUSART_Write(hexM2+55);
+"76
+[e $ ! > -> _hexM2 `i -> 9 `i 921  ]
+[e ( _EUSART_Write (1 -> + -> _hexM2 `i -> 55 `i `uc ]
+[e $U 922  ]
+"77
+[e :U 921 ]
+[; ;uart_top.c: 77: else EUSART_Write(hexM2+48);
+[e ( _EUSART_Write (1 -> + -> _hexM2 `i -> 48 `i `uc ]
+[e :U 922 ]
+[; ;uart_top.c: 79: if(hexL > 9) EUSART_Write(hexL+55);
+"79
+[e $ ! > -> _hexL `i -> 9 `i 923  ]
+[e ( _EUSART_Write (1 -> + -> _hexL `i -> 55 `i `uc ]
+[e $U 924  ]
+"80
+[e :U 923 ]
+[; ;uart_top.c: 80: else EUSART_Write(hexL+48);
+[e ( _EUSART_Write (1 -> + -> _hexL `i -> 48 `i `uc ]
+[e :U 924 ]
+[; ;uart_top.c: 81: }
+"81
+[e :UE 916 ]
+}
