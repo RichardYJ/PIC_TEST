@@ -22,7 +22,7 @@ extern "C" {
 
 #define MY_PRINTF_EN 0
 
-void GE_I2C2_ABRS(void);
+void GE_abRs_reset(void);
 int GE_I2C2_ByteWrite(uint8_t *dataAddress, uint8_t *data2Byte, uint8_t addlen);
 uint8_t GE_I2C2_ByteRead(uint8_t *dataAddress, uint8_t *data2Byte,uint8_t addlen);
 int GE_I2C2_BufferWrite(uint8_t *dataAddress, uint8_t *dataBuffer,  uint8_t addlen, uint8_t buflen);

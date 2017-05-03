@@ -9898,7 +9898,7 @@ uint8_t EEPROM_Buffer[] =
 17,
 0,
 35,
-136,
+128,
 0,
 112,
 0,
@@ -10185,6 +10185,7 @@ int I2C2_BufferWrite(uint8_t *dataAddress, uint8_t *dataBuffer, uint8_t addlen, 
 void I2C2_BufferRead(uint8_t *dataAddress, uint8_t *dataBuffer, uint8_t addlen, uint8_t buflen);
 
 # 25 "golden_eagle_i2c.h"
+void GE_abRs_reset(void);
 int GE_I2C2_ByteWrite(uint8_t *dataAddress, uint8_t *data2Byte, uint8_t addlen);
 uint8_t GE_I2C2_ByteRead(uint8_t *dataAddress, uint8_t *data2Byte,uint8_t addlen);
 int GE_I2C2_BufferWrite(uint8_t *dataAddress, uint8_t *dataBuffer, uint8_t addlen, uint8_t buflen);
@@ -10210,7 +10211,7 @@ void uart_send_dec(uint32_t decValue);
 void uart_send_hex(uint8_t hexValue);
 void uart_send_hex16(uint16_t hexValue);
 
-# 172 "main.c"
+# 268 "main.c"
 const uint8_t fw_content[] = {
 0xC2, 0xED, 0x01, 0x00, 0x7C, 0x2A, 0x5E, 0x2F, 0x01, 0x00, 0x15, 0x4C, 0x00, 0x00, 0x15, 0x64,
 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x03,
@@ -11251,7 +11252,7 @@ int prt_Res = -1;
 
 SYSTEM_Initialize();
 
-# 1223
+# 1319
 (INTCONbits.GIE = 1);
 
 
@@ -11261,24 +11262,24 @@ SYSTEM_Initialize();
 
 int r = 0;
 
-# 1239
+# 1335
 LATCbits.LATC6 = 0;
 LATCbits.LATC7 = 0;
 LATCbits.LATC3 = 0;
 
-# 1245
-_delay((unsigned long)((500)*(32000000/4000.0)));
+# 1341
+_delay((unsigned long)((300)*(32000000/4000.0)));
 LATCbits.LATC6 = 1;
-_delay((unsigned long)((500)*(32000000/4000.0)));
+_delay((unsigned long)((300)*(32000000/4000.0)));
 LATCbits.LATC7 = 1;
 _delay((unsigned long)((500)*(32000000/4000.0)));
 LATCbits.LATC3 = 1;
 
-# 1254
+# 1350
 _delay((unsigned long)((500)*(32000000/4000.0)));
 
-_delay((unsigned long)((5000)*(32000000/4000.0)));
-_delay((unsigned long)((5000)*(32000000/4000.0)));
+
+
 
 const int* b_data;
 b_data = &fw_content[0];
@@ -11293,6 +11294,8 @@ uint16_t dataAddr = 10;
 uint32_t ramAddr = startAddr;
 int32_t checkSum = 0;
 
+uint32_t iCC_BASE=0,iCC_EXT=0;
+
 uint16_t FW_regAddr_base[3] = {0x9f00,0x980D,0x9814};
 int x, i;
 int section = len/24+1;
@@ -11303,104 +11306,44 @@ uint16_t RdCheck = 1;
 uint16_t mdioData;
 uint16_t TotalError=0;
 
-# 1287
+# 1385
+for (i=128;i<=190;i++)
+{
+iCC_BASE+=EEPROM_Buffer[i];
+
+}
+for (i=192;i<=222;i++)
+{
+iCC_EXT+=EEPROM_Buffer[i];
+
+}
+EEPROM_Buffer[191]=iCC_BASE&0xff;
+EEPROM_Buffer[223]=iCC_EXT&0xff;
+
+
+GE_I2C2_HexWrite(0x980d,0x0999);
+
+GE_I2C2_HexWrite(0x980d,0x0000);
+
+_delay((unsigned long)((1000)*(32000000/4000.0)));
+
 int len_script = sizeof(script_content)/4;
 
 for (i=0;i<len_script;i++)
 {
 GE_I2C2_ByteHLWrite(script_content[i*4],script_content[i*4+1],script_content[i*4+2],script_content[i*4+3]);
 }
+
+_delay((unsigned long)((1000)*(32000000/4000.0)));
+
+
 GE_I2C2_HexWrite(0x980d,0x0777);
 GE_I2C2_HexWrite(0x980d,0x0000);
 
+_delay((unsigned long)((1000)*(32000000/4000.0)));
 GE_set_polarity();
 
-GE_I2C2_HexWrite(0x980d,0x0777);
-GE_I2C2_HexWrite(0x980d,0x0000);
-
-# 1310
-for (x=0; x<section; x++)
-{
-checkSum = 0x800C;
-GE_I2C2_HexWrite(FW_regAddr_base[0] + 12, ramAddr>>16);
-GE_I2C2_HexWrite(FW_regAddr_base[0] + 13, ramAddr & 0xFFFF);
-
-checkSum += (ramAddr>>16) + (ramAddr & 0xFFFF);
-
-for (i=0; i<12; i++)
-{
-
-# 1326
-mdioData = get_int16(b_data+dataAddr);
-GE_I2C2_HexWrite(FW_regAddr_base[0]+i, mdioData);
-
-checkSum += mdioData;
-dataAddr += 1;
-ramAddr += 2;
-}
-
-# 1340
-GE_I2C2_HexWrite(FW_regAddr_base[0] + 14, (-checkSum) & 0xFFFF);
-GE_I2C2_HexRead(FW_regAddr_base[0] + 14);
-GE_I2C2_HexWrite(FW_regAddr_base[0] + 15, 0x800C);
-
-checktime = 0;
-status = GE_I2C2_HexRead(FW_regAddr_base[0] + 15);
-
-while (status == 0x800C) {
-checktime++;
-if (checktime > 1000)
-
-# 1353
-;
-status = GE_I2C2_HexRead(FW_regAddr_base[0] + 15);
-}
-if (status != 0x0000)
-{
-TotalError++;
-
-# 1364
-}
-}
-
-
-GE_I2C2_HexWrite(FW_regAddr_base[0] + 12, enterPoint>>16);
-GE_I2C2_HexWrite(FW_regAddr_base[0] + 13, enterPoint & 0xFFFF);
-checkSum = (enterPoint>>16) + (enterPoint & 0xFFFF) + 0x4000;
-GE_I2C2_HexWrite(FW_regAddr_base[0] + 14, (-checkSum) & 0xFFFF);
-GE_I2C2_HexWrite(FW_regAddr_base[0] + 15, 0x4000);
-
-if (RdCheck) {
-checktime = 0;
-status = GE_I2C2_HexRead(FW_regAddr_base[0] + 15);
-while (status==0x4000) {
-checktime++;
-if (checktime>1000)
-
-# 1383
-;
-status = GE_I2C2_HexRead(FW_regAddr_base[0] + 15);
-}
-}
-
-for (i=0;i<1024;i++)
-{
-for(x=0;x<1024;x++)
-{;}
-}
-
-# 1396
-GE_I2C2_HexRead(0x9814);
-
-# 1406
-_delay((unsigned long)((1000)*(32000000/4000.0)));
-_delay((unsigned long)((1000)*(32000000/4000.0)));
-
-GE_I2C2_HexWrite(0x980d,0x0777);
-GE_I2C2_HexWrite(0x980d,0x0000);
-
-
-
+# 1544
 adc_channel_t AN1_Channel = channel_Temp;
 int Temperature;
 float adc_float,temp_float;
@@ -11410,6 +11353,7 @@ ADC_Initialize();
 x=0;
 i=0;
 
+# 1557
 while (1)
 {
 if( EEPROM_Buffer[78] == 2 )
@@ -11426,7 +11370,7 @@ EEPROM_Buffer[77] = rValue & 0x00ff ;
 EEPROM_Buffer[78] = 0 ;
 }
 
-# 1458
+# 1592
 FVRCON = 0xB5;
 _delay((unsigned long)((10)*(32000000/4000.0)));
 ADC_StartConversion(AN1_Channel);
@@ -11447,10 +11391,10 @@ Temperature = (int) temp_abs;
 EEPROM_Buffer[22] = Temperature >> 8;
 EEPROM_Buffer[23] = Temperature & 0x00ff;
 
-# 1483
+# 1617
 }
 
-# 1499
+# 1633
 }
 
 }

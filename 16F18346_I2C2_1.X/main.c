@@ -1197,14 +1197,14 @@ const uint8_t script_content[] = {
 0x85,0x4d,0x80,0x00,
 0x86,0x4d,0x80,0x00,
 0x87,0x4d,0x80,0x00,
-0x80,0x4e,0x30,0x00,
-0x81,0x4e,0x30,0x00,
-0x82,0x4e,0x30,0x00,
-0x83,0x4e,0x30,0x00,  // 3800 clte =7 B?
-0x84,0x4e,0x10,0x00,  // 1000 ctle =2 for 6M awg30 A?
-0x85,0x4e,0x10,0x00,  // 3000 ctle =6  2M awg26
-0x86,0x4e,0x10,0x00,  // 1800 clte=3  8M awg26  
-0x87,0x4e,0x10,0x00,  // 0800 clte =1 10M awg26
+0x80,0x4e,0x38,0x00,
+0x81,0x4e,0x38,0x00,
+0x82,0x4e,0x38,0x00,
+0x83,0x4e,0x38,0x00,  // 3800 clte =7 B?
+0x84,0x4e,0x08,0x00,  // 1000 ctle =2 for 6M awg30 A?
+0x85,0x4e,0x08,0x00,  // 3000 ctle =6  2M awg26
+0x86,0x4e,0x08,0x00,  // 1800 clte=3  8M awg26  
+0x87,0x4e,0x08,0x00,  // 0800 clte =1 10M awg26
 0x80,0x61,0x3C,0x20,
 0x81,0x61,0x34,0x20,
 0x82,0x61,0x34,0x20,
@@ -1343,7 +1343,7 @@ void main(void)
     __delay_ms(300);  //150ms
     EN_1V8 = 1;
     __delay_ms(500);  //250ms
-    GE_RSTB = 1;
+    GE_RSTB = 1;		//hardware reset
 #if MY_PRINTF_EN == 1
     uart_send_char("Reset done! now load fw to GE\r\n");
 #endif
@@ -1396,29 +1396,41 @@ void main(void)
 	EEPROM_Buffer[223]=iCC_EXT&0xff;
 #endif
 
+    GE_I2C2_HexWrite(0x980d,0x0999);//software reset
+    
+    GE_I2C2_HexWrite(0x980d,0x0000);//software reset
+    
+	__delay_ms(1000);
+
     int len_script = sizeof(script_content)/4;
 	
     for (i=0;i<len_script;i++)
     {
         GE_I2C2_ByteHLWrite(script_content[i*4],script_content[i*4+1],script_content[i*4+2],script_content[i*4+3]);
     }
+
+    __delay_ms(1000);
+	
+	
     GE_I2C2_HexWrite(0x980d,0x0777);
     GE_I2C2_HexWrite(0x980d,0x0000);//Logic Reset
-    
-    GE_set_polarity();
+
+    __delay_ms(1000);
+	GE_set_polarity();
+
 //20170421 add for xx
-    __delay_ms(500);  //Delay 250ms
+//    __delay_ms(500);  //Delay 250ms
 
     //GE_I2C2_HexWrite(0x980d,0x0777);
     //GE_I2C2_HexWrite(0x980d,0x0000);//Logic Reset
 //20170421 add for xx	   
 
-    GE_I2C2_HexWrite(0x980d,0x0777);
-    GE_I2C2_HexWrite(0x980d,0x0000);//Logic Reset
+//    GE_I2C2_HexWrite(0x980d,0x0777);
+//    GE_I2C2_HexWrite(0x980d,0x0000);//Logic Reset
     
-    __delay_ms(500);  //Delay 250ms
+//    __delay_ms(500);  //Delay 250ms
 
-	GE_I2C2_ABRS();
+//	GE_abRs_reset();
 
 //    GE_state_reset();
     

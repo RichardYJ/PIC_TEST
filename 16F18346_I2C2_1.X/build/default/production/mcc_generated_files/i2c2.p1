@@ -7509,7 +7509,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;i2c2.c: 212: SSP2CON3 = 0x00;
 "212
 [e = _SSP2CON3 -> -> 0 `i `uc ]
-[; ;i2c2.c: 214: SSP2ADD = 0x1F;
+[; ;i2c2.c: 214: SSP2ADD = 0x1f;
 "214
 [e = _SSP2ADD -> -> 31 `i `uc ]
 [; ;i2c2.c: 218: PIR2bits.SSP2IF = 0;
