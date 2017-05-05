@@ -643,3 +643,16 @@ GE_I2C2_bitset(0x80A1+i*0x0100,0x0,11,1);  //  0x8x8a[11]->0
     
     
 }
+
+void GE_abRs_reset(void)
+{
+    uint16_t i;
+    
+    for(i=0;i<8;i++) {
+        GE_I2C2_bitset(0x8081+i*0x0100,0x1,11,1);  //  0x8x81[11]->1
+        __delay_ms(10);
+        GE_I2C2_bitset(0x8081+i*0x0100,0x0,11,1);  //  0x8x81[11]->0
+        __delay_ms(10);
+    }
+}
+

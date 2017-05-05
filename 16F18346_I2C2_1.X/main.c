@@ -56,13 +56,11 @@
 #define EN_1V8 LATCbits.LATC7
 #define LPMODE RA2
 
-#define STRESSTEST 0
+//#define STRESSTEST 0
+//#define DYCALCC 1
 
 
-#define DYCALCC 1
-
-
-#if STRESSTEST == 1
+#ifdef STRESSTEST
 void testReadWrite(uint32_t loop_times, uint16_t regAddr)
 {
 /*
@@ -1364,7 +1362,7 @@ void main(void)
     uint16_t dataAddr = 10;   //   20/2
     uint32_t ramAddr = startAddr;   //?????
     int32_t checkSum = 0;       //????
-#if DYCALCC==1
+#ifdef DYCALCC
     uint32_t iCC_BASE=0,iCC_EXT=0;
 #endif    
     uint16_t FW_regAddr_base[3] = {0x9f00,0x980D,0x9814};
@@ -1381,7 +1379,7 @@ void main(void)
     //load script
 ///    GE_reload_default();
 
-#if DYCALCC==1
+#ifdef DYCALCC
 	for (i=128;i<=190;i++)
 	{
 		iCC_BASE+=EEPROM_Buffer[i];
@@ -1418,7 +1416,7 @@ void main(void)
     
     __delay_ms(500);  //Delay 250ms
 
-	GE_I2C2_ABRS();
+//	  GE_abRs_reset();
 
 //    GE_state_reset();
     
@@ -1538,7 +1536,7 @@ void main(void)
      x=0;
     i=0;
 
-#if STRESSTEST == 1
+#ifdef STRESSTEST
 	testReadWrite(200000, 0x8079);
 #endif
 
@@ -1642,7 +1640,7 @@ void main (void)
         val = rand();
         val++;
     }
-    //putchar(’\n’);
+    //putchar(’\n?;
 }
 
 #endif
