@@ -1,7 +1,7 @@
 
 
 Microchip Technology PIC LITE Macro Assembler V1.37 build -256452561 
-                                                                                               Thu Apr 27 17:33:44 2017
+                                                                                               Tue May 16 14:31:13 2017
 
 Microchip Technology Omniscient Code Generator v1.38 (Free mode) build 201607010351
      1                           	processor	16LF18346
@@ -5005,22 +5005,22 @@ Microchip Technology Omniscient Code Generator v1.38 (Free mode) build 201607010
   4999  2221  3400               	retlw	0
   5000  2222  3401               	retlw	1
   5001  2223  34A0               	retlw	160
-  5002  2224  344D               	retlw	77
-  5003  2225  346F               	retlw	111
-  5004  2226  346C               	retlw	108
-  5005  2227  3465               	retlw	101
-  5006  2228  3478               	retlw	120
-  5007  2229  3420               	retlw	32
-  5008  222A  3449               	retlw	73
-  5009  222B  346E               	retlw	110
-  5010  222C  3463               	retlw	99
-  5011  222D  342E               	retlw	46
-  5012  222E  3420               	retlw	32
-  5013  222F  3420               	retlw	32
-  5014  2230  3420               	retlw	32
-  5015  2231  3420               	retlw	32
-  5016  2232  3420               	retlw	32
-  5017  2233  3420               	retlw	32
+  5002  2224  3446               	retlw	70
+  5003  2225  3449               	retlw	73
+  5004  2226  3454               	retlw	84
+  5005  2227  3420               	retlw	32
+  5006  2228  3400               	retlw	0
+  5007  2229  3400               	retlw	0
+  5008  222A  3400               	retlw	0
+  5009  222B  3400               	retlw	0
+  5010  222C  3400               	retlw	0
+  5011  222D  3400               	retlw	0
+  5012  222E  3400               	retlw	0
+  5013  222F  3400               	retlw	0
+  5014  2230  3400               	retlw	0
+  5015  2231  3400               	retlw	0
+  5016  2232  3400               	retlw	0
+  5017  2233  3400               	retlw	0
   5018  2234  341F               	retlw	31
   5019  2235  3400               	retlw	0
   5020  2236  3409               	retlw	9
@@ -6307,19 +6307,19 @@ Microchip Technology Omniscient Code Generator v1.38 (Free mode) build 201607010
   6301  0507  3482               	retlw	130
   6302  0508  3480               	retlw	128
   6303  0509  3401               	retlw	1
-  6304  050A  3442               	retlw	66
+  6304  050A  3451               	retlw	81
   6305  050B  3401               	retlw	1
   6306  050C  3481               	retlw	129
   6307  050D  3401               	retlw	1
-  6308  050E  3442               	retlw	66
+  6308  050E  3451               	retlw	81
   6309  050F  3401               	retlw	1
   6310  0510  3482               	retlw	130
   6311  0511  3401               	retlw	1
-  6312  0512  3442               	retlw	66
+  6312  0512  3451               	retlw	81
   6313  0513  3401               	retlw	1
   6314  0514  3483               	retlw	131
   6315  0515  3401               	retlw	1
-  6316  0516  3442               	retlw	66
+  6316  0516  3451               	retlw	81
   6317  0517  3401               	retlw	1
   6318  0518  3484               	retlw	132
   6319  0519  3401               	retlw	1
@@ -6923,19 +6923,19 @@ Microchip Technology Omniscient Code Generator v1.38 (Free mode) build 201607010
   6917  076F  3400               	retlw	0
   6918  0770  3484               	retlw	132
   6919  0771  34A7               	retlw	167
-  6920  0772  3414               	retlw	20
+  6920  0772  3412               	retlw	18
   6921  0773  3400               	retlw	0
   6922  0774  3485               	retlw	133
   6923  0775  34A7               	retlw	167
-  6924  0776  3414               	retlw	20
+  6924  0776  3412               	retlw	18
   6925  0777  3400               	retlw	0
   6926  0778  3486               	retlw	134
   6927  0779  34A7               	retlw	167
-  6928  077A  3414               	retlw	20
+  6928  077A  3412               	retlw	18
   6929  077B  3400               	retlw	0
   6930  077C  3487               	retlw	135
   6931  077D  34A7               	retlw	167
-  6932  077E  3414               	retlw	20
+  6932  077E  3412               	retlw	18
   6933  077F  3400               	retlw	0
   6934  0780  3480               	retlw	128
   6935  0781  34A8               	retlw	168
@@ -6955,19 +6955,19 @@ Microchip Technology Omniscient Code Generator v1.38 (Free mode) build 201607010
   6949  078F  3400               	retlw	0
   6950  0790  3484               	retlw	132
   6951  0791  34A8               	retlw	168
-  6952  0792  3400               	retlw	0
+  6952  0792  343F               	retlw	63
   6953  0793  3400               	retlw	0
   6954  0794  3485               	retlw	133
   6955  0795  34A8               	retlw	168
-  6956  0796  3400               	retlw	0
+  6956  0796  343F               	retlw	63
   6957  0797  3400               	retlw	0
   6958  0798  3486               	retlw	134
   6959  0799  34A8               	retlw	168
-  6960  079A  3400               	retlw	0
+  6960  079A  343F               	retlw	63
   6961  079B  3400               	retlw	0
   6962  079C  3487               	retlw	135
   6963  079D  34A8               	retlw	168
-  6964  079E  3400               	retlw	0
+  6964  079E  343F               	retlw	63
   6965  079F  3400               	retlw	0
   6966  07A0  3484               	retlw	132
   6967  07A1  34A6               	retlw	166
@@ -7435,19 +7435,19 @@ Microchip Technology Omniscient Code Generator v1.38 (Free mode) build 201607010
   7429  096F  3400               	retlw	0
   7430  0970  3480               	retlw	128
   7431  0971  344E               	retlw	78
-  7432  0972  3438               	retlw	56
+  7432  0972  3430               	retlw	48
   7433  0973  3400               	retlw	0
   7434  0974  3481               	retlw	129
   7435  0975  344E               	retlw	78
-  7436  0976  3438               	retlw	56
+  7436  0976  3430               	retlw	48
   7437  0977  3400               	retlw	0
   7438  0978  3482               	retlw	130
   7439  0979  344E               	retlw	78
-  7440  097A  3438               	retlw	56
+  7440  097A  3430               	retlw	48
   7441  097B  3400               	retlw	0
   7442  097C  3483               	retlw	131
   7443  097D  344E               	retlw	78
-  7444  097E  3438               	retlw	56
+  7444  097E  3430               	retlw	48
   7445  097F  3400               	retlw	0
   7446  0980  3484               	retlw	132
   7447  0981  344E               	retlw	78
@@ -7563,19 +7563,19 @@ Microchip Technology Omniscient Code Generator v1.38 (Free mode) build 201607010
   7557  09EF  3400               	retlw	0
   7558  09F0  3480               	retlw	128
   7559  09F1  3401               	retlw	1
-  7560  09F2  3442               	retlw	66
+  7560  09F2  3451               	retlw	81
   7561  09F3  3401               	retlw	1
   7562  09F4  3481               	retlw	129
   7563  09F5  3401               	retlw	1
-  7564  09F6  3442               	retlw	66
+  7564  09F6  3451               	retlw	81
   7565  09F7  3401               	retlw	1
   7566  09F8  3482               	retlw	130
   7567  09F9  3401               	retlw	1
-  7568  09FA  3442               	retlw	66
+  7568  09FA  3451               	retlw	81
   7569  09FB  3401               	retlw	1
   7570  09FC  3483               	retlw	131
   7571  09FD  3401               	retlw	1
-  7572  09FE  3442               	retlw	66
+  7572  09FE  3451               	retlw	81
   7573  09FF  3401               	retlw	1
   7574  0A00  3484               	retlw	132
   7575  0A01  3401               	retlw	1
@@ -22449,7 +22449,7 @@ BANK25               0      0       0      57        0.0%
 
 
 Microchip Technology PIC Macro Assembler V1.37 build -256452561 
-Symbol Table                                                                                   Thu Apr 27 17:33:44 2017
+Symbol Table                                                                                   Tue May 16 14:31:13 2017
 
                         main@RdCheck 00CB                                    pc 0002  
                         main@iCC_EXT 00EB           __size_of_GE_I2C2_ByteWrite 0074  

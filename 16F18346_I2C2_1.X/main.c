@@ -58,6 +58,10 @@
 
 #define STRESSTEST 0
 
+//#define G100_5M 1
+
+//G40_8 
+//G100_6M           
 
 #define DYCALCC 1
 
@@ -1201,10 +1205,32 @@ const uint8_t script_content[] = {
                         0x81,0x4e,0x30,0x00,
                         0x82,0x4e,0x30,0x00,
                         0x83,0x4e,0x30,0x00,  // 3800 clte =7 B?
+                        #ifdef G100_7_10M
                         0x84,0x4e,0x08,0x00,  // 1000 ctle =2 for 6M awg30 A?
                         0x85,0x4e,0x08,0x00,  // 3000 ctle =6  2M awg26
                         0x86,0x4e,0x08,0x00,  // 1800 clte=3  8M awg26  
                         0x87,0x4e,0x08,0x00,  // 0800 clte =1 10M awg26
+                        #elif defined G100_6M
+                        0x84,0x4e,0x10,0x00,  // 1000 ctle =.2 for 6M awg30 A?
+                        0x85,0x4e,0x10,0x00,  // 3000 ctle =6  2M awg26
+                        0x86,0x4e,0x10,0x00,  // 1800 clte=3  8M awg26  
+                        0x87,0x4e,0x10,0x00,  // 0800 clte =1 10M awg26
+                        #elif defined G40_8M
+                        0x84,0x4e,0x18,0x00,  // 1000 ctle =2 for 6M awg30 A?
+                        0x85,0x4e,0x18,0x00,  // 3000 ctle =6  2M awg26
+                        0x86,0x4e,0x18,0x00,  // 1800 clte=3  8M awg26  
+                        0x87,0x4e,0x18,0x00,  // 0800 clte =1 10M awg26
+                        #elif defined G100_5M
+                        0x84,0x4e,0x20,0x00,  // 1000 ctle =2 for 6M awg30 A?
+                        0x85,0x4e,0x20,0x00,  // 3000 ctle =6  2M awg26
+                        0x86,0x4e,0x20,0x00,  // 1800 clte=3  8M awg26  
+                        0x87,0x4e,0x20,0x00,  // 0800 clte =1 10M awg26
+                        #elif defined G100_2M
+                        0x84,0x4e,0x30,0x00,  // 1000 ctle =2 for 6M awg30 A?
+                        0x85,0x4e,0x30,0x00,  // 3000 ctle =6  2M awg26
+                        0x86,0x4e,0x30,0x00,  // 1800 clte=3  8M awg26  
+                        0x87,0x4e,0x30,0x00,  // 0800 clte =1 10M awg26
+                        #endif
                         0x80,0x61,0x3C,0x20,    //2000 clte =4   5M awg26
                         0x81,0x61,0x34,0x20,
                         0x82,0x61,0x34,0x20,
@@ -1229,10 +1255,10 @@ const uint8_t script_content[] = {
                         0x75,0x08,0x0c,0x00,
                         0x76,0x08,0x0c,0x00,
                         0x77,0x08,0x0c,0x00,
-                        0x80,0x01,0x42,0x01,// 5111 -> 4201, for fellowing the temperature
-                        0x81,0x01,0x42,0x01,//5111 -> 4201, for fellowing the temperature
-                        0x82,0x01,0x42,0x01,//5111 -> 4201, for fellowing the temperature
-                        0x83,0x01,0x42,0x01,//5111 -> 4201, for fellowing the temperature
+                        0x80,0x01,0x51,0x01,// 5111 -> 4201, for fellowing the temperature
+                        0x81,0x01,0x51,0x01,//5111 -> 4201, for fellowing the temperature
+                        0x82,0x01,0x51,0x01,//5111 -> 4201, for fellowing the temperature
+                        0x83,0x01,0x51,0x01,//5111 -> 4201, for fellowing the temperature
                         0x84,0x01,0x42,0x01,//0201 -> 4201, for fellowing the temperature
                         0x85,0x01,0x42,0x01,//0201 -> 4201, for fellowing the temperature
                         0x86,0x01,0x42,0x01,//0201 -> 4201, for fellowing the temperature
