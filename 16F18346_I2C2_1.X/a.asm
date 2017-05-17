@@ -8,8 +8,8 @@ SIGNAT _fw_content_T,4218
 ; everything following will be placed into the mytext psect
 PSECT mytext,local,class=STRING,delta=2,reloc=2;CODE;STRING;reloc=2;EEDATA
 ; our routine to add to ints and return the result
-;ORG 50h
-_fw_content_T: Dw 1234h,4321h,2234h,3234h
+ORG 9ah
+_fw_content_T: Dw 269ah
 ;TABLE:	DW 12H;RETLW 41H	
 ;_fw_content_T_ DW 1234h,2,3,4
 ;_addTest:

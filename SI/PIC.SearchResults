@@ -1,7 +1,0 @@
----- STRESSTEST Matches (3 in 1 files) ----
-Main.c://#define STRESSTEST 0
-Main.c:#ifdef STRESSTEST
-Main.c:#if STRESSTEST == 1
----- GE_I2C2_ABRS Matches (2 in 2 files) ----
-Golden_eagle_i2c.h:void GE_I2C2_ABRS(void);
-Main.c:	GE_I2C2_ABRS();
