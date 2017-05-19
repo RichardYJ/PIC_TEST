@@ -58,7 +58,7 @@
 
 #define STRESSTEST 0
 
-//#define G100_5M 1
+#define G100_6M 1
 
 //G40_8 
 //G100_6M           
