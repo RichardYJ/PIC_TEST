@@ -7610,7 +7610,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "238
 -> -> 1 `i `uc
 "239
--> -> 160 `i `uc
+-> -> 8 `i `uc
 "240
 -> -> 70 `i `uc
 "241
@@ -7688,19 +7688,19 @@ Version 3.2 HI-TECH Software Intermediate Code
 "277
 -> -> 32 `i `uc
 "278
--> -> 0 `i `uc
+-> -> 66 `i `uc
 "279
--> -> 0 `i `uc
+-> -> 104 `i `uc
 "280
--> -> 0 `i `uc
+-> -> 7 `i `uc
 "281
--> -> 0 `i `uc
+-> -> 208 `i `uc
 "282
 -> -> 0 `i `uc
 "283
 -> -> 99 `i `uc
 "284
--> -> 11 `i `uc
+-> -> 2 `i `uc
 "285
 -> -> 0 `i `uc
 "286
@@ -7978,7 +7978,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;i2c1.h: 236: 0,
 [; ;i2c1.h: 237: 0,
 [; ;i2c1.h: 238: 1,
-[; ;i2c1.h: 239: 160,
+[; ;i2c1.h: 239: 8,
 [; ;i2c1.h: 240: 70,
 [; ;i2c1.h: 241: 73,
 [; ;i2c1.h: 242: 84,
@@ -8017,13 +8017,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;i2c1.h: 275: 32,
 [; ;i2c1.h: 276: 49,
 [; ;i2c1.h: 277: 32,
-[; ;i2c1.h: 278: 0,
-[; ;i2c1.h: 279: 0,
-[; ;i2c1.h: 280: 0,
-[; ;i2c1.h: 281: 0,
+[; ;i2c1.h: 278: 66,
+[; ;i2c1.h: 279: 104,
+[; ;i2c1.h: 280: 7,
+[; ;i2c1.h: 281: 208,
 [; ;i2c1.h: 282: 0,
 [; ;i2c1.h: 283: 99,
-[; ;i2c1.h: 284: 11,
+[; ;i2c1.h: 284: 2,
 [; ;i2c1.h: 285: 0,
 [; ;i2c1.h: 286: 0,
 [; ;i2c1.h: 287: 0,
@@ -10269,106 +10269,106 @@ Version 3.2 HI-TECH Software Intermediate Code
 "588
 [e :UE 1135 ]
 }
-"591
-[v _GE_set_polarity `(v ~T0 @X0 1 ef ]
 "592
+[v _GE_set_polarity `(v ~T0 @X0 1 ef ]
+"593
 {
-[; ;golden_eagle_i2c.c: 591: void GE_set_polarity(void)
-[; ;golden_eagle_i2c.c: 592: {
+[; ;golden_eagle_i2c.c: 592: void GE_set_polarity(void)
+[; ;golden_eagle_i2c.c: 593: {
 [e :U _GE_set_polarity ]
 [f ]
-[; ;golden_eagle_i2c.c: 605: GE_I2C2_bitset(0x8061,0x1,14,1);
-"605
-[e ( _GE_I2C2_bitset (4 , , , -> 32865 `ui -> -> 1 `i `ui -> 14 `i -> 1 `i ]
-[; ;golden_eagle_i2c.c: 606: GE_I2C2_bitset(0x8161,0x1,14,1);
+[; ;golden_eagle_i2c.c: 606: GE_I2C2_bitset(0x8061,0x1,14,1);
 "606
+[e ( _GE_I2C2_bitset (4 , , , -> 32865 `ui -> -> 1 `i `ui -> 14 `i -> 1 `i ]
+[; ;golden_eagle_i2c.c: 607: GE_I2C2_bitset(0x8161,0x1,14,1);
+"607
 [e ( _GE_I2C2_bitset (4 , , , -> 33121 `ui -> -> 1 `i `ui -> 14 `i -> 1 `i ]
-[; ;golden_eagle_i2c.c: 608: GE_I2C2_bitset(0x8361,0x1,14,1);
-"608
+[; ;golden_eagle_i2c.c: 609: GE_I2C2_bitset(0x8361,0x1,14,1);
+"609
 [e ( _GE_I2C2_bitset (4 , , , -> 33633 `ui -> -> 1 `i `ui -> 14 `i -> 1 `i ]
-[; ;golden_eagle_i2c.c: 612: }
-"612
+[; ;golden_eagle_i2c.c: 613: }
+"613
 [e :UE 1139 ]
 }
-"615
+"639
 [v _GE_state_reset `(v ~T0 @X0 1 ef ]
-"616
+"640
 {
-[; ;golden_eagle_i2c.c: 615: void GE_state_reset(void)
-[; ;golden_eagle_i2c.c: 616: {
+[; ;golden_eagle_i2c.c: 639: void GE_state_reset(void)
+[; ;golden_eagle_i2c.c: 640: {
 [e :U _GE_state_reset ]
 [f ]
-"617
+"641
 [v _i `ui ~T0 @X0 1 a ]
-[; ;golden_eagle_i2c.c: 617: uint16_t i;
-[; ;golden_eagle_i2c.c: 619: for(i=0;i<8;i++) {
-"619
+[; ;golden_eagle_i2c.c: 641: uint16_t i;
+[; ;golden_eagle_i2c.c: 643: for(i=0;i<8;i++) {
+"643
 {
 [e = _i -> -> 0 `i `ui ]
 [e $ < _i -> -> 8 `i `ui 1141  ]
 [e $U 1142  ]
 [e :U 1141 ]
 {
-[; ;golden_eagle_i2c.c: 620: GE_I2C2_bitset(0x80A1+i*0x0100,0x1,11,1);
-"620
+[; ;golden_eagle_i2c.c: 644: GE_I2C2_bitset(0x80A1+i*0x0100,0x1,11,1);
+"644
 [e ( _GE_I2C2_bitset (4 , , , + -> 32929 `ui * _i -> -> 256 `i `ui -> -> 1 `i `ui -> 11 `i -> 1 `i ]
-[; ;golden_eagle_i2c.c: 621: GE_I2C2_bitset(0x80A1+i*0x0100,0x0,11,1);
-"621
+[; ;golden_eagle_i2c.c: 645: GE_I2C2_bitset(0x80A1+i*0x0100,0x0,11,1);
+"645
 [e ( _GE_I2C2_bitset (4 , , , + -> 32929 `ui * _i -> -> 256 `i `ui -> -> 0 `i `ui -> 11 `i -> 1 `i ]
-"622
+"646
 }
-"619
+"643
 [e ++ _i -> -> 1 `i `ui ]
 [e $ < _i -> -> 8 `i `ui 1141  ]
 [e :U 1142 ]
-"622
+"646
 }
-[; ;golden_eagle_i2c.c: 622: }
-[; ;golden_eagle_i2c.c: 623: }
-"623
+[; ;golden_eagle_i2c.c: 646: }
+[; ;golden_eagle_i2c.c: 647: }
+"647
 [e :UE 1140 ]
 }
-"625
+"649
 [v _GE_abRs_reset `(v ~T0 @X0 1 ef ]
-"626
+"650
 {
-[; ;golden_eagle_i2c.c: 625: void GE_abRs_reset(void)
-[; ;golden_eagle_i2c.c: 626: {
+[; ;golden_eagle_i2c.c: 649: void GE_abRs_reset(void)
+[; ;golden_eagle_i2c.c: 650: {
 [e :U _GE_abRs_reset ]
 [f ]
-"627
+"651
 [v _i `ui ~T0 @X0 1 a ]
-[; ;golden_eagle_i2c.c: 627: uint16_t i;
-[; ;golden_eagle_i2c.c: 629: for(i=0;i<8;i++) {
-"629
+[; ;golden_eagle_i2c.c: 651: uint16_t i;
+[; ;golden_eagle_i2c.c: 653: for(i=0;i<8;i++) {
+"653
 {
 [e = _i -> -> 0 `i `ui ]
 [e $ < _i -> -> 8 `i `ui 1145  ]
 [e $U 1146  ]
 [e :U 1145 ]
 {
-[; ;golden_eagle_i2c.c: 630: GE_I2C2_bitset(0x8081+i*0x0100,0x1,11,1);
-"630
+[; ;golden_eagle_i2c.c: 654: GE_I2C2_bitset(0x8081+i*0x0100,0x1,11,1);
+"654
 [e ( _GE_I2C2_bitset (4 , , , + -> 32897 `ui * _i -> -> 256 `i `ui -> -> 1 `i `ui -> 11 `i -> 1 `i ]
-[; ;golden_eagle_i2c.c: 631: _delay((unsigned long)((10)*(32000000/4000.0)));
-"631
+[; ;golden_eagle_i2c.c: 655: _delay((unsigned long)((10)*(32000000/4000.0)));
+"655
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-[; ;golden_eagle_i2c.c: 632: GE_I2C2_bitset(0x8081+i*0x0100,0x0,11,1);
-"632
+[; ;golden_eagle_i2c.c: 656: GE_I2C2_bitset(0x8081+i*0x0100,0x0,11,1);
+"656
 [e ( _GE_I2C2_bitset (4 , , , + -> 32897 `ui * _i -> -> 256 `i `ui -> -> 0 `i `ui -> 11 `i -> 1 `i ]
-[; ;golden_eagle_i2c.c: 633: _delay((unsigned long)((10)*(32000000/4000.0)));
-"633
+[; ;golden_eagle_i2c.c: 657: _delay((unsigned long)((10)*(32000000/4000.0)));
+"657
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
-"634
+"658
 }
-"629
+"653
 [e ++ _i -> -> 1 `i `ui ]
 [e $ < _i -> -> 8 `i `ui 1145  ]
 [e :U 1146 ]
-"634
+"658
 }
-[; ;golden_eagle_i2c.c: 634: }
-[; ;golden_eagle_i2c.c: 635: }
-"635
+[; ;golden_eagle_i2c.c: 658: }
+[; ;golden_eagle_i2c.c: 659: }
+"659
 [e :UE 1144 ]
 }
