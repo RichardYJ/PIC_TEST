@@ -591,11 +591,11 @@ uint16_t get_int16(const unsigned char* data)
 void GE_set_polarity(void)
 {
        //Cable side   6m awg30 cable
-	//GE_I2C2_bitset(0x8461,0x1,14,1); //BR0
+	GE_I2C2_bitset(0x8461,0x1,14,1); //BR0
 
     //GE_I2C2_bitset(0x8561,0x1,14,1); //BR1
     //GE_I2C2_bitset(0x8661,0x1,14,1);  //BR2 
-    //GE_I2C2_bitset(0x8761,0x1,14,1);  //BR3
+    GE_I2C2_bitset(0x8761,0x1,14,1);  //BR3
     
    //Cable side  2m awg30 cable
    //GE_I2C2_bitset(0x8561,0x1,14,1); //BR1
@@ -604,8 +604,8 @@ void GE_set_polarity(void)
    //Gold Finger
     GE_I2C2_bitset(0x8061,0x1,14,1);  //AR0
     GE_I2C2_bitset(0x8161,0x1,14,1);  //AR1
-    //GE_I2C2_bitset(0x8261,0x1,14,1);  //AR2
-    GE_I2C2_bitset(0x8361,0x1,14,1);  //AR3
+    GE_I2C2_bitset(0x8261,0x1,14,1);  //AR2
+    //GE_I2C2_bitset(0x8361,0x1,14,1);  //AR3
     
    //
     
