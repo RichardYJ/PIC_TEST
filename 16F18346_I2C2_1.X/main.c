@@ -64,6 +64,63 @@
 //G100_6M           
 
 #define DYCALCC 1
+#define FLASHREAD 1
+#define FLASHSTART 0x3000	//0x269a  LEN:0D87
+
+#ifdef FLASHREAD
+uint16_t getShortFrom14Arry(uint16_t pos16,uint16_t * inArry)
+{
+	uint16_t outData,pos14,offset,i,j,sL,sH;
+	i = pos14 = (pos16)*16/14;
+	j = pos16;
+    i=j+j/7;
+    int m = j%7;
+    sL = FLASH_ReadWord(i+FLASHSTART);
+    sH = FLASH_ReadWord(i+1+FLASHSTART);
+    switch(m)
+    {
+    case 0:
+        outData = sL&0x3fff|(sH&0x3)<<14;
+        break;
+    case 1:
+        outData = (sL&((0x3fff<<2)&0x3fff))>>2|(sH&0xf)<<12;
+        break;
+    case 2:
+        outData = (sL&((0x3fff<<4)&0x3fff))>>4|(sH&0x3f)<<10;
+        break;
+    case 3:
+        outData = (sL&((0x3fff<<6)&0x3fff))>>6|(sH&0xff)<<8;
+        break;
+    case 4:
+        outData = (sL&((0x3fff<<8)&0x3fff))>>8|(sH&0x3ff)<<6;
+        break;
+    case 5:
+        outData = (sL&((0x3fff<<10)&0x3fff))>>10|(sH&0xfff)<<4;
+        break;
+    case 6:
+        outData = (sL&((0x3fff<<12)&0x3fff))>>12|(sH&0x3fff)<<2;
+        break;
+    }
+
+	outData=((outData&0xff)<<8|(outData&0xff00)>>8);
+#if 0
+	uart_send_char("getShortFrom14Arry[");
+	uart_send_hex16(pos16);
+	uart_send_char("]:");
+	uart_send_hex16(outData);
+//	uart_send_char("\r\n");
+	uart_send_char(",sL:");
+	uart_send_hex16(sL);
+//	uart_send_char("\r\n");
+	uart_send_char(",sH:");
+	uart_send_hex16(sH);
+	uart_send_char("\r\n");
+#endif    
+	return outData;
+}
+
+#endif
+
 
 
 #if STRESSTEST == 1
@@ -270,6 +327,7 @@ const uint8_t fw_content[] = {
 
 #else
 const uint8_t fw_content[] = { // /*    
+#ifndef FLASHREAD
 0xC2, 0xED, 0x01, 0x00, 0x7C, 0x2A, 0x5E, 0x2F, 0x01, 0x00, 0x15, 0x4C, 0x00, 0x00, 0x15, 0x64, 
 0x01, 0x00, 0x00, 0x00, /*start load data*/0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 
 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 
@@ -614,7 +672,7 @@ const uint8_t fw_content[] = { // /*
 0x9C, 0x21, 0xFF, 0xFC, 0x9C, 0x21, 0x00, 0x04, 0x44, 0x00, 0x48, 0x00, 0x84, 0x21, 0xFF, 0xFC, 
 0x18, 0x20, 0x01, 0x00, 0xA8, 0x21, 0x18, 0x68, 0x18, 0x40, 0x01, 0x00, 0xA8, 0x42, 0x03, 0x5C, 
 0x44, 0x00, 0x10, 0x00, 0x15, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-                             //  */
+#endif
 };
 #endif
 
@@ -1328,7 +1386,8 @@ const uint8_t script_content[] = {
 void main(void)
 {
     int prt_Res = -1;
-    // initialize the device
+	uint16_t tH,tL;
+	// initialize the device
     SYSTEM_Initialize();        //yj系统初始化
 ///	test_main();
 
@@ -1383,9 +1442,60 @@ void main(void)
    
     
     uint32_t counter = 0; 
-    uint32_t len = get_int32(b_data+6);  // 0x00, 0x00, 0x15, 0x64     12/2		
-    uint32_t enterPoint = get_int32(b_data+4);    //0x01, 0x00, 0x15, 0x4C  8/2
-    uint32_t startAddr = get_int32(b_data+8);  //0x0100 0000    16/2
+#ifndef FLASHREAD
+	uint32_t len = get_int32(b_data+6);  // 0x00, 0x00, 0x15, 0x64	   12/2 	
+#else
+	tH= getShortFrom14Arry(0+6,FLASHSTART);
+	tL= getShortFrom14Arry(0+7,FLASHSTART);
+	uint32_t len = 0;
+	len |= tH;
+	len <<=16;
+	len |= tL;
+#endif
+#if MY_PRINTF_EN == 1
+	uart_send_char("\r\n");
+	uart_send_char("len:");
+	uart_send_hex16(len>>16);
+	uart_send_hex16(len & 0xFFFF);
+	uart_send_char("\r\n");
+#endif
+
+#ifndef FLASHREAD
+	uint32_t enterPoint = get_int32(b_data+4);	  //0x01, 0x00, 0x15, 0x4C	8/2
+#else
+	tH= getShortFrom14Arry(0+4,FLASHSTART);
+	tL= getShortFrom14Arry(0+5,FLASHSTART);
+	uint32_t enterPoint = 0;
+	enterPoint |= tH;
+	enterPoint <<=16;
+	enterPoint |= tL;
+#endif
+#if MY_PRINTF_EN == 1
+	uart_send_char("\r\n");
+	uart_send_char("enterPoint:");
+	uart_send_hex16(enterPoint>>16);
+	uart_send_hex16(enterPoint & 0xFFFF);
+	uart_send_char("\r\n");
+#endif
+
+#ifndef FLASHREAD
+	uint32_t startAddr = get_int32(b_data+8);  //0x0100 0000	16/2
+#else
+	tH= getShortFrom14Arry(0+8,FLASHSTART);
+	tL= getShortFrom14Arry(0+9,FLASHSTART);
+	uint32_t startAddr = (tH<<16)| tL;//0x01000000;//
+	startAddr |= tH;
+	startAddr <<=16;
+	startAddr |= tL;
+
+#endif
+#if MY_PRINTF_EN == 1
+	uart_send_char("\r\n");
+	uart_send_char("startAddr:");
+	uart_send_hex16(startAddr>>16);//tH);//
+	uart_send_hex16(startAddr & 0xFFFF);//tL);//
+	uart_send_char("\r\n");
+#endif
  
     uint16_t dataAddr = 10;   //   20/2
     uint32_t ramAddr = startAddr;   //?????
@@ -1463,7 +1573,7 @@ void main(void)
 
      //GE_PRBS31_test();
     //load script
-#if 0    
+#if 1    
       //golden eagle?firmware?????20170330
     
     //load firmware
@@ -1483,7 +1593,18 @@ void main(void)
             uart_send_hex16(ramAddr & 0xFFFF);
             uart_send_byte('\r'); uart_send_byte('\n');	
 #endif            
+#ifndef FLASHREAD
             mdioData = get_int16(b_data+dataAddr);
+#else
+			tL = getShortFrom14Arry(dataAddr,FLASHSTART);
+			mdioData = tL;//((tL&0xff)<<8|tL>>8);
+#endif
+#if MY_PRINTF_EN == 1
+			uart_send_char("mdioData=");
+			uart_send_hex16(mdioData);
+			uart_send_byte('\r'); uart_send_byte('\n'); 
+#endif            
+
             GE_I2C2_HexWrite(FW_regAddr_base[0]+i, mdioData);
             //GE_I2C2_HexRead(FW_regAddr_base[0] + i);
             checkSum += mdioData;
