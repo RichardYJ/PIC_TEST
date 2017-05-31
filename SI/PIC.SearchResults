@@ -1,0 +1,51 @@
+---- fw_content Matches (26 in 2 files) ----
+A.asm:GLOBAL _fw_content_T
+A.asm:SIGNAT _fw_content_T,4218
+A.asm:_fw_content_T: Dw 1234h,4321h,2234h,3234h
+A.asm:;_fw_content_T_ DW 1234h,2,3,4
+Main.c:extern uint16_t fw_content_T;
+Main.c:  pRst = &fw_content_T;
+Main.c:  unsigned char * p = &fw_content_T;//&fw_content_T;9731
+Main.c:  result16 = FLASH_ReadWord(&fw_content_T);
+Main.c:  uart_send_char("FLASH_ReadWord(&fw_content_T)=");
+Main.c:  uart_send_char("FLASH_ReadWord((&fw_content_T)+1)=");
+Main.c:  uart_send_char("FLASH_ReadWord((&fw_content_T)+2)=");
+Main.c:  uart_send_char("FLASH_ReadWord((&fw_content_T)+3)=");
+Main.c:  result16 = fw_content_T;//fw_content_T;
+Main.c:  uart_send_char("fw_content_T=");
+Main.c:  result16 = *p;//fw_content_T;
+Main.c://  memcpy(&result16,&fw_content_T,sizeof(fw_content_T));
+Main.c:  result= fw_content_T;//fw_content_T[0];
+Main.c:const uint32_t fw_content[] = {
+Main.c:const uint8_t fw_content[] = {
+Main.c:const uint8_t fw_content[] = { // /*    
+Main.c:     b_data = &fw_content[0]; //point to the program memory table:  fw_content 
+---- b_data Matches (6 in 1 files) ----
+Main.c:     const int* b_data; 
+Main.c:     b_data = &fw_content[0]; //point to the program memory table:  fw_content 
+Main.c:	uint32_t len = get_int32(b_data+6);  // 0x00, 0x00, 0x15, 0x64	   12/2 	
+Main.c:	uint32_t enterPoint = get_int32(b_data+4);	  //0x01, 0x00, 0x15, 0x4C	8/2
+Main.c:	uint32_t startAddr = get_int32(b_data+8);  //0x0100 0000	16/2
+Main.c:            mdioData = get_int16(b_data+dataAddr);
+---- fw_content Matches (26 in 2 files) ----
+A.asm:GLOBAL _fw_content_T
+A.asm:SIGNAT _fw_content_T,4218
+A.asm:_fw_content_T: Dw 1234h,4321h,2234h,3234h
+A.asm:;_fw_content_T_ DW 1234h,2,3,4
+Main.c:extern uint16_t fw_content_T;
+Main.c:  pRst = &fw_content_T;
+Main.c:  unsigned char * p = &fw_content_T;//&fw_content_T;9731
+Main.c:  result16 = FLASH_ReadWord(&fw_content_T);
+Main.c:  uart_send_char("FLASH_ReadWord(&fw_content_T)=");
+Main.c:  uart_send_char("FLASH_ReadWord((&fw_content_T)+1)=");
+Main.c:  uart_send_char("FLASH_ReadWord((&fw_content_T)+2)=");
+Main.c:  uart_send_char("FLASH_ReadWord((&fw_content_T)+3)=");
+Main.c:  result16 = fw_content_T;//fw_content_T;
+Main.c:  uart_send_char("fw_content_T=");
+Main.c:  result16 = *p;//fw_content_T;
+Main.c://  memcpy(&result16,&fw_content_T,sizeof(fw_content_T));
+Main.c:  result= fw_content_T;//fw_content_T[0];
+Main.c:const uint32_t fw_content[] = {
+Main.c:const uint8_t fw_content[] = {
+Main.c:const uint8_t fw_content[] = { // /*    
+Main.c:     b_data = &fw_content[0]; //point to the program memory table:  fw_content 

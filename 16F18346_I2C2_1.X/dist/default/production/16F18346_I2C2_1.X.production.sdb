@@ -3,7 +3,7 @@
 [d edition pro ]
 [d chip 16LF18346 ]
 [d frameptr 6 ]
-"184 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\mcc_generated_files/i2c2.c
+"184 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\mcc_generated_files/i2c2.c
 [e E7648 . `uc
 I2C2_MESSAGE_COMPLETE 0
 I2C2_MESSAGE_FAIL 1
@@ -28,7 +28,7 @@ S_MASTER_NOACK_STOP 9
 S_MASTER_SEND_ADDR_10BIT_LSB 10
 S_MASTER_10BIT_RESTART 11
 ]
-"123 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\mcc_generated_files/i2c1.c
+"123 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\mcc_generated_files/i2c1.c
 [e E7648 . `uc
 I2C1_SLAVE_WRITE_REQUEST 0
 I2C1_SLAVE_READ_REQUEST 1
@@ -40,21 +40,21 @@ I2C1_SLAVE_READ_COMPLETED 3
 SLAVE_NORMAL_DATA 0
 SLAVE_DATA_ADDRESS 1
 ]
-"86 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\mcc_generated_files/adc.c
+"86 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\mcc_generated_files/adc.c
 [e E7651 . `uc
 channel_AVSS 60
 channel_Temp 61
 channel_DAC1 62
 channel_FVR 63
 ]
-"1544 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\main.c
+"1691 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\main.c
 [e E7744 . `uc
 channel_AVSS 60
 channel_Temp 61
 channel_DAC1 62
 channel_FVR 63
 ]
-"73 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\eeprom_i2c.c
+"73 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\eeprom_i2c.c
 [e E7669 . `uc
 I2C2_MESSAGE_COMPLETE 0
 I2C2_MESSAGE_FAIL 1
@@ -64,7 +64,7 @@ I2C2_MESSAGE_ADDRESS_NO_ACK 4
 I2C2_DATA_NO_ACK 5
 I2C2_LOST_STATE 6
 ]
-"132 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\golden_eagle_i2c.c
+"132 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\golden_eagle_i2c.c
 [e E7669 . `uc
 I2C2_MESSAGE_COMPLETE 0
 I2C2_MESSAGE_FAIL 1
@@ -92,15 +92,19 @@ I2C2_LOST_STATE 6
 [v ___lldiv __lldiv `(ul  1 e 4 0 ]
 "6 C:\Program Files (x86)\Microchip\xc8\v1.38\sources\common\llmod.c
 [v ___llmod __llmod `(ul  1 e 4 0 ]
+"6 C:\Program Files (x86)\Microchip\xc8\v1.38\sources\common\lwdiv.c
+[v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
+"6 C:\Program Files (x86)\Microchip\xc8\v1.38\sources\common\lwmod.c
+[v ___lwmod __lwmod `(ui  1 e 2 0 ]
 "28 C:\Program Files (x86)\Microchip\xc8\v1.38\sources\common\lwtoft.c
 [v ___lwtoft __lwtoft `(f  1 e 3 0 ]
 "6 C:\Program Files (x86)\Microchip\xc8\v1.38\sources\pic\eeprom.c
 [v _eecpymem eecpymem `(v  1 e 1 0 ]
 "39
 [v _memcpyee memcpyee `(v  1 e 1 0 ]
-"52 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\eeprom_i2c.c
+"52 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\eeprom_i2c.c
 [v _I2C2_ByteWrite I2C2_ByteWrite `(i  1 e 2 0 ]
-"12 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\golden_eagle_i2c.c
+"12 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\golden_eagle_i2c.c
 [v _GE_I2C2_HexWrite GE_I2C2_HexWrite `(i  1 e 2 0 ]
 "28
 [v _GE_I2C2_HexRead GE_I2C2_HexRead `(ui  1 e 2 0 ]
@@ -118,13 +122,13 @@ I2C2_LOST_STATE 6
 [v _bitset bitset `T(ui  1 s 2 bitset ]
 "356
 [v _GE_I2C2_bitset GE_I2C2_bitset `T(v  1 s 1 GE_I2C2_bitset ]
-"568
-[v _get_int32 get_int32 `(l  1 e 4 0 ]
 "591
 [v _GE_set_polarity GE_set_polarity `(v  1 e 1 0 ]
-"1302 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\main.c
+"71 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\main.c
+[v _getShortFrom14Arry getShortFrom14Arry `(ui  1 e 2 0 ]
+"1386
 [v _main main `(v  1 e 1 0 ]
-"64 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\mcc_generated_files/adc.c
+"64 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\mcc_generated_files/adc.c
 [v _ADC_Initialize ADC_Initialize `(v  1 e 1 0 ]
 "85
 [v _ADC_StartConversion ADC_StartConversion `(v  1 e 1 0 ]
@@ -132,21 +136,21 @@ I2C2_LOST_STATE 6
 [v _ADC_IsConversionDone ADC_IsConversionDone `(uc  1 e 1 0 ]
 "104
 [v _ADC_GetConversionResult ADC_GetConversionResult `(ui  1 e 2 0 ]
-"57 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\mcc_generated_files/clkref.c
+"57 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\mcc_generated_files/clkref.c
 [v _CLKREF_Initialize CLKREF_Initialize `(v  1 e 1 0 ]
-"55 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\mcc_generated_files/eusart.c
+"55 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\mcc_generated_files/eusart.c
 [v _EUSART_Initialize EUSART_Initialize `(v  1 e 1 0 ]
 "97
 [v _EUSART_Write EUSART_Write `(v  1 e 1 0 ]
-"57 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\mcc_generated_files/fvr.c
+"57 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\mcc_generated_files/fvr.c
 [v _FVR_Initialize FVR_Initialize `(v  1 e 1 0 ]
-"85 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\mcc_generated_files/i2c1.c
+"85 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\mcc_generated_files/i2c1.c
 [v _I2C1_Initialize I2C1_Initialize `(v  1 e 1 0 ]
 "108
 [v _I2C1_ISR I2C1_ISR `(v  1 e 1 0 ]
 "172
 [v _I2C1_StatusCallback I2C1_StatusCallback `(v  1 e 1 0 ]
-"198 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\mcc_generated_files/i2c2.c
+"198 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\mcc_generated_files/i2c2.c
 [v _I2C2_Initialize I2C2_Initialize `(v  1 e 1 0 ]
 "233
 [v _I2C2_ISR I2C2_ISR `(v  1 e 1 0 ]
@@ -166,24 +170,32 @@ I2C2_LOST_STATE 6
 [v _I2C2_MasterWriteTRBBuild I2C2_MasterWriteTRBBuild `(v  1 e 1 0 ]
 "728
 [v _I2C2_BusCollisionISR I2C2_BusCollisionISR `(v  1 e 1 0 ]
-"51 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\mcc_generated_files/interrupt_manager.c
+"51 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\mcc_generated_files/interrupt_manager.c
 [v _INTERRUPT_InterruptManager INTERRUPT_InterruptManager `II(v  1 e 1 0 ]
-"76 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\mcc_generated_files/mcc.c
+"76 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\mcc_generated_files/mcc.c
 [v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
 "90
 [v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
 "106
 [v _WDT_Initialize WDT_Initialize `(v  1 e 1 0 ]
-"57 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\mcc_generated_files/memory.c
+"57 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\mcc_generated_files/memory.c
 [v _FLASH_ReadWord FLASH_ReadWord `(ui  1 e 2 0 ]
 "93
 [v _FLASH_WriteBlock FLASH_WriteBlock `(c  1 e 1 0 ]
 "148
 [v _FLASH_EraseBlock FLASH_EraseBlock `(v  1 e 1 0 ]
-"51 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\mcc_generated_files/pin_manager.c
+"51 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\mcc_generated_files/pin_manager.c
 [v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
-"22 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\uart_top.c
+"7 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\uart_top.c
+[v _uart_send_char uart_send_char `(v  1 e 1 0 ]
+"22
 [v _uart_send_byte uart_send_byte `(v  1 e 1 0 ]
+"32
+[v _uart_send_dec uart_send_dec `(v  1 e 1 0 ]
+"43
+[v _uart_send_hex uart_send_hex `(v  1 e 1 0 ]
+"58
+[v _uart_send_hex16 uart_send_hex16 `(v  1 e 1 0 ]
 [s S650 . 1 `uc 1 INTEDG 1 0 :1:0 
 `uc 1 . 1 0 :5:1 
 `uc 1 PEIE 1 0 :1:6 
@@ -283,7 +295,7 @@ I2C2_LOST_STATE 6
 [v _LATB LATB `VEuc  1 e 1 @269 ]
 "2173
 [v _LATC LATC `VEuc  1 e 1 @270 ]
-[s S1083 . 1 `uc 1 LATC0 1 0 :1:0 
+[s S1084 . 1 `uc 1 LATC0 1 0 :1:0 
 `uc 1 LATC1 1 0 :1:1 
 `uc 1 LATC2 1 0 :1:2 
 `uc 1 LATC3 1 0 :1:3 
@@ -293,8 +305,8 @@ I2C2_LOST_STATE 6
 `uc 1 LATC7 1 0 :1:7 
 ]
 "2190
-[u S1092 . 1 `S1083 1 . 1 0 ]
-[v _LATCbits LATCbits `VES1092  1 e 1 @270 ]
+[u S1093 . 1 `S1084 1 . 1 0 ]
+[v _LATCbits LATCbits `VES1093  1 e 1 @270 ]
 "2537
 [v _FVRCON FVRCON `VEuc  1 e 1 @279 ]
 [s S958 . 1 `uc 1 ADFVR 1 0 :2:0 
@@ -574,18 +586,18 @@ I2C2_LOST_STATE 6
 [v _RC4PPSbits RC4PPSbits `VES484  1 e 1 @3748 ]
 "19345
 [v _GIE GIE `VEb  1 e 0 @95 ]
-"9 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\golden_eagle_i2c.c
+"9 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\golden_eagle_i2c.c
 [v _timeOut timeOut `uc  1 e 1 0 ]
-"268 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\main.c
-[v _fw_content fw_content `DCC[5500]uc  1 e 5500 0 ]
-"617
+"329 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\main.c
+[v _fw_content fw_content `DCC[0]uc  1 e 0 0 ]
+"679
 [v _script_content script_content `DCC[2716]uc  1 e 2716 0 ]
-"66 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\mcc_generated_files/i2c1.c
+"66 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\mcc_generated_files/i2c1.c
 [v _I2C1_slaveWriteData I2C1_slaveWriteData `VEuc  1 e 1 0 ]
-"90 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\mcc_generated_files/i2c1.h
+"90 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\mcc_generated_files/i2c1.h
 [v _EEPROM_Buffer EEPROM_Buffer `[256]uc  1 e 256 @9968 ]
 [s S19 . 5 `ui 1 address 2 0 `uc 1 length 1 2 `*.39uc 1 pbuffer 2 3 ]
-"184 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\mcc_generated_files/i2c2.c
+"184 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\mcc_generated_files/i2c2.c
 [s S31 . 3 `uc 1 count 1 0 `*.5S19 1 ptrb_list 1 1 `*.4E7648 1 pTrFlag 1 2 ]
 [v _i2c2_tr_queue i2c2_tr_queue `[1]S31  1 s 3 i2c2_tr_queue ]
 "185
@@ -604,83 +616,105 @@ I2C2_LOST_STATE 6
 [v _p_i2c2_trb_current p_i2c2_trb_current `*.5S19  1 s 1 p_i2c2_trb_current ]
 "190
 [v _p_i2c2_current p_i2c2_current `*.5S31  1 s 1 p_i2c2_current ]
-"1302 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\main.c
+"1386 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"1607
-[v main@temp_abs temp_abs `f  1 a 3 61 ]
-"1566
-[v main@rValue rValue `ui  1 a 2 6 ]
-"1370
+"1754
+[v main@temp_abs temp_abs `f  1 a 3 23 ]
+"1713
+[v main@rValue rValue `ui  1 a 2 51 ]
+"1506
 [v main@FW_regAddr_base FW_regAddr_base `[3]ui  1 a 6 71 ]
-"1368
-[v main@iCC_EXT iCC_EXT `ul  1 a 4 75 ]
-[v main@iCC_BASE iCC_BASE `ul  1 a 4 71 ]
-"1362
-[v main@startAddr startAddr `ul  1 a 4 51 ]
-"1360
-[v main@len len `ul  1 a 4 47 ]
-"1373
-[v main@checktime checktime `ul  1 a 4 31 ]
-"1366
-[v main@checkSum checkSum `l  1 a 4 27 ]
-"1365
-[v main@ramAddr ramAddr `ul  1 a 4 23 ]
-"1361
-[v main@enterPoint enterPoint `ul  1 a 4 19 ]
-"1359
-[v main@counter counter `ul  1 a 4 15 ]
-"1546
-[v main@temp_float temp_float `f  1 a 3 58 ]
-[v main@adc_float adc_float `f  1 a 3 55 ]
-"1371
-[v main@i i `i  1 a 2 10 ]
-"1355
-[v main@b_data b_data `*.25DCCi  1 a 2 8 ]
-"1545
-[v main@Temperature Temperature `i  1 a 2 4 ]
-"1547
-[v main@convertedValue_LowRange convertedValue_LowRange `ui  1 a 2 2 ]
-[v main@convertedValue_HighRange convertedValue_HighRange `ui  1 a 2 0 ]
-[v main@convertedValue convertedValue `ui  1 a 2 69 ]
-"1405
-[v main@len_script len_script `i  1 a 2 67 ]
-"1378
-[v main@TotalError TotalError `ui  1 a 2 45 ]
-"1376
-[v main@RdCheck RdCheck `ui  1 a 2 43 ]
-"1372
-[v main@section section `i  1 a 2 41 ]
-"1371
-[v main@x x `i  1 a 2 39 ]
-"1364
-[v main@dataAddr dataAddr `ui  1 a 2 37 ]
-"1326
-[v main@r r `i  1 a 2 35 ]
-"1304
-[v main@prt_Res prt_Res `i  1 a 2 77 ]
-"1544
+"1468
+[v main@enterPoint enterPoint `ul  1 a 4 14 ]
+"1501
+[v main@ramAddr ramAddr `ul  1 a 4 10 ]
+"1509
+[v main@checktime checktime `ul  1 a 4 4 ]
+"1502
+[v main@checkSum checkSum `l  1 a 4 0 ]
+"1486
+[v main@startAddr startAddr `ul  1 a 4 63 ]
+"1450
+[v main@len len `ul  1 a 4 59 ]
+"1504
+[v main@iCC_EXT iCC_EXT `ul  1 a 4 43 ]
+[v main@iCC_BASE iCC_BASE `ul  1 a 4 39 ]
+"1444
+[v main@counter counter `ul  1 a 4 71 ]
+"1693
+[v main@temp_float temp_float `f  1 a 3 20 ]
+[v main@adc_float adc_float `f  1 a 3 17 ]
+"1507
+[v main@i i `i  1 a 2 18 ]
+"1389
+[v main@tL tL `ui  1 a 2 8 ]
+[v main@tH tH `ui  1 a 2 77 ]
+"1507
+[v main@x x `i  1 a 2 69 ]
+"1510
+[v main@status status `ui  1 a 2 67 ]
+"1692
+[v main@Temperature Temperature `i  1 a 2 57 ]
+"1513
+[v main@mdioData mdioData `ui  1 a 2 55 ]
+"1514
+[v main@TotalError TotalError `ui  1 a 2 53 ]
+"1694
+[v main@convertedValue convertedValue `ui  1 a 2 49 ]
+"1500
+[v main@dataAddr dataAddr `ui  1 a 2 47 ]
+"1694
+[v main@convertedValue_LowRange convertedValue_LowRange `ui  1 a 2 37 ]
+[v main@convertedValue_HighRange convertedValue_HighRange `ui  1 a 2 35 ]
+"1541
+[v main@len_script len_script `i  1 a 2 33 ]
+"1512
+[v main@RdCheck RdCheck `ui  1 a 2 31 ]
+"1508
+[v main@section section `i  1 a 2 29 ]
+"1440
+[v main@b_data b_data `*.25DCCi  1 a 2 15 ]
+"1411
+[v main@r r `i  1 a 2 77 ]
+"1388
+[v main@prt_Res prt_Res `i  1 a 2 75 ]
+"1691
 [v main@AN1_Channel AN1_Channel `E7744  1 a 1 79 ]
-"1368
-[v main@F7878 F7878 `[3]ui  1 s 6 F7878 ]
-"1635
+"1504
+[v main@F7891 F7891 `[3]ui  1 s 6 F7891 ]
+"1782
 } 0
-"568 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\golden_eagle_i2c.c
-[v _get_int32 get_int32 `(l  1 e 4 0 ]
+"58 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\uart_top.c
+[v _uart_send_hex16 uart_send_hex16 `(v  1 e 1 0 ]
 {
-"570
-[v get_int32@result result `ul  1 a 4 8 ]
-"571
-[v get_int32@i i `i  1 a 2 12 ]
-"568
-[v get_int32@data data `*.25DCCuc  1 p 2 0 ]
-"577
+"60
+[v uart_send_hex16@hexH hexH `uc  1 a 1 13 ]
+"61
+[v uart_send_hex16@hexM1 hexM1 `uc  1 a 1 12 ]
+"62
+[v uart_send_hex16@hexM2 hexM2 `uc  1 a 1 11 ]
+"63
+[v uart_send_hex16@hexL hexL `uc  1 a 1 10 ]
+"58
+[v uart_send_hex16@hexValue hexValue `ui  1 p 2 1 ]
+"81
 } 0
-"28 C:\Program Files (x86)\Microchip\xc8\v1.38\sources\common\lwtoft.c
-[v ___lwtoft __lwtoft `(f  1 e 3 0 ]
+"32
+[v _uart_send_dec uart_send_dec `(v  1 e 1 0 ]
 {
-[v ___lwtoft@c c `ui  1 p 2 8 ]
-"31
+[v uart_send_dec@decValue decValue `ul  1 p 4 14 ]
+"41
+} 0
+"6 C:\Program Files (x86)\Microchip\xc8\v1.38\sources\common\llmod.c
+[v ___llmod __llmod `(ul  1 e 4 0 ]
+{
+"11
+[v ___llmod@counter counter `uc  1 a 1 9 ]
+"6
+[v ___llmod@divisor divisor `ul  1 p 4 0 ]
+[v ___llmod@dividend dividend `ul  1 p 4 4 ]
+"26
 } 0
 "6 C:\Program Files (x86)\Microchip\xc8\v1.38\sources\common\lldiv.c
 [v ___lldiv __lldiv `(ul  1 e 4 0 ]
@@ -692,6 +726,61 @@ I2C2_LOST_STATE 6
 "6
 [v ___lldiv@divisor divisor `ul  1 p 4 0 ]
 [v ___lldiv@dividend dividend `ul  1 p 4 4 ]
+"31
+} 0
+"71 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\main.c
+[v _getShortFrom14Arry getShortFrom14Arry `(ui  1 e 2 0 ]
+{
+"73
+[v getShortFrom14Arry@sH sH `ui  1 a 2 31 ]
+[v getShortFrom14Arry@sL sL `ui  1 a 2 29 ]
+[v getShortFrom14Arry@outData outData `ui  1 a 2 27 ]
+[v getShortFrom14Arry@j j `ui  1 a 2 25 ]
+[v getShortFrom14Arry@i i `ui  1 a 2 23 ]
+"77
+[v getShortFrom14Arry@m m `i  1 a 2 21 ]
+"73
+[v getShortFrom14Arry@pos14 pos14 `ui  1 a 2 19 ]
+"71
+[v getShortFrom14Arry@pos16 pos16 `ui  1 p 2 8 ]
+[v getShortFrom14Arry@inArry inArry `*.39ui  1 p 2 10 ]
+"120
+} 0
+"6 C:\Program Files (x86)\Microchip\xc8\v1.38\sources\common\lwmod.c
+[v ___lwmod __lwmod `(ui  1 e 2 0 ]
+{
+"11
+[v ___lwmod@counter counter `uc  1 a 1 5 ]
+"6
+[v ___lwmod@divisor divisor `ui  1 p 2 0 ]
+[v ___lwmod@dividend dividend `ui  1 p 2 2 ]
+"26
+} 0
+"6 C:\Program Files (x86)\Microchip\xc8\v1.38\sources\common\lwdiv.c
+[v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
+{
+"11
+[v ___lwdiv@quotient quotient `ui  1 a 2 5 ]
+"12
+[v ___lwdiv@counter counter `uc  1 a 1 7 ]
+"6
+[v ___lwdiv@divisor divisor `ui  1 p 2 0 ]
+[v ___lwdiv@dividend dividend `ui  1 p 2 2 ]
+"31
+} 0
+"57 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\mcc_generated_files/memory.c
+[v _FLASH_ReadWord FLASH_ReadWord `(ui  1 e 2 0 ]
+{
+"59
+[v FLASH_ReadWord@GIEBitValue GIEBitValue `uc  1 a 1 2 ]
+"57
+[v FLASH_ReadWord@flashAddr flashAddr `ui  1 p 2 0 ]
+"72
+} 0
+"28 C:\Program Files (x86)\Microchip\xc8\v1.38\sources\common\lwtoft.c
+[v ___lwtoft __lwtoft `(f  1 e 3 0 ]
+{
+[v ___lwtoft@c c `ui  1 p 2 8 ]
 "31
 } 0
 "44 C:\Program Files (x86)\Microchip\xc8\v1.38\sources\common\fttol.c
@@ -760,7 +849,7 @@ I2C2_LOST_STATE 6
 [v ___ftpack@sign sign `uc  1 p 1 4 ]
 "86
 } 0
-"76 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\mcc_generated_files/mcc.c
+"76 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\mcc_generated_files/mcc.c
 [v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
 {
 "88
@@ -770,49 +859,49 @@ I2C2_LOST_STATE 6
 {
 "110
 } 0
-"51 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\mcc_generated_files/pin_manager.c
+"51 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\mcc_generated_files/pin_manager.c
 [v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
 {
 "93
 [v PIN_MANAGER_Initialize@state state `uc  1 a 1 0 ]
 "115
 } 0
-"90 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\mcc_generated_files/mcc.c
+"90 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\mcc_generated_files/mcc.c
 [v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
 {
 "104
 } 0
-"198 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\mcc_generated_files/i2c2.c
+"198 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\mcc_generated_files/i2c2.c
 [v _I2C2_Initialize I2C2_Initialize `(v  1 e 1 0 ]
 {
 "222
 } 0
-"85 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\mcc_generated_files/i2c1.c
+"85 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\mcc_generated_files/i2c1.c
 [v _I2C1_Initialize I2C1_Initialize `(v  1 e 1 0 ]
 {
 "106
 } 0
-"57 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\mcc_generated_files/fvr.c
+"57 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\mcc_generated_files/fvr.c
 [v _FVR_Initialize FVR_Initialize `(v  1 e 1 0 ]
 {
 "61
 } 0
-"55 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\mcc_generated_files/eusart.c
+"55 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\mcc_generated_files/eusart.c
 [v _EUSART_Initialize EUSART_Initialize `(v  1 e 1 0 ]
 {
 "74
 } 0
-"57 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\mcc_generated_files/clkref.c
+"57 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\mcc_generated_files/clkref.c
 [v _CLKREF_Initialize CLKREF_Initialize `(v  1 e 1 0 ]
 {
 "61
 } 0
-"64 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\mcc_generated_files/adc.c
+"64 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\mcc_generated_files/adc.c
 [v _ADC_Initialize ADC_Initialize `(v  1 e 1 0 ]
 {
 "83
 } 0
-"591 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\golden_eagle_i2c.c
+"591 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\golden_eagle_i2c.c
 [v _GE_set_polarity GE_set_polarity `(v  1 e 1 0 ]
 {
 "612
@@ -845,12 +934,12 @@ I2C2_LOST_STATE 6
 [v _GE_I2C2_HexWrite GE_I2C2_HexWrite `(i  1 e 2 0 ]
 {
 "15
-[v GE_I2C2_HexWrite@dataValue dataValue `[2]uc  1 a 2 50 ]
+[v GE_I2C2_HexWrite@dataValue dataValue `[2]uc  1 a 2 51 ]
 "16
-[v GE_I2C2_HexWrite@dataAddr dataAddr `[2]uc  1 a 2 48 ]
+[v GE_I2C2_HexWrite@dataAddr dataAddr `[2]uc  1 a 2 49 ]
 "12
-[v GE_I2C2_HexWrite@RegAddr RegAddr `ui  1 p 2 42 ]
-[v GE_I2C2_HexWrite@RegValue RegValue `ui  1 p 2 44 ]
+[v GE_I2C2_HexWrite@RegAddr RegAddr `ui  1 p 2 43 ]
+[v GE_I2C2_HexWrite@RegValue RegValue `ui  1 p 2 45 ]
 "13
 [v GE_I2C2_HexWrite@F7843 F7843 `[2]uc  1 s 2 F7843 ]
 "15
@@ -879,19 +968,19 @@ I2C2_LOST_STATE 6
 {
 [v GE_I2C2_ByteHLWrite@RegAddrH RegAddrH `uc  1 a 1 wreg ]
 "49
-[v GE_I2C2_ByteHLWrite@dataValue dataValue `[2]uc  1 a 2 50 ]
+[v GE_I2C2_ByteHLWrite@dataValue dataValue `[2]uc  1 a 2 51 ]
 "50
-[v GE_I2C2_ByteHLWrite@dataAddr dataAddr `[2]uc  1 a 2 48 ]
+[v GE_I2C2_ByteHLWrite@dataAddr dataAddr `[2]uc  1 a 2 49 ]
 "46
 [v GE_I2C2_ByteHLWrite@RegAddrH RegAddrH `uc  1 a 1 wreg ]
-[v GE_I2C2_ByteHLWrite@RegAddrL RegAddrL `uc  1 p 1 42 ]
-[v GE_I2C2_ByteHLWrite@RegValueH RegValueH `uc  1 p 1 43 ]
-[v GE_I2C2_ByteHLWrite@RegValueL RegValueL `uc  1 p 1 44 ]
+[v GE_I2C2_ByteHLWrite@RegAddrL RegAddrL `uc  1 p 1 43 ]
+[v GE_I2C2_ByteHLWrite@RegValueH RegValueH `uc  1 p 1 44 ]
+[v GE_I2C2_ByteHLWrite@RegValueL RegValueL `uc  1 p 1 45 ]
 "47
 [v GE_I2C2_ByteHLWrite@F7857 F7857 `[2]uc  1 s 2 F7857 ]
 "49
 [v GE_I2C2_ByteHLWrite@F7859 F7859 `[2]uc  1 s 2 F7859 ]
-[v GE_I2C2_ByteHLWrite@RegAddrH RegAddrH `uc  1 a 1 47 ]
+[v GE_I2C2_ByteHLWrite@RegAddrH RegAddrH `uc  1 a 1 48 ]
 "61
 } 0
 "80
@@ -901,17 +990,17 @@ I2C2_LOST_STATE 6
 "86
 [v GE_I2C2_ByteWrite@i i `i  1 a 2 39 ]
 "82
-[v GE_I2C2_ByteWrite@writeBuffer writeBuffer `[19]uc  1 a 19 18 ]
+[v GE_I2C2_ByteWrite@writeBuffer writeBuffer `[19]uc  1 a 19 19 ]
 "132
-[v GE_I2C2_ByteWrite@status status `E7669  1 a 1 41 ]
+[v GE_I2C2_ByteWrite@status status `E7669  1 a 1 42 ]
 "83
-[v GE_I2C2_ByteWrite@buflen buflen `uc  1 a 1 37 ]
+[v GE_I2C2_ByteWrite@buflen buflen `uc  1 a 1 38 ]
 "80
 [v GE_I2C2_ByteWrite@dataAddress dataAddress `*.4uc  1 a 1 wreg ]
-[v GE_I2C2_ByteWrite@data2Byte data2Byte `*.4uc  1 p 1 14 ]
-[v GE_I2C2_ByteWrite@addlen addlen `uc  1 p 1 15 ]
+[v GE_I2C2_ByteWrite@data2Byte data2Byte `*.4uc  1 p 1 15 ]
+[v GE_I2C2_ByteWrite@addlen addlen `uc  1 p 1 16 ]
 "86
-[v GE_I2C2_ByteWrite@dataAddress dataAddress `*.4uc  1 a 1 38 ]
+[v GE_I2C2_ByteWrite@dataAddress dataAddress `*.4uc  1 a 1 41 ]
 "161
 } 0
 "62
@@ -950,7 +1039,59 @@ I2C2_LOST_STATE 6
 [v GE_I2C2_ByteRead@dataAddress dataAddress `*.4uc  1 a 1 48 ]
 "258
 } 0
-"619 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\mcc_generated_files/i2c2.c
+"43 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\uart_top.c
+[v _uart_send_hex uart_send_hex `(v  1 e 1 0 ]
+{
+[v uart_send_hex@hexValue hexValue `uc  1 a 1 wreg ]
+"45
+[v uart_send_hex@hexH hexH `uc  1 a 1 14 ]
+"46
+[v uart_send_hex@hexL hexL `uc  1 a 1 13 ]
+"43
+[v uart_send_hex@hexValue hexValue `uc  1 a 1 wreg ]
+"48
+[v uart_send_hex@hexValue hexValue `uc  1 a 1 12 ]
+"56
+} 0
+"6 C:\Program Files (x86)\Microchip\xc8\v1.38\sources\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+{
+"11
+[v ___awdiv@quotient quotient `i  1 a 2 7 ]
+"12
+[v ___awdiv@sign sign `uc  1 a 1 6 ]
+[v ___awdiv@counter counter `uc  1 a 1 5 ]
+"6
+[v ___awdiv@divisor divisor `i  1 p 2 0 ]
+[v ___awdiv@dividend dividend `i  1 p 2 2 ]
+"42
+} 0
+"97 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\mcc_generated_files/eusart.c
+[v _EUSART_Write EUSART_Write `(v  1 e 1 0 ]
+{
+[v EUSART_Write@txData txData `uc  1 a 1 wreg ]
+[v EUSART_Write@txData txData `uc  1 a 1 wreg ]
+[v EUSART_Write@txData txData `uc  1 a 1 0 ]
+"104
+} 0
+"7 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\uart_top.c
+[v _uart_send_char uart_send_char `(v  1 e 1 0 ]
+{
+"9
+[v uart_send_char@temp_ptr temp_ptr `*.25uc  1 a 2 3 ]
+"7
+[v uart_send_char@buffer buffer `*.25uc  1 p 2 0 ]
+"20
+} 0
+"22
+[v _uart_send_byte uart_send_byte `(v  1 e 1 0 ]
+{
+[v uart_send_byte@temp temp `uc  1 a 1 wreg ]
+[v uart_send_byte@temp temp `uc  1 a 1 wreg ]
+[v uart_send_byte@temp temp `uc  1 a 1 0 ]
+"30
+} 0
+"619 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\mcc_generated_files/i2c2.c
 [v _I2C2_MasterRead I2C2_MasterRead `(v  1 e 1 0 ]
 {
 "620
@@ -984,7 +1125,7 @@ I2C2_LOST_STATE 6
 [v I2C2_MasterReadTRBBuild@ptrb ptrb `*.5S19  1 a 1 7 ]
 "705
 } 0
-"163 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\golden_eagle_i2c.c
+"163 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\golden_eagle_i2c.c
 [v _GE_I2C2_AddrWrite GE_I2C2_AddrWrite `(i  1 e 2 0 ]
 {
 [v GE_I2C2_AddrWrite@dataAddress dataAddress `*.4uc  1 a 1 wreg ]
@@ -1003,7 +1144,7 @@ I2C2_LOST_STATE 6
 [v GE_I2C2_AddrWrite@dataAddress dataAddress `*.4uc  1 a 1 38 ]
 "206
 } 0
-"598 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\mcc_generated_files/i2c2.c
+"598 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\mcc_generated_files/i2c2.c
 [v _I2C2_MasterWrite I2C2_MasterWrite `(v  1 e 1 0 ]
 {
 "599
@@ -1055,7 +1196,7 @@ I2C2_LOST_STATE 6
 [v I2C2_MasterTRBInsert@count count `uc  1 a 1 3 ]
 "692
 } 0
-"85 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\mcc_generated_files/adc.c
+"85 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\mcc_generated_files/adc.c
 [v _ADC_StartConversion ADC_StartConversion `(v  1 e 1 0 ]
 {
 [v ADC_StartConversion@channel channel `E7651  1 a 1 wreg ]
@@ -1074,12 +1215,12 @@ I2C2_LOST_STATE 6
 {
 "108
 } 0
-"51 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\mcc_generated_files/interrupt_manager.c
+"51 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\mcc_generated_files/interrupt_manager.c
 [v _INTERRUPT_InterruptManager INTERRUPT_InterruptManager `II(v  1 e 1 0 ]
 {
 "70
 } 0
-"233 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\mcc_generated_files/i2c2.c
+"233 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\mcc_generated_files/i2c2.c
 [v _I2C2_ISR I2C2_ISR `(v  1 e 1 0 ]
 {
 "236
@@ -1111,7 +1252,7 @@ I2C2_LOST_STATE 6
 {
 "731
 } 0
-"108 D:\WorkSpace\MyCode\git\PIC_fit_100g_10m\16F18346_I2C2_1.X\mcc_generated_files/i2c1.c
+"108 D:\WorkSpace\MyCode\git\PIC\16F18346_I2C2_1.X\mcc_generated_files/i2c1.c
 [v _I2C1_ISR I2C1_ISR `(v  1 e 1 0 ]
 {
 "110
