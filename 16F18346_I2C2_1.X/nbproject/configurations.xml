@@ -96,7 +96,7 @@
       </makeCustomizationType>
       <HI-TECH-COMP>
         <property key="asmlist" value="true"/>
-        <property key="define-macros" value="STRESSTEST=0;DYCALCC=1;FIT_VERSION"/>
+        <property key="define-macros" value="STRESSTEST=0;DYCALCC=1;TENGTEK_VERSION"/>
         <property key="extra-include-directories" value=""/>
         <property key="identifier-length" value="255"/>
         <property key="operation-mode" value="free"/>
@@ -193,9 +193,9 @@
         <property key="programoptions.pgmspeed" value="2"/>
         <property key="programoptions.preservedataflash" value="false"/>
         <property key="programoptions.preserveeeprom" value="false"/>
-        <property key="programoptions.preserveprogramrange" value="false"/>
+        <property key="programoptions.preserveprogramrange" value="true"/>
         <property key="programoptions.preserveprogramrange.end" value="0x3fff"/>
-        <property key="programoptions.preserveprogramrange.start" value="0x0"/>
+        <property key="programoptions.preserveprogramrange.start" value="0x3000"/>
         <property key="programoptions.preserveuserid" value="false"/>
         <property key="programoptions.programcalmem" value="false"/>
         <property key="programoptions.programuserotp" value="false"/>
