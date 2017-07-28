@@ -1,7 +1,7 @@
 
 
-Microchip Technology PIC Macro Assembler V1.42 build -159332390 
-                                                                                                           Wed Jul 19 14:11:03 2017
+Microchip Technology PIC Macro Assembler V1.38 build -256452561 
+                                                                                                           Fri Jul 28 16:19:32 2017
 
 
      1                           	processor	16LF18346
@@ -72,7 +72,7 @@ Microchip Technology PIC Macro Assembler V1.42 build -159332390
     66  202A  0008               	return
 
 
-Microchip Technology PIC Macro Assembler V1.42 build -159332390 
-Symbol Table                                                                                               Wed Jul 19 14:11:03 2017
+Microchip Technology PIC Macro Assembler V1.38 build -256452561 
+Symbol Table                                                                                               Fri Jul 28 16:19:32 2017
 
                    _fw_content_T 2026  
