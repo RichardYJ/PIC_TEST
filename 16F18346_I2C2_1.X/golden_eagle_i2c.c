@@ -361,7 +361,7 @@ inline static void GE_I2C2_bitset(uint16_t addr, uint16_t new_value, int lbit, i
 }
 
 
-#if 0	
+#if 1	
 void GE_reload_default(void)
 {
     int i=0;
