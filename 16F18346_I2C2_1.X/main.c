@@ -1466,8 +1466,12 @@ void main(void)
 
     // Disable the Peripheral Interrupts
     //INTERRUPT_PeripheralInterruptDisable();
-
-
+    
+    {   //wdt
+    CLRWDT();   
+    //STATUSbits.nTO      //STATUSbits.nPD  //
+    //CONFIG2
+    }
     INTERRUPT_GlobalInterruptEnable();
 
     // Enable the Peripheral Interrupts
@@ -1770,6 +1774,7 @@ void main(void)
 
     while (1)
     {
+        CLRWDT(); 
 		if( EEPROM_Buffer[78] == 2 )                //write  xxxxxx11;2
         {
             GE_I2C2_ByteHLWrite( EEPROM_Buffer[74], EEPROM_Buffer[75], EEPROM_Buffer[76], EEPROM_Buffer[77] ) ;

@@ -55,7 +55,7 @@
 // CONFIG2
 #pragma config MCLRE = ON    // Master Clear Enable bit->MCLR/VPP pin function is MCLR; Weak pull-up enabled
 #pragma config PWRTE = OFF    // Power-up Timer Enable bit->PWRT disabled
-#pragma config WDTE = OFF    // Watchdog Timer Enable bits->WDT disabled; SWDTEN is ignored
+#pragma config WDTE = SWDTEN    // Watchdog Timer Enable bits->WDT disabled; SWDTEN is ignored
 #pragma config LPBOREN = OFF    // Low-power BOR enable bit->ULPBOR disabled
 #pragma config BOREN = OFF    // Brown-out Reset Enable bits->Brown-out Reset disabled
 #pragma config BORV = LOW    // Brown-out Reset Voltage selection bit->Brown-out voltage (Vbor) set to 2.45V
@@ -106,7 +106,8 @@ void OSCILLATOR_Initialize(void)
 void WDT_Initialize(void)
 {
     // WDTPS 1:65536; SWDTEN OFF; 
-    WDTCON = 0x20;
+    //WDTCON = 0x20;
+    WDTCON = 0xc<<1|1;
 }
 
 /**
