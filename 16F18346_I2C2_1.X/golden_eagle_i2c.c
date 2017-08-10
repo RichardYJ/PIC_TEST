@@ -8,6 +8,9 @@
 
 uint8_t timeOut = 0;
 
+#ifdef I2C2_DEBUG
+extern uint32_t State_Dbg_flag[2] ;
+#endif
 
 int GE_I2C2_HexWrite(uint16_t RegAddr, uint16_t RegValue)
 {
@@ -81,7 +84,9 @@ int GE_I2C2_ByteWrite(uint8_t *dataAddress, uint8_t *data2Byte, uint8_t addlen)
 {
    uint8_t writeBuffer[PAGE_LIMIT+3];
    uint8_t buflen;
-  
+#ifdef I2C2_DEBUG
+  uart_send_char("1");
+#endif
    //Copy address bytes to the write buffer so it can be sent first 
     for(int i = 0; i < addlen; i++)
     {
@@ -124,7 +129,9 @@ int GE_I2C2_ByteWrite(uint8_t *dataAddress, uint8_t *data2Byte, uint8_t addlen)
 #endif
 #endif
      }        
-    
+#ifdef I2C2_DEBUG
+  uart_send_char("2");
+#endif    
    //else
       // buflen = addlen;
    
@@ -137,24 +144,71 @@ int GE_I2C2_ByteWrite(uint8_t *dataAddress, uint8_t *data2Byte, uint8_t addlen)
     //While the message has not failed...
     while(status != I2C2_MESSAGE_FAIL)
     {
+        #ifdef I2C2_DEBUG
+        uart_send_char("3");
+        #endif
         // Initiate a write to EEPROM
             I2C2_MasterWrite(writeBuffer,buflen,SLAVE_ADDRESS,&status);
-
+        #ifdef I2C2_DEBUG
+        uart_send_char("4\r\n");
+        #endif
         // wait for the message to be sent or status has changed.
-            while(status == I2C2_MESSAGE_PENDING);
+            while
+            //if    
+                (status == I2C2_MESSAGE_PENDING)
+		{
+        #ifdef I2C2_DEBUG
+                uart_send_char("I2C2_MESSAGE_PENDING,machine state: ");
+                uart_send_dec(State_Dbg_flag[0]);
+                uart_send_char("\r\n");
+        
+                uart_send_char("S_MASTER_SEND_DATA:");
+                uart_send_dec(State_Dbg_flag[1]);
+                uart_send_char("\r\n");   
+        #endif
+            	}
+        #ifdef I2C2_DEBUG
+        uart_send_char("5");
+        #endif
        // if transfer is complete, break the loop
             if (status == I2C2_MESSAGE_COMPLETE)
                 break;
+        #ifdef I2C2_DEBUG
+        uart_send_char("6");
+        #endif
                 // if transfer fails, break the loop
             if (status == I2C2_MESSAGE_FAIL)
                 break;
+        #ifdef I2C2_DEBUG
+        uart_send_char("7");
+        #endif
         //Max retry is set for max Ack polling. If the Acknowledge bit is not set, this will just loop again until the write command is acknowledged
             if (timeOut == MAX_RETRY)
                 break;
             else
+            {
                 timeOut++;
+        #ifdef I2C2_DEBUG
+                uart_send_char("timeOut,machine state:");
+                uart_send_dec(State_Dbg_flag[0]);
+                uart_send_char("\r\n");
+                
+                uart_send_char("status:");
+                uart_send_dec(status);
+                uart_send_char("\r\n");
+                
+                uart_send_char("S_MASTER_SEND_DATA:");
+                uart_send_dec(State_Dbg_flag[1]);
+                uart_send_char("\r\n");
+        #endif                
+            }
+        #ifdef I2C2_DEBUG
+        uart_send_char("8");
+        #endif
     }
-    
+#ifdef I2C2_DEBUG
+  uart_send_char("9");
+#endif    
                 // if the transfer failed, stop at this point
                 if (status == I2C2_MESSAGE_FAIL)
                 return 1;
@@ -361,7 +415,7 @@ inline static void GE_I2C2_bitset(uint16_t addr, uint16_t new_value, int lbit, i
 }
 
 
-#if 1	
+#if 0	
 void GE_reload_default(void)
 {
     int i=0;

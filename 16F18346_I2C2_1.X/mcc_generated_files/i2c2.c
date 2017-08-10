@@ -188,8 +188,9 @@ static uint8_t                                 i2c2_trb_count = 0;
 
 static I2C2_TRANSACTION_REQUEST_BLOCK       *p_i2c2_trb_current = NULL;
 static I2C_TR_QUEUE_ENTRY                  *p_i2c2_current = NULL;
-
-
+#ifdef I2C2_DEBUG
+uint32_t State_Dbg_flag[2] = {127,127};
+#endif
 /**
   Section: Driver Interface
 */
@@ -251,7 +252,9 @@ void I2C2_ISR ( void )
 
         // reset the buffer pointer
         p_i2c2_current = NULL;
-
+#ifdef I2C2_DEBUG        
+	*State_Dbg_flag = 0;
+#endif    
         return;
     }
 
@@ -293,7 +296,9 @@ void I2C2_ISR ( void )
                 // start the i2c request
                 i2c2_state = S_MASTER_SEND_ADDR;
             }
-
+#ifdef I2C2_DEBUG            
+	*State_Dbg_flag = 1;
+#endif    
             break;
 
         case S_MASTER_RESTART:
@@ -305,7 +310,9 @@ void I2C2_ISR ( void )
 
             // start the i2c request
             i2c2_state = S_MASTER_SEND_ADDR;
-
+#ifdef I2C2_DEBUG            
+	*State_Dbg_flag = 2;
+#endif
             break;
 
         case S_MASTER_SEND_ADDR_10BIT_LSB:
@@ -333,7 +340,9 @@ void I2C2_ISR ( void )
                     i2c2_state = S_MASTER_SEND_DATA;
                 }
             }
-
+#ifdef I2C2_DEBUG            
+	*State_Dbg_flag = 3;
+#endif    
             break;
 
         case S_MASTER_10BIT_RESTART:
@@ -362,7 +371,9 @@ void I2C2_ISR ( void )
                 // Resend the address as a read
                 i2c2_state = S_MASTER_SEND_ADDR;
             }
-
+#ifdef I2C2_DEBUG            
+	*State_Dbg_flag = 4;
+#endif    
             break;
 
         case S_MASTER_SEND_ADDR:
@@ -421,6 +432,9 @@ void I2C2_ISR ( void )
                     i2c2_state = S_MASTER_SEND_DATA;
                 }
             }
+#ifdef I2C2_DEBUG            
+	*State_Dbg_flag = 5;
+#endif    
             break;
 
         case S_MASTER_SEND_DATA:
@@ -436,7 +450,9 @@ void I2C2_ISR ( void )
 
                 // Send a stop flag and go back to idle
                 I2C2_Stop(I2C2_DATA_NO_ACK);
-
+#ifdef I2C2_DEBUG                
+		*(State_Dbg_flag+1)=1;
+#endif        
             }
             else
             {
@@ -473,7 +489,13 @@ void I2C2_ISR ( void )
                     // Grab the next data to transmit
                     I2C2_TRANSMIT_REG = *pi2c_buf_ptr++;
                 }
+#ifdef I2C2_DEBUG                
+		*(State_Dbg_flag+1)=2;
+#endif        
             }
+#ifdef I2C2_DEBUG
+        *State_Dbg_flag = 6;			
+#endif            
             break;
 
         case S_MASTER_ACK_ADDR:
@@ -496,6 +518,9 @@ void I2C2_ISR ( void )
                 I2C2_RECEIVE_ENABLE_BIT = 1;
                 i2c2_state = S_MASTER_ACK_RCV_DATA;
             }
+#ifdef I2C2_DEBUG            
+	*State_Dbg_flag = 7;
+#endif    
             break;
 
         case S_MASTER_RCV_DATA:
@@ -507,7 +532,9 @@ void I2C2_ISR ( void )
 
             // Set up to receive a byte of data
             I2C2_RECEIVE_ENABLE_BIT = 1;
-
+#ifdef I2C2_DEBUG            
+	*State_Dbg_flag = 8;
+#endif    
             break;
 
         case S_MASTER_ACK_RCV_DATA:
@@ -540,6 +567,9 @@ void I2C2_ISR ( void )
 
             // Initiate the acknowledge
             I2C2_ACKNOWLEDGE_ENABLE_BIT = 1;
+#ifdef I2C2_DEBUG            
+	*State_Dbg_flag = 9;
+#endif    
             break;
 
         case S_MASTER_RCV_STOP:                
@@ -547,6 +577,9 @@ void I2C2_ISR ( void )
 
             // Send the stop flag
             I2C2_Stop(I2C2_MESSAGE_COMPLETE);
+#ifdef I2C2_DEBUG            
+	*State_Dbg_flag = 10;
+#endif    
             break;
 
         default:
@@ -555,6 +588,9 @@ void I2C2_ISR ( void )
             // terminate the transfer
             i2c2_object.i2cErrors++;
             I2C2_Stop(I2C2_LOST_STATE);
+#ifdef I2C2_DEBUG            
+	*State_Dbg_flag = 11;
+#endif    
             break;
 
     }

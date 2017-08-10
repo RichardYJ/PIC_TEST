@@ -66,7 +66,7 @@
 //G100_6M           
 
 #define DYCALCC 1
-#define FLASHREAD 1
+//#define FLASHREAD 1
 #define FLASHSTART 0x3000	//0x269a  LEN:0D87
 
 #ifdef FLASHREAD
@@ -1778,7 +1778,19 @@ void main(void)
         else if( EEPROM_Buffer[78] == 1 )           //read   xxxxxx01;1
         {
             uint16_t rValue;
+            #if MY_PRINTF_EN == 1
+            uart_send_char("\r\n");
+            uart_send_char("zhuanfa 0x");
+            uart_send_hex(EEPROM_Buffer[74]);
+            uart_send_hex(EEPROM_Buffer[75]);                    
+            uart_send_char("\r\n");
+            #endif                    
             rValue = GE_I2C2_ByteHLRead( EEPROM_Buffer[74], EEPROM_Buffer[75] ) ;
+            #if MY_PRINTF_EN == 1         
+            uart_send_char("read: ");            
+            uart_send_hex16(rValue);//tH);//
+            uart_send_char("\r\n");
+            #endif
             EEPROM_Buffer[76] = rValue >> 8 ;
             EEPROM_Buffer[77] = rValue & 0x00ff ;
             EEPROM_Buffer[78] = 0 ;    //complete
