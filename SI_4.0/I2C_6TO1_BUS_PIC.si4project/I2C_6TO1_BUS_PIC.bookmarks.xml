@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceInsightBookmarks
+	AppVer="4.00.0086"
+	AppVerMinReader="4.00.0009"
+	>
+	<Bookmarks>
+		<Mark
+			Name="1372600865225092807102"
+			Comment=""
+			File="SFP\mcc_generated_files\i2c2.c"
+			Line="405"
+			Column="28"
+			Symbol="I2C2_ISR"
+			SymbolInstance="0"
+			SymbolType="Function"
+			LineOffset="173"
+			/>
+	</Bookmarks>
+</SourceInsightBookmarks>
