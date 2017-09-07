@@ -20,7 +20,7 @@ extern "C" {
 #define T uint16_t
 #define ONE ((T)1)
 
-#define MY_PRINTF_EN 1
+#define MY_PRINTF_EN 0
 
 void GE_abRs_reset(void);
 int GE_I2C2_ByteWrite(uint8_t *dataAddress, uint8_t *data2Byte, uint8_t addlen);

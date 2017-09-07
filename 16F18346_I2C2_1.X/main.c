@@ -1795,10 +1795,10 @@ void main(void)
             EEPROM_Buffer[77] = rValue & 0x00ff ;
             EEPROM_Buffer[78] = 0 ;    //complete
         }
-/*        x++;
-        if(x > 10)
+        x++;
+        if(x > 30000)	//history:	x>10 
         {
-            i++;
+  /*          i++;
             if(i > 30000)    
             {
             */ 
@@ -1843,9 +1843,9 @@ void main(void)
                 }
 /*               i = 0;
             }
-        x=0;
+*/        x=0;
         }
-*/  
+  
 
 
 #if 0
