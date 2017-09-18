@@ -1,0 +1,9 @@
+---- 980D Matches (5 in 5 files) ----
+16F18346_I2C2_25G78125_2017.X.production.lst (dist\default\production) line 13090 :  13079                           ;main.c: 765: uint16_t FW_regAddr_base[3] = {0x9f00,0x980D,0x9814};
+16F18346_I2C2_25G78125_2017.X.production.rlf (dist\default\production) line 13450 :  13079                           ;main.c: 765: uint16_t FW_regAddr_base[3] = {0x9f00,0x980D,0x9814};
+main in main.c :     uint16_t FW_regAddr_base[3] = {0x9f00,0x980D,0x9814};
+main.p1 (build\default\production) line 15479 : [; ;main.c: 765: uint16_t FW_regAddr_base[3] = {0x9f00,0x980D,0x9814};
+main.pre (build\default\production) line 10634 : uint16_t FW_regAddr_base[3] = {0x9f00,0x980D,0x9814};
+---- 980D Search Errors Encountered (1) ----
+The following 1 files could not be processed:
+D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\dist\default\production\16F18346_I2C2_25G78125_2017.X.production.obj : File could not be opened.

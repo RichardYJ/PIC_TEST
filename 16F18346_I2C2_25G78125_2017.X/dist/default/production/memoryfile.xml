@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <executable name="dist/default/production\16F18346_I2C2_25G78125_2017.X.production.hex">
+    <memory name="program">
+      <units>words</units>
+      <length>16384</length>
+      <used>12252</used>
+      <free>4132</free>
+    </memory>
+    <memory name="data">
+      <units>bytes</units>
+      <length>2048</length>
+      <used>459</used>
+      <free>1589</free>
+    </memory>
+  </executable>
+</project>
