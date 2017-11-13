@@ -3,7 +3,7 @@
 [d edition pro ]
 [d chip 16LF18346 ]
 [d frameptr 6 ]
-"184 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/i2c2.c
+"184 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/i2c2.c
 [e E7648 . `uc
 I2C2_MESSAGE_COMPLETE 0
 I2C2_MESSAGE_FAIL 1
@@ -28,26 +28,26 @@ S_MASTER_NOACK_STOP 9
 S_MASTER_SEND_ADDR_10BIT_LSB 10
 S_MASTER_10BIT_RESTART 11
 ]
-"119 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/i2c1.c
+"380 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/i2c1.c
 [e E7648 . `uc
 I2C1_SLAVE_WRITE_REQUEST 0
 I2C1_SLAVE_READ_REQUEST 1
 I2C1_SLAVE_WRITE_COMPLETED 2
 I2C1_SLAVE_READ_COMPLETED 3
 ]
-"432
+"435
 [e E7659 . `uc
 SLAVE_NORMAL_DATA 0
 SLAVE_DATA_ADDRESS 1
 ]
-"86 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/adc.c
+"86 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/adc.c
 [e E7651 . `uc
 channel_AVSS 60
 channel_Temp 61
 channel_DAC1 62
 channel_FVR 63
 ]
-"73 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\eeprom_i2c.c
+"73 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\eeprom_i2c.c
 [e E7688 . `uc
 I2C2_MESSAGE_COMPLETE 0
 I2C2_MESSAGE_FAIL 1
@@ -57,7 +57,7 @@ I2C2_MESSAGE_ADDRESS_NO_ACK 4
 I2C2_DATA_NO_ACK 5
 I2C2_LOST_STATE 6
 ]
-"115 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\golden_eagle_i2c.c
+"115 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\golden_eagle_i2c.c
 [e E7688 . `uc
 I2C2_MESSAGE_COMPLETE 0
 I2C2_MESSAGE_FAIL 1
@@ -81,14 +81,16 @@ I2C2_LOST_STATE 6
 [v _eecpymem eecpymem `(v  1 e 1 0 ]
 "39
 [v _memcpyee memcpyee `(v  1 e 1 0 ]
-"52 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\eeprom_i2c.c
+"52 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\eeprom_i2c.c
 [v _I2C2_ByteWrite I2C2_ByteWrite `(i  1 e 2 0 ]
-"12 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\golden_eagle_i2c.c
+"12 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\golden_eagle_i2c.c
 [v _GE_I2C2_HexWrite GE_I2C2_HexWrite `(i  1 e 2 0 ]
 "28
 [v _GE_I2C2_HexRead GE_I2C2_HexRead `(ui  1 e 2 0 ]
 "46
 [v _GE_I2C2_ByteHLWrite GE_I2C2_ByteHLWrite `(i  1 e 2 0 ]
+"62
+[v _GE_I2C2_ByteHLRead GE_I2C2_ByteHLRead `(ui  1 e 2 0 ]
 "80
 [v _GE_I2C2_ByteWrite GE_I2C2_ByteWrite `(i  1 e 2 0 ]
 "146
@@ -103,25 +105,27 @@ I2C2_LOST_STATE 6
 [v _GE_reload_default GE_reload_default `(v  1 e 1 0 ]
 "547
 [v _get_int32 get_int32 `(l  1 e 4 0 ]
-"702 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\main.c
+"579
+[v _GE_set_polarity GE_set_polarity `(v  1 e 1 0 ]
+"793 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\main.c
 [v _main main `(v  1 e 1 0 ]
-"64 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/adc.c
+"64 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/adc.c
 [v _ADC_Initialize ADC_Initialize `(v  1 e 1 0 ]
-"57 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/clkref.c
+"57 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/clkref.c
 [v _CLKREF_Initialize CLKREF_Initialize `(v  1 e 1 0 ]
-"55 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/eusart.c
+"55 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/eusart.c
 [v _EUSART_Initialize EUSART_Initialize `(v  1 e 1 0 ]
 "97
 [v _EUSART_Write EUSART_Write `(v  1 e 1 0 ]
-"57 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/fvr.c
+"57 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/fvr.c
 [v _FVR_Initialize FVR_Initialize `(v  1 e 1 0 ]
-"81 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/i2c1.c
+"342 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/i2c1.c
 [v _I2C1_Initialize I2C1_Initialize `(v  1 e 1 0 ]
-"104
+"365
 [v _I2C1_ISR I2C1_ISR `(v  1 e 1 0 ]
-"168
+"429
 [v _I2C1_StatusCallback I2C1_StatusCallback `(v  1 e 1 0 ]
-"198 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/i2c2.c
+"198 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/i2c2.c
 [v _I2C2_Initialize I2C2_Initialize `(v  1 e 1 0 ]
 "233
 [v _I2C2_ISR I2C2_ISR `(v  1 e 1 0 ]
@@ -141,26 +145,24 @@ I2C2_LOST_STATE 6
 [v _I2C2_MasterWriteTRBBuild I2C2_MasterWriteTRBBuild `(v  1 e 1 0 ]
 "728
 [v _I2C2_BusCollisionISR I2C2_BusCollisionISR `(v  1 e 1 0 ]
-"51 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/interrupt_manager.c
+"51 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/interrupt_manager.c
 [v _INTERRUPT_InterruptManager INTERRUPT_InterruptManager `II(v  1 e 1 0 ]
-"76 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/mcc.c
+"76 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/mcc.c
 [v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
 "89
 [v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
-"60 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/memory.c
+"60 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/memory.c
 [v _FLASH_ReadWord FLASH_ReadWord `(ui  1 e 2 0 ]
 "96
 [v _FLASH_WriteBlock FLASH_WriteBlock `(c  1 e 1 0 ]
 "151
 [v _FLASH_EraseBlock FLASH_EraseBlock `(v  1 e 1 0 ]
-"50 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/pin_manager.c
+"50 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/pin_manager.c
 [v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
-"6 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\uart_top.c
+"6 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\uart_top.c
 [v _uart_send_char uart_send_char `(v  1 e 1 0 ]
 "16
 [v _uart_send_byte uart_send_byte `(v  1 e 1 0 ]
-"33
-[v _uart_send_hex uart_send_hex `(v  1 e 1 0 ]
 [s S640 . 1 `uc 1 INTEDG 1 0 :1:0 
 `uc 1 . 1 0 :5:1 
 `uc 1 PEIE 1 0 :1:6 
@@ -547,16 +549,18 @@ I2C2_LOST_STATE 6
 [v _RC4PPSbits RC4PPSbits `VES482  1 e 1 @3748 ]
 "19345
 [v _GIE GIE `VEb  1 e 0 @95 ]
-"10 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\golden_eagle_i2c.c
+"10 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\golden_eagle_i2c.c
 [v _timeOut timeOut `uc  1 e 1 0 ]
-"63 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\main.c
+"63 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\main.c
 [v _fw_content fw_content `DCC[5500]uc  1 e 5500 0 ]
 "411
-[v _script_content script_content `DCC[1152]uc  1 e 1152 0 ]
-"62 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/i2c1.c
+[v _script_content script_content `DCC[344]uc  1 e 344 0 ]
+"62 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/i2c1.c
 [v _I2C1_slaveWriteData I2C1_slaveWriteData `VEuc  1 e 1 0 ]
+"64
+[v _EEPROM_Buffer EEPROM_Buffer `[256]uc  1 e 256 @9968 ]
 [s S19 . 5 `ui 1 address 2 0 `uc 1 length 1 2 `*.39uc 1 pbuffer 2 3 ]
-"184 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/i2c2.c
+"184 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/i2c2.c
 [s S31 . 3 `uc 1 count 1 0 `*.5S19 1 ptrb_list 1 1 `*.4E7648 1 pTrFlag 1 2 ]
 [v _i2c2_tr_queue i2c2_tr_queue `[1]S31  1 s 3 i2c2_tr_queue ]
 "185
@@ -575,46 +579,57 @@ I2C2_LOST_STATE 6
 [v _p_i2c2_trb_current p_i2c2_trb_current `*.5S19  1 s 1 p_i2c2_trb_current ]
 "190
 [v _p_i2c2_current p_i2c2_current `*.4S31  1 s 1 p_i2c2_current ]
-"702 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\main.c
+"793 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"765
+"1036
+[v main@rValue rValue `ui  1 a 2 61 ]
+"856
 [v main@FW_regAddr_base FW_regAddr_base `[3]ui  1 a 6 15 ]
-"759
+"850
 [v main@startAddr startAddr `ul  1 a 4 55 ]
-"757
+"848
 [v main@len len `ul  1 a 4 51 ]
-"768
+"859
 [v main@checktime checktime `ul  1 a 4 37 ]
-"763
+"854
 [v main@checkSum checkSum `l  1 a 4 33 ]
-"762
+"853
 [v main@ramAddr ramAddr `ul  1 a 4 29 ]
-"758
+"849
 [v main@enterPoint enterPoint `ul  1 a 4 25 ]
-"756
+"847
 [v main@counter counter `ul  1 a 4 21 ]
-"766
-[v main@i i `i  1 a 2 63 ]
-"752
-[v main@b_data b_data `*.25DCCi  1 a 2 61 ]
-"782
+"857
+[v main@i i `i  1 a 2 65 ]
+"843
+[v main@b_data b_data `*.25DCCi  1 a 2 63 ]
+"877
 [v main@len_script len_script `i  1 a 2 59 ]
-"773
+"864
 [v main@TotalError TotalError `ui  1 a 2 49 ]
-"771
+"862
 [v main@RdCheck RdCheck `ui  1 a 2 47 ]
-"767
+"858
 [v main@section section `i  1 a 2 45 ]
-"761
+"852
 [v main@dataAddr dataAddr `ui  1 a 2 43 ]
-"724
+"815
 [v main@r r `i  1 a 2 41 ]
-"763
+"854
 [v main@F7868 F7868 `[3]ui  1 s 6 F7868 ]
-"933
+"1057
 } 0
-"547 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\golden_eagle_i2c.c
+"6 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\uart_top.c
+[v _uart_send_char uart_send_char `(v  1 e 1 0 ]
+{
+"8
+[v uart_send_char@temp_ptr temp_ptr `*.25uc  1 a 2 3 ]
+"6
+[v uart_send_char@buffer buffer `*.25uc  1 p 2 0 ]
+"14
+} 0
+"547 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\golden_eagle_i2c.c
 [v _get_int32 get_int32 `(l  1 e 4 0 ]
 {
 "549
@@ -637,54 +652,59 @@ I2C2_LOST_STATE 6
 [v ___lldiv@dividend dividend `ul  1 p 4 4 ]
 "31
 } 0
-"76 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/mcc.c
+"76 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/mcc.c
 [v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
 {
 "87
 } 0
-"50 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/pin_manager.c
+"50 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/pin_manager.c
 [v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
 {
 "68
 [v PIN_MANAGER_Initialize@state state `uc  1 a 1 0 ]
 "91
 } 0
-"89 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/mcc.c
+"89 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/mcc.c
 [v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
 {
 "103
 } 0
-"198 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/i2c2.c
+"198 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/i2c2.c
 [v _I2C2_Initialize I2C2_Initialize `(v  1 e 1 0 ]
 {
 "222
 } 0
-"81 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/i2c1.c
+"342 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/i2c1.c
 [v _I2C1_Initialize I2C1_Initialize `(v  1 e 1 0 ]
 {
-"102
+"363
 } 0
-"57 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/fvr.c
+"57 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/fvr.c
 [v _FVR_Initialize FVR_Initialize `(v  1 e 1 0 ]
 {
 "61
 } 0
-"55 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/eusart.c
+"55 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/eusart.c
 [v _EUSART_Initialize EUSART_Initialize `(v  1 e 1 0 ]
 {
 "74
 } 0
-"57 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/clkref.c
+"57 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/clkref.c
 [v _CLKREF_Initialize CLKREF_Initialize `(v  1 e 1 0 ]
 {
 "61
 } 0
-"64 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/adc.c
+"64 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/adc.c
 [v _ADC_Initialize ADC_Initialize `(v  1 e 1 0 ]
 {
 "83
 } 0
-"347 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\golden_eagle_i2c.c
+"579 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\golden_eagle_i2c.c
+[v _GE_set_polarity GE_set_polarity `(v  1 e 1 0 ]
+{
+"599
+} 0
+"347
 [v _GE_reload_default GE_reload_default `(v  1 e 1 0 ]
 {
 "349
@@ -719,12 +739,12 @@ I2C2_LOST_STATE 6
 [v _GE_I2C2_HexWrite GE_I2C2_HexWrite `(i  1 e 2 0 ]
 {
 "15
-[v GE_I2C2_HexWrite@dataValue dataValue `[2]uc  1 a 2 51 ]
+[v GE_I2C2_HexWrite@dataValue dataValue `[2]uc  1 a 2 50 ]
 "16
-[v GE_I2C2_HexWrite@dataAddr dataAddr `[2]uc  1 a 2 49 ]
+[v GE_I2C2_HexWrite@dataAddr dataAddr `[2]uc  1 a 2 48 ]
 "12
-[v GE_I2C2_HexWrite@RegAddr RegAddr `ui  1 p 2 43 ]
-[v GE_I2C2_HexWrite@RegValue RegValue `ui  1 p 2 45 ]
+[v GE_I2C2_HexWrite@RegAddr RegAddr `ui  1 p 2 42 ]
+[v GE_I2C2_HexWrite@RegValue RegValue `ui  1 p 2 44 ]
 "13
 [v GE_I2C2_HexWrite@F7834 F7834 `[2]uc  1 s 2 F7834 ]
 "15
@@ -748,6 +768,66 @@ I2C2_LOST_STATE 6
 [v GE_I2C2_HexRead@F7842 F7842 `[2]uc  1 s 2 F7842 ]
 "44
 } 0
+"46
+[v _GE_I2C2_ByteHLWrite GE_I2C2_ByteHLWrite `(i  1 e 2 0 ]
+{
+[v GE_I2C2_ByteHLWrite@RegAddrH RegAddrH `uc  1 a 1 wreg ]
+"49
+[v GE_I2C2_ByteHLWrite@dataValue dataValue `[2]uc  1 a 2 50 ]
+"50
+[v GE_I2C2_ByteHLWrite@dataAddr dataAddr `[2]uc  1 a 2 48 ]
+"46
+[v GE_I2C2_ByteHLWrite@RegAddrH RegAddrH `uc  1 a 1 wreg ]
+[v GE_I2C2_ByteHLWrite@RegAddrL RegAddrL `uc  1 p 1 42 ]
+[v GE_I2C2_ByteHLWrite@RegValueH RegValueH `uc  1 p 1 43 ]
+[v GE_I2C2_ByteHLWrite@RegValueL RegValueL `uc  1 p 1 44 ]
+"47
+[v GE_I2C2_ByteHLWrite@F7848 F7848 `[2]uc  1 s 2 F7848 ]
+"49
+[v GE_I2C2_ByteHLWrite@F7850 F7850 `[2]uc  1 s 2 F7850 ]
+[v GE_I2C2_ByteHLWrite@RegAddrH RegAddrH `uc  1 a 1 47 ]
+"61
+} 0
+"80
+[v _GE_I2C2_ByteWrite GE_I2C2_ByteWrite `(i  1 e 2 0 ]
+{
+[v GE_I2C2_ByteWrite@dataAddress dataAddress `*.4uc  1 a 1 wreg ]
+"86
+[v GE_I2C2_ByteWrite@i i `i  1 a 2 39 ]
+"82
+[v GE_I2C2_ByteWrite@writeBuffer writeBuffer `[19]uc  1 a 19 18 ]
+"115
+[v GE_I2C2_ByteWrite@status status `E7688  1 a 1 41 ]
+"83
+[v GE_I2C2_ByteWrite@buflen buflen `uc  1 a 1 37 ]
+"80
+[v GE_I2C2_ByteWrite@dataAddress dataAddress `*.4uc  1 a 1 wreg ]
+[v GE_I2C2_ByteWrite@data2Byte data2Byte `*.4uc  1 p 1 14 ]
+[v GE_I2C2_ByteWrite@addlen addlen `uc  1 p 1 15 ]
+"86
+[v GE_I2C2_ByteWrite@dataAddress dataAddress `*.4uc  1 a 1 38 ]
+"144
+} 0
+"62
+[v _GE_I2C2_ByteHLRead GE_I2C2_ByteHLRead `(ui  1 e 2 0 ]
+{
+[v GE_I2C2_ByteHLRead@RegAddrH RegAddrH `uc  1 a 1 wreg ]
+"66
+[v GE_I2C2_ByteHLRead@dataValue dataValue `[2]uc  1 a 2 58 ]
+"67
+[v GE_I2C2_ByteHLRead@dataAddr dataAddr `[2]uc  1 a 2 56 ]
+"64
+[v GE_I2C2_ByteHLRead@RegValue RegValue `ui  1 a 2 60 ]
+"62
+[v GE_I2C2_ByteHLRead@RegAddrH RegAddrH `uc  1 a 1 wreg ]
+[v GE_I2C2_ByteHLRead@RegAddrL RegAddrL `uc  1 p 1 50 ]
+"64
+[v GE_I2C2_ByteHLRead@F7855 F7855 `[2]uc  1 s 2 F7855 ]
+"66
+[v GE_I2C2_ByteHLRead@F7857 F7857 `[2]uc  1 s 2 F7857 ]
+[v GE_I2C2_ByteHLRead@RegAddrH RegAddrH `uc  1 a 1 55 ]
+"77
+} 0
 "191
 [v _GE_I2C2_ByteRead GE_I2C2_ByteRead `(uc  1 e 1 0 ]
 {
@@ -764,7 +844,7 @@ I2C2_LOST_STATE 6
 [v GE_I2C2_ByteRead@dataAddress dataAddress `*.4uc  1 a 1 48 ]
 "241
 } 0
-"619 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/i2c2.c
+"619 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/i2c2.c
 [v _I2C2_MasterRead I2C2_MasterRead `(v  1 e 1 0 ]
 {
 "620
@@ -798,7 +878,7 @@ I2C2_LOST_STATE 6
 [v I2C2_MasterReadTRBBuild@ptrb ptrb `*.5S19  1 a 1 7 ]
 "705
 } 0
-"146 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\golden_eagle_i2c.c
+"146 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\golden_eagle_i2c.c
 [v _GE_I2C2_AddrWrite GE_I2C2_AddrWrite `(i  1 e 2 0 ]
 {
 [v GE_I2C2_AddrWrite@dataAddress dataAddress `*.4uc  1 a 1 wreg ]
@@ -817,99 +897,7 @@ I2C2_LOST_STATE 6
 [v GE_I2C2_AddrWrite@dataAddress dataAddress `*.4uc  1 a 1 38 ]
 "189
 } 0
-"46
-[v _GE_I2C2_ByteHLWrite GE_I2C2_ByteHLWrite `(i  1 e 2 0 ]
-{
-[v GE_I2C2_ByteHLWrite@RegAddrH RegAddrH `uc  1 a 1 wreg ]
-"49
-[v GE_I2C2_ByteHLWrite@dataValue dataValue `[2]uc  1 a 2 51 ]
-"50
-[v GE_I2C2_ByteHLWrite@dataAddr dataAddr `[2]uc  1 a 2 49 ]
-"46
-[v GE_I2C2_ByteHLWrite@RegAddrH RegAddrH `uc  1 a 1 wreg ]
-[v GE_I2C2_ByteHLWrite@RegAddrL RegAddrL `uc  1 p 1 43 ]
-[v GE_I2C2_ByteHLWrite@RegValueH RegValueH `uc  1 p 1 44 ]
-[v GE_I2C2_ByteHLWrite@RegValueL RegValueL `uc  1 p 1 45 ]
-"47
-[v GE_I2C2_ByteHLWrite@F7848 F7848 `[2]uc  1 s 2 F7848 ]
-"49
-[v GE_I2C2_ByteHLWrite@F7850 F7850 `[2]uc  1 s 2 F7850 ]
-[v GE_I2C2_ByteHLWrite@RegAddrH RegAddrH `uc  1 a 1 48 ]
-"61
-} 0
-"80
-[v _GE_I2C2_ByteWrite GE_I2C2_ByteWrite `(i  1 e 2 0 ]
-{
-[v GE_I2C2_ByteWrite@dataAddress dataAddress `*.4uc  1 a 1 wreg ]
-"86
-[v GE_I2C2_ByteWrite@i i `i  1 a 2 39 ]
-"82
-[v GE_I2C2_ByteWrite@writeBuffer writeBuffer `[19]uc  1 a 19 19 ]
-"115
-[v GE_I2C2_ByteWrite@status status `E7688  1 a 1 42 ]
-"83
-[v GE_I2C2_ByteWrite@buflen buflen `uc  1 a 1 38 ]
-"80
-[v GE_I2C2_ByteWrite@dataAddress dataAddress `*.4uc  1 a 1 wreg ]
-[v GE_I2C2_ByteWrite@data2Byte data2Byte `*.4uc  1 p 1 15 ]
-[v GE_I2C2_ByteWrite@addlen addlen `uc  1 p 1 16 ]
-"86
-[v GE_I2C2_ByteWrite@dataAddress dataAddress `*.4uc  1 a 1 41 ]
-"144
-} 0
-"33 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\uart_top.c
-[v _uart_send_hex uart_send_hex `(v  1 e 1 0 ]
-{
-[v uart_send_hex@hexValue hexValue `uc  1 a 1 wreg ]
-"35
-[v uart_send_hex@hexH hexH `uc  1 a 1 14 ]
-"36
-[v uart_send_hex@hexL hexL `uc  1 a 1 13 ]
-"33
-[v uart_send_hex@hexValue hexValue `uc  1 a 1 wreg ]
-"38
-[v uart_send_hex@hexValue hexValue `uc  1 a 1 12 ]
-"46
-} 0
-"6 C:\Program Files (x86)\Microchip\xc8\v1.38\sources\common\awdiv.c
-[v ___awdiv __awdiv `(i  1 e 2 0 ]
-{
-"11
-[v ___awdiv@quotient quotient `i  1 a 2 7 ]
-"12
-[v ___awdiv@sign sign `uc  1 a 1 6 ]
-[v ___awdiv@counter counter `uc  1 a 1 5 ]
-"6
-[v ___awdiv@divisor divisor `i  1 p 2 0 ]
-[v ___awdiv@dividend dividend `i  1 p 2 2 ]
-"42
-} 0
-"97 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/eusart.c
-[v _EUSART_Write EUSART_Write `(v  1 e 1 0 ]
-{
-[v EUSART_Write@txData txData `uc  1 a 1 wreg ]
-[v EUSART_Write@txData txData `uc  1 a 1 wreg ]
-[v EUSART_Write@txData txData `uc  1 a 1 0 ]
-"104
-} 0
-"6 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\uart_top.c
-[v _uart_send_char uart_send_char `(v  1 e 1 0 ]
-{
-"8
-[v uart_send_char@temp_ptr temp_ptr `*.25uc  1 a 2 3 ]
-"6
-[v uart_send_char@buffer buffer `*.25uc  1 p 2 0 ]
-"14
-} 0
-"16
-[v _uart_send_byte uart_send_byte `(v  1 e 1 0 ]
-{
-[v uart_send_byte@temp temp `uc  1 a 1 wreg ]
-[v uart_send_byte@temp temp `uc  1 a 1 wreg ]
-[v uart_send_byte@temp temp `uc  1 a 1 0 ]
-"20
-} 0
-"598 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/i2c2.c
+"598 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/i2c2.c
 [v _I2C2_MasterWrite I2C2_MasterWrite `(v  1 e 1 0 ]
 {
 "599
@@ -961,12 +949,12 @@ I2C2_LOST_STATE 6
 [v I2C2_MasterTRBInsert@count count `uc  1 a 1 3 ]
 "692
 } 0
-"51 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/interrupt_manager.c
+"51 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/interrupt_manager.c
 [v _INTERRUPT_InterruptManager INTERRUPT_InterruptManager `II(v  1 e 1 0 ]
 {
 "70
 } 0
-"233 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/i2c2.c
+"233 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/i2c2.c
 [v _I2C2_ISR I2C2_ISR `(v  1 e 1 0 ]
 {
 "236
@@ -998,25 +986,23 @@ I2C2_LOST_STATE 6
 {
 "731
 } 0
-"104 D:\WorkSpace\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/i2c1.c
+"365 D:\WorkSpace2\PIC_SFP\16F18346_I2C2_25G78125_2017.X\mcc_generated_files/i2c1.c
 [v _I2C1_ISR I2C1_ISR `(v  1 e 1 0 ]
 {
-"106
+"367
 [v I2C1_ISR@i2c_data i2c_data `uc  1 a 1 4 ]
-"144
+"405
 } 0
-"168
+"429
 [v _I2C1_StatusCallback I2C1_StatusCallback `(v  1 e 1 0 ]
 {
 [v I2C1_StatusCallback@i2c_bus_state i2c_bus_state `E7648  1 a 1 wreg ]
 [v I2C1_StatusCallback@i2c_bus_state i2c_bus_state `E7648  1 a 1 wreg ]
-"171
-[v I2C1_StatusCallback@EEPROM_Buffer EEPROM_Buffer `[256]uc  1 s 256 EEPROM_Buffer ]
-"431
+"434
 [v I2C1_StatusCallback@eepromAddress eepromAddress `uc  1 s 1 eepromAddress ]
-"432
+"435
 [v I2C1_StatusCallback@slaveWriteType slaveWriteType `uc  1 s 1 slaveWriteType ]
-"168
+"429
 [v I2C1_StatusCallback@i2c_bus_state i2c_bus_state `E7648  1 a 1 2 ]
-"480
+"483
 } 0

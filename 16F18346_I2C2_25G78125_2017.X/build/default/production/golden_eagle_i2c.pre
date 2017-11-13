@@ -10025,16 +10025,7 @@ writeBuffer[addlen] = data2Byte[0];
 writeBuffer[addlen+1] = data2Byte[1];
 buflen = addlen+2;
 
-
-uart_send_char("Wr ");
-uart_send_hex(dataAddress[0]);
-uart_send_hex(dataAddress[1]);
-uart_send_char(" ");
-uart_send_hex(data2Byte[0]);
-uart_send_hex(data2Byte[1]);
-uart_send_byte('\r'); uart_send_byte('\n');
-
-
+# 109
 }
 
 # 115
@@ -10154,14 +10145,7 @@ else
 timeOut++;
 }
 
-uart_send_char("Rd ");
-uart_send_hex(dataAddress[0]);
-uart_send_hex(dataAddress[1]);
-uart_send_char("==");
-uart_send_hex(data2Byte[0]);
-uart_send_hex(data2Byte[1]);
-uart_send_byte('\r'); uart_send_byte('\n');
-
+# 239
 return 1;
 
 }
@@ -10488,12 +10472,15 @@ result |= data[i];
 return result;
 }
 
-
+# 579
 void GE_set_polarity(void)
 {
 
+# 594
+GE_I2C2_bitset(0x8061,0x1,14,1);
 
 
-GE_I2C2_bitset(0x8461,0x1,14,1);
+
 
 }
+

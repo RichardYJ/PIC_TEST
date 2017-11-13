@@ -3,12 +3,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _GE_I2C2_ByteWrite `(i ~T0 @X0 0 ef3`*uc`*uc`uc ]
 "25
 [v _GE_I2C2_ByteRead `(uc ~T0 @X0 0 ef3`*uc`*uc`uc ]
-"66 uart_top.h
-[v _uart_send_char `(v ~T0 @X0 0 ef1`*uc ]
-"69
-[v _uart_send_hex `(v ~T0 @X0 0 ef1`uc ]
-"67
-[v _uart_send_byte `(v ~T0 @X0 0 ef1`uc ]
 "115 golden_eagle_i2c.c
 [c E7688 0 1 2 3 4 5 6 .. ]
 [n E7688 . I2C2_MESSAGE_COMPLETE I2C2_MESSAGE_FAIL I2C2_MESSAGE_PENDING I2C2_STUCK_START I2C2_MESSAGE_ADDRESS_NO_ACK I2C2_DATA_NO_ACK I2C2_LOST_STATE  ]
@@ -7725,28 +7719,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;golden_eagle_i2c.c: 97: buflen = addlen+2;
 "97
 [e = _buflen -> + -> _addlen `i -> 2 `i `uc ]
-[; ;golden_eagle_i2c.c: 100: uart_send_char("Wr ");
-"100
-[e ( _uart_send_char (1 -> :s 1C `*uc ]
-[; ;golden_eagle_i2c.c: 101: uart_send_hex(dataAddress[0]);
-"101
-[e ( _uart_send_hex (1 *U + _dataAddress * -> -> 0 `i `x -> -> # *U _dataAddress `i `x ]
-[; ;golden_eagle_i2c.c: 102: uart_send_hex(dataAddress[1]);
-"102
-[e ( _uart_send_hex (1 *U + _dataAddress * -> -> 1 `i `x -> -> # *U _dataAddress `i `x ]
-[; ;golden_eagle_i2c.c: 103: uart_send_char(" ");
-"103
-[e ( _uart_send_char (1 -> :s 2C `*uc ]
-[; ;golden_eagle_i2c.c: 104: uart_send_hex(data2Byte[0]);
-"104
-[e ( _uart_send_hex (1 *U + _data2Byte * -> -> 0 `i `x -> -> # *U _data2Byte `i `x ]
-[; ;golden_eagle_i2c.c: 105: uart_send_hex(data2Byte[1]);
-"105
-[e ( _uart_send_hex (1 *U + _data2Byte * -> -> 1 `i `x -> -> # *U _data2Byte `i `x ]
-[; ;golden_eagle_i2c.c: 106: uart_send_byte('\r'); uart_send_byte('\n');
-"106
-[e ( _uart_send_byte (1 -> -> 13 `ui `uc ]
-[e ( _uart_send_byte (1 -> -> 10 `ui `uc ]
 "109
 }
 "115
@@ -8021,28 +7993,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $ != -> _status `i -> . `E7688 1 `i 941  ]
 [e :U 942 ]
 [; ;golden_eagle_i2c.c: 229: }
-[; ;golden_eagle_i2c.c: 231: uart_send_char("Rd ");
-"231
-[e ( _uart_send_char (1 -> :s 3C `*uc ]
-[; ;golden_eagle_i2c.c: 232: uart_send_hex(dataAddress[0]);
-"232
-[e ( _uart_send_hex (1 *U + _dataAddress * -> -> 0 `i `x -> -> # *U _dataAddress `i `x ]
-[; ;golden_eagle_i2c.c: 233: uart_send_hex(dataAddress[1]);
-"233
-[e ( _uart_send_hex (1 *U + _dataAddress * -> -> 1 `i `x -> -> # *U _dataAddress `i `x ]
-[; ;golden_eagle_i2c.c: 234: uart_send_char("==");
-"234
-[e ( _uart_send_char (1 -> :s 4C `*uc ]
-[; ;golden_eagle_i2c.c: 235: uart_send_hex(data2Byte[0]);
-"235
-[e ( _uart_send_hex (1 *U + _data2Byte * -> -> 0 `i `x -> -> # *U _data2Byte `i `x ]
-[; ;golden_eagle_i2c.c: 236: uart_send_hex(data2Byte[1]);
-"236
-[e ( _uart_send_hex (1 *U + _data2Byte * -> -> 1 `i `x -> -> # *U _data2Byte `i `x ]
-[; ;golden_eagle_i2c.c: 237: uart_send_byte('\r'); uart_send_byte('\n');
-"237
-[e ( _uart_send_byte (1 -> -> 13 `ui `uc ]
-[e ( _uart_send_byte (1 -> -> 10 `ui `uc ]
 [; ;golden_eagle_i2c.c: 239: return 1;
 "239
 [e ) -> -> 1 `i `uc ]
@@ -9514,22 +9464,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 "567
 [e :UE 1132 ]
 }
-"570
+"579
 [v _GE_set_polarity `(v ~T0 @X0 1 ef ]
-"571
+"580
 {
-[; ;golden_eagle_i2c.c: 570: void GE_set_polarity(void)
-[; ;golden_eagle_i2c.c: 571: {
+[; ;golden_eagle_i2c.c: 579: void GE_set_polarity(void)
+[; ;golden_eagle_i2c.c: 580: {
 [e :U _GE_set_polarity ]
 [f ]
-[; ;golden_eagle_i2c.c: 575: GE_I2C2_bitset(0x8461,0x1,14,1);
-"575
-[e ( _GE_I2C2_bitset (4 , , , -> 33889 `ui -> -> 1 `i `ui -> 14 `i -> 1 `i ]
-[; ;golden_eagle_i2c.c: 577: }
-"577
+[; ;golden_eagle_i2c.c: 594: GE_I2C2_bitset(0x8061,0x1,14,1);
+"594
+[e ( _GE_I2C2_bitset (4 , , , -> 32865 `ui -> -> 1 `i `ui -> 14 `i -> 1 `i ]
+[; ;golden_eagle_i2c.c: 599: }
+"599
 [e :UE 1136 ]
 }
-[a 4C 61 61 0 ]
-[a 1C 87 114 32 0 ]
-[a 3C 82 100 32 0 ]
-[a 2C 32 0 ]

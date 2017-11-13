@@ -9771,77 +9771,7 @@ SLAVE_DATA_ADDRESS,
 # 62
 volatile uint8_t I2C1_slaveWriteData = 0x55;
 
-# 67
-void I2C1_StatusCallback(I2C1_SLAVE_DRIVER_STATUS i2c_bus_state);
-
-# 81
-void I2C1_Initialize(void)
-{
-
-
-SSP1STAT = 0x00;
-
-SSP1CON1 = 0x26;
-
-SSP1CON2 = 0x00;
-
-SSP1CON3 = 0x00;
-
-SSP1MSK = (0x7F << 1);
-
-SSP1ADD = (0x50 << 1);
-
-
-PIR1bits.SSP1IF = 0;
-
-PIE1bits.SSP1IE = 1;
-
-}
-
-void I2C1_ISR ( void )
-{
-uint8_t i2c_data = 0x55;
-
-# 112
-PIR1bits.SSP1IF = 0;
-i2c_data = SSP1BUF;
-if(1 == SSP1STATbits.R_nW)
-{
-if((1 == SSP1STATbits.D_nA) && (1 == SSP1CON2bits.ACKSTAT))
-{
-
-I2C1_StatusCallback(I2C1_SLAVE_READ_COMPLETED);
-}
-else
-{
-
-I2C1_StatusCallback(I2C1_SLAVE_READ_REQUEST);
-}
-}
-else if(0 == SSP1STATbits.D_nA)
-{
-
-
-
-I2C1_StatusCallback(I2C1_SLAVE_WRITE_REQUEST);
-}
-else
-{
-I2C1_slaveWriteData = i2c_data;
-
-
-I2C1_StatusCallback(I2C1_SLAVE_WRITE_COMPLETED);
-}
-
-SSP1CON1bits.CKP = 1;
-
-}
-
-# 168
-void I2C1_StatusCallback(I2C1_SLAVE_DRIVER_STATUS i2c_bus_state)
-{
-
-static uint8_t EEPROM_Buffer[] =
+uint8_t EEPROM_Buffer[] =
 {
 3,
 4,
@@ -10100,6 +10030,78 @@ static uint8_t EEPROM_Buffer[] =
 0,
 0
 };
+
+# 328
+void I2C1_StatusCallback(I2C1_SLAVE_DRIVER_STATUS i2c_bus_state);
+
+# 342
+void I2C1_Initialize(void)
+{
+
+
+SSP1STAT = 0x00;
+
+SSP1CON1 = 0x26;
+
+SSP1CON2 = 0x00;
+
+SSP1CON3 = 0x00;
+
+SSP1MSK = (0x7F << 1);
+
+SSP1ADD = (0x50 << 1);
+
+
+PIR1bits.SSP1IF = 0;
+
+PIE1bits.SSP1IE = 1;
+
+}
+
+void I2C1_ISR ( void )
+{
+uint8_t i2c_data = 0x55;
+
+# 373
+PIR1bits.SSP1IF = 0;
+i2c_data = SSP1BUF;
+if(1 == SSP1STATbits.R_nW)
+{
+if((1 == SSP1STATbits.D_nA) && (1 == SSP1CON2bits.ACKSTAT))
+{
+
+I2C1_StatusCallback(I2C1_SLAVE_READ_COMPLETED);
+}
+else
+{
+
+I2C1_StatusCallback(I2C1_SLAVE_READ_REQUEST);
+}
+}
+else if(0 == SSP1STATbits.D_nA)
+{
+
+
+
+I2C1_StatusCallback(I2C1_SLAVE_WRITE_REQUEST);
+}
+else
+{
+I2C1_slaveWriteData = i2c_data;
+
+
+I2C1_StatusCallback(I2C1_SLAVE_WRITE_COMPLETED);
+}
+
+SSP1CON1bits.CKP = 1;
+
+}
+
+# 429
+void I2C1_StatusCallback(I2C1_SLAVE_DRIVER_STATUS i2c_bus_state)
+{
+
+
 
 static uint8_t eepromAddress = 0;
 static uint8_t slaveWriteType = SLAVE_NORMAL_DATA;
