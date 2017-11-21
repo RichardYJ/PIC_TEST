@@ -42,13 +42,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 "56
 [p x MCLRE=ON ]
 "57
-[p x PWRTE=OFF ]
+[p x PWRTE=ON ]
 "58
 [p x WDTE=OFF ]
 "59
 [p x LPBOREN=OFF ]
 "60
-[p x BOREN=OFF ]
+[p x BOREN=ON ]
 "61
 [p x BORV=LOW ]
 "62

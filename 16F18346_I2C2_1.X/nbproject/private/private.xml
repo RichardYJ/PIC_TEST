@@ -3,7 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/WorkSpace/MyCode/gitHUB_mergered/16F18346_I2C2_1.X/main.c</file>
+            <file>file:/D:/WorkSpace/MyCode/git/gitHUB_mergered_tobemodified/16F18346_I2C2_1.X/mcc_generated_files/interrupt_manager.c</file>
+            <file>file:/D:/WorkSpace/MyCode/git/gitHUB_mergered_tobemodified/16F18346_I2C2_1.X/main.c</file>
+            <file>file:/D:/WorkSpace/MyCode/git/gitHUB_mergered_tobemodified/16F18346_I2C2_1.X/mcc_generated_files/eusart.c</file>
+            <file>file:/D:/WorkSpace/MyCode/git/gitHUB_mergered_tobemodified/16F18346_I2C2_1.X/mcc_generated_files/mcc.c</file>
         </group>
     </open-files>
 </project-private>

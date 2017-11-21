@@ -1,7 +1,7 @@
 
 
 Microchip Technology PIC Macro Assembler V1.42 build -159332390 
-                                                                                                           Tue Nov 14 17:48:51 2017
+                                                                                                           Mon Nov 20 11:24:26 2017
 
 
      1                           	processor	16LF18346
@@ -24,14 +24,14 @@ Microchip Technology PIC Macro Assembler V1.42 build -159332390
     18  0000                     	;CODE;STRING;reloc=2;EEDATA
     19                           
     20                           	psect	mytext
-    21  2818                     _fw_content_T:	
+    21  20C0                     _fw_content_T:	
     22                           ;GLOBAL _addTest ; make _add globally accessible
     23                           ;SIGNAT _addTest,4217 ; tell the linker how it should be called
     24                           ; everything following will be placed into the mytext psect
     25                           ; our routine to add to ints and return the result
     26                           ;ORG 50h
     27                           
-    28  2818  1234 4321 2234 3234 	dw	4660,17185,8756,12852
+    28  20C0  1234 4321 2234 3234 	dw	4660,17185,8756,12852
     29                           
     30                           ;TABLE: DW 12H;RETLW 41H
     31                           ;_fw_content_T_ DW 1234h,2,3,4
@@ -69,10 +69,10 @@ Microchip Technology PIC Macro Assembler V1.42 build -159332390
     63                           ;TABLE1 DW 1234h,2,3,4
     64                           ; the result is already in the required location (W)so we can
     65                           ; just return immediately
-    66  281C  0008               	return
+    66  20C4  0008               	return
 
 
 Microchip Technology PIC Macro Assembler V1.42 build -159332390 
-Symbol Table                                                                                               Tue Nov 14 17:48:51 2017
+Symbol Table                                                                                               Mon Nov 20 11:24:26 2017
 
-                   _fw_content_T 2818  
+                   _fw_content_T 20C0  

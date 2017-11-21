@@ -1,0 +1,11 @@
+---- lvp Matches (2 in 2 files) ----
+configurations.xml (nbproject) line 204 :         <property key="programoptions.uselvpprogramming" value="false"/>
+mcc.c (mcc_generated_files) line 68 : #pragma config LVP = ON    // Low Voltage Programming Enable bit->Low Voltage programming enabled. MCLR/VPP pin function is MCLR. MCLRE configuration bit is ignored.
+---- G100_6M Matches (3 in 1 files) ----
+main.c line 63 : #define G100_6M 1
+main.c line 66 : //G100_6M           
+main.c line 5404 :                         #elif defined G100_6M
+---- Breakdown Matches (3 in 1 files) ----
+main.c line 5569 : void Breakdown(void)
+Breakdown in main.c : 			uart_send_char("Breakdown!\r\n");
+main in main.c : 	Breakdown();

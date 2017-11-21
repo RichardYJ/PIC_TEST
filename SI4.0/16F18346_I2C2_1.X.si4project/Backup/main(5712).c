@@ -67,7 +67,7 @@
 
 #define DYCALCC 1
 #define FLASHREAD 1
-#define FLASHSTART 0x006c//fw_content//0x3000	//0x269a  LEN:0D87
+#define FLASHSTART fw_content//0x3000	//0x269a  LEN:0D87
 
 
 
@@ -5516,7 +5516,7 @@ const uint8_t script_content[] = {
                         0x87,0xff,0xfd,0xc0,
 #else
 //main cursor
- 0x80,0xa7 ,0x14,0x00  
+0x80,0xa7 ,0x14,0x00  
 ,0x81,0xa7 ,0x14,0x00
 ,0x82,0xa7 ,0x14,0x00
 ,0x83,0xa7 ,0x14,0x00
@@ -5542,8 +5542,8 @@ const uint8_t script_content[] = {
 ,0x80,0xa0 ,0x00,0x80
 ,0x81,0xa0 ,0x00,0x80
 ,0x82,0xa0 ,0x00,0x80
-,0x83,0xa0 ,0x00,0x00
-,0x84,0xa0 ,0x00,0x00
+,0x83,0xa0 ,0x00,0x80
+,0x84,0xa0 ,0x00,0x80
 ,0x85,0xa0 ,0x00,0x80
 ,0x86,0xa0 ,0x00,0x80
 ,0x87,0xa0 ,0x00,0x80
@@ -5565,20 +5565,6 @@ const uint8_t script_content[] = {
 #endif
 };
 #if 1
-
-void Breakdown(void)
-{
-#if 1    
-		while(1)
-		{
-			uart_send_char("Breakdown!\r\n");
-			__delay_ms(2000);	
-		}
-#endif
-
-
-}
-
 void main(void)
 {
     int prt_Res = -1;
@@ -5632,7 +5618,7 @@ void main(void)
     
     //__delay_ms(5000);  //2500ms
     //__delay_ms(5000);  //2500ms
-
+    
      const int* b_data; 
      b_data = &fw_content[0]; //point to the program memory table:  fw_content 
    
@@ -5728,14 +5714,6 @@ void main(void)
 	EEPROM_Buffer[223]=iCC_EXT&0xff;
 #endif
 
-
-#if 1
-    GE_I2C2_HexWrite(0x980d,0x0999);//software reset
-    
-    GE_I2C2_HexWrite(0x980d,0x0000);//software reset
-    
-	__delay_ms(1000);
-#endif
 
 
 #if 1    
@@ -5839,51 +5817,32 @@ void main(void)
 #if MY_PRINTF_EN == 1
 		uart_send_char("check the result:\r\n");
 #endif
-		status = GE_I2C2_HexRead(0x9814);
+		GE_I2C2_HexRead(0x9814);
 #if MY_PRINTF_EN == 1
-		uart_send_char("0x9814's  value:");
-		uart_send_hex(status);
-		uart_send_char("\r\n");
 		uart_send_char("If there is checksum error, total error  = ");
 		uart_send_hex(TotalError);
 		uart_send_char("\r\n");
 #endif
+		//load firmware
+#endif	
+
 
 	{//load default:
-	#if MY_PRINTF_EN == 1
-		uart_send_char("load default: ");
-		uart_send_char("\r\n");
-	#endif
 		GE_I2C2_HexWrite( 0x9818,0x5000);
 		status = GE_I2C2_HexRead(0x9818);
-
 		while(0x0500 != status)
-		{
-		#if MY_PRINTF_EN == 1
-			uart_send_char("load default: 0x9818's  value:");
-			uart_send_hex(status);
-			uart_send_char("\r\n");
-		#endif
-			__delay_ms(300);
 			status = GE_I2C2_HexRead(0x9818);
-		}
+
 	}
 
 	{//load 25g:
-#if MY_PRINTF_EN == 1
-		uart_send_char("load 25g: ");
-		uart_send_char("\r\n");
-#endif
 		GE_I2C2_HexWrite( 0x9818,0x5020);
 		status = GE_I2C2_HexRead(0x9818);
 		while(0x0500 != status)
-		{
-			__delay_ms(300);
 			status = GE_I2C2_HexRead(0x9818);
-		}
-	}
- 
 
+	}
+	
 #if 0
 	{//load 10g:
 		GE_I2C2_HexWrite( 0x9818,0x5030);
@@ -5892,13 +5851,14 @@ void main(void)
 			status = GE_I2C2_HexRead(0x9818);
 
 	}
-#endif    
-    
-//load firmware
-#endif    
-    
+#endif
 
 
+    GE_I2C2_HexWrite(0x980d,0x0999);//software reset
+    
+    GE_I2C2_HexWrite(0x980d,0x0000);//software reset
+    
+	__delay_ms(1000);
 
     int len_script = sizeof(script_content)/4;
 	
@@ -5953,17 +5913,6 @@ void main(void)
 #if STRESSTEST == 1
 	testReadWrite(200000, 0x8079);
 #endif
-
-#if MY_PRINTF_EN == 1
-	DATAEE_WriteByte(1,0x66);
-	uint8_t cRes = DATAEE_ReadByte(1);
-	uart_send_char("Write to eeprom:0x66, read result: 0x ");			 
-	uart_send_hex(cRes);
-	uart_send_char("\r\n");
-#endif
-
-	uart_send_char("MCU START OK......");			 
-
 
     while (1)
     {
