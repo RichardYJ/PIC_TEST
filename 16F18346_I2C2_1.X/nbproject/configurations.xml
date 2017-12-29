@@ -17,6 +17,7 @@
         <itemPath>mcc_generated_files/adc.h</itemPath>
         <itemPath>mcc_generated_files/fvr.h</itemPath>
         <itemPath>mcc_generated_files/memory.h</itemPath>
+        <itemPath>mcc_generated_files/mdio.h</itemPath>
       </logicalFolder>
       <itemPath>eeprom_i2c.h</itemPath>
       <itemPath>golden_eagle_i2c.h</itemPath>
@@ -42,6 +43,7 @@
         <itemPath>mcc_generated_files/adc.c</itemPath>
         <itemPath>mcc_generated_files/fvr.c</itemPath>
         <itemPath>mcc_generated_files/memory.c</itemPath>
+        <itemPath>mcc_generated_files/mdio.c</itemPath>
       </logicalFolder>
       <itemPath>main.c</itemPath>
       <itemPath>eeprom_i2c.c</itemPath>
@@ -69,7 +71,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>PICkit3PlatformTool</platformTool>
         <languageToolchain>XC8</languageToolchain>
-        <languageToolchainVersion>1.37</languageToolchainVersion>
+        <languageToolchainVersion>1.42</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <compileType>
@@ -193,7 +195,7 @@
         <property key="programoptions.pgmspeed" value="2"/>
         <property key="programoptions.preservedataflash" value="false"/>
         <property key="programoptions.preserveeeprom" value="false"/>
-        <property key="programoptions.preserveprogramrange" value="true"/>
+        <property key="programoptions.preserveprogramrange" value="false"/>
         <property key="programoptions.preserveprogramrange.end" value="0x3fff"/>
         <property key="programoptions.preserveprogramrange.start" value="0x3000"/>
         <property key="programoptions.preserveuserid" value="false"/>

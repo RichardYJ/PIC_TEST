@@ -54,10 +54,10 @@
 
 // CONFIG2
 #pragma config MCLRE = ON    // Master Clear Enable bit->MCLR/VPP pin function is MCLR; Weak pull-up enabled
-#pragma config PWRTE = OFF    // Power-up Timer Enable bit->PWRT disabled
+#pragma config PWRTE = ON    // Power-up Timer Enable bit->PWRT disabled
 #pragma config WDTE = OFF    // Watchdog Timer Enable bits->WDT disabled; SWDTEN is ignored
 #pragma config LPBOREN = OFF    // Low-power BOR enable bit->ULPBOR disabled
-#pragma config BOREN = OFF    // Brown-out Reset Enable bits->Brown-out Reset disabled
+#pragma config BOREN = ON    // Brown-out Reset Enable bits->Brown-out Reset disabled
 #pragma config BORV = LOW    // Brown-out Reset Voltage selection bit->Brown-out voltage (Vbor) set to 2.45V
 #pragma config PPS1WAY = ON    // PPSLOCK bit One-Way Set Enable bit->The PPSLOCK bit can be cleared and set only once; PPS registers remain locked after one clear/set cycle
 #pragma config STVREN = ON    // Stack Overflow/Underflow Reset Enable bit->Stack Overflow or Underflow will cause a Reset
@@ -80,11 +80,12 @@ void SYSTEM_Initialize(void)
     OSCILLATOR_Initialize();
     WDT_Initialize();
     I2C1_Initialize();
-    I2C2_Initialize();
+//    I2C2_Initialize();
     FVR_Initialize();
     ADC_Initialize();
     CLKREF_Initialize();
     EUSART_Initialize();
+	mdio_init();
 }
 
 void OSCILLATOR_Initialize(void)

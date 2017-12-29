@@ -4,6 +4,7 @@
 mcc_generated_files/fvr.h  \
 mcc_generated_files/clkref.h  \
 mcc_generated_files/mcc.h  \
+mcc_generated_files/mdio.h  \
 mcc_generated_files/adc.h  \
 mcc_generated_files/memory.h  \
 mcc_generated_files/i2c1.h  \

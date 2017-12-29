@@ -67,157 +67,11 @@
 
 #define DYCALCC 1
 #define FLASHREAD 1
-#define FLASHSTART 0x3000	//0x269a  LEN:0D87
+#define FLASHSTART 0x0056		//fw_content//0x3000	//0x269a  LEN:0D87
 
-#ifdef FLASHREAD
-uint16_t getShortFrom14Arry(uint16_t pos16,uint16_t * inArry)
-{
-	uint16_t outData,pos14,offset,i,j,sL,sH;
-	i = pos14 = (pos16)*16/14;
-	j = pos16;
-    i=j+j/7;
-    int m = j%7;
-    sL = FLASH_ReadWord(i+FLASHSTART);
-    sH = FLASH_ReadWord(i+1+FLASHSTART);
-    switch(m)
-    {
-    case 0:
-        outData = sL&0x3fff|(sH&0x3)<<14;
-        break;
-    case 1:
-        outData = (sL&((0x3fff<<2)&0x3fff))>>2|(sH&0xf)<<12;
-        break;
-    case 2:
-        outData = (sL&((0x3fff<<4)&0x3fff))>>4|(sH&0x3f)<<10;
-        break;
-    case 3:
-        outData = (sL&((0x3fff<<6)&0x3fff))>>6|(sH&0xff)<<8;
-        break;
-    case 4:
-        outData = (sL&((0x3fff<<8)&0x3fff))>>8|(sH&0x3ff)<<6;
-        break;
-    case 5:
-        outData = (sL&((0x3fff<<10)&0x3fff))>>10|(sH&0xfff)<<4;
-        break;
-    case 6:
-        outData = (sL&((0x3fff<<12)&0x3fff))>>12|(sH&0x3fff)<<2;
-        break;
-    }
+#define GE_I2C2_HexWrite(a,b) MDIO_write(0x10,0x01,a,b)
+#define GE_I2C2_HexRead(a) MDIO_read(0x10,0x01,a)
 
-	outData=((outData&0xff)<<8|(outData&0xff00)>>8);
-#if 0
-	uart_send_char("getShortFrom14Arry[");
-	uart_send_hex16(pos16);
-	uart_send_char("]:");
-	uart_send_hex16(outData);
-//	uart_send_char("\r\n");
-	uart_send_char(",sL:");
-	uart_send_hex16(sL);
-//	uart_send_char("\r\n");
-	uart_send_char(",sH:");
-	uart_send_hex16(sH);
-	uart_send_char("\r\n");
-#endif    
-	return outData;
-}
-
-#endif
-
-
-
-#if STRESSTEST == 1
-void testReadWrite(uint32_t loop_times, uint16_t regAddr)
-{
-/*
-0x80,0x79
-0x81,0x79
-0x82,0x79
-0x83,0x79
-0x84,0x79
-0x85,0x79
-0x86,0x79
-0x87,0x79
-*/
-#define OFFSET0 (0<<8)
-#define OFFSET1 (1<<8)
-#define OFFSET2 (2<<8)
-#define OFFSET3 (3<<8)
-#define OFFSET4 (4<<8)
-#define OFFSET5 (5<<8)
-#define OFFSET6 (6<<8)
-#define OFFSET7 (7<<8)
-
-	uint32_t i;
-//	uint16_t regAddr=;
-	uint16_t value_0,value_1,value_2,value_3,value_4,value_5,value_6,value_7,value_8,value_9;
-	uint16_t read_0,read_1,read_2,read_3,read_4,read_5,read_6,read_7,read_8,read_9;
-	for(i=0; i<loop_times; i++)
-	{
-		value_0 = rand();//65535
-		GE_I2C2_HexWrite(regAddr+OFFSET0, value_0); //wr 0
-
-		value_1 = rand();
-		GE_I2C2_HexWrite(regAddr+OFFSET1, value_1); //wr 1
-
-		value_2 = rand();
-		GE_I2C2_HexWrite(regAddr+OFFSET2, value_2); //wr 2
-
-		value_3 = rand();
-		GE_I2C2_HexWrite(regAddr+OFFSET3, value_3); //wr 3
-
-		value_4 = rand();
-		GE_I2C2_HexWrite(regAddr+OFFSET4, value_4); //wr 4
-
-		value_5 = rand();
-		GE_I2C2_HexWrite(regAddr+OFFSET5, value_5); //wr 5
-
-		value_6 = rand();
-		GE_I2C2_HexWrite(regAddr+OFFSET6, value_6); //wr 6
-
-		value_7 = rand();
-		GE_I2C2_HexWrite(regAddr+OFFSET7, value_7); //wr 7
-
-//		value_8 = rand();
-//		GE_I2C2_HexWrite(regAddr+8, value_8); //wr 8
-
-//		value_9 = rand();
-//		GE_I2C2_HexWrite(regAddr+9, value_9); //wr 9
-
-		read_0 = GE_I2C2_HexRead( regAddr+OFFSET0); //rd 0
-		read_1 = GE_I2C2_HexRead( regAddr+OFFSET1); //	1
-		read_2 = GE_I2C2_HexRead( regAddr+OFFSET2); //  2
-		read_3 = GE_I2C2_HexRead( regAddr+OFFSET3); //  3
-		read_4 = GE_I2C2_HexRead( regAddr+OFFSET4); //  4
-		read_5 = GE_I2C2_HexRead( regAddr+OFFSET5); //  5
-		read_6 = GE_I2C2_HexRead( regAddr+OFFSET6); //  6
-		read_7 = GE_I2C2_HexRead( regAddr+OFFSET7); //  7
-//		read_8 = GE_I2C2_HexRead( regAddr+8); //  8
-//		read_9 = GE_I2C2_HexRead( regAddr+9); //  9
-
-		if ((read_0==value_0) && (read_1==value_1) && (read_2==value_2) && (read_3==value_3) && (read_4==value_4) && \
-		   (read_5==value_5) && (read_6==value_6) && (read_7==value_7))//&& (read_8==value_8) && (read_9==value_9))
-		{
-			if (0 == (i%100))
-			{
-				uart_send_dec(i);
-				uart_send_char("\r\n");
-			}
-		}
-		else
-		{
-			uart_send_char("Reg readwrite ERROR!\r\n");
-			break;
-//			  raw_input();
-		}
-	}
-	uart_send_char("Func testReadWrite End!\r\n");
-}
-#endif
-
-
-/*
-                         Main application
- */
 #if 0
 
 #if 1
@@ -328,72 +182,9 @@ const uint8_t fw_content[] = {
 #endif
 
 #else
-const uint8_t fw_content[] = { // /*    
+
 #ifndef FLASHREAD
-#if 1
-0xc2,0xed,0x01,0x00,0x03,0x1a,0x35,0xf2,0x01,0x00,0x00,0x7c,0x00,0x00,0x03,0xb8,
-0x01,0x00,0x00,0x00,0x00,0x00,0x0f,0xd0,0x00,0x00,0x0f,0xd0,0x00,0x00,0x0f,0xd0,
-0x00,0x00,0x0f,0xd0,0x00,0x00,0x0f,0xd0,0x00,0x00,0x0f,0xd0,0x00,0x00,0x0f,0xd0,
-0x00,0x00,0x0f,0xd0,0x00,0x00,0x0f,0xd0,0x00,0x00,0x0f,0xd0,0x00,0x00,0x0f,0xd0,
-0x00,0x00,0x0f,0xd0,0x00,0x00,0x0f,0xd0,0x00,0x00,0x0f,0xd0,0x00,0x00,0x00,0x00,
-0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
-0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
-0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
-0x01,0x00,0x00,0x88,0x01,0x00,0x00,0xb0,0x00,0x00,0x00,0x06,0x00,0x00,0x00,0x32,
-0x18,0x20,0x01,0x00,0x00,0x00,0x00,0x16,0xa8,0x21,0x06,0xb8,0x9c,0x21,0xff,0xf8,
-0xa8,0x97,0x00,0x00,0x9c,0xa0,0x00,0x04,0xd4,0x01,0x48,0x04,0x07,0xc0,0x07,0xeb,
-0xd4,0x01,0x08,0x00,0x85,0x21,0x00,0x04,0x84,0x21,0x00,0x00,0x44,0x00,0x48,0x00,
-0x9c,0x21,0x00,0x08,0x18,0x60,0x00,0xf7,0x9c,0x21,0xff,0xf8,0xa8,0x63,0xf2,0x01,
-0xd4,0x01,0x48,0x04,0x07,0xc0,0x07,0xc9,0xd4,0x01,0x08,0x00,0x85,0x21,0x00,0x04,
-0x84,0x21,0x00,0x00,0x44,0x00,0x48,0x00,0x9c,0x21,0x00,0x08,0x18,0x60,0x01,0x00,
-0x18,0x80,0x01,0x00,0x9c,0x21,0xff,0xe0,0xa8,0x63,0x03,0xb8,0xa8,0x84,0x06,0xc0,
-0xd4,0x01,0x48,0x1c,0xd4,0x01,0x08,0x00,0xd4,0x01,0x10,0x04,0xd4,0x01,0x70,0x08,
-0xd4,0x01,0x90,0x0c,0xd4,0x01,0xa0,0x10,0xd4,0x01,0xb0,0x14,0x07,0xc0,0x05,0x43,
-0xd4,0x01,0xc0,0x18,0x07,0xc0,0x04,0xe9,0x15,0x00,0x00,0x00,0x1a,0xe0,0x01,0x00,
-0xaa,0xf7,0x00,0x74,0xa8,0x60,0x98,0x14,0x07,0xc0,0x04,0xf2,0xa8,0x40,0xff,0xf0,
-0xe4,0x2b,0x10,0x00,0x10,0x00,0x00,0x06,0xa8,0x60,0x98,0x14,0x07,0xc0,0x04,0xe6,
-0x9c,0x60,0x00,0x00,0x07,0xc0,0x00,0x11,0x15,0x00,0x00,0x00,0x9c,0x80,0x5b,0x5b,
-0x07,0xc0,0x04,0xdc,0x18,0x40,0xcf,0xff,0xa8,0x42,0xff,0xff,0xc1,0x40,0x10,0x00,
-0x9c,0x40,0x00,0x00,0xc1,0x40,0x10,0x01,0xa8,0x80,0x82,0x00,0xa8,0x62,0x00,0x00,
-0x07,0xc0,0x08,0x05,0x9c,0x42,0x00,0x01,0xbc,0x22,0x00,0x08,0x13,0xff,0xff,0xfc,
-0xa8,0x80,0x82,0x00,0x9e,0x80,0x00,0xff,0x9c,0x42,0x00,0x01,0x18,0x60,0x01,0x00,
-0xa4,0x42,0x00,0x07,0xa8,0x63,0x06,0xb8,0xbc,0x22,0x00,0x00,0x10,0x00,0x00,0x06,
-0xe1,0xc2,0x18,0x00,0xa8,0x74,0x00,0x00,0x07,0xc0,0x0a,0xb7,0x9c,0x80,0x00,0x04,
-0xaa,0x8b,0x00,0x00,0x07,0xc0,0x09,0x21,0xa8,0x62,0x00,0x00,0xb9,0x6b,0x00,0x88,
-0xbd,0xab,0x00,0x1f,0x10,0x00,0x00,0x30,0xbd,0x4b,0x00,0x17,0xa5,0x6b,0x00,0x1f,
-0xbc,0x0b,0x00,0x02,0x10,0x00,0x00,0x06,0xbc,0x0b,0x00,0x18,0x10,0x00,0x00,0x13,
-0xa8,0x80,0x82,0x00,0x00,0x00,0x00,0x24,0x15,0x00,0x00,0x00,0x18,0x60,0x01,0x00,
-0xa8,0x82,0x00,0x00,0x07,0xc0,0x08,0xbc,0xa8,0x63,0x03,0xa4,0x07,0xc0,0x09,0x52,
-0xa8,0x62,0x00,0x00,0xa8,0x62,0x00,0x00,0xd8,0x0e,0x58,0x00,0x07,0xc0,0x09,0x14,
-0x9c,0x80,0x00,0x00,0xa8,0x62,0x00,0x00,0x07,0xc0,0x07,0xdf,0x9c,0x80,0x0c,0x00,
-0x00,0x00,0x00,0x15,0x15,0x00,0x00,0x00,0x07,0xc0,0x07,0xd7,0xa8,0x62,0x00,0x00,
-0x07,0xc0,0x08,0x4f,0xa8,0x62,0x00,0x00,0xa8,0x62,0x00,0x00,0x07,0xc0,0x08,0x19,
-0xa9,0xcb,0x00,0x00,0x84,0x77,0x00,0x00,0xe4,0x8b,0x18,0x00,0x10,0x00,0x00,0x06,
-0x15,0x00,0x00,0x00,0x9d,0xce,0x00,0x14,0xbc,0xae,0x00,0x28,0x10,0x00,0x00,0x06,
-0x15,0x00,0x00,0x00,0xa8,0x62,0x00,0x00,0x9c,0x80,0x00,0x60,0x07,0xc0,0x07,0xce,
-0x9c,0xa0,0x3b,0xff,0x07,0xc0,0x09,0xc7,0xa8,0x62,0x00,0x00,0x00,0x00,0x00,0x44,
-0x18,0x60,0x01,0x00,0x0c,0x00,0x00,0x42,0x18,0x60,0x01,0x00,0x8e,0xce,0x00,0x00,
-0xbc,0x36,0x00,0x00,0x10,0x00,0x00,0x3e,0x15,0x00,0x00,0x00,0xa8,0x62,0x00,0x00,
-0x9c,0x80,0x00,0x13,0x07,0xc0,0x07,0xaf,0x9e,0xd6,0x00,0x01,0x07,0xc0,0x04,0x8e,
-0xab,0x0b,0x00,0x00,0x07,0xc0,0x04,0x8c,0xaa,0x4b,0x00,0x00,0xa8,0x62,0x00,0x00,
-0x9c,0x80,0x00,0x13,0x07,0xc0,0x07,0xa7,0xa9,0xcb,0x00,0x00,0xa5,0x6b,0x00,0x0f,
-0xa7,0x18,0x00,0x0f,0xac,0x8b,0x00,0x0f,0xe5,0x58,0x58,0x00,0xe0,0x60,0x20,0x02,
-0xe0,0x83,0x20,0x04,0x9c,0x60,0x00,0x01,0xac,0x84,0xff,0xff,0x10,0x00,0x00,0x03,
-0xb8,0x84,0x00,0x5f,0x9c,0x60,0x00,0x00,0xe0,0x84,0x18,0x04,0xa4,0x84,0x00,0xff,
-0xbc,0x04,0x00,0x00,0x10,0x00,0x00,0x07,0xac,0x76,0x00,0x03,0xe0,0x80,0x18,0x02,
-0xe0,0x64,0x18,0x04,0xbd,0x83,0x00,0x00,0x13,0xff,0xff,0xe2,0xa8,0x62,0x00,0x00,
-0xa8,0x62,0x00,0x00,0x07,0xc0,0x07,0xf4,0xba,0xce,0x00,0x11,0x84,0x77,0x00,0x04,
-0xe5,0x8b,0x18,0x00,0x0c,0x00,0x00,0x11,0xba,0xd6,0x00,0x99,0x9e,0xd6,0x00,0x10,
-0xbc,0x56,0x00,0x10,0x10,0x00,0x00,0x0d,0x15,0x00,0x00,0x00,0xb9,0xce,0x00,0x19,
-0xb9,0xce,0x00,0x99,0x9d,0xce,0x00,0x0a,0xbc,0x4e,0x00,0x14,0x10,0x00,0x00,0x07,
-0xba,0x52,0x00,0x19,0xba,0x52,0x00,0x99,0x9e,0x52,0x00,0x1b,0xbc,0xb2,0x00,0x36,
-0x10,0x00,0x00,0x06,0x15,0x00,0x00,0x00,0xa8,0x62,0x00,0x00,0x9c,0x80,0x00,0x60,
-0x07,0xc0,0x07,0x89,0x9c,0xa0,0x3b,0xff,0x18,0x60,0x01,0x00,0x07,0xc0,0x06,0xf8,
-0xa8,0x63,0x00,0x38,0xa8,0x60,0x98,0x10,0x07,0xc0,0x07,0x57,0x9c,0x80,0x00,0x1a,
-0x03,0xff,0xff,0x7b,0x9c,0x42,0x00,0x01,0x00,0x50,0x0f,0xff,0x00,0x40,0x00,0x3b,
-0xf0,0x00,0x00,0x00,0x00,0x0b,0x9f,0x9f,0x82,0x98,0x00,0x00,0x00,0x00,0x00,0x00,  
-    
-#else
+const uint8_t fw_content[] = { // /*    
 0xC2, 0xED, 0x01, 0x00, 0x7C, 0x2A, 0x5E, 0x2F, 0x01, 0x00, 0x15, 0x4C, 0x00, 0x00, 0x15, 0x64, 
 0x01, 0x00, 0x00, 0x00, /*start load data*/0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 
 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 
@@ -738,12 +529,4288 @@ const uint8_t fw_content[] = { // /*
 0x9C, 0x21, 0xFF, 0xFC, 0x9C, 0x21, 0x00, 0x04, 0x44, 0x00, 0x48, 0x00, 0x84, 0x21, 0xFF, 0xFC, 
 0x18, 0x20, 0x01, 0x00, 0xA8, 0x21, 0x18, 0x68, 0x18, 0x40, 0x01, 0x00, 0xA8, 0x42, 0x03, 0x5C, 
 0x44, 0x00, 0x10, 0x00, 0x15, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
-#endif
-#endif
 };
+#else
+
+const uint16_t fw_content[]=
+{
+#asm
+
+
+DW 2dc2h
+DW 0007h
+DW 0c70h
+DW 003eh
+DW 0100h
+DW 0400h
+DW 0000h
+DW 0000h
+DW 181ah
+DW 0005h
+DW 0000h
+DW 0000h
+DW 0f00h
+DW 0340h
+DW 3000h
+DW 3403h
+
+DW 0000h
+DW 003ch
+DW 000dh
+DW 03c0h
+DW 00d0h
+DW 3c00h
+DW 0d00h
+DW 0000h
+DW 100fh
+DW 0003h
+DW 00f0h
+DW 0034h
+DW 0f00h
+DW 0340h
+DW 3000h
+DW 3403h
+
+DW 0000h
+DW 003ch
+DW 000dh
+DW 03c0h
+DW 00d0h
+DW 3c00h
+DW 0d00h
+DW 0000h
+DW 100fh
+DW 0003h
+DW 00f0h
+DW 0034h
+DW 0000h
+DW 0000h
+DW 0000h
+DW 0000h
+
+DW 0000h
+DW 0000h
+DW 0000h
+DW 0000h
+DW 0100h
+DW 1400h
+DW 0040h
+DW 0000h
+DW 0000h
+DW 0000h
+DW 0000h
+DW 0000h
+DW 0000h
+DW 0000h
+DW 0000h
+DW 0000h
+
+DW 0000h
+DW 0000h
+DW 0000h
+DW 0000h
+DW 0000h
+DW 0000h
+DW 1000h
+DW 0000h
+DW 1c05h
+DW 0006h
+DW 0060h
+DW 0051h
+DW 0600h
+DW 11b0h
+DW 0000h
+DW 1000h
+
+DW 3401h
+DW 0007h
+DW 0000h
+DW 0008h
+DW 0004h
+DW 0408h
+DW 2f40h
+DW 0000h
+DW 0200h
+DW 0400h
+DW 0ff0h
+DW 003fh
+DW 0001h
+DW 0018h
+DW 00a0h
+DW 0180h
+
+DW 0500h
+DW 1400h
+DW 3000h
+DW 000eh
+DW 001eh
+DW 0004h
+DW 00a0h
+DW 0000h
+DW 0000h
+DW 0000h
+DW 0000h
+DW 0040h
+DW 0000h
+DW 000ch
+DW 04b0h
+DW 0c80h
+
+DW 1001h
+DW 1816h
+DW 0000h
+DW 0000h
+DW 0000h
+DW 0000h
+DW 0000h
+DW 0000h
+DW 1800h
+DW 0042h
+DW 1a90h
+DW 0422h
+DW 0b0dh
+DW 02afh
+DW 0001h
+DW 2f37h
+
+DW 0610h
+DW 3574h
+DW 000ch
+DW 0180h
+DW 005dh
+DW 0000h
+DW 0760h
+DW 0000h
+DW 0000h
+DW 0000h
+DW 0020h
+DW 0004h
+DW 2f03h
+DW 0004h
+DW 0000h
+DW 0000h
+
+DW 0100h
+DW 200ch
+DW 002eh
+DW 0040h
+DW 0080h
+DW 1880h
+DW 0060h
+DW 0500h
+DW 0000h
+DW 0000h
+DW 0000h
+DW 0000h
+DW 0000h
+DW 2000h
+DW 1201h
+DW 0000h
+
+DW 0000h
+DW 0c04h
+DW 1a87h
+DW 0748h
+DW 1c58h
+DW 3c86h
+DW 0e0fh
+DW 192eh
+DW 0200h
+DW 0752h
+DW 0100h
+DW 2a01h
+DW 1840h
+DW 3016h
+DW 384ah
+DW 3fffh
+
+DW 01d4h
+DW 12c0h
+DW 3e21h
+DW 0430h
+DW 1c00h
+DW 0102h
+DW 0010h
+DW 2129h
+DW 0300h
+DW 0b80h
+DW 2184h
+DW 3500h
+DW 2001h
+DW 0842h
+DW 084eh
+DW 0008h
+
+DW 02b8h
+DW 2001h
+DW 1d40h
+DW 1c00h
+DW 2208h
+DW 0253h
+DW 1002h
+DW 3027h
+DW 0000h
+DW 0750h
+DW 0900h
+DW 3503h
+DW 0001h
+DW 1063h
+DW 001dh
+DW 0712h
+
+DW 01d4h
+DW 0020h
+DW 09e0h
+DW 0025h
+DW 2004h
+DW 0113h
+DW 3001h
+DW 0027h
+DW 0a00h
+DW 3aa8h
+DW 0004h
+DW 01c0h
+DW 04c0h
+DW 2380h
+DW 076ah
+DW 0000h
+
+DW 2be1h
+DW 2281h
+DW 0184h
+DW 0018h
+DW 0c00h
+DW 02deh
+DW 03e0h
+DW 18eah
+DW 302dh
+DW 2e97h
+DW 3006h
+DW 3841h
+DW 186bh
+DW 3000h
+DW 08b8h
+DW 0000h
+
+DW 24e5h
+DW 00a1h
+DW 0100h
+DW 0000h
+DW 2807h
+DW 01deh
+DW 0000h
+DW 2978h
+DW 0220h
+DW 0b94h
+DW 0287h
+DW 0400h
+DW 0000h
+DW 140ch
+DW 0001h
+DW 0000h
+
+DW 05aah
+DW 0001h
+DW 38c0h
+DW 0018h
+DW 253fh
+DW 2293h
+DW 0001h
+DW 0004h
+DW 0600h
+DW 1380h
+DW 2188h
+DW 3940h
+DW 206eh
+DW 0000h
+DW 0001h
+DW 00c0h
+
+DW 0015h
+DW 0000h
+DW 0a90h
+DW 0031h
+DW 1f00h
+DW 3c62h
+DW 0fffh
+DW 0e2fh
+DW 0000h
+DW 3c4ch
+DW 1fffh
+DW 0579h
+DW 0000h
+DW 3800h
+DW 3529h
+DW 3fffh
+
+DW 32bch
+DW 3ffch
+DW 00cfh
+DW 0000h
+DW 2806h
+DW 2182h
+DW 3049h
+DW 3001h
+DW 1304h
+DW 0aa3h
+DW 0008h
+DW 00c0h
+DW 3fffh
+DW 3befh
+DW 3529h
+DW 3fffh
+
+DW 029ch
+DW 1001h
+DW 29d0h
+DW 3ff3h
+DW 3cffh
+DW 3cbah
+DW 0fffh
+DW 0003h
+DW 0600h
+DW 02a0h
+DW 0986h
+DW 01c1h
+DW 04c0h
+DW 2328h
+DW 082ah
+DW 0000h
+
+DW 3f03h
+DW 2fffh
+DW 29dfh
+DW 3ff3h
+DW 05ffh
+DW 0086h
+DW 01c0h
+DW 0861h
+DW 0000h
+DW 0610h
+DW 0004h
+DW 2141h
+DW 00c1h
+DW 1820h
+DW 0418h
+DW 0300h
+
+DW 0186h
+DW 0002h
+DW 1861h
+DW 0030h
+DW 0714h
+DW 0006h
+DW 0180h
+DW 0011h
+DW 0048h
+DW 0670h
+DW 0002h
+DW 2708h
+DW 3f21h
+DW 13a3h
+DW 001dh
+DW 021ch
+
+DW 01d4h
+DW 1120h
+DW 1d41h
+DW 0200h
+DW 1400h
+DW 0007h
+DW 0041h
+DW 0075h
+DW 0c90h
+DW 0750h
+DW 0a00h
+DW 2a44h
+DW 00c3h
+DW 1000h
+DW 06e9h
+DW 0000h
+
+DW 23bch
+DW 0000h
+DW 00c0h
+DW 0000h
+DW 2416h
+DW 3d0eh
+DW 0000h
+DW 08afh
+DW 0008h
+DW 0040h
+DW 2000h
+DW 2583h
+DW 008eh
+DW 3808h
+DW 0409h
+DW 0000h
+
+DW 03a4h
+DW 3fc1h
+DW 0a8fh
+DW 3fe0h
+DW 20ffh
+DW 018bh
+DW 0009h
+DW 2d2ah
+DW 0000h
+DW 001ch
+DW 304ch
+DW 27a7h
+DW 0152h
+DW 3000h
+DW 032bh
+DW 0002h
+
+DW 3f13h
+DW 2fffh
+DW 0a8fh
+DW 3fe0h
+DW 03ffh
+DW 3ffch
+DW 1effh
+DW 33a7h
+DW 0400h
+DW 02a0h
+DW 3ff8h
+DW 01ffh
+DW 04c0h
+DW 225ch
+DW 0b4ah
+DW 0000h
+
+DW 3f03h
+DW 2bffh
+DW 29deh
+DW 0033h
+DW 0504h
+DW 0086h
+DW 0140h
+DW 0861h
+DW 0000h
+DW 0610h
+DW 0004h
+DW 2141h
+DW 00c1h
+DW 1820h
+DW 0418h
+DW 0300h
+
+DW 0186h
+DW 0002h
+DW 0441h
+DW 1200h
+DW 1c00h
+DW 0086h
+DW 0180h
+DW 2827h
+DW 0100h
+DW 0670h
+DW 0ff2h
+DW 383dh
+DW 2085h
+DW 1020h
+DW 001dh
+DW 0104h
+
+DW 03a8h
+DW 0001h
+DW 0a80h
+DW 2618h
+DW 2811h
+DW 0292h
+DW 0000h
+DW 0075h
+DW 0848h
+DW 001ch
+DW 304ch
+DW 3520h
+DW 0801h
+DW 1000h
+DW 060bh
+DW 0054h
+
+DW 02d4h
+DW 2060h
+DW 09c0h
+DW 0018h
+DW 1c00h
+DW 200bh
+DW 11a1h
+DW 0861h
+DW 0800h
+DW 0610h
+DW 0002h
+DW 2100h
+DW 0041h
+DW 1010h
+DW 0004h
+DW 0012h
+
+DW 219ch
+DW 3000h
+DW 0a40h
+DW 0029h
+DW 1c07h
+DW 3c86h
+DW 0f0fh
+DW 296eh
+DW 0b00h
+DW 0750h
+DW 0100h
+DW 2701h
+DW 38c0h
+DW 2000h
+DW 044ah
+DW 0000h
+
+DW 009ch
+DW 3802h
+DW 1d44h
+DW 1c00h
+DW 1408h
+DW 2007h
+DW 10c4h
+DW 30eah
+DW 0000h
+DW 001ch
+DW 307ch
+DW 3520h
+DW 0801h
+DW 1000h
+DW 0a2ah
+DW 0200h
+
+DW 2ea8h
+DW 0001h
+DW 1bc0h
+DW 0001h
+DW 1000h
+DW 0000h
+DW 0030h
+DW 2027h
+DW 1f00h
+DW 0273h
+DW 200ah
+DW 01c8h
+DW 07c0h
+DW 31ech
+DW 0c09h
+DW 3880h
+
+DW 2185h
+DW 3000h
+DW 1840h
+DW 0008h
+DW 0400h
+DW 0106h
+DW 1040h
+DW 3061h
+DW 0800h
+DW 0110h
+DW 0480h
+DW 2700h
+DW 0021h
+DW 3040h
+DW 3219h
+DW 3b3fh
+
+DW 01d4h
+DW 1040h
+DW 1d40h
+DW 1c00h
+DW 1408h
+DW 2007h
+DW 0104h
+DW 0075h
+DW 0008h
+DW 0750h
+DW 0900h
+DW 2a03h
+DW 0043h
+DW 3800h
+DW 0438h
+DW 0500h
+
+DW 238ch
+DW 3002h
+DW 2a60h
+DW 0014h
+DW 2507h
+DW 21cbh
+DW 0002h
+DW 0004h
+DW 0400h
+DW 12a4h
+DW 000ch
+DW 0000h
+DW 0000h
+DW 3014h
+DW 3a59h
+DW 3fffh
+
+DW 32e5h
+DW 00a2h
+DW 0100h
+DW 0000h
+DW 1c03h
+DW 0296h
+DW 0010h
+DW 00b6h
+DW 0c28h
+DW 0a30h
+DW 000ah
+DW 2903h
+DW 00a5h
+DW 201ch
+DW 06eah
+DW 0000h
+
+DW 25b8h
+DW 2c02h
+DW 09c0h
+DW 0020h
+DW 074eh
+DW 1f00h
+DW 05b0h
+DW 3027h
+DW 0038h
+DW 0a30h
+DW 0006h
+DW 3903h
+DW 1023h
+DW 0002h
+DW 0001h
+DW 0540h
+
+DW 2185h
+DW 0000h
+DW 28c1h
+DW 0020h
+DW 0714h
+DW 3ffch
+DW 0c7fh
+DW 1baah
+DW 0000h
+DW 3aa0h
+DW 0006h
+DW 2700h
+DW 02a0h
+DW 3000h
+DW 3c09h
+DW 200fh
+
+DW 0007h
+DW 3c1fh
+DW 09c4h
+DW 0020h
+DW 2801h
+DW 018ah
+DW 3000h
+DW 3fc1h
+DW 2cffh
+DW 3aa2h
+DW 0008h
+DW 2d00h
+DW 1060h
+DW 1005h
+DW 002dh
+DW 0206h
+
+DW 209ch
+DW 3801h
+DW 2a81h
+DW 0023h
+DW 1800h
+DW 200bh
+DW 30e1h
+DW 3fc1h
+DW 2dffh
+DW 0aa0h
+DW 0006h
+DW 2140h
+DW 0021h
+DW 1040h
+DW 0218h
+DW 0000h
+
+DW 0184h
+DW 1001h
+DW 1850h
+DW 0030h
+DW 0608h
+DW 0106h
+DW 00c0h
+DW 0011h
+DW 0048h
+DW 0670h
+DW 0002h
+DW 2705h
+DW 3f21h
+DW 13c3h
+DW 001dh
+DW 0312h
+
+DW 01d4h
+DW 0020h
+DW 1d40h
+DW 0400h
+DW 1404h
+DW 0007h
+DW 1087h
+DW 30e6h
+DW 1a00h
+DW 3af0h
+DW 0000h
+DW 0300h
+DW 0000h
+DW 1458h
+DW 0218h
+DW 0300h
+
+DW 00b4h
+DW 0541h
+DW 3840h
+DW 0028h
+DW 2008h
+DW 210bh
+DW 0022h
+DW 2de6h
+DW 1c00h
+DW 0ae0h
+DW 1004h
+DW 3916h
+DW 2882h
+DW 0000h
+DW 0001h
+DW 0380h
+
+DW 2185h
+DW 3000h
+DW 3a80h
+DW 0010h
+DW 1800h
+DW 0580h
+DW 3000h
+DW 3001h
+DW 0608h
+DW 0ea0h
+DW 01a6h
+DW 2712h
+DW 0060h
+DW 3004h
+DW 002dh
+DW 0686h
+
+DW 228ch
+DW 3c01h
+DW 3bc0h
+DW 0000h
+DW 1000h
+DW 0000h
+DW 1040h
+DW 0861h
+DW 0c00h
+DW 0b60h
+DW 2700h
+DW 2143h
+DW 0021h
+DW 1030h
+DW 0218h
+DW 0000h
+
+DW 0184h
+DW 1001h
+DW 1850h
+DW 0030h
+DW 0408h
+DW 2001h
+DW 0004h
+DW 0867h
+DW 1000h
+DW 0ee0h
+DW 0006h
+DW 2721h
+DW 3f21h
+DW 13d3h
+DW 001dh
+DW 0104h
+
+DW 03a4h
+DW 3c01h
+DW 1d40h
+DW 1200h
+DW 3c08h
+DW 000ah
+DW 0020h
+DW 0004h
+DW 1300h
+DW 0750h
+DW 0080h
+DW 2f00h
+DW 0002h
+DW 000ch
+DW 0001h
+DW 0240h
+
+DW 02bch
+DW 0000h
+DW 00c0h
+DW 0000h
+DW 180ah
+DW 0580h
+DW 3000h
+DW 3fc1h
+DW 05ffh
+DW 0ea1h
+DW 0186h
+DW 2719h
+DW 0060h
+DW 0014h
+DW 0000h
+DW 03c0h
+
+DW 02a8h
+DW 0002h
+DW 0180h
+DW 0058h
+DW 0000h
+DW 0000h
+DW 0080h
+DW 18eah
+DW 3c18h
+DW 001fh
+DW 102ch
+DW 273ch
+DW 0060h
+DW 0008h
+DW 0000h
+DW 02c0h
+
+DW 2185h
+DW 2000h
+DW 0180h
+DW 0058h
+DW 2800h
+DW 258eh
+DW 3a41h
+DW 3fc1h
+DW 37ffh
+DW 0054h
+DW 0000h
+DW 2700h
+DW 0060h
+DW 3014h
+DW 0809h
+DW 0000h
+
+DW 0007h
+DW 280bh
+DW 015eh
+DW 0000h
+DW 0500h
+DW 0086h
+DW 0080h
+DW 0861h
+DW 0000h
+DW 0610h
+DW 0004h
+DW 1101h
+DW 0800h
+DW 3001h
+DW 0219h
+DW 0300h
+
+DW 219ch
+DW 23fch
+DW 3a4fh
+DW 0020h
+DW 14ffh
+DW 2007h
+DW 0044h
+DW 012fh
+DW 0000h
+DW 0040h
+DW 2000h
+DW 3501h
+DW 0801h
+DW 1c00h
+DW 2c00h
+DW 3680h
+
+DW 209ch
+DW 0801h
+DW 0000h
+DW 0000h
+DW 051fh
+DW 0086h
+DW 3040h
+DW 3001h
+DW 1902h
+DW 0273h
+DW 1006h
+DW 2a03h
+DW 1860h
+DW 1c42h
+DW 2c00h
+DW 3201h
+
+DW 009ch
+DW 2802h
+DW 0071h
+DW 00f0h
+DW 28c5h
+DW 2182h
+DW 0189h
+DW 22eeh
+DW 0c00h
+DW 2e96h
+DW 3006h
+DW 2f03h
+DW 000bh
+DW 0000h
+DW 0001h
+DW 0300h
+
+DW 24ach
+DW 3401h
+DW 0e00h
+DW 0628h
+DW 2002h
+DW 2197h
+DW 1041h
+DW 20efh
+DW 0000h
+DW 0040h
+DW 0000h
+DW 2f02h
+DW 0004h
+DW 3000h
+DW 0609h
+DW 0340h
+
+DW 0007h
+DW 1c0bh
+DW 09cch
+DW 0020h
+DW 0001h
+DW 0000h
+DW 1090h
+DW 0861h
+DW 0400h
+DW 12f0h
+DW 0000h
+DW 04c0h
+DW 3fffh
+DW 17afh
+DW 0001h
+DW 0000h
+
+DW 0007h
+DW 340bh
+DW 09cbh
+DW 0018h
+DW 030dh
+DW 3ffch
+DW 0e8fh
+DW 182ah
+DW 1098h
+DW 0610h
+DW 0002h
+DW 1100h
+DW 0800h
+DW 3001h
+DW 0219h
+DW 0200h
+
+DW 219ch
+DW 23fch
+DW 3a8fh
+DW 0025h
+DW 1c00h
+DW 0282h
+DW 0420h
+DW 0075h
+DW 0448h
+DW 001ch
+DW 006ch
+DW 351fh
+DW 0801h
+DW 1400h
+DW 0218h
+DW 0100h
+
+DW 2184h
+DW 0000h
+DW 0440h
+DW 1200h
+DW 1c00h
+DW 0086h
+DW 0080h
+DW 0867h
+DW 34ffh
+DW 0753h
+DW 0100h
+DW 2901h
+DW 0043h
+DW 103ch
+DW 001dh
+DW 0212h
+
+DW 22bch
+DW 0400h
+DW 0100h
+DW 0000h
+DW 140ch
+DW 2007h
+DW 0000h
+DW 2006h
+DW 0001h
+DW 02a0h
+DW 1986h
+DW 2a06h
+DW 0084h
+DW 1fe0h
+DW 3c00h
+DW 2280h
+
+DW 0494h
+DW 0002h
+DW 09c0h
+DW 0018h
+DW 070fh
+DW 0b00h
+DW 0a20h
+DW 20aah
+DW 0000h
+DW 0000h
+DW 2000h
+DW 2141h
+DW 0021h
+DW 2020h
+DW 0601h
+DW 2240h
+
+DW 0007h
+DW 301bh
+DW 3a84h
+DW 1a98h
+DW 05afh
+DW 0086h
+DW 0080h
+DW 0861h
+DW 0000h
+DW 0610h
+DW 0004h
+DW 1101h
+DW 0800h
+DW 3001h
+DW 0219h
+DW 0300h
+
+DW 219ch
+DW 13fch
+DW 018dh
+DW 0058h
+DW 1800h
+DW 0600h
+DW 0000h
+DW 0075h
+DW 0410h
+DW 0060h
+DW 0014h
+DW 2a00h
+DW 1a63h
+DW 2160h
+DW 384ah
+DW 2607h
+
+DW 02a8h
+DW 2001h
+DW 1d4fh
+DW 1200h
+DW 1428h
+DW 2007h
+DW 0000h
+DW 0075h
+DW 0870h
+DW 0750h
+DW 0900h
+DW 3503h
+DW 2001h
+DW 1042h
+DW 001dh
+DW 052ch
+
+DW 01d4h
+DW 2300h
+DW 1d41h
+DW 3400h
+DW 141ch
+DW 0007h
+DW 320eh
+DW 3001h
+DW 0003h
+DW 0753h
+DW 0f00h
+DW 01c9h
+DW 03c0h
+DW 1598h
+DW 0001h
+DW 0000h
+
+DW 2294h
+DW 0001h
+DW 3bc0h
+DW 0008h
+DW 1000h
+DW 0000h
+DW 0070h
+DW 1806h
+DW 0001h
+DW 0060h
+DW 0018h
+DW 2a00h
+DW 0063h
+DW 1000h
+DW 3000h
+DW 2f00h
+
+DW 04a8h
+DW 206ah
+DW 2dc5h
+DW 1600h
+DW 1a00h
+DW 0780h
+DW 2000h
+DW 3deah
+DW 3400h
+DW 02a1h
+DW 0986h
+DW 01c5h
+DW 03c0h
+DW 2198h
+DW 340ah
+DW 3c3fh
+
+DW 2be4h
+DW 0040h
+DW 0100h
+DW 0000h
+DW 1806h
+DW 3d00h
+DW 3ffch
+DW 3001h
+DW 1a03h
+DW 0271h
+DW 0006h
+DW 01c0h
+DW 3ebfh
+DW 1617h
+DW 0001h
+DW 0000h
+
+DW 02a8h
+DW 3ffdh
+DW 0c1fh
+DW 0410h
+DW 1c00h
+DW 0202h
+DW 1000h
+DW 1030h
+DW 0120h
+DW 0060h
+DW 0016h
+DW 2740h
+DW 3fc0h
+DW 1fffh
+DW 3c00h
+DW 1501h
+
+DW 23a8h
+DW 305dh
+DW 29d2h
+DW 0033h
+DW 2501h
+DW 033ah
+DW 0070h
+DW 1baeh
+DW 0300h
+DW 3ae0h
+DW 2004h
+DW 3801h
+DW 1043h
+DW 2000h
+DW 1601h
+DW 0000h
+
+DW 23a8h
+DW 2075h
+DW 2e05h
+DW 0610h
+DW 0700h
+DW 1f00h
+DW 09f0h
+DW 1baah
+DW 0000h
+DW 2ee4h
+DW 0006h
+DW 2f62h
+DW 00abh
+DW 007ch
+DW 1001h
+DW 32c0h
+
+DW 0bbdh
+DW 1c01h
+DW 3a61h
+DW 0012h
+DW 3d1fh
+DW 014ah
+DW 0090h
+DW 0004h
+DW 0900h
+DW 0af4h
+DW 3009h
+DW 2f42h
+DW 0072h
+DW 0020h
+DW 0001h
+DW 3600h
+
+DW 12bch
+DW 0800h
+DW 0100h
+DW 0000h
+DW 1c0ch
+DW 3e02h
+DW 0fefh
+DW 0000h
+DW 0a03h
+DW 0056h
+DW 0000h
+DW 0400h
+DW 0300h
+DW 3620h
+DW 0b2bh
+DW 0300h
+
+DW 0010h
+DW 1004h
+DW 2bc0h
+DW 0004h
+DW 1018h
+DW 0400h
+DW 06d0h
+DW 202ah
+DW 0082h
+DW 0000h
+DW 2030h
+DW 0560h
+DW 0000h
+DW 3000h
+DW 0628h
+DW 1080h
+
+DW 009eh
+DW 0403h
+DW 3e00h
+DW 0818h
+DW 2203h
+DW 035bh
+DW 0087h
+DW 00b6h
+DW 0218h
+DW 001dh
+DW 303ch
+DW 2a0bh
+DW 1860h
+DW 203eh
+DW 060ah
+DW 05a6h
+
+DW 2be1h
+DW 21c1h
+DW 0074h
+DW 00f0h
+DW 262bh
+DW 012eh
+DW 0010h
+DW 182ah
+DW 1198h
+DW 0b60h
+DW 0900h
+DW 2a04h
+DW 0096h
+DW 3000h
+DW 0a09h
+DW 0000h
+
+DW 0007h
+DW 000fh
+DW 3aa3h
+DW 0022h
+DW 1000h
+DW 018ah
+DW 00e0h
+DW 08efh
+DW 2400h
+DW 0041h
+DW 0000h
+DW 2903h
+DW 3f74h
+DW 03ffh
+DW 063eh
+DW 221ch
+
+DW 23a4h
+DW 0401h
+DW 3bc0h
+DW 0000h
+DW 1000h
+DW 0c00h
+DW 0600h
+DW 25aah
+DW 0000h
+DW 02a0h
+DW 2986h
+DW 01c5h
+DW 03c0h
+DW 3090h
+DW 0a09h
+DW 0000h
+
+DW 209ch
+DW 0001h
+DW 2d80h
+DW 0600h
+DW 070eh
+DW 1f00h
+DW 0aa0h
+DW 1baah
+DW 0000h
+DW 2e94h
+DW 3006h
+DW 2f3fh
+DW 0012h
+DW 0000h
+DW 0001h
+DW 0b00h
+
+DW 02d8h
+DW 3d60h
+DW 3940h
+DW 002dh
+DW 1c24h
+DW 0302h
+DW 03f0h
+DW 2969h
+DW 3f00h
+DW 3aa0h
+DW 0006h
+DW 01c0h
+DW 06c0h
+DW 30ach
+DW 0809h
+DW 1e00h
+
+DW 2018h
+DW 0005h
+DW 2a80h
+DW 0023h
+DW 0700h
+DW 1f00h
+DW 0040h
+DW 18eah
+DW 2018h
+DW 0060h
+DW 0016h
+DW 2a00h
+DW 008eh
+DW 1c00h
+DW 3c00h
+DW 0001h
+
+DW 23a8h
+DW 305dh
+DW 09ceh
+DW 0020h
+DW 2808h
+DW 01bah
+DW 0000h
+DW 00b6h
+DW 0e20h
+DW 001ch
+DW 206ch
+DW 2706h
+DW 0080h
+DW 2538h
+DW 06bbh
+DW 0480h
+
+DW 228ch
+DW 3c02h
+DW 3b90h
+DW 001ah
+DW 3c5dh
+DW 0016h
+DW 0000h
+DW 1baah
+DW 0000h
+DW 0040h
+DW 0000h
+DW 3603h
+DW 1802h
+DW 3031h
+DW 0a09h
+DW 0000h
+
+DW 009ch
+DW 0402h
+DW 0070h
+DW 01b0h
+DW 1c13h
+DW 0302h
+DW 0004h
+DW 15e5h
+DW 1800h
+DW 0af0h
+DW 0002h
+DW 0400h
+DW 0000h
+DW 300ch
+DW 0a09h
+DW 0080h
+
+DW 22a8h
+DW 0002h
+DW 2a80h
+DW 001bh
+DW 1c00h
+DW 0202h
+DW 0df0h
+DW 3027h
+DW 0200h
+DW 001ch
+DW 106ch
+DW 0542h
+DW 0000h
+DW 0000h
+DW 0000h
+DW 1b40h
+
+DW 1794h
+DW 0002h
+DW 3bc0h
+DW 0002h
+DW 1000h
+DW 0000h
+DW 0310h
+DW 3027h
+DW 3f00h
+DW 1e50h
+DW 000bh
+DW 2909h
+DW 00a5h
+DW 20fch
+DW 06eah
+DW 0000h
+
+DW 009ch
+DW 2002h
+DW 0077h
+DW 0170h
+DW 3afeh
+DW 0252h
+DW 0100h
+DW 1806h
+DW 0001h
+DW 3aa0h
+DW 0008h
+DW 01c0h
+DW 06c0h
+DW 235ch
+DW 063ah
+DW 0806h
+
+DW 2018h
+DW 0005h
+DW 2a80h
+DW 0023h
+DW 0700h
+DW 1b00h
+DW 0d30h
+DW 18eah
+DW 2c17h
+DW 0273h
+DW 1006h
+DW 2701h
+DW 0080h
+DW 2020h
+DW 002dh
+DW 0346h
+
+DW 34bdh
+DW 0001h
+DW 0100h
+DW 0000h
+DW 1806h
+DW 000bh
+DW 00e2h
+DW 1827h
+DW 0700h
+DW 0270h
+DW 1008h
+DW 3600h
+DW 1802h
+DW 2034h
+DW 002dh
+DW 0408h
+
+DW 228ch
+DW 3402h
+DW 1a40h
+DW 0029h
+DW 2807h
+DW 01bah
+DW 0000h
+DW 296eh
+DW 0b00h
+DW 0270h
+DW 2008h
+DW 01d3h
+DW 05c0h
+DW 3394h
+DW 0c09h
+DW 000eh
+
+DW 228ch
+DW 3401h
+DW 2d80h
+DW 0600h
+DW 140ch
+DW 015eh
+DW 0180h
+DW 08afh
+DW 0000h
+DW 0040h
+DW 3000h
+DW 2700h
+DW 00a0h
+DW 2008h
+DW 0a2ah
+DW 0000h
+
+DW 2ea8h
+DW 0001h
+DW 09c0h
+DW 0020h
+DW 07dfh
+DW 1700h
+DW 0da0h
+DW 3027h
+DW 0200h
+DW 3aa0h
+DW 0006h
+DW 2700h
+DW 0080h
+DW 3004h
+DW 0a09h
+DW 0000h
+
+DW 3f03h
+DW 33ffh
+DW 09cch
+DW 1030h
+DW 0c00h
+DW 018ah
+DW 00e0h
+DW 18e7h
+DW 36ffh
+DW 0ef3h
+DW 1004h
+DW 0403h
+DW 0000h
+DW 20ech
+DW 1601h
+DW 0000h
+
+DW 20b4h
+DW 0541h
+DW 2840h
+DW 0028h
+DW 2004h
+DW 218fh
+DW 0022h
+DW 2de5h
+DW 1000h
+DW 0ee0h
+DW 0006h
+DW 3914h
+DW 1885h
+DW 0000h
+DW 0001h
+DW 0c80h
+
+DW 37e0h
+DW 01c2h
+DW 28c0h
+DW 0030h
+DW 1c13h
+DW 019ah
+DW 0120h
+DW 18eeh
+DW 0200h
+DW 1f80h
+DW 0187h
+DW 2100h
+DW 0063h
+DW 2000h
+DW 083bh
+DW 1700h
+
+DW 02d4h
+DW 0060h
+DW 09c2h
+DW 0021h
+DW 381ah
+DW 0212h
+DW 0020h
+DW 25f8h
+DW 0020h
+DW 1210h
+DW 0008h
+DW 3600h
+DW 1002h
+DW 104ah
+DW 002dh
+DW 0908h
+
+DW 03a4h
+DW 3c02h
+DW 3b8fh
+DW 0018h
+DW 2404h
+DW 0392h
+DW 00f0h
+DW 2129h
+DW 0700h
+DW 0ee0h
+DW 0006h
+DW 3612h
+DW 2002h
+DW 2030h
+DW 002dh
+DW 050eh
+
+DW 02d4h
+DW 0060h
+DW 0182h
+DW 0058h
+DW 1c00h
+DW 000bh
+DW 0189h
+DW 00b7h
+DW 1690h
+DW 1760h
+DW 0300h
+DW 2a0bh
+DW 008eh
+DW 1c00h
+DW 2c00h
+DW 2241h
+
+DW 23a8h
+DW 305dh
+DW 28ceh
+DW 0028h
+DW 180ch
+DW 025eh
+DW 1220h
+DW 2179h
+DW 0020h
+DW 0040h
+DW 1000h
+DW 0542h
+DW 0000h
+DW 1000h
+DW 0b79h
+DW 2000h
+
+DW 25a4h
+DW 3c02h
+DW 2a87h
+DW 001bh
+DW 3800h
+DW 0296h
+DW 0070h
+DW 2027h
+DW 0100h
+DW 001ch
+DW 005ch
+DW 2728h
+DW 3fc0h
+DW 3200h
+DW 0828h
+DW 0500h
+
+DW 3f07h
+DW 03fbh
+DW 2a81h
+DW 001bh
+DW 1400h
+DW 025eh
+DW 3000h
+DW 3001h
+DW 2305h
+DW 3aa2h
+DW 0006h
+DW 0000h
+DW 0200h
+DW 1710h
+DW 0001h
+DW 0000h
+
+DW 2018h
+DW 0005h
+DW 2a80h
+DW 0023h
+DW 0700h
+DW 1b00h
+DW 0710h
+DW 18eah
+DW 0817h
+DW 0272h
+DW 3008h
+DW 2707h
+DW 0060h
+DW 2000h
+DW 002dh
+DW 0708h
+
+DW 02d8h
+DW 3480h
+DW 09c1h
+DW 0020h
+DW 1808h
+DW 200bh
+DW 0121h
+DW 0000h
+DW 3802h
+DW 0b62h
+DW 2200h
+DW 2383h
+DW 0082h
+DW 3048h
+DW 034bh
+DW 0000h
+
+DW 0010h
+DW 1c00h
+DW 09c0h
+DW 0018h
+DW 3410h
+DW 0182h
+DW 0015h
+DW 00b5h
+DW 0418h
+DW 0270h
+DW 1006h
+DW 3602h
+DW 1802h
+DW 3038h
+DW 0609h
+DW 0400h
+
+DW 03e2h
+DW 2282h
+DW 0bc8h
+DW 000dh
+DW 1000h
+DW 0000h
+DW 1030h
+DW 0005h
+DW 0000h
+DW 0278h
+DW 1008h
+DW 2a00h
+DW 006eh
+DW 1c00h
+DW 1c00h
+DW 1dc1h
+
+DW 009ch
+DW 1002h
+DW 3a57h
+DW 3fdah
+DW 3cffh
+DW 012eh
+DW 0010h
+DW 0004h
+DW 0300h
+DW 0270h
+DW 1006h
+DW 2700h
+DW 0060h
+DW 1000h
+DW 063ah
+DW 3fc0h
+
+DW 23bch
+DW 0000h
+DW 0100h
+DW 0000h
+DW 0c05h
+DW 018ah
+DW 01c0h
+DW 0cafh
+DW 0900h
+DW 0040h
+DW 0000h
+DW 0542h
+DW 0000h
+DW 2000h
+DW 002dh
+DW 0786h
+
+DW 03bch
+DW 3801h
+DW 00c3h
+DW 0000h
+DW 2205h
+DW 020fh
+DW 000ah
+DW 0000h
+DW 0500h
+DW 0a30h
+DW 000ah
+DW 3887h
+DW 2083h
+DW 200ah
+DW 002dh
+DW 0728h
+
+DW 228ch
+DW 3002h
+DW 2a81h
+DW 001bh
+DW 1c00h
+DW 0302h
+DW 07f0h
+DW 2027h
+DW 0a00h
+DW 001dh
+DW 105ch
+DW 2918h
+DW 00a5h
+DW 21fch
+DW 06eah
+DW 0000h
+
+DW 009ch
+DW 2402h
+DW 0074h
+DW 0170h
+DW 1c6ah
+DW 0282h
+DW 0000h
+DW 202ah
+DW 0c8bh
+DW 001eh
+DW 305ch
+DW 2a17h
+DW 006eh
+DW 0000h
+DW 2000h
+DW 2100h
+
+DW 0015h
+DW 0000h
+DW 28e0h
+DW 0020h
+DW 1c12h
+DW 0182h
+DW 2100h
+DW 20f8h
+DW 08a0h
+DW 12f2h
+DW 0003h
+DW 0400h
+DW 0000h
+DW 140ch
+DW 0001h
+DW 0000h
+
+DW 009eh
+DW 0402h
+DW 2a80h
+DW 001bh
+DW 0700h
+DW 1700h
+DW 04a0h
+DW 2027h
+DW 3400h
+DW 2e95h
+DW 3ff6h
+DW 2f3fh
+DW 004bh
+DW 0004h
+DW 0001h
+DW 0100h
+
+DW 228ch
+DW 3401h
+DW 0001h
+DW 0000h
+DW 2206h
+DW 020fh
+DW 002ah
+DW 10efh
+DW 3e00h
+DW 0040h
+DW 0000h
+DW 3601h
+DW 1802h
+DW 087ch
+DW 083eh
+DW 0028h
+
+DW 02d8h
+DW 3680h
+DW 28c1h
+DW 0028h
+DW 281dh
+DW 01bah
+DW 0000h
+DW 2027h
+DW 0c00h
+DW 1691h
+DW 300ah
+DW 01dfh
+DW 05c0h
+DW 30f4h
+DW 0c09h
+DW 1fc0h
+
+DW 228ch
+DW 0801h
+DW 3bc1h
+DW 0010h
+DW 1006h
+DW 0000h
+DW 0100h
+DW 2027h
+DW 3800h
+DW 02a1h
+DW 3ffah
+DW 2a3fh
+DW 006eh
+DW 1c00h
+DW 1c00h
+DW 1081h
+
+DW 009ch
+DW 2402h
+DW 0a84h
+DW 2220h
+DW 0789h
+DW 1700h
+DW 0370h
+DW 1baah
+DW 0000h
+DW 0a30h
+DW 2006h
+DW 2704h
+DW 0063h
+DW 3004h
+DW 032bh
+DW 0300h
+
+DW 0010h
+DW 2408h
+DW 2d85h
+DW 0600h
+DW 0012h
+DW 0000h
+DW 03b0h
+DW 1806h
+DW 0001h
+DW 1e50h
+DW 000bh
+DW 2a09h
+DW 006eh
+DW 1000h
+DW 0a5ah
+DW 0fc0h
+
+DW 009ch
+DW 3c03h
+DW 0073h
+DW 0170h
+DW 1e25h
+DW 0102h
+DW 0000h
+DW 1806h
+DW 0001h
+DW 3aa0h
+DW 0008h
+DW 01c0h
+DW 05c0h
+DW 23f8h
+DW 063ah
+DW 0806h
+
+DW 228ch
+DW 3c01h
+DW 3e41h
+DW 2400h
+DW 1000h
+DW 0000h
+DW 00f0h
+DW 2027h
+DW 0000h
+DW 001ch
+DW 101ch
+DW 232ch
+DW 0062h
+DW 3078h
+DW 0628h
+DW 07c0h
+
+DW 0007h
+DW 3807h
+DW 3aaah
+DW 0012h
+DW 2800h
+DW 01cah
+DW 3000h
+DW 3001h
+DW 0201h
+DW 2ea2h
+DW 0008h
+DW 2700h
+DW 0080h
+DW 1c1ch
+DW 2c00h
+DW 1580h
+
+DW 2ba8h
+DW 0001h
+DW 39e0h
+DW 3fd2h
+DW 1c80h
+DW 0202h
+DW 0000h
+DW 182ah
+DW 1698h
+DW 001ch
+DW 101ch
+DW 353bh
+DW 2002h
+DW 1480h
+DW 06bah
+DW 0020h
+
+DW 2bbch
+DW 0000h
+DW 0100h
+DW 0000h
+DW 1c13h
+DW 0182h
+DW 1060h
+DW 2cafh
+DW 0b00h
+DW 0041h
+DW 2000h
+DW 2f43h
+DW 00b2h
+DW 01c8h
+DW 0001h
+DW 0300h
+
+DW 209dh
+DW 0401h
+DW 2bd0h
+DW 002ch
+DW 1087h
+DW 0000h
+DW 1090h
+DW 1827h
+DW 0200h
+DW 0af4h
+DW 300bh
+DW 0432h
+DW 0000h
+DW 3418h
+DW 0609h
+DW 00c0h
+
+DW 12bdh
+DW 3801h
+DW 010fh
+DW 0000h
+DW 1d03h
+DW 0182h
+DW 1050h
+DW 1827h
+DW 0400h
+DW 0270h
+DW 1006h
+DW 3801h
+DW 1863h
+DW 2009h
+DW 002dh
+DW 04c6h
+
+DW 37e0h
+DW 01c1h
+DW 3d80h
+DW 2400h
+DW 1c40h
+DW 0182h
+DW 00a0h
+DW 00b6h
+DW 0e18h
+DW 0060h
+DW 0016h
+DW 2a00h
+DW 008eh
+DW 1c00h
+DW 1c00h
+DW 3301h
+
+DW 23a8h
+DW 2061h
+DW 0004h
+DW 0080h
+DW 1812h
+DW 0580h
+DW 3000h
+DW 3001h
+DW 3004h
+DW 3aa3h
+DW 0006h
+DW 2300h
+DW 0062h
+DW 2108h
+DW 063ah
+DW 0040h
+
+DW 02d8h
+DW 0860h
+DW 0074h
+DW 0170h
+DW 2865h
+DW 01bah
+DW 0000h
+DW 1baah
+DW 0000h
+DW 001ch
+DW 305ch
+DW 2a8bh
+DW 004bh
+DW 1000h
+DW 0779h
+DW 0680h
+
+DW 0be4h
+DW 0062h
+DW 0100h
+DW 0000h
+DW 1e05h
+DW 014ah
+DW 0100h
+DW 2cafh
+DW 2000h
+DW 0040h
+DW 1000h
+DW 0542h
+DW 0000h
+DW 2000h
+DW 06eah
+DW 0000h
+
+DW 009ch
+DW 0002h
+DW 09c5h
+DW 0228h
+DW 0700h
+DW 1300h
+DW 0d70h
+DW 3027h
+DW 3f0fh
+DW 0003h
+DW 1020h
+DW 0540h
+DW 0000h
+DW 3000h
+DW 0628h
+DW 0400h
+
+DW 03bch
+DW 0000h
+DW 0100h
+DW 0000h
+DW 152eh
+DW 0000h
+DW 0000h
+DW 25e5h
+DW 0200h
+DW 001ch
+DW 304ch
+DW 2a35h
+DW 006eh
+DW 2000h
+DW 0a0ah
+DW 0038h
+
+DW 00a8h
+DW 03c3h
+DW 2a80h
+DW 001bh
+DW 0700h
+DW 1300h
+DW 0c90h
+DW 2027h
+DW 3b00h
+DW 0a30h
+DW 0006h
+DW 2f04h
+DW 0003h
+DW 0000h
+DW 0001h
+DW 0340h
+
+DW 0015h
+DW 0000h
+DW 28c0h
+DW 0018h
+DW 3c0fh
+DW 008eh
+DW 0000h
+DW 0004h
+DW 1800h
+DW 0270h
+DW 2006h
+DW 2306h
+DW 0082h
+DW 2030h
+DW 0779h
+DW 0780h
+
+DW 24e5h
+DW 0061h
+DW 0100h
+DW 0000h
+DW 2804h
+DW 01bah
+DW 3000h
+DW 3001h
+DW 3505h
+DW 0273h
+DW 3008h
+DW 2301h
+DW 0062h
+DW 303ch
+DW 023bh
+DW 0000h
+
+DW 0010h
+DW 3400h
+DW 09c0h
+DW 0018h
+DW 0c1ah
+DW 020ah
+DW 00c0h
+DW 1de6h
+DW 2000h
+DW 1394h
+DW 0186h
+DW 0400h
+DW 0000h
+DW 3018h
+DW 0a09h
+DW 0880h
+
+DW 2ea8h
+DW 0001h
+DW 09c0h
+DW 0020h
+DW 07dfh
+DW 1300h
+DW 0ad0h
+DW 3027h
+DW 2200h
+DW 0003h
+DW 1000h
+DW 2702h
+DW 0080h
+DW 2074h
+DW 08eah
+DW 0000h
+
+DW 02d8h
+DW 3860h
+DW 3070h
+DW 3f3fh
+DW 288fh
+DW 018ah
+DW 0000h
+DW 0000h
+DW 0400h
+DW 0054h
+DW 0000h
+DW 2700h
+DW 0080h
+DW 2040h
+DW 002dh
+DW 0388h
+
+DW 20b4h
+DW 0541h
+DW 0000h
+DW 0040h
+DW 14cch
+DW 200bh
+DW 0001h
+DW 0003h
+DW 0301h
+DW 0063h
+DW 0016h
+DW 2780h
+DW 004eh
+DW 3a00h
+DW 0c09h
+DW 00c0h
+
+DW 12bah
+DW 2001h
+DW 29f0h
+DW 0024h
+DW 1e13h
+DW 014ah
+DW 32a0h
+DW 3001h
+DW 3701h
+DW 32a1h
+DW 0007h
+DW 2a00h
+DW 0072h
+DW 1c00h
+DW 1c00h
+DW 1d00h
+
+DW 0babh
+DW 0003h
+DW 09c0h
+DW 0020h
+DW 280dh
+DW 01bah
+DW 3000h
+DW 3001h
+DW 0c04h
+DW 2eaeh
+DW 0000h
+DW 2a00h
+DW 006eh
+DW 1c00h
+DW 1c00h
+DW 0041h
+
+DW 0baah
+DW 0002h
+DW 0a80h
+DW 001fh
+DW 2b00h
+DW 012eh
+DW 3000h
+DW 3001h
+DW 2901h
+DW 3a9dh
+DW 300dh
+DW 2943h
+DW 006bh
+DW 143ch
+DW 05eeh
+DW 0016h
+
+DW 0010h
+DW 0c00h
+DW 09c0h
+DW 0020h
+DW 1c01h
+DW 0202h
+DW 0000h
+DW 2129h
+DW 3f00h
+DW 12f3h
+DW 0002h
+DW 0400h
+DW 0000h
+DW 3050h
+DW 00bbh
+DW 03c0h
+
+DW 0010h
+DW 0c00h
+DW 29e1h
+DW 3ff5h
+DW 36ffh
+DW 0302h
+DW 0015h
+DW 18a3h
+DW 0e00h
+DW 0e70h
+DW 0ff6h
+DW 21bch
+DW 0042h
+DW 1000h
+DW 063ah
+DW 3fc0h
+
+DW 16e2h
+DW 0a41h
+DW 3bc0h
+DW 0010h
+DW 1021h
+DW 0400h
+DW 2990h
+DW 14aeh
+DW 1000h
+DW 0061h
+DW 0018h
+DW 2e00h
+DW 0063h
+DW 2008h
+DW 284ah
+DW 2905h
+
+DW 23e0h
+DW 0081h
+DW 3840h
+DW 0018h
+DW 0400h
+DW 2001h
+DW 1001h
+DW 0005h
+DW 0000h
+DW 1a78h
+DW 3ffdh
+DW 2f3fh
+DW 0036h
+DW 0c00h
+DW 3ff1h
+DW 34ffh
+
+DW 0015h
+DW 0000h
+DW 3030h
+DW 3fffh
+DW 15ech
+DW 0000h
+DW 0000h
+DW 1de5h
+DW 2600h
+DW 0b90h
+DW 0189h
+DW 0400h
+DW 0100h
+DW 2224h
+DW 1601h
+DW 0000h
+
+DW 1794h
+DW 0802h
+DW 0070h
+DW 0130h
+DW 286ah
+DW 01bah
+DW 0000h
+DW 1baah
+DW 0000h
+DW 0270h
+DW 0008h
+DW 2702h
+DW 00a0h
+DW 1e00h
+DW 0c00h
+DW 1701h
+
+DW 009ch
+DW 0003h
+DW 28cfh
+DW 0018h
+DW 3c0fh
+DW 000eh
+DW 0000h
+DW 0003h
+DW 3a01h
+DW 0b51h
+DW 0b00h
+DW 0000h
+DW 0100h
+DW 30b4h
+DW 0809h
+DW 0480h
+
+DW 1794h
+DW 2002h
+DW 2e42h
+DW 0824h
+DW 1000h
+DW 0400h
+DW 0770h
+DW 1806h
+DW 0001h
+DW 1e50h
+DW 0009h
+DW 250fh
+DW 00c2h
+DW 0060h
+DW 098eh
+DW 0008h
+
+DW 04e5h
+DW 00c2h
+DW 0100h
+DW 0000h
+DW 1508h
+DW 0000h
+DW 0000h
+DW 1de5h
+DW 2600h
+DW 0b90h
+DW 0189h
+DW 0300h
+DW 0000h
+DW 2014h
+DW 1601h
+DW 0000h
+
+DW 0000h
+DW 2c04h
+DW 0156h
+DW 0000h
+DW 1f00h
+DW 0002h
+DW 0000h
+DW 18a1h
+DW 2400h
+DW 0b50h
+DW 0b00h
+DW 2900h
+DW 0083h
+DW 203ch
+DW 063bh
+DW 1100h
+
+DW 24bch
+DW 3c00h
+DW 00c0h
+DW 0000h
+DW 1414h
+DW 200bh
+DW 0241h
+DW 1927h
+DW 1400h
+DW 2290h
+DW 3ffbh
+DW 383fh
+DW 1863h
+DW 0000h
+DW 0e2eh
+DW 0008h
+
+DW 22e0h
+DW 0061h
+DW 3dc0h
+DW 0a00h
+DW 0c00h
+DW 018ah
+DW 0140h
+DW 01f6h
+DW 30d0h
+DW 1f60h
+DW 0180h
+DW 230dh
+DW 00e2h
+DW 1448h
+DW 0a4eh
+DW 000eh
+
+DW 0010h
+DW 0c00h
+DW 0e50h
+DW 0c2eh
+DW 1800h
+DW 000bh
+DW 0122h
+DW 0004h
+DW 0400h
+DW 0054h
+DW 0000h
+DW 3700h
+DW 2802h
+DW 3060h
+DW 002dh
+DW 0586h
+
+DW 0284h
+DW 0002h
+DW 0bc2h
+DW 0001h
+DW 1000h
+DW 0000h
+DW 0130h
+DW 0e2fh
+DW 0000h
+DW 0040h
+DW 1000h
+DW 0542h
+DW 0000h
+DW 3000h
+DW 0a28h
+DW 0500h
+
+DW 2294h
+DW 1801h
+DW 1a41h
+DW 0029h
+DW 2407h
+DW 018eh
+DW 1070h
+DW 1179h
+DW 0018h
+DW 0040h
+DW 2000h
+DW 0542h
+DW 0000h
+DW 1000h
+DW 084ah
+DW 03c0h
+
+DW 2ea8h
+DW 0001h
+DW 3070h
+DW 3f3fh
+DW 188eh
+DW 000bh
+DW 0142h
+DW 18a1h
+DW 2000h
+DW 0ee0h
+DW 0006h
+DW 0011h
+DW 0100h
+DW 10ech
+DW 002dh
+DW 0806h
+
+DW 2295h
+DW 2002h
+DW 2902h
+DW 0038h
+DW 0c30h
+DW 020ah
+DW 1120h
+DW 00a7h
+DW 2a00h
+DW 0a70h
+DW 100ah
+DW 2a0ch
+DW 00cdh
+DW 3400h
+DW 0e09h
+DW 0000h
+
+DW 209ch
+DW 0401h
+DW 3e50h
+DW 0828h
+DW 0c00h
+DW 0000h
+DW 1130h
+DW 25eah
+DW 0000h
+DW 2254h
+DW 0008h
+DW 3940h
+DW 30ach
+DW 0000h
+DW 0001h
+DW 02c0h
+
+DW 0015h
+DW 0000h
+DW 1910h
+DW 0019h
+DW 3d00h
+DW 022eh
+DW 0000h
+DW 0004h
+DW 0400h
+DW 2f94h
+DW 0384h
+DW 0400h
+DW 0000h
+DW 1414h
+DW 0001h
+DW 0000h
+
+DW 2ba8h
+DW 0003h
+DW 3a90h
+DW 0038h
+DW 2800h
+DW 0332h
+DW 0000h
+DW 18e7h
+DW 0100h
+DW 2274h
+DW 2000h
+DW 00c0h
+DW 3fffh
+DW 33bbh
+DW 0a59h
+DW 0040h
+
+DW 229ch
+DW 2002h
+DW 29d2h
+DW 0000h
+DW 1c30h
+DW 0182h
+DW 0000h
+DW 08f9h
+DW 0078h
+DW 0030h
+DW 3000h
+DW 2f04h
+DW 0024h
+DW 180ch
+DW 0259h
+DW 0000h
+
+DW 2c95h
+DW 2001h
+DW 1e13h
+DW 161ch
+DW 2500h
+DW 022fh
+DW 0003h
+DW 0004h
+DW 0800h
+DW 0054h
+DW 0000h
+DW 2440h
+DW 0068h
+DW 3400h
+DW 08bbh
+DW 0000h
+
+DW 0010h
+DW 2000h
+DW 3e50h
+DW 0e2ah
+DW 1000h
+DW 0000h
+DW 0070h
+DW 092fh
+DW 0300h
+DW 0e70h
+DW 1006h
+DW 2700h
+DW 00a5h
+DW 0c08h
+DW 3ff0h
+DW 3bffh
+
+DW 089dh
+DW 0400h
+DW 0bc0h
+DW 0009h
+DW 1003h
+DW 0000h
+DW 11a0h
+DW 0005h
+DW 0000h
+DW 0054h
+DW 0000h
+DW 2f00h
+DW 0023h
+DW 0000h
+DW 0001h
+DW 0580h
+
+DW 0015h
+DW 0000h
+DW 2940h
+DW 0020h
+DW 202eh
+DW 2213h
+DW 0026h
+DW 292eh
+DW 1f00h
+DW 1782h
+DW 1208h
+DW 3801h
+DW 2884h
+DW 1008h
+DW 0ac9h
+DW 0e80h
+
+DW 24e5h
+DW 00a1h
+DW 0100h
+DW 0000h
+DW 150dh
+DW 0000h
+DW 0000h
+DW 20a4h
+DW 3100h
+DW 12f4h
+DW 0008h
+DW 0400h
+DW 0000h
+DW 1420h
+DW 0001h
+DW 0000h
+
+DW 0290h
+DW 0802h
+DW 0bd3h
+DW 0019h
+DW 1000h
+DW 0000h
+DW 1050h
+DW 0005h
+DW 0000h
+DW 0000h
+DW 3000h
+DW 2700h
+DW 0060h
+DW 3008h
+DW 0609h
+DW 0040h
+
+DW 22e0h
+DW 0061h
+DW 28c0h
+DW 0020h
+DW 0c14h
+DW 018eh
+DW 0340h
+DW 2129h
+DW 0700h
+DW 0b60h
+DW 0180h
+DW 2705h
+DW 0060h
+DW 2064h
+DW 002dh
+DW 0308h
+
+DW 0000h
+DW 1c00h
+DW 2d80h
+DW 0600h
+DW 140eh
+DW 01deh
+DW 02a0h
+DW 24b9h
+DW 0018h
+DW 0040h
+DW 1000h
+DW 0578h
+DW 0000h
+DW 1000h
+DW 002dh
+DW 002ch
+
+DW 22a8h
+DW 0001h
+DW 3070h
+DW 3f3fh
+DW 2846h
+DW 023ah
+DW 0000h
+DW 0000h
+DW 1c00h
+DW 0063h
+DW 0016h
+DW 2a00h
+DW 0062h
+DW 1c00h
+DW 0ff0h
+DW 1e3fh
+
+DW 0ea8h
+DW 0002h
+DW 28c0h
+DW 0018h
+DW 3c0fh
+DW 008eh
+DW 0000h
+DW 0004h
+DW 1500h
+DW 0063h
+DW 0016h
+DW 2780h
+DW 0140h
+DW 2000h
+DW 060ah
+DW 03e6h
+
+DW 0007h
+DW 3003h
+DW 2e28h
+DW 1c14h
+DW 2208h
+DW 012fh
+DW 0039h
+DW 0cafh
+DW 0000h
+DW 0040h
+DW 0000h
+DW 2733h
+DW 0080h
+DW 2004h
+DW 06eah
+DW 0000h
+
+DW 32a8h
+DW 0002h
+DW 0070h
+DW 00f0h
+DW 1ca4h
+DW 0302h
+DW 0004h
+DW 1827h
+DW 0100h
+DW 0b70h
+DW 2900h
+DW 3605h
+DW 1802h
+DW 3054h
+DW 002dh
+DW 0624h
+
+DW 1794h
+DW 1802h
+DW 3e03h
+DW 0818h
+DW 1c08h
+DW 0202h
+DW 01f0h
+DW 00b5h
+DW 00b0h
+DW 0b60h
+DW 1180h
+DW 0004h
+DW 0000h
+DW 22f4h
+DW 002dh
+DW 0388h
+
+DW 22a8h
+DW 0001h
+DW 3070h
+DW 3f3fh
+DW 285ah
+DW 023ah
+DW 3000h
+DW 3001h
+DW 3400h
+DW 02a1h
+DW 3986h
+DW 2703h
+DW 0160h
+DW 0000h
+DW 063eh
+DW 021ch
+
+DW 2be1h
+DW 0c61h
+DW 3bc0h
+DW 000ah
+DW 1000h
+DW 0000h
+DW 0b30h
+DW 1806h
+DW 0001h
+DW 3aa0h
+DW 0006h
+DW 01c0h
+DW 03c0h
+DW 321ch
+DW 0809h
+DW 0240h
+
+DW 2ba5h
+DW 0201h
+DW 3bc0h
+DW 000ah
+DW 1000h
+DW 0000h
+DW 0ac0h
+DW 1806h
+DW 0001h
+DW 1e50h
+DW 0007h
+DW 390dh
+DW 1892h
+DW 0000h
+DW 0001h
+DW 2a00h
+
+DW 2018h
+DW 0005h
+DW 28e0h
+DW 0010h
+DW 1411h
+DW 018ah
+DW 2160h
+DW 14a7h
+DW 3fffh
+DW 238fh
+DW 0181h
+DW 2980h
+DW 0052h
+DW 13fch
+DW 002dh
+DW 002ch
+
+DW 02dch
+DW 1b00h
+DW 2bc1h
+DW 000ch
+DW 1000h
+DW 0000h
+DW 09d0h
+DW 00b6h
+DW 1190h
+DW 3aa0h
+DW 0006h
+DW 01c0h
+DW 03c0h
+DW 31c8h
+DW 0809h
+DW 2000h
+
+DW 2ea8h
+DW 0001h
+DW 09c0h
+DW 0020h
+DW 0701h
+DW 0f00h
+DW 26e0h
+DW 32eah
+DW 0000h
+DW 0a50h
+DW 2006h
+DW 2505h
+DW 0082h
+DW 1060h
+DW 064eh
+DW 0006h
+
+DW 0010h
+DW 1000h
+DW 0150h
+DW 0000h
+DW 0000h
+DW 0000h
+DW 0070h
+DW 00b7h
+DW 1818h
+DW 0a30h
+DW 1006h
+DW 2705h
+DW 3f63h
+DW 33ffh
+DW 002dh
+DW 0624h
+
+DW 23b8h
+DW 3c01h
+DW 2d85h
+DW 0600h
+DW 1015h
+DW 020ah
+DW 0150h
+DW 012fh
+DW 0000h
+DW 0040h
+DW 1000h
+DW 2902h
+DW 0074h
+DW 21fch
+DW 0b6bh
+DW 0400h
+
+DW 25b8h
+DW 2402h
+DW 3e55h
+DW 0a20h
+DW 0c00h
+DW 0000h
+DW 10a0h
+DW 0005h
+DW 0000h
+DW 0000h
+DW 1000h
+DW 2702h
+DW 00a3h
+DW 2004h
+DW 0abbh
+DW 0480h
+
+DW 25b8h
+DW 2402h
+DW 3e55h
+DW 0a10h
+DW 0c00h
+DW 0000h
+DW 0040h
+DW 2969h
+DW 3fffh
+DW 0e73h
+DW 3ffah
+DW 293fh
+DW 3fa5h
+DW 23ffh
+DW 06eah
+DW 0000h
+
+DW 009ch
+DW 3c02h
+DW 0075h
+DW 00f0h
+DW 1c50h
+DW 0302h
+DW 07f0h
+DW 2827h
+DW 0010h
+DW 3aa0h
+DW 0006h
+DW 2700h
+DW 0080h
+DW 1c28h
+DW 3c00h
+DW 12c0h
+
+DW 05a8h
+DW 0003h
+DW 3940h
+DW 0025h
+DW 1c36h
+DW 0182h
+DW 0010h
+DW 18f8h
+DW 0820h
+DW 0b60h
+DW 1180h
+DW 2704h
+DW 0060h
+DW 0000h
+DW 0000h
+DW 1a00h
+
+DW 02dch
+DW 1860h
+DW 3941h
+DW 001dh
+DW 2406h
+DW 22cbh
+DW 0001h
+DW 0004h
+DW 2400h
+DW 0055h
+DW 0000h
+DW 2a00h
+DW 0062h
+DW 1c00h
+DW 3ff0h
+DW 097eh
+
+DW 0ea8h
+DW 0002h
+DW 09c0h
+DW 0020h
+DW 141ch
+DW 000bh
+DW 000bh
+DW 00b6h
+DW 0e20h
+DW 0aa0h
+DW 0006h
+DW 01c0h
+DW 3bffh
+DW 225fh
+DW 08eah
+DW 0000h
+
+DW 0000h
+DW 2800h
+DW 0185h
+DW 0058h
+DW 1400h
+DW 01deh
+DW 0040h
+DW 2cb9h
+DW 0018h
+DW 0040h
+DW 1000h
+DW 0555h
+DW 0000h
+DW 0000h
+DW 0000h
+DW 1480h
+
+DW 209ch
+DW 2c01h
+DW 3941h
+DW 001dh
+DW 240eh
+DW 22cbh
+DW 0001h
+DW 0004h
+DW 0f00h
+DW 0271h
+DW 3008h
+DW 0006h
+DW 0000h
+DW 2134h
+DW 002dh
+DW 0388h
+
+DW 22a8h
+DW 0001h
+DW 3070h
+DW 3effh
+DW 2886h
+DW 023ah
+DW 0000h
+DW 0000h
+DW 0700h
+DW 0271h
+DW 3006h
+DW 2506h
+DW 0077h
+DW 1020h
+DW 092eh
+DW 0006h
+
+DW 0010h
+DW 1000h
+DW 09c4h
+DW 0020h
+DW 1c31h
+DW 0182h
+DW 0000h
+DW 00b6h
+DW 0e20h
+DW 0b70h
+DW 2180h
+DW 2706h
+DW 0060h
+DW 1004h
+DW 0979h
+DW 0280h
+
+DW 23e0h
+DW 2081h
+DW 2d80h
+DW 0600h
+DW 1411h
+DW 01deh
+DW 00c0h
+DW 24b9h
+DW 0018h
+DW 0040h
+DW 2000h
+DW 060eh
+DW 0160h
+DW 1000h
+DW 0629h
+DW 0680h
+
+DW 1ae3h
+DW 0061h
+DW 28c0h
+DW 0020h
+DW 3b11h
+DW 016ah
+DW 0100h
+DW 2127h
+DW 3fffh
+DW 0b53h
+DW 0b00h
+DW 2ec0h
+DW 005ah
+DW 1240h
+DW 084ah
+DW 3fc0h
+
+DW 02dch
+DW 2b40h
+DW 0bc1h
+DW 0009h
+DW 1000h
+DW 0000h
+DW 02d0h
+DW 00b6h
+DW 1120h
+DW 1e50h
+DW 200fh
+DW 2602h
+DW 0077h
+DW 0050h
+DW 063eh
+DW 020eh
+
+DW 3ae5h
+DW 0062h
+DW 0100h
+DW 0000h
+DW 0c0bh
+DW 018ah
+DW 00c0h
+DW 00efh
+DW 0000h
+DW 0040h
+DW 2000h
+DW 2785h
+DW 0040h
+DW 3004h
+DW 0a28h
+DW 0340h
+
+DW 05e4h
+DW 0062h
+DW 0100h
+DW 0000h
+DW 1c12h
+DW 3d8eh
+DW 0fffh
+DW 0000h
+DW 0f00h
+DW 0b60h
+DW 0180h
+DW 2603h
+DW 00b7h
+DW 0058h
+DW 0a5eh
+DW 020eh
+
+DW 3ae5h
+DW 00a1h
+DW 0100h
+DW 0000h
+DW 1e0bh
+DW 0102h
+DW 0010h
+DW 10efh
+DW 0500h
+DW 0040h
+DW 0000h
+DW 0542h
+DW 0000h
+DW 3000h
+DW 0a28h
+DW 0340h
+
+DW 05e4h
+DW 0061h
+DW 0100h
+DW 0000h
+DW 2004h
+DW 018fh
+DW 0009h
+DW 00b6h
+DW 0c18h
+DW 12a8h
+DW 0004h
+DW 2300h
+DW 0082h
+DW 1c30h
+DW 3c00h
+DW 0480h
+
+DW 2ea8h
+DW 0001h
+DW 2bc0h
+DW 0004h
+DW 1000h
+DW 0000h
+DW 0080h
+DW 2027h
+DW 1a00h
+DW 0aa0h
+DW 0006h
+DW 3600h
+DW 2002h
+DW 1c38h
+DW 2ff0h
+DW 32beh
+
+DW 0ea8h
+DW 0002h
+DW 0000h
+DW 0000h
+DW 1805h
+DW 0580h
+DW 0000h
+DW 1827h
+DW 3000h
+DW 0b60h
+DW 2180h
+DW 0603h
+DW 0160h
+DW 1c00h
+DW 2c00h
+DW 1680h
+
+DW 23a8h
+DW 2001h
+DW 0a83h
+DW 2618h
+DW 0710h
+DW 0b00h
+DW 0b90h
+DW 2027h
+DW 1a00h
+DW 3c0ch
+DW 2fcfh
+DW 2758h
+DW 00ceh
+DW 1c04h
+DW 0c00h
+DW 3701h
+
+DW 2ea8h
+DW 0001h
+DW 3030h
+DW 3fffh
+DW 18f7h
+DW 0580h
+DW 1000h
+DW 1aeah
+DW 3fffh
+DW 0067h
+DW 0010h
+DW 2a40h
+DW 1608h
+DW 1210h
+DW 003eh
+DW 0008h
+
+DW 0010h
+DW 0000h
+DW 09c1h
+DW 0028h
+DW 1404h
+DW 030eh
+DW 1000h
+DW 1af8h
+DW 0530h
+DW 2ee0h
+DW 000ch
+DW 2e53h
+DW 006bh
+DW 0010h
+DW 0c6eh
+DW 000ch
+
+DW 259ch
+DW 3ffeh
+DW 2e0fh
+DW 1031h
+DW 3c00h
+DW 0096h
+DW 0000h
+DW 31a5h
+DW 0000h
+DW 1b84h
+DW 1586h
+DW 04c1h
+DW 3fffh
+DW 17e3h
+DW 36bah
+DW 3fffh
+
+DW 3f03h
+DW 07ffh
+DW 39cfh
+DW 0018h
+DW 0402h
+DW 2001h
+DW 1004h
+DW 0005h
+DW 0000h
+DW 0000h
+DW 1800h
+DW 2001h
+DW 000fh
+DW 0028h
+DW 01b8h
+DW 0780h
+
+DW 1400h
+DW 0600h
+DW 3801h
+DW 000ch
+DW 0036h
+DW 00f0h
+DW 0398h
+DW 0a00h
+DW 2d80h
+DW 1e00h
+DW 2002h
+DW 0048h
+DW 0f00h
+DW 0750h
+DW 1000h
+DW 3f05h
+
+DW 0001h
+DW 3040h
+DW 0011h
+DW 0540h
+DW 01fch
+DW 1400h
+DW 1fc1h
+DW 0000h
+DW 3c15h
+DW 0007h
+DW 0150h
+DW 007fh
+DW 1500h
+DW 07f0h
+DW 1000h
+DW 3f05h
+
+DW 0001h
+DW 0048h
+DW 0017h
+DW 0500h
+DW 01d0h
+DW 0800h
+DW 1981h
+DW 0000h
+DW 2014h
+DW 0006h
+DW 0140h
+DW 0059h
+DW 1400h
+DW 06e0h
+DW 3000h
+DW 0404h
+
+DW 0001h
+DW 3054h
+DW 001fh
+DW 0540h
+DW 01fch
+DW 1400h
+DW 1fc1h
+DW 0000h
+DW 3c15h
+DW 0007h
+DW 0150h
+DW 007fh
+DW 1500h
+DW 07f0h
+DW 1000h
+DW 3f05h
+
+DW 0001h
+DW 3054h
+DW 001fh
+DW 0540h
+DW 01fch
+DW 1400h
+DW 1fc1h
+DW 0000h
+DW 3c15h
+DW 0007h
+DW 0150h
+DW 007fh
+DW 1500h
+DW 07f0h
+DW 1000h
+DW 3f05h
+
+DW 0001h
+DW 3054h
+DW 001fh
+DW 0540h
+DW 01fch
+DW 1000h
+DW 1e41h
+DW 0000h
+DW 1015h
+DW 0260h
+DW 3ff1h
+DW 003fh
+DW 0000h
+DW 3c2eh
+DW 29f9h
+DW 0020h
+
+DW 0b81h
+DW 3e7ch
+DW 0829h
+DW 2080h
+DW 1f0bh
+DW 0a7eh
+DW 3008h
+DW 02e0h
+DW 1f9fh
+DW 020ah
+DW 0980h
+DW 3fc5h
+DW 1bffh
+DW 216dh
+DW 00c9h
+DW 0008h
+
+DW 0020h
+DW 3e60h
+DW 3ff0h
+DW 003fh
+DW 19f0h
+DW 3c02h
+DW 1fffh
+DW 383fh
+DW 0199h
+DW 3ffch
+DW 021fh
+DW 2641h
+DW 3f02h
+DW 0fffh
+DW 1109h
+DW 00e6h
+
+DW 3fffh
+DW 192bh
+DW 2986h
+DW 3fc7h
+DW 05ffh
+DW 20e2h
+DW 3269h
+DW 3fffh
+DW 3995h
+DW 1e61h
+DW 3ff2h
+DW 003fh
+DW 0000h
+DW 0000h
+DW 3f20h
+DW 3c00h
+
+DW 2002h
+DW 3c03h
+DW 200dh
+DW 0038h
+DW 0000h
+DW 03e4h
+DW 07e0h
+DW 1300h
+DW 3800h
+DW 000fh
+DW 0008h
+DW 0000h
+DW 303bh
+DW 0003h
+DW 0000h
+DW 1e00h
+
+DW 3f00h
+DW 1000h
+DW 3002h
+DW 27c2h
+DW 089fh
+DW 0226h
+DW 0650h
+DW 3800h
+DW 0000h
+DW 2000h
+DW 3ff4h
+DW 3fffh
+DW 00ffh
+DW 3d24h
+DW 3fffh
+DW 3fffh
+
+DW 0a00h
+DW 3c3dh
+DW 307fh
+DW 0007h
+DW 3f4bh
+DW 3fffh
+DW 0fffh
+DW 1300h
+DW 3f1fh
+DW 3c3bh
+DW 1009h
+DW 2013h
+DW 0000h
+DW 0002h
+DW 04e0h
+DW 000eh
+
+DW 0038h
+DW 3c00h
+DW 0f04h
+DW 3c00h
+DW 0000h
+DW 0000h
+DW 0000h
+DW 1400h
+DW 3f0fh
+DW 0003h
+DW 3004h
+DW 3c0eh
+DW 0000h
+DW 0000h
+DW 04d0h
+DW 0020h
+
+DW 0080h
+DW 2000h
+DW 0000h
+DW 003ch
+DW 0080h
+DW 0004h
+DW 0004h
+DW 0010h
+DW 0a00h
+DW 0040h
+DW 0000h
+DW 0000h
+DW 0065h
+DW 0380h
+DW 0000h
+DW 02c0h
+
+DW 1f9fh
+DW 220ah
+DW 0009h
+DW 0000h
+DW 0000h
+DW 3d20h
+DW 0fffh
+DW 2000h
+DW 0900h
+DW 3ffdh
+DW 200fh
+DW 0000h
+DW 1f4ch
+DW 07fch
+DW 0151h
+DW 12c0h
+
+DW 3fffh
+DW 0003h
+DW 2008h
+DW 03d2h
+DW 08ffh
+DW 02f4h
+DW 30b0h
+DW 27e7h
+DW 0082h
+DW 0000h
+DW 0000h
+DW 0000h
+DW 0881h
+DW 2000h
+DW 0000h
+DW 0300h
+
+DW 0080h
+DW 0000h
+DW 0000h
+DW 2003h
+DW 0000h
+DW 0002h
+DW 0810h
+DW 0002h
+DW 0000h
+DW 0000h
+DW 0000h
+DW 2200h
+DW 0e83h
+DW 2015h
+DW 0828h
+DW 0036h
+
+DW 3588h
+DW 3f19h
+DW 260fh
+DW 2000h
+DW 0800h
+DW 0bf2h
+DW 0365h
+DW 001eh
+DW 0000h
+DW 0220h
+DW 0505h
+DW 2210h
+DW 00a3h
+DW 1480h
+DW 04e8h
+DW 0000h
+
+DW 3688h
+DW 0905h
+DW 3888h
+DW 145dh
+DW 0866h
+DW 31e2h
+DW 0bb1h
+DW 1da1h
+DW 0400h
+DW 1a16h
+DW 0007h
+DW 21a1h
+DW 0076h
+DW 1e10h
+DW 0768h
+DW 2100h
+
+DW 3784h
+DW 0861h
+DW 3858h
+DW 061dh
+DW 0682h
+DW 21deh
+DW 3821h
+DW 1de1h
+DW 0218h
+DW 2212h
+DW 08c7h
+DW 214eh
+DW 0c78h
+DW 18e2h
+DW 0788h
+DW 0e23h
+
+DW 3887h
+DW 2231h
+DW 2843h
+DW 0013h
+DW 0700h
+DW 013ah
+DW 2000h
+DW 13a1h
+DW 0000h
+DW 0980h
+DW 0803h
+DW 1800h
+DW 0012h
+DW 2002h
+DW 0638h
+DW 2000h
+
+DW 2488h
+DW 0201h
+DW 0888h
+DW 1682h
+DW 08bbh
+DW 240eh
+DW 0332h
+DW 00a2h
+DW 0640h
+DW 0980h
+DW 0802h
+DW 2200h
+DW 2106h
+DW 2002h
+DW 2058h
+DW 20abh
+
+DW 0000h
+DW 0000h
+DW 3880h
+DW 0037h
+DW 0866h
+DW 0206h
+DW 0003h
+DW 21e2h
+DW 3acdh
+DW 1a21h
+DW 2cd8h
+DW 221eh
+DW 0d85h
+DW 21e9h
+DW 1848h
+DW 1ea3h
+
+DW 3c88h
+DW 194fh
+DW 0886h
+DW 1362h
+DW 087ah
+DW 03fah
+DW 0ae8h
+DW 3f62h
+DW 04b6h
+DW 3e21h
+DW 0fdfh
+DW 1e30h
+DW 0c08h
+DW 0c00h
+DW 31a7h
+DW 003fh
+
+DW 1a71h
+DW 03fch
+DW 2720h
+DW 3fc6h
+DW 3000h
+DW 3c69h
+DW 000fh
+DW 025eh
+DW 103ah
+DW 2622h
+DW 0887h
+DW 209bh
+DW 384eh
+DW 0400h
+DW 04e8h
+DW 000eh
+
+DW 0e83h
+DW 00e1h
+DW 2800h
+DW 0e13h
+DW 0800h
+DW 0136h
+DW 0008h
+DW 019eh
+DW 1412h
+DW 3e21h
+DW 0b6eh
+DW 2228h
+DW 37fbh
+DW 20d9h
+DW 0197h
+DW 0140h
+
+DW 1678h
+DW 0204h
+DW 188ch
+DW 22feh
+DW 085ah
+DW 1fe2h
+DW 078bh
+DW 01c0h
+DW 2000h
+DW 0620h
+DW 0b0fh
+DW 2200h
+DW 27f0h
+DW 22d1h
+DW 1f58h
+DW 3818h
+
+DW 3788h
+DW 1a8bh
+DW 2994h
+DW 24c0h
+DW 1910h
+DW 3402h
+DW 1e0fh
+DW 0066h
+DW 0421h
+DW 0620h
+DW 1020h
+DW 2200h
+DW 0d00h
+DW 2015h
+DW 1078h
+DW 1e93h
+
+DW 0000h
+DW 0000h
+DW 3880h
+DW 0037h
+DW 0866h
+DW 0206h
+DW 0003h
+DW 21e2h
+DW 3acdh
+DW 1a21h
+DW 2cd8h
+DW 221eh
+DW 0d85h
+DW 21e9h
+DW 1848h
+DW 1ea3h
+
+DW 0678h
+DW 1048h
+DW 3885h
+DW 1dfeh
+DW 0836h
+DW 17fah
+DW 0a8ah
+DW 3f62h
+DW 0436h
+DW 3e21h
+DW 0fdfh
+DW 1e30h
+DW 0c08h
+DW 0c00h
+DW 31a7h
+DW 003fh
+
+DW 1a71h
+DW 03fch
+DW 2700h
+DW 3fc6h
+DW 3200h
+DW 3c69h
+DW 000fh
+DW 025eh
+DW 103ah
+DW 2622h
+DW 0887h
+DW 205bh
+DW 384eh
+DW 0c00h
+DW 04e8h
+DW 000eh
+
+DW 0e82h
+DW 00e1h
+DW 2800h
+DW 0e13h
+DW 0800h
+DW 0136h
+DW 0008h
+DW 3be2h
+DW 20b6h
+DW 2222h
+DW 24d8h
+DW 1e1eh
+DW 0019h
+DW 2014h
+DW 1167h
+DW 3020h
+
+DW 3988h
+DW 2a2fh
+DW 088dh
+DW 2dfeh
+DW 0078h
+DW 001ch
+DW 02a0h
+DW 3c62h
+DW 00b0h
+DW 0220h
+DW 067fh
+DW 222dh
+DW 21f5h
+DW 2381h
+DW 2f78h
+DW 11a8h
+
+DW 0299h
+DW 024ch
+DW 0991h
+DW 3f40h
+DW 19e0h
+DW 0406h
+DW 0042h
+DW 0062h
+DW 0102h
+DW 0220h
+DW 14d0h
+DW 2201h
+DW 0d07h
+DW 01e9h
+DW 0000h
+DW 0000h
+
+DW 0b00h
+DW 03f2h
+DW 0fc0h
+DW 0000h
+DW 3c8bh
+DW 0003h
+DW 0000h
+DW 0000h
+DW 0000h
+DW 0000h
+DW 0000h
+
+#endasm
+};
+
+
 #endif
 
+
+#endif
+
+
+
+
+
+#ifdef FLASHREAD
+uint16_t getShortFrom14Arry(uint16_t pos16,uint16_t * inArry)
+{
+	uint16_t outData,pos14,offset,i,j,sL,sH;
+	i = pos14 = (pos16)*16/14;
+	j = pos16;
+    i=j+j/7;
+    int m = j%7;
+    sL = FLASH_ReadWord(i+FLASHSTART);
+    sH = FLASH_ReadWord(i+1+FLASHSTART);
+    switch(m)
+    {
+    case 0:
+        outData = sL&0x3fff|(sH&0x3)<<14;
+        break;
+    case 1:
+        outData = (sL&((0x3fff<<2)&0x3fff))>>2|(sH&0xf)<<12;
+        break;
+    case 2:
+        outData = (sL&((0x3fff<<4)&0x3fff))>>4|(sH&0x3f)<<10;
+        break;
+    case 3:
+        outData = (sL&((0x3fff<<6)&0x3fff))>>6|(sH&0xff)<<8;
+        break;
+    case 4:
+        outData = (sL&((0x3fff<<8)&0x3fff))>>8|(sH&0x3ff)<<6;
+        break;
+    case 5:
+        outData = (sL&((0x3fff<<10)&0x3fff))>>10|(sH&0xfff)<<4;
+        break;
+    case 6:
+        outData = (sL&((0x3fff<<12)&0x3fff))>>12|(sH&0x3fff)<<2;
+        break;
+    }
+
+	outData=((outData&0xff)<<8|(outData&0xff00)>>8);
+#if 0
+	uart_send_char("getShortFrom14Arry[");
+	uart_send_hex16(pos16);
+	uart_send_char("]:");
+	uart_send_hex16(outData);
+//	uart_send_char("\r\n");
+	uart_send_char(",sL:");
+	uart_send_hex16(sL);
+//	uart_send_char("\r\n");
+	uart_send_char(",sH:");
+	uart_send_hex16(sH);
+	uart_send_char("\r\n");
+#endif    
+	return outData;
+}
+
+#endif
+
+
+
+#if STRESSTEST == 1
+void testReadWrite(uint32_t loop_times, uint16_t regAddr)
+{
+/*
+0x80,0x79
+0x81,0x79
+0x82,0x79
+0x83,0x79
+0x84,0x79
+0x85,0x79
+0x86,0x79
+0x87,0x79
+*/
+#define OFFSET0 (0<<8)
+#define OFFSET1 (1<<8)
+#define OFFSET2 (2<<8)
+#define OFFSET3 (3<<8)
+#define OFFSET4 (4<<8)
+#define OFFSET5 (5<<8)
+#define OFFSET6 (6<<8)
+#define OFFSET7 (7<<8)
+
+	uint32_t i;
+//	uint16_t regAddr=;
+	uint16_t value_0,value_1,value_2,value_3,value_4,value_5,value_6,value_7,value_8,value_9;
+	uint16_t read_0,read_1,read_2,read_3,read_4,read_5,read_6,read_7,read_8,read_9;
+	for(i=0; i<loop_times; i++)
+	{
+		value_0 = rand();//65535
+		GE_I2C2_HexWrite(regAddr+OFFSET0, value_0); //wr 0
+
+		value_1 = rand();
+		GE_I2C2_HexWrite(regAddr+OFFSET1, value_1); //wr 1
+
+		value_2 = rand();
+		GE_I2C2_HexWrite(regAddr+OFFSET2, value_2); //wr 2
+
+		value_3 = rand();
+		GE_I2C2_HexWrite(regAddr+OFFSET3, value_3); //wr 3
+
+		value_4 = rand();
+		GE_I2C2_HexWrite(regAddr+OFFSET4, value_4); //wr 4
+
+		value_5 = rand();
+		GE_I2C2_HexWrite(regAddr+OFFSET5, value_5); //wr 5
+
+		value_6 = rand();
+		GE_I2C2_HexWrite(regAddr+OFFSET6, value_6); //wr 6
+
+		value_7 = rand();
+		GE_I2C2_HexWrite(regAddr+OFFSET7, value_7); //wr 7
+
+//		value_8 = rand();
+//		GE_I2C2_HexWrite(regAddr+8, value_8); //wr 8
+
+//		value_9 = rand();
+//		GE_I2C2_HexWrite(regAddr+9, value_9); //wr 9
+
+		read_0 = GE_I2C2_HexRead( regAddr+OFFSET0); //rd 0
+		read_1 = GE_I2C2_HexRead( regAddr+OFFSET1); //	1
+		read_2 = GE_I2C2_HexRead( regAddr+OFFSET2); //  2
+		read_3 = GE_I2C2_HexRead( regAddr+OFFSET3); //  3
+		read_4 = GE_I2C2_HexRead( regAddr+OFFSET4); //  4
+		read_5 = GE_I2C2_HexRead( regAddr+OFFSET5); //  5
+		read_6 = GE_I2C2_HexRead( regAddr+OFFSET6); //  6
+		read_7 = GE_I2C2_HexRead( regAddr+OFFSET7); //  7
+//		read_8 = GE_I2C2_HexRead( regAddr+8); //  8
+//		read_9 = GE_I2C2_HexRead( regAddr+9); //  9
+
+		if ((read_0==value_0) && (read_1==value_1) && (read_2==value_2) && (read_3==value_3) && (read_4==value_4) && \
+		   (read_5==value_5) && (read_6==value_6) && (read_7==value_7))//&& (read_8==value_8) && (read_9==value_9))
+		{
+			if (0 == (i%100))
+			{
+				uart_send_dec(i);
+				uart_send_char("\r\n");
+			}
+		}
+		else
+		{
+			uart_send_char("Reg readwrite ERROR!\r\n");
+			break;
+//			  raw_input();
+		}
+	}
+	uart_send_char("Func testReadWrite End!\r\n");
+}
+#endif
+
+
+/*
+                         Main application
+ */
+
 const uint8_t script_content[] = {
+#if 0
 /***********Default script start************/
 0x99,0x00,0x9D,0xC0,
 0x99,0x01,0x21,0x04,
@@ -1448,8 +5515,71 @@ const uint8_t script_content[] = {
                         0x85,0xff,0xfd,0xc0,
                         0x86,0xff,0xfd,0xc0,
                         0x87,0xff,0xfd,0xc0,
+#else
+//main cursor
+ 0x80,0xa7 ,0x14,0x00  
+,0x81,0xa7 ,0x14,0x00
+,0x82,0xa7 ,0x14,0x00
+,0x83,0xa7 ,0x14,0x00
+,0x84,0xa7 ,0x12,0x00
+,0x85,0xa7 ,0x12,0x00
+,0x86,0xa7 ,0x12,0x00
+,0x87,0xa7 ,0x12,0x00
+//pre cursor
+,0x80,0xa8 ,0x3c,0x00  
+,0x81,0xa8 ,0x3c,0x00
+,0x82,0xa8 ,0x3c,0x00
+,0x83,0xa8 ,0x3c,0x00
+,0x84,0xa8 ,0x3f,0x00
+,0x85,0xa8 ,0x3f,0x00
+,0x86,0xa8 ,0x3f,0x00
+,0x87,0xa8 ,0x3f,0x00
+//post cursor  B
+,0x84,0xa6 ,0x3c,0x00
+,0x85,0xa6 ,0x3c,0x00
+,0x86,0xa6 ,0x3c,0x00
+,0x87,0xa6 ,0x3c,0x00
+//TX polarity
+,0x80,0xa0 ,0x00,0x80
+,0x81,0xa0 ,0x00,0x80
+,0x82,0xa0 ,0x00,0x80
+,0x83,0xa0 ,0x00,0x00
+,0x84,0xa0 ,0x00,0x00
+,0x85,0xa0 ,0x00,0x80
+,0x86,0xa0 ,0x00,0x80
+,0x87,0xa0 ,0x00,0x80
+//RX CLTE=4
+,0x84,0x4e ,0x08,0x00
+,0x85,0x4e ,0x08,0x00
+,0x86,0x4e ,0x08,0x00
+,0x87,0x4e ,0x08,0x00
+//RX polarity
+,0x80,0x61 ,0x3C,0x20
+,0x81,0x61 ,0x34,0x20
+,0x82,0x61 ,0x34,0x20
+,0x83,0x61 ,0x3C,0x20
+,0x84,0x61 ,0x7C,0x20
+,0x85,0x61 ,0x34,0x20
+,0x86,0x61 ,0x34,0x20
+,0x87,0x61 ,0x34,0x20
+
+#endif
 };
 #if 1
+
+void Breakdown(void)
+{
+#if 1    
+		while(1)
+		{
+			uart_send_char("Breakdown!\r\n");
+			__delay_ms(2000);	
+		}
+#endif
+
+
+}
+
 void main(void)
 {
     int prt_Res = -1;
@@ -1503,7 +5633,7 @@ void main(void)
     
     //__delay_ms(5000);  //2500ms
     //__delay_ms(5000);  //2500ms
-    
+
      const int* b_data; 
      b_data = &fw_content[0]; //point to the program memory table:  fw_content 
    
@@ -1554,8 +5684,8 @@ void main(void)
 	startAddr |= tH;
 	startAddr <<=16;
 	startAddr |= tL;
-
 #endif
+
 #if MY_PRINTF_EN == 1
 	uart_send_char("\r\n");
 	uart_send_char("startAddr:");
@@ -1599,11 +5729,178 @@ void main(void)
 	EEPROM_Buffer[223]=iCC_EXT&0xff;
 #endif
 
+
+#if 1
     GE_I2C2_HexWrite(0x980d,0x0999);//software reset
     
     GE_I2C2_HexWrite(0x980d,0x0000);//software reset
     
 	__delay_ms(1000);
+#endif
+
+
+	uart_send_char("MDIO load firmware START ......");
+#if 1    
+		  //golden eagle?firmware?????20170330
+		//load firmware
+		for (x=0; x<section; x++) 
+		{
+			checkSum = 0x800C;
+			GE_I2C2_HexWrite(FW_regAddr_base[0] + 12, ramAddr>>16);
+			GE_I2C2_HexWrite(FW_regAddr_base[0] + 13, ramAddr & 0xFFFF);
+		 
+			checkSum += (ramAddr>>16) + (ramAddr & 0xFFFF);
+			
+			for (i=0; i<12; i++) //数据搬到 ramAddr 地址
+			{
+#if MY_PRINTF_EN == 1
+				 uart_send_char("ramAddr=");
+				uart_send_hex16(ramAddr>>16);
+				uart_send_hex16(ramAddr & 0xFFFF);
+				uart_send_byte('\r'); uart_send_byte('\n'); 
+#endif            
+#ifndef FLASHREAD
+				mdioData = get_int16(b_data+dataAddr);
+#else
+				tL = getShortFrom14Arry(dataAddr,FLASHSTART);
+				mdioData = tL;//((tL&0xff)<<8|tL>>8);
+#endif
+#if MY_PRINTF_EN == 1
+				uart_send_char("mdioData=");
+				uart_send_hex16(mdioData);
+				uart_send_byte('\r'); uart_send_byte('\n'); 
+#endif            
+	
+				GE_I2C2_HexWrite(FW_regAddr_base[0]+i, mdioData);
+				//GE_I2C2_HexRead(FW_regAddr_base[0] + i);
+				checkSum += mdioData;
+				dataAddr += 1;	 // 2/1
+				ramAddr += 2;  
+			}
+			
+#if MY_PRINTF_EN == 1
+			uart_send_char("checksum =");
+			uart_send_hex16(checkSum>>16);
+			uart_send_hex16(checkSum & 0xFFFF);
+			uart_send_char("\r\n");
+#endif
+			GE_I2C2_HexWrite(FW_regAddr_base[0] + 14, (-checkSum) & 0xFFFF);
+			GE_I2C2_HexRead(FW_regAddr_base[0] + 14);
+			GE_I2C2_HexWrite(FW_regAddr_base[0] + 15, 0x800C);	
+			
+			checktime = 0;
+			status = GE_I2C2_HexRead(FW_regAddr_base[0] + 15);
+			
+			while (status == 0x800C) {	
+				checktime++;
+				if (checktime > 1000)
+#if MY_PRINTF_EN == 1
+					uart_send_hex16(checktime)
+#endif
+				;
+				status = GE_I2C2_HexRead(FW_regAddr_base[0] + 15);
+			}
+			  if (status != 0x0000) 
+			  {
+			  TotalError++;
+#if MY_PRINTF_EN == 1
+			  uart_send_char("checksum error!, total error	= ");
+			  uart_send_hex(TotalError);
+			  uart_send_char("\r\n");
+#endif
+			  }
+		}	//end of the for loop
+	
+	
+		GE_I2C2_HexWrite(FW_regAddr_base[0] + 12, enterPoint>>16);	
+		GE_I2C2_HexWrite(FW_regAddr_base[0] + 13, enterPoint & 0xFFFF);
+		checkSum = (enterPoint>>16) + (enterPoint & 0xFFFF) + 0x4000;
+		GE_I2C2_HexWrite(FW_regAddr_base[0] + 14, (-checkSum) & 0xFFFF);
+		GE_I2C2_HexWrite(FW_regAddr_base[0] + 15, 0x4000);		
+		
+		if (RdCheck) {		
+			checktime = 0;
+			status = GE_I2C2_HexRead(FW_regAddr_base[0] + 15);
+			while (status==0x4000) {
+				checktime++;
+				if (checktime>1000) 
+#if MY_PRINTF_EN == 1
+					uart_send_hex16(checktime)
+#endif
+					;
+				status = GE_I2C2_HexRead(FW_regAddr_base[0] + 15);
+			}
+		}
+	
+		 for (i=0;i<1024;i++)
+		{
+			for(x=0;x<1024;x++)
+			{;}
+		} 
+#if MY_PRINTF_EN == 1
+		uart_send_char("check the result:\r\n");
+#endif
+		status = GE_I2C2_HexRead(0x9814);
+#if MY_PRINTF_EN == 1
+		uart_send_char("0x9814's  value:");
+		uart_send_hex(status);
+		uart_send_char("\r\n");
+		uart_send_char("If there is checksum error, total error  = ");
+		uart_send_hex(TotalError);
+		uart_send_char("\r\n");
+#endif
+
+	{//load default:
+	#if MY_PRINTF_EN == 1
+		uart_send_char("load default: ");
+		uart_send_char("\r\n");
+	#endif
+		GE_I2C2_HexWrite( 0x9818,0x5000);
+		status = GE_I2C2_HexRead(0x9818);
+
+//		while(0x0500 != status)
+		{
+		#if MY_PRINTF_EN == 1
+			uart_send_char("load default: 0x9818's  value:");
+			uart_send_hex(status);
+			uart_send_char("\r\n");
+		#endif
+			__delay_ms(300);
+			status = GE_I2C2_HexRead(0x9818);
+		}
+	}
+
+	{//load 25g:
+#if MY_PRINTF_EN == 1
+		uart_send_char("load 25g: ");
+		uart_send_char("\r\n");
+#endif
+		GE_I2C2_HexWrite( 0x9818,0x5020);
+		status = GE_I2C2_HexRead(0x9818);
+//		while(0x0500 != status)
+		{
+			__delay_ms(300);
+			status = GE_I2C2_HexRead(0x9818);
+		}
+	}
+ 
+
+#if 0
+	{//load 10g:
+		GE_I2C2_HexWrite( 0x9818,0x5030);
+		status = GE_I2C2_HexRead(0x9818);
+		while(0x0500 != status)
+			status = GE_I2C2_HexRead(0x9818);
+
+	}
+#endif    
+    
+//load firmware
+#endif    
+
+	uart_send_char("MDIO load firmware End ......");
+    while(1);
+
 
     int len_script = sizeof(script_content)/4;
 	
@@ -1640,117 +5937,8 @@ void main(void)
 
      //GE_PRBS31_test();
     //load script
-#if 1    
-      //golden eagle?firmware?????20170330
     
-    //load firmware
-    for (x=0; x<section; x++) 
-    {
-        checkSum = 0x800C;
-        GE_I2C2_HexWrite(FW_regAddr_base[0] + 12, ramAddr>>16);
-        GE_I2C2_HexWrite(FW_regAddr_base[0] + 13, ramAddr & 0xFFFF);
-     
-        checkSum += (ramAddr>>16) + (ramAddr & 0xFFFF);
-        
-        for (i=0; i<12; i++) //数据搬到 ramAddr 地址
-        {
-#if MY_PRINTF_EN == 1
-             uart_send_char("ramAddr=");
-            uart_send_hex16(ramAddr>>16);
-            uart_send_hex16(ramAddr & 0xFFFF);
-            uart_send_byte('\r'); uart_send_byte('\n');	
-#endif            
-#ifndef FLASHREAD
-            mdioData = get_int16(b_data+dataAddr);
-#else
-			tL = getShortFrom14Arry(dataAddr,FLASHSTART);
-			mdioData = tL;//((tL&0xff)<<8|tL>>8);
-#endif
-#if MY_PRINTF_EN == 1
-			uart_send_char("mdioData=");
-			uart_send_hex16(mdioData);
-			uart_send_byte('\r'); uart_send_byte('\n'); 
-#endif            
-
-            GE_I2C2_HexWrite(FW_regAddr_base[0]+i, mdioData);
-            //GE_I2C2_HexRead(FW_regAddr_base[0] + i);
-            checkSum += mdioData;
-            dataAddr += 1;   // 2/1
-            ramAddr += 2;  
-        }
-        
-#if MY_PRINTF_EN == 1
-        uart_send_char("checksum =");
-        uart_send_hex16(checkSum>>16);
-        uart_send_hex16(checkSum & 0xFFFF);
-        uart_send_char("\r\n");
-#endif
-        GE_I2C2_HexWrite(FW_regAddr_base[0] + 14, (-checkSum) & 0xFFFF);
-        GE_I2C2_HexRead(FW_regAddr_base[0] + 14);
-        GE_I2C2_HexWrite(FW_regAddr_base[0] + 15, 0x800C);	
-        
-        checktime = 0;
-        status = GE_I2C2_HexRead(FW_regAddr_base[0] + 15);
-        
-        while (status == 0x800C) {	
-            checktime++;
-            if (checktime > 1000)
-#if MY_PRINTF_EN == 1
-				uart_send_hex16(checktime)
-#endif
-			;
-            status = GE_I2C2_HexRead(FW_regAddr_base[0] + 15);
-        }
-          if (status != 0x0000) 
-          {
-          TotalError++;
-#if MY_PRINTF_EN == 1
-          uart_send_char("checksum error!, total error  = ");
-          uart_send_hex(TotalError);
-          uart_send_char("\r\n");
-#endif
-          }
-    }   //end of the for loop
-
-
-    GE_I2C2_HexWrite(FW_regAddr_base[0] + 12, enterPoint>>16);  
-    GE_I2C2_HexWrite(FW_regAddr_base[0] + 13, enterPoint & 0xFFFF);
-    checkSum = (enterPoint>>16) + (enterPoint & 0xFFFF) + 0x4000;
-    GE_I2C2_HexWrite(FW_regAddr_base[0] + 14, (-checkSum) & 0xFFFF);
-    GE_I2C2_HexWrite(FW_regAddr_base[0] + 15, 0x4000);		
-    
-    if (RdCheck) {		
-        checktime = 0;
-        status = GE_I2C2_HexRead(FW_regAddr_base[0] + 15);
-        while (status==0x4000) {
-            checktime++;
-            if (checktime>1000) 
-#if MY_PRINTF_EN == 1
-				uart_send_hex16(checktime)
-#endif
-				;
-            status = GE_I2C2_HexRead(FW_regAddr_base[0] + 15);
-        }
-    }
-
-     for (i=0;i<1024;i++)
-    {
-        for(x=0;x<1024;x++)
-        {;}
-    } 
-#if MY_PRINTF_EN == 1
-    uart_send_char("check the result:\r\n");
-#endif
-	GE_I2C2_HexRead(0x9814);
-#if MY_PRINTF_EN == 1
-    uart_send_char("If there is checksum error, total error  = ");
-    uart_send_hex(TotalError);
-    uart_send_char("\r\n");
-#endif
-    //load firmware
-#endif	
-    
-    
+//old firmware location!//    
 
     
   //Temperature test
@@ -1759,6 +5947,8 @@ void main(void)
     int Temperature;
     float adc_float,temp_float;
     uint16_t convertedValue,convertedValue_HighRange,convertedValue_LowRange;
+	uint16_t eepAddr = 0;
+	uint16_t rValue;
 
     ADC_Initialize();
      x=0;
@@ -1768,25 +5958,63 @@ void main(void)
 	testReadWrite(200000, 0x8079);
 #endif
 
+#if MY_PRINTF_EN == 1
+	DATAEE_WriteByte(1,0x66);
+	uint8_t cRes = DATAEE_ReadByte(1);
+	uart_send_char("Write to eeprom:0x66, read result: 0x ");			 
+	uart_send_hex(cRes);
+	uart_send_char("\r\n");
+#endif
+
+	uart_send_char("MCU START OK......");			 
+
     while (1)
     {
-		if( EEPROM_Buffer[78] == 2 )                //write  xxxxxx11;2
+		switch (EEPROM_Buffer[78])
+		{
+			case 1://read	 xxxxxx01;1
+
+#if MY_PRINTF_EN == 1
+				uart_send_char("\r\n");
+				uart_send_char("zhuanfa 0x");
+				uart_send_hex(EEPROM_Buffer[74]);
+				uart_send_hex(EEPROM_Buffer[75]);					 
+				uart_send_char("\r\n");
+#endif					  
+				rValue = GE_I2C2_ByteHLRead( EEPROM_Buffer[74], EEPROM_Buffer[75] ) ;
+#if MY_PRINTF_EN == 1		  
+				uart_send_char("read: ");			 
+				uart_send_hex16(rValue);//tH);//
+				uart_send_char("\r\n");
+#endif
+				EEPROM_Buffer[76] = rValue >> 8 ;
+				EEPROM_Buffer[77] = rValue & 0x00ff ;
+				EEPROM_Buffer[78] = 0 ;    //complete
+			break;
+			case 2://write  xxxxxx11;2
+				GE_I2C2_ByteHLWrite( EEPROM_Buffer[74], EEPROM_Buffer[75], EEPROM_Buffer[76], EEPROM_Buffer[77] ) ;
+				EEPROM_Buffer[78] = 0 ;    //complete
+			break;
+			case 4:     //reset write eeprom position
+				eepAddr=0 ;
+				EEPROM_Buffer[78] = 0 ;    //complete
+			break;
+			case 3:     //continus 
+				DATAEE_WriteByte(eepAddr++,EEPROM_Buffer[74]);
+				DATAEE_WriteByte(eepAddr++,EEPROM_Buffer[75]);
+				DATAEE_WriteByte(eepAddr++,EEPROM_Buffer[76]);
+				DATAEE_WriteByte(eepAddr++,EEPROM_Buffer[77]);
+				EEPROM_Buffer[78] = 0 ;    //complete
+			break;
+			default:
+			break;
+		}
+
+#if 0		
+        x++;
+        if(x > 30000)	//history:	x>10 
         {
-            GE_I2C2_ByteHLWrite( EEPROM_Buffer[74], EEPROM_Buffer[75], EEPROM_Buffer[76], EEPROM_Buffer[77] ) ;
-            EEPROM_Buffer[78] = 0 ;    //complete
-        }
-        else if( EEPROM_Buffer[78] == 1 )           //read   xxxxxx01;1
-        {
-            uint16_t rValue;
-            rValue = GE_I2C2_ByteHLRead( EEPROM_Buffer[74], EEPROM_Buffer[75] ) ;
-            EEPROM_Buffer[76] = rValue >> 8 ;
-            EEPROM_Buffer[77] = rValue & 0x00ff ;
-            EEPROM_Buffer[78] = 0 ;    //complete
-        }
-/*        x++;
-        if(x > 10)
-        {
-            i++;
+  /*          i++;
             if(i > 30000)    
             {
             */ 
@@ -1831,10 +6059,8 @@ void main(void)
                 }
 /*               i = 0;
             }
-        x=0;
+*/        x=0;
         }
-*/  
-
 
 #if 0
 
@@ -1844,6 +6070,7 @@ void main(void)
 		EEPROM_Buffer[80] = rValue2 & 0x00ff ;
 		
 #endif		
+#endif
     }
 
 }

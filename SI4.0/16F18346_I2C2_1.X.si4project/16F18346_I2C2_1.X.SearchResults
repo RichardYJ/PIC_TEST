@@ -1,0 +1,6 @@
+---- MDC_OUT_MDIO_OUT Matches (5 in 1 files) ----
+mdio.c (mcc_generated_files) line 16 : void MDC_OUT_MDIO_OUT()
+MDIO_write_regAddr in mdio.c (mcc_generated_files) : 	MDC_OUT_MDIO_OUT();			
+MDIO_read_value in mdio.c (mcc_generated_files) : 	MDC_OUT_MDIO_OUT();			
+MDIO_read_value in mdio.c (mcc_generated_files) : 	MDC_OUT_MDIO_OUT();			
+MDIO_write_value in mdio.c (mcc_generated_files) : 	MDC_OUT_MDIO_OUT();			

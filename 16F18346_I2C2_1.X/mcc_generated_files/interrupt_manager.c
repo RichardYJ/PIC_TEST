@@ -55,6 +55,7 @@ void interrupt INTERRUPT_InterruptManager (void)
     {
         I2C1_ISR();
     }
+	#if 0
     if(INTCONbits.PEIE == 1 && PIE2bits.BCL2IE == 1 && PIR2bits.BCL2IF == 1)
     {
         I2C2_BusCollisionISR();
@@ -63,6 +64,7 @@ void interrupt INTERRUPT_InterruptManager (void)
     {
         I2C2_ISR();
     }
+	#endif
     else
     {
         //Unhandled Interrupt

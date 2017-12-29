@@ -57,6 +57,7 @@
 #include "memory.h"
 #include "adc.h"
 #include "fvr.h"
+#include "mdio.h"
 
 #define _XTAL_FREQ  32000000
 
